@@ -23,7 +23,7 @@ export default function Home() {
             {/* Letter Mobile invertendo ordem */}
             <div className="order-2 sm:hidden">
               <Image
-                src="/letter-puppycare.png"
+                src="/only-letter-puppycare.png"
                 alt="Letra da logo Puppy Care"
                 width={200}
                 height={100}
@@ -45,11 +45,11 @@ export default function Home() {
         {/* Letter PC Abaixo da logo: */}
         <div className="hidden sm:block sm:w-full">
           <Image
-            src="/letter-puppycare.png"
+            src="/only-letter-puppycare.png"
             alt="Letra da logo Puppy Care"
             width={300}
             height={200}
-            className="object-contain ml-10"
+            className="object-contain ml-20"
             priority
           />
         </div>
