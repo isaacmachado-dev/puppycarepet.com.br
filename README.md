@@ -1,6 +1,6 @@
 # Puppycare
 `A repository dedicated for a puppycare petshop website.`
-> We are using Next.Js, React and more.
+> We are using Next.Js, React, Tailwind, TypeScript and more.
 
 ---
 
