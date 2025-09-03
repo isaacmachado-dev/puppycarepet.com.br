@@ -2,19 +2,20 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="font-sans min-h-screen p-5 sm:p-16">
+    <div className="font-sans min-h-screen p-5 sm:p-10">
       <main>
         <p className="text-2xl font-bold">Banho & Tosa</p>
+
 
         <div className="flex flex-col items-center gap-10">
           <div className="flex flex-col items-center gap-5 sm:flex-row sm:items-center sm:gap-10">
 
-            <div className="order-1">
+            <div className="order-1 ml-10">
               <Image
                 src="/logo-puppycare.png"
                 alt="Petshop Puppy Care"
-                width={800}
-                height={150}
+                width={600}
+                height={100}
                 className="object-contain"
                 priority
               />
@@ -43,13 +44,13 @@ export default function Home() {
         </div>
 
         {/* Letter PC Abaixo da logo: */}
-        <div className="hidden sm:block sm:w-full">
+        <div className="hidden sm:block ml-30">
           <Image
             src="/only-letter-puppycare.png"
             alt="Letra da logo Puppy Care"
-            width={300}
+            width={200}
             height={200}
-            className="object-contain ml-20"
+            className="object-contain"
             priority
           />
         </div>
