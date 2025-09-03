@@ -21,12 +21,14 @@
 - [Node.Js](https://nodejs.org/pt)
 - Terminal or IDE of preference.
 
-1. First, install dependencies:
+Make sure you are on the correct folder on a 2 window or terminal to run front-end and back-end:
+
+1. First, install front-end dependencies:
 ```
 npm install
 ```
 
-2. Second, run the development server:
+2. Second, run the front-end development server:
 ```
 npm run dev
 ```
