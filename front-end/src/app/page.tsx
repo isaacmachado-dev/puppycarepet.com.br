@@ -2,15 +2,17 @@ import Image from "next/image";
 import Link from "next/link";
 import DogSection from "./sections/DogSection";
 import CatSection from "./sections/CatSection";
+import OurServices from "./sections/OurServices";
+import HomeScreen from "./components/HomeScreen";
+import { SetupSection } from "./components/ConfigSection";
 
 export default function Home() {
   return (
     <div className="font-sans bg-[#1A112E] text-white">
       <main>
 
-        <div className="min-h-screen">
-
-          <div className="mx-auto max-w-[1000px] p-5 sm:p-10">
+        <HomeScreen>
+          <SetupSection>
             <div className="flex flex-col items-center gap-5 sm:flex-row sm:items-center sm:gap-10">
 
               <div className="order-1 sm:ml-10 justify-center">
@@ -73,8 +75,8 @@ export default function Home() {
 
             {/* Banho & Tosa PC */}
             <p className="text-sm ml-48 font-bold hidden sm:block">Banho & Tosa</p>
-          </div>
-        </div>
+          </SetupSection>
+        </HomeScreen>
 
         <div>
           <DogSection />
@@ -82,6 +84,10 @@ export default function Home() {
 
         <div>
           <CatSection />
+        </div>
+
+        <div>
+          <OurServices />
         </div>
 
       </main >

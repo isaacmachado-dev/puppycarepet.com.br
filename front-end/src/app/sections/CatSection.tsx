@@ -1,19 +1,17 @@
 import Image from "next/image";
+import { SectionPurple, SetupSection } from "../components/ConfigSection";
+import H2 from "../components/TextSection";
 
 export default function CatSection() {
     return (
-        <section className="py-20 sm:py-50 bg-[#1A112E] p-5 sm:p-10 flex flex-col justify-center ">
+        <SectionPurple>
 
-            <div className="w-full max-w-[1000px] mx-auto px-5 sm:px-10 text-white">
-                <h2 className="text-5xl font-semibold text-center sm:text-left">
+            <SetupSection>
+                <H2 className="sm:text-right mr-13">
                     Atendemos Gatos
-                </h2>
+                </H2>
 
-                <div className="flex flex-col-reverse sm:flex-row items-center gap-10 sm:gap-20 mx-auto">
-
-                    <p className="max-w-[400px] text-4xl justify-center">
-                        Gatos também gostam de “limpeza”,  alivie-os por estarem beeeeem limpinhos e cheirosos conosco!
-                    </p>
+                <div className="flex flex-col-reverse sm:flex-row items-center gap-10 sm:gap-20">
 
                     <Image
                         src="/CatSection/cat-section.png"
@@ -23,9 +21,13 @@ export default function CatSection() {
                         className="rounded-lg mt-5"
                     />
 
+                    <p className="max-w-[400px] text-4xl">
+                        Gatos também gostam de “limpeza”,  alivie-os por estarem beeem limpinhos e cheirosos conosco!
+                    </p>
 
                 </div>
-            </div>
-        </section>
+            </SetupSection>
+
+        </SectionPurple>
     );
 }
