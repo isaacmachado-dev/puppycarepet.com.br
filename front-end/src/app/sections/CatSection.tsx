@@ -5,29 +5,36 @@ import H2 from "../components/TextSection";
 export default function CatSection() {
     return (
         <SectionPurple>
+            <SetupSection className="flex flex-col sm:flex-row gap-5 sm:gap-20 justify-center">
 
-            <SetupSection>
-                <H2 className="sm:text-right mr-13">
-                    Atendemos Gatos
+                {/* H2 Mobile */}
+                <H2 className="text-center sm:hidden">
+                    Atendemos <br /> Gatos
                 </H2>
 
-                <div className="flex flex-col-reverse sm:flex-row items-center gap-10 sm:gap-20">
-
+                {/* Coluna esquerda: Imagem Gato */}
+                <div className="flex justify-center ">
                     <Image
                         src="/CatSection/cat-section.png"
                         alt="Gato"
                         width={400}
                         height={400}
-                        className="rounded-lg mt-5"
+                        className="rounded-lg"
                     />
-
-                    <p className="max-w-[400px] text-4xl">
-                        Gatos também gostam de “limpeza”,  alivie-os por estarem beeem limpinhos e cheirosos conosco!
-                    </p>
-
                 </div>
-            </SetupSection>
 
+                {/* Coluna direita: H2 desktop + P */}
+                <div className="flex flex-col justify-center">
+                    <H2 className="hidden sm:block text-left">
+                        Atendemos <br /> Gatos
+                    </H2>
+
+                    <p className="max-w-[400px] text-4xl sm:mt-5">
+                        Gatos também gostam de “limpeza”, alivie-os por estarem beeem limpinhos e cheirosos conosco!
+                    </p>
+                </div>
+
+            </SetupSection>
         </SectionPurple>
     );
 }

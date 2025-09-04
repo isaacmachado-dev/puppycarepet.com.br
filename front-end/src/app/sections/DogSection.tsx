@@ -5,28 +5,36 @@ import H2 from "../components/TextSection";
 export default function DogSection() {
     return (
         <SectionYellow>
+            <SetupSection className="flex flex-col sm:flex-row-reverse gap-5 sm:gap-20 justify-center">
 
-            <SetupSection>
-
-                <H2>
-                    Atendemos Cachorros
+                {/* H2 Mobile */}
+                <H2 className="text-center sm:hidden">
+                    Atendemos <br /> Cachorros
                 </H2>
 
-                <div className="flex flex-col-reverse sm:flex-row items-center gap-10 sm:gap-20 mx-auto">
-                    <p className="max-w-[400px] text-4xl justify-center">
-                        Uma vez confiando em nós, damos cheirinho e charme ao seu pet, seja ele quem for, da idade que for!
-                    </p>
-
+                {/* Imagem */}
+                <div className="flex justify-center">
                     <Image
                         src="/DogSection/dog-section.png"
                         alt="Cachorro"
                         width={400}
                         height={400}
-                        className="rounded-lg mt-5"
+                        className="rounded-lg sm:mt-0"
                     />
                 </div>
-            </SetupSection>
 
+                {/* Coluna do texto */}
+                <div className="flex flex-col justify-center">
+                    <H2 className="hidden sm:block text-left">
+                        Atendemos <br /> Cachorros
+                    </H2>
+
+                    <p className="max-w-[400px] text-4xl sm:mt-5">
+                        Uma vez confiando em nós, damos cheirinho e charme ao seu pet, seja ele quem for, da idade que for!
+                    </p>
+                </div>
+
+            </SetupSection>
         </SectionYellow>
     );
 }

@@ -65,7 +65,7 @@ export default function Home() {
 
                 <Link
                   href="#"
-                  className="rounded-md bg-[#E72989] px-10 py-4 hover:bg-[#dc197b] text-white font-bold tracking-[2] transform transition-transform duration-200 hover:scale-120 will-change-auto mt-5 mx-auto"
+                  className="rounded-md bg-[#E72989] px-10 py-4 hover:bg-[#dc197b] text-white font-semibold tracking-[2] transform transition-transform duration-200 hover:scale-120 will-change-auto mt-5 mx-auto sm:text-xl"
                 >
                   Agende agora
                 </Link>
