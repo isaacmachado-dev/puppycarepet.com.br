@@ -14,7 +14,6 @@ export default function Home() {
         <HomeScreen>
           <SetupSection>
             <div className="flex flex-col items-center gap-5 sm:flex-row sm:items-center sm:gap-10">
-
               <div className="order-1 sm:ml-10 justify-center">
                 <Image
                   src="/Logos/logo-redondo-maior-rosa.png"
