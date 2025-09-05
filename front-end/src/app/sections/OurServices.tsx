@@ -1,7 +1,7 @@
 import { SectionYellow, SetupSection } from "../components/ConfigSection";
 import H2 from "../components/TextSection";
 
-import { CarFront, ShowerHead, Dog, ShoppingCart } from 'lucide-react';
+import { CarFront, ShowerHead, Dog, ShoppingCart } from "lucide-react";
 
 export default function OurServices() {
     return (
@@ -51,12 +51,12 @@ export default function OurServices() {
 
                             </div>
 
-                            <div className="px-5 py-2.5 bg-[#B3B3B3] rounded-lg text-xl sm:text-2xl text-black font-medium grid grid-cols-[60px_1fr] items-center h-[150px]">
+                            <div className="px-5 py-2.5 bg-[#B3B3B3] rounded-xl text-xl sm:text-2xl text-black font-medium grid grid-cols-[60px_1fr] items-center h-[150px]">
 
                                 <div className="flex justify-center">
                                     <ShoppingCart size={50} color="black" className="text-black" />
                                 </div>
-                                <p className="text-black hyphens-auto break-words">Roupi <br /> nhas</p>
+                                <p className="text-black hyphens-manual break-words">Roupi&shy;nhas</p>
 
                             </div>
 
