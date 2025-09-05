@@ -28,7 +28,7 @@ export default function Home() {
               {/* Letter Mobile invertendo ordem */}
               <div className="order-2 sm:hidden -mt-5">
                 <Image
-                  src="/only-letter-puppycare.png"
+                  src="/Logos/Letter/only-letter-puppycare.png"
                   alt="Letra da logo Puppy Care"
                   width={150}
                   height={100}
@@ -73,7 +73,7 @@ export default function Home() {
             </div>
 
             {/* Banho & Tosa PC */}
-            <p className="text-sm ml-48 font-bold hidden sm:block">Banho & Tosa</p>
+            <p className="text-sm ml-50 font-bold hidden sm:block">Banho & Tosa</p>
           </SetupSection>
         </HomeScreen>
 
