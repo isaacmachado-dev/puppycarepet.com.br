@@ -17,7 +17,7 @@ export default function Home() {
 
               <div className="order-1 sm:ml-10 justify-center">
                 <Image
-                  src="/logo-puppycare.png"
+                  src="/Logos/logo-redondo-maior-rosa.png"
                   alt="Petshop Puppy Care"
                   width={600}
                   height={100}
@@ -65,7 +65,7 @@ export default function Home() {
 
                 <Link
                   href="#"
-                  className="rounded-md bg-[#E72989] px-10 py-4 hover:bg-[#dc197b] text-white font-semibold tracking-[2] transform transition-transform duration-200 hover:scale-120 will-change-auto mt-5 mx-auto sm:text-xl"
+                  className="rounded-md bg-[#E72989] px-10 py-4 hover:bg-[#dc197b] text-white font-semibold tracking-[2] transform transition-transform duration-200 hover:scale-120 will-change-auto mt-5 text-center sm:-ml-20 sm:text-xl"
                 >
                   Agende agora
                 </Link>
