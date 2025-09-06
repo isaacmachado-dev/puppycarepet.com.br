@@ -16,7 +16,7 @@ export default function Home() {
             <div className="flex flex-col items-center gap-5 sm:flex-row sm:items-center sm:gap-10">
               <div className="order-1 sm:ml-10 justify-center">
                 <Image
-                  src="/Logos/logo-redondo-maior-rosa.png"
+                  src="/logos/brand/logo-redondo-maior-rosa.png"
                   alt="Petshop Puppy Care"
                   width={600}
                   height={100}
@@ -28,7 +28,7 @@ export default function Home() {
               {/* Letter Mobile invertendo ordem */}
               <div className="order-2 sm:hidden -mt-5">
                 <Image
-                  src="/Logos/Letter/only-letter-puppycare.png"
+                  src="/logos/brand/letter/only-letter-puppycare.png"
                   alt="Letra da logo Puppy Care"
                   width={150}
                   height={100}
@@ -51,7 +51,7 @@ export default function Home() {
               {/* Letter PC Abaixo da logo: */}
               <div className="hidden sm:block ml-30">
                 <Image
-                  src="/only-letter-puppycare.png"
+                  src="/logos/brand/letter/only-letter-puppycare.png"
                   alt="Letra da logo Puppy Care"
                   width={400}
                   height={200}
@@ -73,7 +73,7 @@ export default function Home() {
             </div>
 
             {/* Banho & Tosa PC */}
-            <p className="text-sm ml-50 font-bold hidden sm:block">Banho & Tosa</p>
+            <p className="text-sm sm:ml-50 font-bold hidden sm:block">Banho & Tosa</p>
           </SetupSection>
         </HomeScreen>
 
