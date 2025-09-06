@@ -15,7 +15,7 @@ export default function DogSection() {
                 {/* Imagem */}
                 <div className="flex justify-center">
                     <Image
-                        src="/DogSection/dog-section.png"
+                        src="/sections/dog-section/dog-section.png"
                         alt="Cachorro"
                         width={400}
                         height={400}

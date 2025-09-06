@@ -15,7 +15,7 @@ export default function CatSection() {
                 {/* Coluna esquerda: Imagem Gato */}
                 <div className="flex justify-center ">
                     <Image
-                        src="/CatSection/cat-section.png"
+                        src="/sections/cat-section/cat-section.png"
                         alt="Gato"
                         width={400}
                         height={400}
