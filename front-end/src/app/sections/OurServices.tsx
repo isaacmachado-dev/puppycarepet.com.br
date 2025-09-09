@@ -9,12 +9,12 @@ export default function OurServices() {
 
                 <div className="bg-white rounded-lg mt-5 p-5">
 
-                    <H2 className="mb-5">
+                    <H2 className="mb-5 text-black">
                         Conheça os nossos serviços
                     </H2>
 
                     <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
-                        <p className="max-w-[400px] sm:text-4xl font-semibold text-left text-2xl">
+                        <p className="max-w-[400px] sm:text-4xl font-semibold text-black text-left text-2xl">
                             Atendemos o seu animalzinho junto a
                             uma veterinária qualificada, garantindo
                             um trabalho com responsabilidade de quem entende.
@@ -57,7 +57,7 @@ export default function OurServices() {
                                 </div>
 
 
-                                <div className="flex flex-col w-full ml-3 items-center  sm:items-start sm:text-left h-full justify-center group">
+                                <div className="flex flex-col w-full items-center  sm:items-start sm:text-left h-full justify-center group">
                                     <p className="text-black break-words hyphens-auto">
                                         Roupinhas
                                     </p>

@@ -17,33 +17,33 @@ export default function Footer() {
             <div className="flex flex-row justify-center gap-x-10">
                 <div>
                     <a href="https://www.instagram.com/puppycare_pet/">
-                        <Image src="/logos/third-party/instagram.png"
+                        <Image src="/logos/third-party/instagram.svg"
                             alt="Logo Instagram"
                             width={50}
                             height={50}
-                            className=""
+                            className="transition duration-300 filter hover:invert"
                         />
                     </a>
                 </div>
 
                 <div>
                     <a href="https://www.tiktok.com/@puppycare_pet">
-                        <Image src="/logos/third-party/tiktok.png"
+                        <Image src="/logos/third-party/tiktok.svg"
                             alt="Logo TikTok"
                             width={50}
                             height={50}
-                            className=""
+                            className="duration-300 filter hover:invert"
                         />
                     </a>
                 </div>
 
                 <div>
                     <a href="#">
-                        <Image src="/logos/third-party/whatsapp.png"
+                        <Image src="/logos/third-party/whatsapp.svg"
                             alt="Logo WhatsApp"
                             width={50}
                             height={50}
-                            className=""
+                            className="duration-300 filter hover:invert"
                         />
                     </a>
                 </div>
