@@ -21,7 +21,7 @@
 - [Node.Js](https://nodejs.org/pt)
 - Terminal or IDE of preference.
 
-Make sure you are on the correct folder on a 2 window or terminal to run front-end and back-end:
+Make sure you are on the correct folder on a 2 different window or terminal to run front-end and back-end:
 
 1. First, install front-end dependencies:
 ```
