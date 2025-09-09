@@ -39,7 +39,7 @@ export default function Home() {
                 <p className="text-sm ml-[8vw] font-bold sm:block">Banho & Tosa</p>
               </div>
 
-              <div className="text-5xl sm:text-7xl font-semibold order-3 sm:order-2 text-center sm:text-left">
+              <div className="text-5xl sm:text-7xl font-bold order-3 sm:order-2 text-center sm:text-left">
                 <h1 className="max-w-[650px]">
                   Cuidando do seu pet como se fosse <span className="text-yellow-400">nosso</span>
                 </h1>
