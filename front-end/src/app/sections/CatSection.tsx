@@ -29,7 +29,7 @@ export default function CatSection() {
                         Atendemos <br /> Gatos
                     </H2>
 
-                    <p className="max-w-[400px] text-4xl sm:mt-5">
+                    <p className="max-w-[400px] text-4xl sm:mt-5 font-semibold">
                         Gatos também gostam de “limpeza”, alivie-os por estarem beeem limpinhos e cheirosos conosco!
                     </p>
                 </div>

@@ -27,7 +27,7 @@ export default function Footer() {
                 </div>
 
                 <div>
-                    <a href="https://www.tiktok.com/@puppycare_pet?lang=pt-br">
+                    <a href="https://www.tiktok.com/@puppycare_pet">
                         <Image src="/logos/third-party/tiktok.png"
                             alt="Logo TikTok"
                             width={50}

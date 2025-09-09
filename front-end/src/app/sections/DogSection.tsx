@@ -29,7 +29,7 @@ export default function DogSection() {
                         Atendemos <br /> Cachorros
                     </H2>
 
-                    <p className="max-w-[400px] text-4xl sm:mt-5">
+                    <p className="max-w-[400px] text-4xl font-semibold sm:mt-5">
                         Uma vez confiando em nós, damos cheirinho e charme ao seu pet, seja ele quem for, da idade que for!
                     </p>
                 </div>

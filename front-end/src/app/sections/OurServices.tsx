@@ -1,7 +1,6 @@
-import { SectionYellow, SetupSection } from "../components/ConfigSection";
+import { SectionYellow, SetupSection, GreyButton } from "../components/ConfigSection";
 import H2 from "../components/TextSection";
-
-import { CarFront, ShowerHead, Dog, ShoppingCart } from 'lucide-react';
+import { CarFront, ShowerHead, Dog, ShoppingCart, Info } from 'lucide-react';
 
 export default function OurServices() {
     return (
@@ -14,9 +13,8 @@ export default function OurServices() {
                         Conheça os nossos serviços
                     </H2>
 
-
                     <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
-                        <p className="max-w-[400px] sm:text-4xl text-left text-2xl">
+                        <p className="max-w-[400px] sm:text-4xl font-semibold text-left text-2xl">
                             Atendemos o seu animalzinho junto a
                             uma veterinária qualificada, garantindo
                             um trabalho com responsabilidade de quem entende.
@@ -24,48 +22,66 @@ export default function OurServices() {
 
                         <div className="grid grid-cols-2 gap-5">
 
-                            <div className="px-5 py-2.5 bg-[#B3B3B3] rounded-lg sm:text-2xl text-black font-medium flex items-center gap-3 h-auto sm:h-[150px]">
+                            <GreyButton>
 
                                 <div className="flex justify-center">
                                     <CarFront
                                         color="black" className="text-black w-7 h-7 sm:w-16 sm:h-16" />
                                 </div>
-                                <p className="text-black text-center sm:text-left">Leva e Traz</p>
-                            </div>
+                                <p className="text-black  sm:text-left">Leva e Traz</p>
+                            </GreyButton>
 
-                            <div className="px-5 py-2.5 bg-[#B3B3B3] rounded-lg sm:text-2xl text-black font-medium flex items-center gap-3 h-auto sm:h-[150px]">
+                            <GreyButton>
 
                                 <div className="flex justify-center">
                                     <ShowerHead color="black" className="text-black w-7 h-7 sm:w-16 sm:h-16" />
                                 </div>
-                                <p className="text-black text-center sm:text-left">Banho e Tosa</p>
+                                <p className="text-black  sm:text-left">Banho e Tosa</p>
 
-                            </div>
+                            </GreyButton>
 
-                            <div className="px-5 py-2.5 bg-[#B3B3B3] rounded-lg sm:text-2xl text-black font-medium flex items-center gap-3 h-auto sm:h-[150px]">
+                            <GreyButton>
                                 <div className="flex-shrink-0">
                                     <Dog
                                         color="black"
                                         className="text-black w-7 h-7 sm:w-16 sm:h-16" />
                                 </div>
-                                <p className="text-black text-center sm:text-left">
+                                <p className="text-black  sm:text-left">
                                     Cães e Gatos
                                 </p>
-                            </div>
+                            </GreyButton>
 
-                            <div className="px-5 py-2.5 bg-[#B3B3B3] rounded-lg sm:text-2xl text-black font-medium flex items-center gap-3 h-auto sm:h-[150px]">
+                            <GreyButton className="">
                                 <div className="flex-shrink-0">
-                                    <ShoppingCart
-                                        color="black"
-                                        className="text-black w-7 h-7 sm:w-16 sm:h-16" />
+                                    <ShoppingCart color="black" className="text-black w-7 h-7 sm:w-16 sm:h-16" />
                                 </div>
-                                <p className="text-black break-words hyphens-auto text-center sm:text-left">
-                                    Roupi&shy;nhas
-                                </p>
-                            </div>
+
+
+                                <div className="flex flex-col w-full ml-3 items-center  sm:items-start sm:text-left h-full justify-center group">
+                                    <p className="text-black break-words hyphens-auto">
+                                        Roupinhas
+                                    </p>
+
+                                    {/* IZinho */}
+                                    <div className="absolute bottom-2 right-3 flex items-center gap-1">
+                                        <a
+                                            href="https://wa.me/c/5511913632394"
+                                            target="_blank"
+                                            className="text-sm text-[#1A112E] invisible group-hover:visible relative flex items-center gap-1"
+                                        >
+                                            Catálogo
+                                            <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-[#1A112E] transition-all duration-300 group-hover:w-full"></span>
+
+                                            <Info color={"#1A112E"} size={20} className="visible" />
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </GreyButton>
+
+
 
                         </div>
-
 
                     </div>
                 </div>

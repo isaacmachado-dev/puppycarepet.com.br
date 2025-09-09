@@ -30,3 +30,11 @@ export function SetupSection({ children, className = "" }: SectionProps) {
   );
 
 }
+
+export function GreyButton({ children, className = "" }: SectionProps) {
+  return (
+    <div className={`relative px-5 py-2.5 bg-[#B3B3B3] rounded-lg sm:text-2xl text-black font-medium flex items-center gap-3 h-[120px] sm:h-[150px] ${className}`}>
+      {children}
+    </div>
+  );
+}
