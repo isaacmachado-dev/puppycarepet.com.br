@@ -7,7 +7,7 @@ interface SectionProps {
 
 export function SectionYellow({ children, className = "" }: SectionProps) {
   return (
-    <section className={`bg-[#FECE14] py-15 sm:py-30 sm:p-10 flex flex-col justify-center text-black ${className}`}>
+    <section className={`bg-[#1A112E] py-15 sm:py-30 sm:p-10 flex flex-col justify-center text-white ${className}`}>
       {children}
     </section>
   );
@@ -15,7 +15,7 @@ export function SectionYellow({ children, className = "" }: SectionProps) {
 
 export function SectionPurple({ children, className = "" }: SectionProps) {
   return (
-    <section className={`bg-[#1A112E] py-15 sm:py-30 p-5 sm:p-10 flex flex-col justify-center items-center ${className}`}>
+    <section className={`bg-[#20123F] py-15 sm:py-30 p-5 sm:p-10 flex flex-col justify-center items-center ${className}`}>
       {children}
     </section>
   );
@@ -33,7 +33,7 @@ export function SetupSection({ children, className = "" }: SectionProps) {
 
 export function GreyButton({ children, className = "" }: SectionProps) {
   return (
-    <div className={`relative px-5 py-2.5 bg-[#B3B3B3] rounded-lg sm:text-2xl text-black font-medium flex items-center gap-3 h-[120px] sm:h-[150px] ${className}`}>
+    <div className={`group relative px-5 py-2.5 bg-[#1A112E] rounded-lg sm:text-2xl text-black font-medium flex items-center gap-3 h-[120px] sm:h-[150px] ${className}`}>
       {children}
     </div>
   );
