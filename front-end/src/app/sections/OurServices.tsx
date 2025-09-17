@@ -1,6 +1,6 @@
 import { SectionYellow, SetupSection, GreyButton } from "../components/ConfigSection";
 import H2 from "../components/TextSection";
-import { CarFront, ShowerHead, Dog, ShoppingCart, Info } from 'lucide-react';
+import { CarFront, ShowerHead, Dog, ShoppingCart, Info, Phone } from 'lucide-react';
 
 export default function OurServices() {
     return (
@@ -26,39 +26,39 @@ export default function OurServices() {
 
                                 <div className="flex justify-center">
                                     <CarFront
-                                        color="black" className="text-black w-7 h-7 sm:w-16 sm:h-16" />
+                                        color="#FECE14" className="text-black w-7 h-7 sm:w-16 sm:h-16" />
                                 </div>
-                                <p className="text-black  sm:text-left">Leva e Traz</p>
+                                <p className="text-white  sm:text-left">Leva e Traz</p>
                             </GreyButton>
 
                             <GreyButton>
 
                                 <div className="flex justify-center">
-                                    <ShowerHead color="black" className="text-black w-7 h-7 sm:w-16 sm:h-16" />
+                                    <ShowerHead color="#FECE14" className="text-black w-7 h-7 sm:w-16 sm:h-16" />
                                 </div>
-                                <p className="text-black  sm:text-left">Banho e Tosa</p>
+                                <p className="text-white  sm:text-left">Banho e Tosa</p>
 
                             </GreyButton>
+
 
                             <GreyButton>
                                 <div className="flex-shrink-0">
                                     <Dog
-                                        color="black"
+                                        color="#FECE14"
                                         className="text-black w-7 h-7 sm:w-16 sm:h-16" />
                                 </div>
-                                <p className="text-black  sm:text-left">
+                                <p className="text-white  sm:text-left">
                                     Cães e Gatos
                                 </p>
                             </GreyButton>
 
-                            <GreyButton className="">
+                            <GreyButton>
                                 <div className="flex-shrink-0">
-                                    <ShoppingCart color="black" className="text-black w-7 h-7 sm:w-16 sm:h-16" />
+                                    <ShoppingCart color="#FECE14" className="text-black w-7 h-7 sm:w-16 sm:h-16" />
                                 </div>
 
-
-                                <div className="flex flex-col w-full items-center  sm:items-start sm:text-left h-full justify-center group">
-                                    <p className="text-black break-words hyphens-auto">
+                                <div className="flex flex-col w-full items-center sm:items-start sm:text-left h-full justify-center">
+                                    <p className="text-white break-words hyphens-auto">
                                         Roupinhas
                                     </p>
 
@@ -67,30 +67,26 @@ export default function OurServices() {
                                         <a
                                             href="https://wa.me/c/5511913632394"
                                             target="_blank"
-                                            className="text-sm text-[#1A112E] invisible group-hover:visible relative flex items-center gap-1"
+                                            className="text-sm text-[#FECE14] invisible group-hover:visible relative flex items-center gap-1"
                                         >
                                             Catálogo
-                                            <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-[#1A112E] transition-all duration-300 group-hover:w-full"></span>
+                                            <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-[#FECE14] transition-all duration-300 group-hover:w-full"></span>
 
-                                            <Info color={"#1A112E"} size={20} className="visible" />
+                                            <Info color={"#FECE14"} size={20} className="visible" />
                                         </a>
                                     </div>
                                 </div>
 
                             </GreyButton>
 
-
-
                         </div>
 
                     </div>
                 </div>
             </SetupSection>
-
             <div>
-
             </div>
-
         </SectionYellow >
+
     );
 }

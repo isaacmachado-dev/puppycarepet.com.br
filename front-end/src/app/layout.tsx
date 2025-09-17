@@ -2,33 +2,28 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Footer from "./components/Footer";
+import FooterClient from "./components/FooterClient";
+
 
 const inter = Inter({
-  variable: "--font-inter",
   subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
   weight: ["400", "500", "600", "700", "800", "900"],
-})
+});
 
 export const metadata: Metadata = {
   title: "Puppy Care",
   description: "Bla bla bla",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+
   return (
     <html lang="pt-br">
-      <body
-        className={`${inter.variable} antialiased`}
-      >
-
+      <body>
         {children}
-
-        <Footer />
-
+        <FooterClient />
       </body>
     </html>
   );
