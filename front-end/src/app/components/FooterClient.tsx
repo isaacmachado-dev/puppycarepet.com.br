@@ -7,5 +7,4 @@ export default function FooterClient() {
     if (pathname === "/login" || pathname === "/admin") return null;
     return <Footer />;
 
-
 }
