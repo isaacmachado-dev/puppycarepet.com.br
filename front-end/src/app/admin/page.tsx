@@ -1,118 +1,141 @@
 "use client";
 import { useState } from "react";
-import Link from "next/link"
+import Link from "next/link";
 import Image from "next/image";
-import { CalendarDays, Users, ChartNoAxesColumn, Notebook, Settings, X } from "lucide-react";
+import { CalendarDays, Users, ChartNoAxesColumn, Notebook, Settings, X, ChevronLeft, ChevronRight } from "lucide-react";
+import AdminMenuItem from "../components/AdminMenuItem";
 
 export default function AdminPage() {
     const [isOpen, setIsOpen] = useState(true);
 
     return (
-        <div className="flex p-5">
+        <div className="flex min-h-screen text-white">
 
-            <div className="flex flex-row gap-2 p-5">
-                <button
-                    onClick={() => setIsOpen(!isOpen)}
-                    className="text-white rounded-md focus:outline-none z-10">
-                    <Image
-                        src="/logos/brand/logo-redondo-maior-rosa.png"
-                        alt="Petshop Puppy Care"
-                        width={50}
-                        height={50}
-                    />
-                </button>
+            <aside
+                className={`relative bg-[#1A112E] shadow-lg py-4 px-4 transition-all duration-300 ${isOpen ? "w-[250px]" : "w-[125px]"
+                    }`}
+            >
 
-                <span className="flex p-2 bg-[#FECE14] rounded-md text-black items-center  z-10">Admin</span>
-                <p className="p-2 text-white z-10">Puppy Care</p>
+                <div className="flex flex-col gap-4">
+                    <header className="relative flex items-center gap-4 min-h-[50px]">
 
-            </div>
+                        {/* Logozinha */}
+                        <button className="rounded-md focus:outline-none" onClick={() => "/"}>
+                            <Image
+                                src="/logos/brand/logo-redondo-maior-rosa.png"
+                                alt="Petshop Puppy Care"
+                                width={50}
+                                height={50}
+                                className={`transition-all duration-300 ${isOpen ? "opacity-100" : "opacity-0 w-0"
+                                    }`}
+                            />
+                        </button>
 
-            <main className="flex-1">
-                {isOpen && (
-                    <section>
+                        {/* Botao amarelo Admin */}
+                        <span className={"bg-[#FECE14] text-black px-3 py-1 rounded-md transition-all duration-300"}>
+                            Admin
+                        </span>
 
-                        <div className="absolute left-0 top-0 bg-[#1A112E] shadow-lg rounded-md p-40 z-5">
-                            <ul className="flex flex-col gap-2">
+                        {/* Texto Puppy Care */}
+                        <p
+                            className={`text-white transition-all duration-300 overflow-hidden ${isOpen ? "opacity-100 max-w-[200px]" : "opacity-0 max-w-0"
+                                }`}
+                        >
+                            Puppy Care
+                        </p>
 
-                                <div className="flex flex-col bg-[#E3E3E3] p-10 rounded-md gap-2">
+                        {/* Botão Chevron alinhado ao Admin */}
+                        <button
+                            className="absolute -right-4 top-1/2 -translate-y-1/2 translate-x-3  hover:bg-[#333] focus:outline-none rounded-md border-2 border-[#AAAAAA]"
+                            onClick={() => setIsOpen(!isOpen)}
+                        >
+                            {isOpen ? (
+                                <ChevronLeft color="white" />
+                            ) : (
+                                <ChevronRight color="white" />
+                            )}
+                        </button>
+                    </header>
 
-                                    <div className="flex gap-2 bg-[#AAAAAA] rounded-md p-2">
-                                        <CalendarDays
-                                            color="black"
-                                        />
 
-                                        <li className="">
-                                            <Link href="#" className="text-black hover:text-[#FFFFFF]">Agendamentos</Link>
-                                        </li>
+                    <div className="p-2 bg-[#E3E3E3] rounded-md flex flex-col gap-2 transition-all duration-300">
 
-                                    </div>
+                        <div className="text-black hover:text-white transition-all duration-300">
+                            <AdminMenuItem
+                                icon={<CalendarDays color="currentColor" />}
+                                label="Agendamentos"
+                                href="#"
+                                isOpen={isOpen}
+                                className={`${!isOpen ? "flex justify-center align-center" : "justify-start"}`}
 
-                                    <div className="flex gap-2 bg-[#AAAAAA] rounded-md p-2">
-                                        <Users
-                                            color="black"
-                                        />
+                            />
+                        </div>
 
-                                        <li className="">
-                                            <Link href="/admin" className="text-black hover:text-[#FFFFFF]">Clientes</Link>
-                                        </li>
+                        <div className="text-black hover:text-white transition-all duration-300">
+                            <AdminMenuItem
+                                icon={<Users color="currentColor" />}
+                                label="Clientes"
+                                href="#"
+                                isOpen={isOpen}
+                                className={`${!isOpen ? "flex justify-center align-center" : "justify-start"}`}
+                            />
+                        </div>
 
-                                    </div>
+                        <div className="text-black hover:text-white transition-all duration-300">
+                            <AdminMenuItem
+                                icon={<ChartNoAxesColumn color="currentColor" />}
+                                label="Análise"
+                                href="#"
+                                isOpen={isOpen}
+                                className={`${!isOpen ? "flex justify-center align-center" : "justify-start"}`}
 
-                                    <div className="flex gap-2 bg-[#AAAAAA] rounded-md p-2">
-                                        < ChartNoAxesColumn
-                                            color="black"
-                                        />
+                            />
+                        </div>
 
-                                        <li className="">
-                                            <Link href="/login" className="text-black hover:text-[#FFFFFF]">Análise</Link>
-                                        </li>
-                                    </div>
+                        <div className="text-black hover:text-white transition-all duration-300">
+                            <AdminMenuItem
+                                icon={<Notebook color="currentColor" />}
+                                label="Funcionários"
+                                href="#"
+                                isOpen={isOpen}
+                                className={`${!isOpen ? "flex justify-center align-center" : "justify-start"}`}
 
-                                    <div className="flex gap-2 bg-[#AAAAAA] rounded-md p-2">
-                                        <Notebook
-                                            color="black"
-                                        />
+                            />
+                        </div>
 
-                                        <li className="">
-                                            <Link href="/login" className="text-black hover:text-[#FFFFFF]">Funcionários</Link>
-                                        </li>
-                                    </div>
+                        <div className="text-black hover:text-white transition-all duration-300">
+                            <AdminMenuItem
+                                icon={<Settings color="currentColor" />}
+                                label="Opções"
+                                href="#"
+                                isOpen={isOpen}
+                                className={`${!isOpen ? "flex justify-center align-center" : "justify-start"}`}
 
-                                    <div className="flex gap-2 bg-[#AAAAAA] rounded-md p-2">
-                                        <Settings
-                                            color="black"
-                                        />
-
-                                        <li className="">
-                                            <Link href="/login" className="text-black hover:text-[#FFFFFF]">Opções</Link>
-                                        </li>
-                                    </div>
-
-                                    <div className="flex gap-2 bg-[#E45C5C] rounded-md p-2">
-                                        <X
-                                            color="black"
-                                        />
-                                        <li className="">
-                                            <Link href="/login" className="text-black hover:text-[#FFFFFF]">Sair</Link>
-                                        </li>
-                                    </div>
-                                </div>
-                            </ul>
-
+                            />
                         </div>
 
 
-                    </section>
+                    </div>
+                    <div className="text-black hover:text-white transition-all duration-300">
+                        <AdminMenuItem
+                            icon={<X color="currentColor" />}
+                            label="Sair"
+                            href="/"
+                            isOpen={isOpen}
+                            className={`${!isOpen ? "flex justify-center align-center" : "justify-start"}`}
+                            danger
+                        />
+                    </div>
+                </div>
+            </aside>
 
-                )}
+            <main className="flex-1 p-6">
 
-
+                <section>
+                    <p className="text-white">TestandoTestandoTestando</p>
+                </section>
 
             </main>
-
         </div>
-
-
-
     );
 }
