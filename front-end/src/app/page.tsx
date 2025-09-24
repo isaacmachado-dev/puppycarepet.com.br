@@ -1,14 +1,15 @@
 import Image from "next/image";
-import Link from "next/link";
 import DogSection from "./sections/DogSection";
 import CatSection from "./sections/CatSection";
 import OurServices from "./sections/OurServices";
 import HomeScreen from "./components/HomeScreen";
 import { SetupSection } from "./components/ConfigSection";
+import { AdminButton } from "./components/AdminButton";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="font-sans bg-[#1A112E] text-white">
+    <div className="font-sans bg-[#E72989] text-white">
       <main>
 
         <HomeScreen>
@@ -64,7 +65,7 @@ export default function Home() {
 
                 <Link
                   href="#"
-                  className="rounded-md bg-[#E72989] px-10 py-4 hover:bg-[#dc197b] text-white font-semibold tracking-[2] transform transition-transform duration-200 hover:scale-120 will-change-auto mt-5 text-center sm:-ml-20 sm:text-xl"
+                  className="rounded-md bg-[#1A89A2] px-10 py-4 hover:bg-[#186E81] text-white font-semibold tracking-[2] transform transition-transform duration-200 hover:scale-120 will-change-auto mt-5 text-center sm:-ml-20 sm:text-xl"
                 >
                   Agende agora
                 </Link>
@@ -87,6 +88,10 @@ export default function Home() {
 
         <div>
           <OurServices />
+        </div>
+
+        <div>
+          <AdminButton />
         </div>
 
       </main >
