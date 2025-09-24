@@ -18,7 +18,7 @@ export default function AdminMenuItem({
     return (
         <Link
             href={href}
-            className={`flex items-center gap-3 rounded-md px-4 py-2 hover:bg-[#2A2D34] ${danger
+            className={`flex items-center gap-3 rounded-md px-4 py-2 hover:bg-[#333] ${danger
                 ? "bg-[#E45C5C] hover:bg-[#F63434]"
                 : "bg-[#AAAAAA]"
                 } ${className || ""}`}
