@@ -1,8 +1,17 @@
+"use client";
 import Image from "next/image";
 import H2 from "@/app/components/TextSection";
+import { useRouter } from 'next/navigation';
+
 
 export default function LoginPage() {
+    const router = useRouter();
+    const handleLoginClick = () => {
+        router.push('/admin');
+    }
+
     return (
+
         <section className="min-h-screen bg-[#1A112E] text-black">
 
             <div className="flex flex-row gap-2 p-5">
@@ -43,6 +52,7 @@ export default function LoginPage() {
                             <button
                                 type="submit"
                                 className="bg-[#E72989] text-white rounded-md p-2 hover:bg-[#dc197b] font-bold tracking-[2] transition-transform hover:scale-105 will-change-auto transition-colors duration-300 cursor-pointer"
+                                onClick={handleLoginClick}
                             >
                                 Entrar
                             </button>
