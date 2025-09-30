@@ -31,9 +31,9 @@ export function SetupSection({ children, className = "" }: SectionProps) {
 
 }
 
-export function GreyButton({ children, className = "" }: SectionProps) {
+export function PurpleButton({ children, className = "" }: SectionProps) {
   return (
-    <div className={`group relative px-5 py-2.5 bg-[#1A112E] rounded-lg sm:text-2xl text-black font-medium flex items-center gap-3 h-[120px] sm:h-[150px] ${className}`}>
+    <div className={`group relative border-3 border-transparent hover:border-[#FECE14] px-5 py-2.5 bg-[#1A112E] rounded-lg sm:text-2xl text-black font-medium flex items-center gap-3 h-[120px] sm:h-[150px] cursor-pointer ${className}`}>
       {children}
     </div>
   );
