@@ -7,12 +7,10 @@ import { SetupSection } from "./components/ConfigSection";
 import { AdminButton } from "./components/AdminButton";
 
 import Link from "next/link";
-
 export default function Home() {
   return (
     <div className="font-sans bg-[#E72989] text-white">
       <main>
-
         <HomeScreen>
           <SetupSection>
             <div className="flex flex-col items-center gap-5 sm:flex-row sm:items-center sm:gap-10">

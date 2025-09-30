@@ -6,25 +6,29 @@ export default function AdminMenuItem({
     href,
     isOpen,
     danger = false,
-    className
+    className,
+    onClick
 }: {
     icon: React.ReactNode;
     label: string;
-    href: string;
+    href?: string;
     isOpen: boolean;
     danger?: boolean;
     className?: string;
+    onClick?: () => void;
 }) {
-    return (
-        <Link
-            href={href}
-            className={`flex items-center gap-3 rounded-md px-4 py-2 hover:bg-[#333] ${danger
-                ? "bg-[#E45C5C] hover:bg-[#F63434]"
-                : "bg-[#AAAAAA]"
-                } ${className || ""}`}
-        >
+    const baseClasses = `flex items-center gap-3 rounded-md px-4 py-2 hover:bg-[#333] ${danger ? "bg-[#E45C5C] hover:bg-[#F63434]" : "bg-[#AAAAAA]"
+        } ${className || ""}`;
+
+    return href ? (
+        <Link href={href} className={baseClasses}>
             {icon}
-            {isOpen && <span className="text-currentColor hover:text-white ">{label}</span>}
+            {isOpen && <span className="text-currentColor hover:text-white">{label}</span>}
         </Link>
+    ) : (
+        <div onClick={onClick} className={`cursor-pointer ${baseClasses}`}>
+            {icon}
+            {isOpen && <span className="text-currentColor hover:text-white">{label}</span>}
+        </div>
     );
 }
