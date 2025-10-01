@@ -149,9 +149,11 @@ export default function AdminPage() {
                             </div>
                         </div>
                     )}
+
                     {paginaAtual === "agendamentos" && <AgendamentoPage />}
                     {paginaAtual === "clientes" && <ClientesPage />}
                     {paginaAtual === "analise" && <AnalisePage />}
+
                 </section>
 
             </main>
