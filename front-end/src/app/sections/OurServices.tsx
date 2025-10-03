@@ -1,4 +1,4 @@
-import { SectionYellow, SetupSection, GreyButton } from "../components/ConfigSection";
+import { SectionYellow, SetupSection, PurpleButton } from "../components/ConfigSection";
 import H2 from "../components/TextSection";
 import { CarFront, ShowerHead, Dog, ShoppingCart, Info, Phone } from 'lucide-react';
 
@@ -9,11 +9,12 @@ export default function OurServices() {
 
                 <div className="bg-white rounded-lg mt-5 p-5">
 
-                    <H2 className="mb-5 text-black">
+                    <H2 className="text-black">
                         Conheça os nossos serviços
                     </H2>
 
                     <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
+                        z
                         <p className="max-w-[400px] sm:text-4xl font-semibold text-black text-left text-2xl">
                             Atendemos o seu animalzinho junto a
                             uma veterinária qualificada, garantindo
@@ -22,26 +23,26 @@ export default function OurServices() {
 
                         <div className="grid grid-cols-2 gap-5">
 
-                            <GreyButton>
+                            <PurpleButton>
 
                                 <div className="flex justify-center">
                                     <CarFront
                                         color="#FECE14" className="text-black w-7 h-7 sm:w-16 sm:h-16" />
                                 </div>
                                 <p className="text-white  sm:text-left">Leva e Traz</p>
-                            </GreyButton>
+                            </PurpleButton>
 
-                            <GreyButton>
+                            <PurpleButton>
 
                                 <div className="flex justify-center">
                                     <ShowerHead color="#FECE14" className="text-black w-7 h-7 sm:w-16 sm:h-16" />
                                 </div>
                                 <p className="text-white  sm:text-left">Banho e Tosa</p>
 
-                            </GreyButton>
+                            </PurpleButton>
 
 
-                            <GreyButton>
+                            <PurpleButton>
                                 <div className="flex-shrink-0">
                                     <Dog
                                         color="#FECE14"
@@ -49,17 +50,20 @@ export default function OurServices() {
                                 </div>
                                 <p className="text-white  sm:text-left">
                                     Cães e Gatos
+                                    {/* Pacotes */}
+                                    {/* Atendimento */}
+                                    {/* Roupinhas != Acessórios */}
                                 </p>
-                            </GreyButton>
+                            </PurpleButton>
 
-                            <GreyButton>
+                            <PurpleButton>
                                 <div className="flex-shrink-0">
                                     <ShoppingCart color="#FECE14" className="text-black w-7 h-7 sm:w-16 sm:h-16" />
                                 </div>
 
-                                <div className="flex flex-col w-full items-center sm:items-start sm:text-left h-full justify-center">
+                                <div className="flex flex-col items-center sm:items-start sm:text-left h-full justify-center">
                                     <p className="text-white break-words hyphens-auto">
-                                        Roupinhas
+                                        Acessório
                                     </p>
 
                                     {/* IZinho */}
@@ -77,7 +81,7 @@ export default function OurServices() {
                                     </div>
                                 </div>
 
-                            </GreyButton>
+                            </PurpleButton>
 
                         </div>
 

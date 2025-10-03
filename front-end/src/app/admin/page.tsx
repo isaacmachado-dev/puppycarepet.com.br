@@ -2,14 +2,18 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { CalendarDays, Users, ChartNoAxesColumn, Notebook, Settings, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { CalendarDays, Users, ChartNoAxesColumn, Notebook, Settings, X, ChevronLeft, ChevronRight, CircleQuestionMark } from "lucide-react";
 import AdminMenuItem from "../components/AdminMenuItem";
+import AgendamentoPage from "./agendamento/page";
+import ClientesPage from "./clientes/page";
+import AnalisePage from "./analise/page";
 
 export default function AdminPage() {
     const [isOpen, setIsOpen] = useState(true);
+    const [paginaAtual, setPaginaAtual] = useState<"agendamentos" | "clientes" | "analise" | "funcionarios" | null>(null);
 
     return (
-        <div className="flex min-h-screen text-white">
+        <div className="flex min-h-screen bg-[#E3E3E3] text-black font-bold">
 
             <aside
                 className={`relative bg-[#1A112E] shadow-lg py-4 px-4 transition-all duration-300 ${isOpen ? "w-[250px]" : "w-[125px]"
@@ -64,20 +68,22 @@ export default function AdminPage() {
                             <AdminMenuItem
                                 icon={<CalendarDays color="currentColor" />}
                                 label="Agendamentos"
-                                href="#"
+                                href=""
                                 isOpen={isOpen}
                                 className={`${!isOpen ? "flex justify-center align-center" : "justify-start"}`}
-
+                                onClick={() => setPaginaAtual("agendamentos")}
                             />
+
                         </div>
 
                         <div className="text-black hover:text-white transition-all duration-300">
                             <AdminMenuItem
                                 icon={<Users color="currentColor" />}
                                 label="Clientes"
-                                href="#"
+                                href=""
                                 isOpen={isOpen}
                                 className={`${!isOpen ? "flex justify-center align-center" : "justify-start"}`}
+                                onClick={() => setPaginaAtual("clientes")}
                             />
                         </div>
 
@@ -85,9 +91,10 @@ export default function AdminPage() {
                             <AdminMenuItem
                                 icon={<ChartNoAxesColumn color="currentColor" />}
                                 label="Análise"
-                                href="#"
+                                href=""
                                 isOpen={isOpen}
                                 className={`${!isOpen ? "flex justify-center align-center" : "justify-start"}`}
+                                onClick={() => setPaginaAtual("analise")}
 
                             />
                         </div>
@@ -131,8 +138,22 @@ export default function AdminPage() {
 
             <main className="flex-1 p-6">
 
-                <section>
-                    <p className="text-white">TestandoTestandoTestando</p>
+                <section className="">
+                    {!paginaAtual && (
+                        <div>
+
+                            <h1 className="text-8xl">Bem vindo(a) {"{Funcionário}"}!</h1>
+
+                            <div className="bg-[#BCBCBC] p-20 mt-10 rounded-md">
+                                <h2>Estatística</h2>
+                            </div>
+                        </div>
+                    )}
+
+                    {paginaAtual === "agendamentos" && <AgendamentoPage />}
+                    {paginaAtual === "clientes" && <ClientesPage />}
+                    {paginaAtual === "analise" && <AnalisePage />}
+
                 </section>
 
             </main>
