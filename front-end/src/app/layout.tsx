@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import FooterClient from "./components/FooterClient";
+import FooterClient from "../components/ui/custom/FooterClient";
 
 
 const inter = Inter({

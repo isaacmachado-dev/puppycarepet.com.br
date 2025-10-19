@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { SectionPurple, SetupSection } from "../components/ConfigSection";
-import H2 from "../components/TextSection";
+import { SectionPurple, SetupSection } from "../ui/custom/ConfigSection";
+import H2 from "../ui/custom/TextSection";
 
 export default function CatSection() {
     return (
