@@ -1,4 +1,4 @@
-import { AdminBlock, AdminBlockTitle } from "../../components/AdminSettings";
+import { AdminBlock, AdminBlockTitle } from "../../../components/ui/custom/AdminSettings";
 
 export default function AnalisePage() {
   return (

@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { SectionYellow, SetupSection } from "../components/ConfigSection";
-import H2 from "../components/TextSection";
+import { SectionYellow, SetupSection } from "../ui/custom/ConfigSection";
+import H2 from "../ui/custom/TextSection";
 
 export default function DogSection() {
     return (

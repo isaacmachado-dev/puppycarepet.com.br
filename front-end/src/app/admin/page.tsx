@@ -3,24 +3,25 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { CalendarDays, Users, ChartNoAxesColumn, Notebook, Settings, X, ChevronLeft, ChevronRight, CircleQuestionMark } from "lucide-react";
-import AdminMenuItem from "../components/AdminMenuItem";
+import AdminMenuItem from "../../components/ui/custom/AdminMenuItem";
 import AgendamentoPage from "./agendamento/page";
 import ClientesPage from "./clientes/page";
 import AnalisePage from "./analise/page";
+import FuncionariosPage from "./funcionarios/page";
 
 export default function AdminPage() {
     const [isOpen, setIsOpen] = useState(true);
-    const [paginaAtual, setPaginaAtual] = useState<"agendamentos" | "clientes" | "analise" | "funcionarios" | null>(null);
+    const [paginaAtual, setPaginaAtual] = useState<"agendamentos" | "clientes" | "analise" | "funcionarios" | "opcoes" | null>(null);
 
     return (
-        <div className="flex min-h-screen bg-[#E3E3E3] text-black font-bold">
+        <div className="relative flex min-h-screen bg-[#E3E3E3] text-black font-bold">
 
             <aside
-                className={`relative bg-[#1A112E] shadow-lg py-4 px-4 transition-all duration-300 ${isOpen ? "w-[250px]" : "w-[125px]"
+                className={`relative z-10 bg-[#1A112E] shadow-lg py-4 px-4 transition-all duration-300 ${isOpen ? "w-[250px]" : "w-[125px]"
                     }`}
             >
 
-                <div className="flex flex-col gap-4">
+                <div className="sticky top-5 flex flex-col gap-4">
                     <header className="relative flex items-center gap-4 min-h-[50px]">
 
                         {/* Logozinha */}
@@ -50,13 +51,13 @@ export default function AdminPage() {
 
                         {/* Botão Chevron alinhado ao Admin */}
                         <button
-                            className="absolute -right-4 top-1/2 -translate-y-1/2 translate-x-3  hover:bg-[#333] focus:outline-none rounded-md border-2 border-[#AAAAAA]"
+                            className="absolute -right-4 top-1/2 -translate-y-1/2 translate-x-3 bg-[#333] hover:bg-white focus:outline-none rounded-md border-2 border-[#AAAAAA] cursor-pointer"
                             onClick={() => setIsOpen(!isOpen)}
                         >
                             {isOpen ? (
-                                <ChevronLeft color="white" />
+                                <ChevronLeft color="currentColor" className="text-white hover:text-black" />
                             ) : (
-                                <ChevronRight color="white" />
+                                <ChevronRight color="currentColor" className="text-white hover:text-black" />
                             )}
                         </button>
                     </header>
@@ -71,9 +72,10 @@ export default function AdminPage() {
                                 href=""
                                 isOpen={isOpen}
                                 className={`${!isOpen ? "flex justify-center align-center" : "justify-start"}`}
+                                active={paginaAtual === "agendamentos"}
                                 onClick={() => setPaginaAtual("agendamentos")}
-                            />
 
+                            />
                         </div>
 
                         <div className="text-black hover:text-white transition-all duration-300">
@@ -83,17 +85,20 @@ export default function AdminPage() {
                                 href=""
                                 isOpen={isOpen}
                                 className={`${!isOpen ? "flex justify-center align-center" : "justify-start"}`}
+                                active={paginaAtual === "clientes"}
                                 onClick={() => setPaginaAtual("clientes")}
+
                             />
                         </div>
 
                         <div className="text-black hover:text-white transition-all duration-300">
                             <AdminMenuItem
                                 icon={<ChartNoAxesColumn color="currentColor" />}
+                                className={`${!isOpen ? "flex justify-center align-center" : "justify-start"}`}
                                 label="Análise"
                                 href=""
                                 isOpen={isOpen}
-                                className={`${!isOpen ? "flex justify-center align-center" : "justify-start"}`}
+                                active={paginaAtual === "analise"}
                                 onClick={() => setPaginaAtual("analise")}
 
                             />
@@ -102,10 +107,12 @@ export default function AdminPage() {
                         <div className="text-black hover:text-white transition-all duration-300">
                             <AdminMenuItem
                                 icon={<Notebook color="currentColor" />}
-                                label="Funcionários"
-                                href="#"
-                                isOpen={isOpen}
                                 className={`${!isOpen ? "flex justify-center align-center" : "justify-start"}`}
+                                label="Funcionários"
+                                href=""
+                                isOpen={isOpen}
+                                active={paginaAtual === "funcionarios"}
+                                onClick={() => setPaginaAtual("funcionarios")}
 
                             />
                         </div>
@@ -113,10 +120,12 @@ export default function AdminPage() {
                         <div className="text-black hover:text-white transition-all duration-300">
                             <AdminMenuItem
                                 icon={<Settings color="currentColor" />}
+                                className={`${!isOpen ? "flex justify-center align-center" : "justify-start"}`}
                                 label="Opções"
                                 href="#"
                                 isOpen={isOpen}
-                                className={`${!isOpen ? "flex justify-center align-center" : "justify-start"}`}
+                                active={paginaAtual === "opcoes"}
+                                onClick={() => setPaginaAtual("opcoes")}
 
                             />
                         </div>
@@ -126,11 +135,12 @@ export default function AdminPage() {
                     <div className="text-black hover:text-white transition-all duration-300">
                         <AdminMenuItem
                             icon={<X color="currentColor" />}
+                            className={`${!isOpen ? "flex justify-center align-center" : "justify-start"}`}
                             label="Sair"
                             href="/"
                             isOpen={isOpen}
-                            className={`${!isOpen ? "flex justify-center align-center" : "justify-start"}`}
                             danger
+
                         />
                     </div>
                 </div>
@@ -153,6 +163,7 @@ export default function AdminPage() {
                     {paginaAtual === "agendamentos" && <AgendamentoPage />}
                     {paginaAtual === "clientes" && <ClientesPage />}
                     {paginaAtual === "analise" && <AnalisePage />}
+                    {paginaAtual === "funcionarios" && <FuncionariosPage />}
 
                 </section>
 
