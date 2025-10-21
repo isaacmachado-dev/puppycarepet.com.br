@@ -7,7 +7,7 @@ import AdminMenuItem from "../../components/ui/custom/AdminMenuItem";
 import AgendamentoPage from "./agendamento/page";
 import ClientesPage from "./clientes/page";
 import AnalisePage from "./analise/page";
-import FuncionariosPage from "./funcionarios/page";
+import { FuncionariosPage } from "./funcionarios/page";
 
 export default function AdminPage() {
     const [isOpen, setIsOpen] = useState(true);
