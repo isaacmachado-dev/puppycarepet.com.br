@@ -4,22 +4,129 @@ import * as React from "react"
 import { useState } from "react";
 import Image from "next/image";
 import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu"
-import { User, CarFront, ShieldUser, EllipsisVertical } from "lucide-react"
+import { User, CarFront, ShieldUser, EllipsisVertical, MoreHorizontalIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
+
+import {
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+} from "@/components/ui/dialog"
 import {
     DropdownMenu,
-    DropdownMenuCheckboxItem,
     DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
     DropdownMenuLabel,
-    DropdownMenuSeparator,
     DropdownMenuTrigger,
+    DropdownMenuSeparator,
+    DropdownMenuCheckboxItem,
 } from "@/components/ui/dropdown-menu"
+import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
+
 import { AdminBlock, AdminBlockTitle } from "@/components/ui/custom/AdminSettings"
+
 
 
 type Checked = DropdownMenuCheckboxItemProps["checked"]
 
-export default function FuncionariosPage() {
+export function DropdownMenuDialog() {
+    const [showNewDialog, setShowNewDialog] = useState(false)
+    const [showShareDialog, setShowShareDialog] = useState(false)
+
+    return (
+        <>
+            <DropdownMenu modal={false}>
+                <DropdownMenuTrigger asChild>
+                    <Button variant="outline" aria-label="Open menu" size="icon-sm">
+                        <EllipsisVertical />
+                    </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-40" align="end">
+                    <DropdownMenuLabel>Ações</DropdownMenuLabel>
+                    <DropdownMenuGroup>
+                        <DropdownMenuItem onSelect={() => setShowNewDialog(true)}>
+                            Editar
+                        </DropdownMenuItem>
+                        <DropdownMenuItem disabled>Excluir</DropdownMenuItem>
+                    </DropdownMenuGroup>
+                </DropdownMenuContent>
+            </DropdownMenu>
+            <Dialog open={showNewDialog} onOpenChange={setShowNewDialog}>
+                <DialogContent className="sm:max-w-[425px]">
+                    <DialogHeader>
+                        <DialogTitle>Editar o funcionário</DialogTitle>
+                        <DialogDescription>
+                            Edite as informações do funcionário abaixo.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <FieldGroup className="pb-3">
+                        <Field>
+                            <FieldLabel htmlFor="filename">Nome</FieldLabel>
+                            <Input id="filename" name="filename" placeholder="{Nome atual}" />
+                        </Field>
+                        <Field>
+                            <FieldLabel htmlFor="email">Email</FieldLabel>
+                            <Input id="email" name="email" placeholder="emailAtual@exemplo.com.br" />
+                        </Field>
+                    </FieldGroup>
+                    <DialogFooter>
+                        <DialogClose asChild>
+                            <Button variant="outline">Cancelar</Button>
+                        </DialogClose>
+                        <Button type="submit">Salvar</Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
+            <Dialog open={showShareDialog} onOpenChange={setShowShareDialog}>
+                <DialogContent className="sm:max-w-[425px]">
+                    <DialogHeader>
+                        <DialogTitle>Share File</DialogTitle>
+                        <DialogDescription>
+                            Anyone with the link will be able to view this file.
+                        </DialogDescription>
+                    </DialogHeader>
+                    <FieldGroup className="py-3">
+                        <Field>
+                            <Label htmlFor="email">Email Address</Label>
+                            <Input
+                                id="email"
+                                name="email"
+                                type="email"
+                                placeholder="shadcn@vercel.com"
+                                autoComplete="off"
+                            />
+                        </Field>
+                        <Field>
+                            <FieldLabel htmlFor="message">Message (Optional)</FieldLabel>
+                            <Textarea
+                                id="message"
+                                name="message"
+                                placeholder="Check out this file"
+                            />
+                        </Field>
+                    </FieldGroup>
+                    <DialogFooter>
+                        <DialogClose asChild>
+                            <Button variant="outline">Cancel</Button>
+                        </DialogClose>
+                        <Button type="submit">Send Invite</Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
+        </>
+    )
+}
+
+
+export function FuncionariosPage() {
 
     const [showStatusBar, setShowStatusBar] = React.useState<Checked>(true)
     const [showActivityBar, setShowActivityBar] = React.useState<Checked>(false)
@@ -154,23 +261,19 @@ export default function FuncionariosPage() {
                     <div className="flex bg-[#D9D9D9] rounded-md mt-2 flex-col justify-center relative ">
 
                         <div className="flex justify-end p-1 absolute top-0 right-0">
-                            <EllipsisVertical
-                                className="bg-[#191919] rounded-sm"
-                                color="white"
-                            />
+                            <DropdownMenuDialog />
                         </div>
 
                         <div className="w-[150px] h-[150px] rounded-full overflow-hidden mx-auto">
 
-
-
                             <Image
-                                src="/admin/funcionarios/Joel-Miller.webp"
+                                src="/admin/funcionarios/Joel-MIller.webp"
                                 width={200}
                                 height={200}
                                 alt="Joel Miller"
                                 className="w-full h-full object-cover"
                             />
+
                         </div>
                         <div className="flex flex-row">
 
