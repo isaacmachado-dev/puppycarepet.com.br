@@ -81,15 +81,15 @@ export default function DropdownMenuDialog({ funcionario }: DropdownMenuDialogPr
                             <Input
                                 id="email"
                                 name="email"
-                                defaultValue="emailAtual@exemplo.com.br"
+                                defaultValue="{emailAtual@exemplo.com.br}"
                             />
                         </Field>
                     </FieldGroup>
                     <DialogFooter>
                         <DialogClose asChild>
-                            <Button variant="outline">Cancelar</Button>
+                            <Button variant="outline" className="cursor-pointer">Cancelar</Button>
                         </DialogClose>
-                        <Button type="submit">Salvar</Button>
+                        <Button type="submit" className="cursor-pointer">Salvar</Button>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
