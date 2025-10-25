@@ -3,8 +3,7 @@ import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import { useState } from "react"
-
+import { useEffect, useState } from "react"
 import {
     Dialog,
     DialogClose,
@@ -14,7 +13,6 @@ import {
     DialogHeader,
     DialogTitle,
 } from "@/components/ui/dialog"
-
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -25,19 +23,21 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { EllipsisVertical } from "lucide-react";
 import { Button } from "../button";
-
-interface Funcionario {
-    id: number;
-    name: string;
-    image: string;
-}
+import AdminTypeEmployee from "./AdminTypeEmployee";
+import { Funcionario } from "@/types/funcionario";
+import { format } from "path";
 
 interface DropdownMenuDialogProps {
     funcionario: Funcionario;
+    onUpdated?: () => void;
 }
 
-export default function DropdownMenuDialog({ funcionario }: DropdownMenuDialogProps) {
-    const [showNewDialog, setShowNewDialog] = useState(false)
+export default function DropdownMenuDialog({ funcionario, onUpdated }: DropdownMenuDialogProps) {
+    const [showNewDialog, setShowNewDialog] = useState(false);
+    const [name, setName] = useState(funcionario.name);
+    const [email, setEmail] = useState(funcionario.email);
+    const [type, setType] = useState<string[]>(funcionario.type);
+    const [reload, setReload] = useState(false);
 
     return (
         <>
@@ -73,7 +73,7 @@ export default function DropdownMenuDialog({ funcionario }: DropdownMenuDialogPr
                                 id="filename"
                                 name="filename"
                                 defaultValue={funcionario.name}
-
+                                onChange={e => setName(e.target.value)}
                             />
                         </Field>
                         <Field>
@@ -81,18 +81,52 @@ export default function DropdownMenuDialog({ funcionario }: DropdownMenuDialogPr
                             <Input
                                 id="email"
                                 name="email"
-                                defaultValue="{emailAtual@exemplo.com.br}"
+                                defaultValue={funcionario.email}
+                                onChange={e => setEmail(e.target.value)}
                             />
                         </Field>
+                        <Field>
+                            <FieldLabel htmlFor="type">Tipo de usuário</FieldLabel>
+                            <AdminTypeEmployee
+                                className="w-full"
+                                value={funcionario.type}
+                                onChange={setType}
+
+                            />
+                        </Field>
+
                     </FieldGroup>
                     <DialogFooter>
                         <DialogClose asChild>
                             <Button variant="outline" className="cursor-pointer">Cancelar</Button>
                         </DialogClose>
-                        <Button type="submit" className="cursor-pointer">Salvar</Button>
+                        <Button
+                            type="submit"
+                            className="cursor-pointer"
+                            onClick={async () => {
+                                await fetch(`/api/funcionarios/${funcionario.id}`, {
+                                    method: 'PATCH',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                    },
+                                    body: JSON.stringify({
+                                        name,
+                                        email,
+                                        type,
+                                    }),
+                                });
+
+                                setShowNewDialog(false);
+                                if (onUpdated) onUpdated(); // <-- chama o pai. Nada de window.location.reload!
+                            }}
+                        >
+                            Salvar
+                        </Button>
                     </DialogFooter>
                 </DialogContent>
-            </Dialog>
+            </Dialog >
         </>
     )
 }
+
+

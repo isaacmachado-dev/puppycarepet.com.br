@@ -1,0 +1,58 @@
+[
+  {
+    "id": 0,
+    "name": "Joel Milla",
+    "image": "/admin/funcionarios/joel.webp",
+    "email": "joel.miller@thelastofus.com",
+    "type": [
+      "administrador"
+    ]
+  },
+  {
+    "id": 1,
+    "name": "Ellie Miller",
+    "image": "/admin/funcionarios/ellie.jpg",
+    "email": "ellie.williams@thelastofus.com",
+    "type": [
+      "funcionario",
+      "condutor"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Ricka Grima",
+    "image": "/admin/funcionarios/rick.webp",
+    "email": "rick.grimes@thewalkingdead.com",
+    "type": [
+      "administrador"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "R1ck",
+    "image": "/admin/funcionarios/rick.gif",
+    "email": "morty@rickandmorty.com",
+    "type": [
+      "administrador"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Daryl Dixon",
+    "image": "/admin/funcionarios/daryl.jpg",
+    "email": "daryl.dixon@thewalkingdead.com",
+    "type": [
+      "funcionario"
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Negana",
+    "image": "/admin/funcionarios/negan.webp",
+    "email": "negan@thewalkingdea.com",
+    "type": [
+      "administrador",
+      "funcionario"
+    ]
+  }
+]

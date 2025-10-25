@@ -8,15 +8,40 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FuncionariosService = void 0;
 const common_1 = require("@nestjs/common");
+const FILE_PATH = 'src/funcionarios/funcionarios.json';
 let FuncionariosService = class FuncionariosService {
-    funcionarios = [
-        { id: 1, name: 'Joel Miller', image: '/admin/funcionarios/joel.webp', position: 'administradores' },
-        { id: 2, name: 'Ellie Williams', image: '/admin/funcionarios/ellie.jpg', position: 'funcionarios' },
-        { id: 3, name: 'Rick Grimes', image: '/admin/funcionarios/rick.webp', position: 'condutor' },
-        { id: 4, name: 'Morty', image: '/admin/funcionarios/morty.webp', position: 'condutor' },
-    ];
+    funcionarios = this.loadFuncionarios();
+    loadFuncionarios() {
+        const fs = require('fs');
+        try {
+            if (fs.existsSync(FILE_PATH)) {
+                const data = fs.readFileSync(FILE_PATH, 'utf-8');
+                console.log('LIDO DO JSON:', data);
+                return JSON.parse(data);
+            }
+        }
+        catch (e) {
+            console.error('Erro ao ler o arquivo de funcionarios:', e);
+        }
+        return [];
+    }
+    saveFuncionarios() {
+        const fs = require('fs');
+        fs.writeFileSync(FILE_PATH, JSON.stringify(this.funcionarios, null, 2), 'utf-8');
+    }
     findAll() {
         return this.funcionarios;
+    }
+    updateFuncionario(id, data) {
+        const index = this.funcionarios.findIndex(f => f.id === id);
+        if (index === -1)
+            return null;
+        this.funcionarios[index] = {
+            ...this.funcionarios[index],
+            ...data,
+        };
+        this.saveFuncionarios();
+        return this.funcionarios[index];
     }
 };
 exports.FuncionariosService = FuncionariosService;
