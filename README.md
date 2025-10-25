@@ -21,59 +21,54 @@
 - [Node.Js](https://nodejs.org/pt)
 - Terminal or IDE of preference.
 
-Make sure you are on the correct folder on a 2 different window or terminal to run front-end and back-end folders:
+Make sure you are on the correct folder on a 2 different window or terminal to run *front-end* and *back-end* folders:
 
-1. First, install front-end dependencies:
+### Front-END: 
+
+```bash
+# Enter the front-end folder:
+cd front-end
+```
+
+1. Install *front-end* dependencies:
+```npm
+npm install
+```
+
+2. Run the *front-end* development server:
+```npm
+npm run dev
+```
+
+3. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result of Front-END.
+
+### Back-END:
+
+```bash
+# Enter the front-end folder:
+cd back-end
+```
+
+1. Install *back-end* dependencies:
 ```
 npm install
 ```
 
-2. Second, run the front-end development server:
+2. Run the *back-end* development server:
 ```
 npm run dev
 ```
 
-3. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-  
-## Learn More
-
 > [!Tip]
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+For more details, please see the README.md from 'back-end' folder on this project
 
-> [!Note]
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Back-end
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Project setup
+##
+### Test units:
 
 ```bash
-$ npm install
+# Enter the front-end folder:
+cd back-end
 ```
-
-## Compile and run the project
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
-```
-
-## Run tests
 
 ```bash
 # unit tests
@@ -86,4 +81,16 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## For more details, please see the README.md from 'back-end' folder on this project
+## Learn More
+
+> [!Tip]
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+
+> [!Note]
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+
