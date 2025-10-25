@@ -31,11 +31,10 @@ export function FuncionariosPage() {
     const [showPanel, setShowPanel] = React.useState<Checked>(false)
     const [selectedTypes, setSelectedTypes] = useState<string[]>([])
     const [dropdownActive, setDropdownActive] = useState(false);
-    const [funcionarios, setFuncionario] = useState([]);
-    const numFuncionarios = funcionarios.length;
+    const funcionarios = 3;
     const condutores = 2
     const administradores = 1
-    const totalFuncionarios = numFuncionarios + condutores + administradores
+    const totalFuncionarios = funcionarios + condutores + administradores
 
     const toggleType = (type: string, checked: boolean) => {
         if (checked) {
