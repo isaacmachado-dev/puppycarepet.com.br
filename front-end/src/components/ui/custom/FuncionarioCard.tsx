@@ -30,7 +30,7 @@ export default function FuncionariosList() {
           className="flex bg-[#D9D9D9] rounded-md mt-2 flex-col justify-center relative"
         >
           <div className="flex justify-end p-1 absolute top-0 right-0">
-            <DropdownMenuDialog />
+            <DropdownMenuDialog funcionario={func} />
           </div>
 
           <div className="w-[150px] h-[150px] rounded-full overflow-hidden mx-auto">
