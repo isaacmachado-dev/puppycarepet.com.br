@@ -1,27 +1,16 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
 import DropdownMenuDialog from './FuncionarioConfig';
+import { Funcionario } from '@/types/funcionario';
 
 
-interface Funcionario {
-  id: number;
-  name: string;
-  image: string;
+interface FuncionariosCardProps {
+  funcionarios: Funcionario[];  // ← Aceita props
+  onUpdated?: () => void;
 }
 
-
-export default function FuncionariosList() {
-  const [funcionarios, setFuncionarios] = useState<Funcionario[]>([]);
-
-  useEffect(() => {
-    fetch('/api/funcionarios') // rota que você criou
-      .then(res => res.json())
-      .then(data => setFuncionarios(data))
-      .catch(err => console.error('Erro ao buscar funcionários:', err));
-  }, []);
-
+export default function FuncionariosCard({ funcionarios, onUpdated }: FuncionariosCardProps) {
   return (
     <div className="grid grid-cols-4 gap-4 mt-10">
       {funcionarios.map((func) => (
@@ -30,7 +19,10 @@ export default function FuncionariosList() {
           className="flex bg-[#D9D9D9] rounded-md mt-2 flex-col justify-center relative"
         >
           <div className="flex justify-end p-1 absolute top-0 right-0">
-            <DropdownMenuDialog funcionario={func} />
+            <DropdownMenuDialog
+              funcionario={func}
+              onUpdated={onUpdated}
+            />
           </div>
 
           <div className="w-[150px] h-[150px] rounded-full overflow-hidden mx-auto">
@@ -43,8 +35,9 @@ export default function FuncionariosList() {
             />
           </div>
 
-          <div className="flex flex-row">
+          <div className="flex flex-col mx-auto">
             <h3 className="mx-auto">{func.name}</h3>
+            {/* {func.type} */}
           </div>
         </div>
       ))}

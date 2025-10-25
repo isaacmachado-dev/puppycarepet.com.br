@@ -2,10 +2,10 @@ import { FuncionariosService } from './funcionarios.service';
 export declare class FuncionariosController {
     private readonly funcionariosService;
     constructor(funcionariosService: FuncionariosService);
-    findAll(): {
-        id: number;
-        name: string;
-        image: string;
-        position: string;
-    }[];
+    findAll(): any;
+    update(id: string, body: {
+        name?: string;
+        email?: string;
+        type?: string[];
+    }): any;
 }

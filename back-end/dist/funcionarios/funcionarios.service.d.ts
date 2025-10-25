@@ -1,9 +1,11 @@
 export declare class FuncionariosService {
-    private readonly funcionarios;
-    findAll(): {
-        id: number;
+    private funcionarios;
+    private loadFuncionarios;
+    private saveFuncionarios;
+    findAll(): any;
+    updateFuncionario(id: number, data: Partial<{
         name: string;
-        image: string;
-        position: string;
-    }[];
+        email: string;
+        type: string[];
+    }>): any;
 }

@@ -1,51 +1,81 @@
 "use client"
-
 import * as React from "react"
-import { useState } from "react";
 import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu"
 import { User, CarFront, ShieldUser } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import FuncionariosCard from "@/components/ui/custom/FuncionarioCard";
-
-
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuGroup,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuTrigger,
-    DropdownMenuSeparator,
-    DropdownMenuCheckboxItem,
-} from "@/components/ui/dropdown-menu"
-
 import { AdminBlock, AdminBlockTitle } from "@/components/ui/custom/AdminSettings"
+import FuncionariosCard from "@/components/ui/custom/FuncionarioCard";
+import AdminTypeEmployee from "@/components/ui/custom/AdminTypeEmployee";
+import { Funcionario, FuncionarioType } from "@/types/funcionario";
+import { useEffect, useState } from "react"
 
 type Checked = DropdownMenuCheckboxItemProps["checked"]
 
 
 export function FuncionariosPage() {
-
     const [showStatusBar, setShowStatusBar] = React.useState<Checked>(true)
     const [showActivityBar, setShowActivityBar] = React.useState<Checked>(false)
     const [showPanel, setShowPanel] = React.useState<Checked>(false)
-    const [selectedTypes, setSelectedTypes] = useState<string[]>([])
-    const [dropdownActive, setDropdownActive] = useState(false);
-    const funcionarios = 3;
-    const condutores = 2
-    const administradores = 1
-    const totalFuncionarios = funcionarios + condutores + administradores
 
-    const toggleType = (type: string, checked: boolean) => {
-        if (checked) {
-            setSelectedTypes([...selectedTypes, type])
-        } else {
-            setSelectedTypes(selectedTypes.filter(t => t !== type))
-        }
+    // Estado para buscas
+    const [searchName, setSearchName] = React.useState("");
+    const [selectedTypes, setSelectedTypes] = React.useState<string[]>([]);
+
+
+
+    // Estado para armazenar os funcionários
+    const [funcionarios, setFuncionarios] = React.useState<Funcionario[]>([]);
+    const [loading, setLoading] = React.useState(true);
+
+    const [reload, setReload] = useState(false);
+
+
+
+    // Buscar funcionários do back-end
+    const fetchFuncionarios = () => {
+        setLoading(true);
+        fetch('/api/funcionarios')
+            .then(res => res.json())
+            .then(data => {
+                setFuncionarios(data);
+                setLoading(false);
+            })
+            .catch(err => {
+                console.error('Erro ao buscar funcionários:', err);
+                setLoading(false);
+            });
+    };
+
+    useEffect(() => {
+        fetchFuncionarios();
+    }, [reload]); // agora sempre que reload muda, re-busca do backend!
+
+
+    // Calcular quantidades por tipo automaticamente
+    const numFuncionarios = funcionarios.filter(f => f.type.includes('funcionario' as FuncionarioType)).length;
+    const condutores = funcionarios.filter(f => f.type.includes('condutor' as FuncionarioType)).length;
+    const administradores = funcionarios.filter(f => f.type.includes('administrador' as FuncionarioType)).length;
+    const totalFuncionarios = funcionarios.length;
+
+
+    // Busca por nome
+    const searchFuncionarios = funcionarios.filter((func) => {
+        return func.name.toLowerCase().includes(searchName.toLowerCase())
+    })
+
+    // Busca por filtro do type
+    const filteredFuncionarios = funcionarios
+        .filter(func => func.name.toLowerCase().includes(searchName.toLowerCase()))
+        .filter(func => {
+            if (selectedTypes.length === 0) return true;
+            return func.type.some(t => selectedTypes.includes(t));
+        });
+
+
+    if (loading) {
+        return <div className="text-center p-10">Carregando...</div>;
     }
 
     return (
-
         <div className="flex flex-col gap-10">
             <AdminBlock>
                 <AdminBlockTitle>Gerenciamento de Funcionários</AdminBlockTitle>
@@ -55,7 +85,7 @@ export function FuncionariosPage() {
                         <div className="bg-white p-10 rounded-md flex flex-col items-center text-center w-40">
                             <User className="flex" width="40px" height="40px" />
                             <h1>Funcionários</h1>
-                            <p>{funcionarios}</p>
+                            <p>{numFuncionarios}</p>
                         </div>
 
                         <div className="bg-white p-10 rounded-md flex flex-col items-center text-center w-40">
@@ -79,81 +109,41 @@ export function FuncionariosPage() {
             </AdminBlock>
 
             <AdminBlock>
-                <AdminBlockTitle>Funcionários </AdminBlockTitle>
+                <AdminBlockTitle>Funcionários</AdminBlockTitle>
 
                 <div className="flex flex-row gap-2 flex-wrap items-center justify-center">
                     <div>
+                        {/* BUSCA: Nome do usuário */}
                         <h2>Nome</h2>
                         <input
                             type="text"
                             placeholder="Digite o nome..."
-                            className="bg-[#D9D9D9] p-2 rounded-sm outline-none focus:ring-2 focus:ring-[#2A2D34] hover:bg-white text-sm font-bold leading-5 w-90 h-10"
+                            className="bg-[#D9D9D9] p-2 rounded-sm outline-none focus:ring-2 focus:ring-[#2A2D34] hover:bg-white text-sm font-bold leading-5 w-80 h-10"
+                            value={searchName}
+                            onChange={(e) => setSearchName(e.target.value)}
                         />
                     </div>
 
                     <div>
+                        {/* BUSCA: Tipo de usuário */}
                         <h2>Tipo de usuário</h2>
-                        <DropdownMenu open={dropdownActive} onOpenChange={setDropdownActive}>
-                            <DropdownMenuTrigger asChild>
-                                <Button
-                                    variant="outline"
-                                    className={`bg-[#D9D9D9] rounded-sm p-2 w-60 h-10 justify-start !text-left cursor-pointer ${dropdownActive ? "ring-2 ring-black ring-offset-2" : ""
-                                        }`}
-                                >
-                                    {selectedTypes.length > 0 ? (
-                                        <div className="flex flex-wrap gap-1 rounded-sm h-[30px] ">
-                                            {selectedTypes.slice(0, 2).map((type) => (
-                                                <span
-                                                    key={type}
-                                                    className="bg-gray-500 text-white px-2 py-1 rounded-full text-xs flex items-center"
-                                                >
-                                                    {type}
-                                                </span>
-                                            ))}
-                                            {selectedTypes.length > 2 && (
-                                                <span className="bg-gray-500 text-white px-2 py-1 rounded-full text-xs flex items-center">
-                                                    +{selectedTypes.length - 2}
-                                                </span>
-                                            )}
-                                        </div>
-                                    ) : (
-                                        <span className="rounded-sm text-[#6c6c6c] text-sm font-bold leading-5">
-                                            Escolha
-                                        </span>
-                                    )}
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className="w-56">
-                                <DropdownMenuSeparator />
-                                <DropdownMenuCheckboxItem
-                                    checked={selectedTypes.includes("Funcionário")}
-                                    onCheckedChange={(checked) => toggleType("Funcionário", !!checked)}
-                                    className="cursor-pointer"
-                                >
-                                    Funcionário
-                                </DropdownMenuCheckboxItem>
-                                <DropdownMenuCheckboxItem
-                                    checked={selectedTypes.includes("Condutor")}
-                                    onCheckedChange={(checked) => toggleType("Condutor", !!checked)}
-                                    className="cursor-pointer"
-                                >
-                                    Condutor
-                                </DropdownMenuCheckboxItem>
-                                <DropdownMenuCheckboxItem
-                                    checked={selectedTypes.includes("Administradores")}
-                                    onCheckedChange={(checked) => toggleType("Administradores", !!checked)}
-                                    className="cursor-pointer"
-                                >
-                                    Administradores
-                                </DropdownMenuCheckboxItem>
-                            </DropdownMenuContent>
-                        </DropdownMenu>
+                        <AdminTypeEmployee
+                            value={selectedTypes}
+                            onChange={setSelectedTypes}
+
+                        />
                     </div>
                 </div>
 
-                <FuncionariosCard />
+                {/* Lista dos funcionários */}
+                <div>
+                    <FuncionariosCard
+                        funcionarios={filteredFuncionarios}
+                        onUpdated={() => setReload(r => !r)}
+                    />
+                </div>
 
-            </AdminBlock >
-        </div >
+            </AdminBlock>
+        </div>
     )
 }
