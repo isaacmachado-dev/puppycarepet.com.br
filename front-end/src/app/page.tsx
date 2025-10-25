@@ -10,7 +10,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div className="font-sans bg-[#E72989] text-white">
-      <main>
+      <main>f
         <HomeScreen>
           <SetupSection>
             <div className="flex flex-col items-center gap-5 sm:flex-row sm:items-center sm:gap-10">
@@ -92,8 +92,6 @@ export default function Home() {
         <div>
           <AdminButton />
         </div>
-
-
 
       </main >
 
