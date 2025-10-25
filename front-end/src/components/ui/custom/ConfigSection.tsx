@@ -28,7 +28,6 @@ export function SetupSection({ children, className = "" }: SectionProps) {
       {children}
     </div>
   );
-
 }
 
 export function PurpleButton({ children, className = "" }: SectionProps) {
