@@ -4,56 +4,9 @@ import { UpdateStatusDto } from './dto/update-status.dto';
 export declare class StatusController {
     private readonly statusService;
     constructor(statusService: StatusService);
-    create(createStatusDto: CreateStatusDto): Promise<{
-        id: string;
-        status: string;
-        timestamp: Date;
-        ordem_id: string;
-    }>;
-    findAll(): Promise<({
-        ordem: {
-            id: string;
-            status: string;
-            cliente_id: string;
-            pet_id: string;
-            tipo: string;
-            data_agendada: Date;
-            preco: import("@prisma/client/runtime/library").Decimal | null;
-            observacoes: string | null;
-        };
-    } & {
-        id: string;
-        status: string;
-        timestamp: Date;
-        ordem_id: string;
-    })[]>;
-    findOne(id: string): Promise<{
-        ordem: {
-            id: string;
-            status: string;
-            cliente_id: string;
-            pet_id: string;
-            tipo: string;
-            data_agendada: Date;
-            preco: import("@prisma/client/runtime/library").Decimal | null;
-            observacoes: string | null;
-        };
-    } & {
-        id: string;
-        status: string;
-        timestamp: Date;
-        ordem_id: string;
-    }>;
-    update(id: string, updateStatusDto: UpdateStatusDto): Promise<{
-        id: string;
-        status: string;
-        timestamp: Date;
-        ordem_id: string;
-    }>;
-    remove(id: string): Promise<{
-        id: string;
-        status: string;
-        timestamp: Date;
-        ordem_id: string;
-    }>;
+    create(createStatusDto: CreateStatusDto): Promise<any>;
+    findAll(): Promise<any>;
+    findOne(id: string): Promise<any>;
+    update(id: string, updateStatusDto: UpdateStatusDto): Promise<any>;
+    remove(id: string): Promise<any>;
 }

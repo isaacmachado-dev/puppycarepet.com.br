@@ -1,5 +1,4 @@
-import { CreatePetDto } from './create-pet.dto';
-declare const UpdatePetDto_base: import("@nestjs/common").Type<Partial<CreatePetDto>>;
+declare const UpdatePetDto_base: any;
 export declare class UpdatePetDto extends UpdatePetDto_base {
 }
 export {};

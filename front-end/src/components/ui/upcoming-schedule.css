@@ -39,7 +39,7 @@
 }
 
 .date-selector:hover {
-  background-color: #dededd;
+  background-color: #cfcfcf;
 }
 
 .date-selector span {
@@ -108,15 +108,19 @@
   border-bottom-right-radius: 20px;
 }
 
-.day-item:hover .day-number,
-.day-item:hover .day-name {
-  background-color: #f8f8f8;
-}
 
 .day-active .day-number,
 .day-active .day-name {
   background-color: #f0ff7a;
 }
+
+.day-item:hover .day-number,
+.day-item:hover .day-name {
+  background-color: #cfcfcf;
+  cursor: pointer;
+
+}
+
 
 .indicator-container {
   display: flex;

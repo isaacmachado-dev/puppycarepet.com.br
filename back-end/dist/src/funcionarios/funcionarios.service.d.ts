@@ -4,54 +4,9 @@ import { UpdateFuncionarioDto } from './dto/update-funcionario.dto';
 export declare class FuncionariosService {
     private prisma;
     constructor(prisma: PrismaService);
-    create(createFuncionarioDto: CreateFuncionarioDto): Promise<{
-        id: string;
-        nome: string;
-        email: string;
-        telefone: string;
-        cargo: string;
-        ativo: boolean;
-        createdAt: Date;
-        updatedAt: Date;
-    }>;
-    findAll(): Promise<{
-        id: string;
-        nome: string;
-        email: string;
-        telefone: string;
-        cargo: string;
-        ativo: boolean;
-        createdAt: Date;
-        updatedAt: Date;
-    }[]>;
-    findOne(id: string): Promise<{
-        id: string;
-        nome: string;
-        email: string;
-        telefone: string;
-        cargo: string;
-        ativo: boolean;
-        createdAt: Date;
-        updatedAt: Date;
-    }>;
-    update(id: string, updateFuncionarioDto: UpdateFuncionarioDto): Promise<{
-        id: string;
-        nome: string;
-        email: string;
-        telefone: string;
-        cargo: string;
-        ativo: boolean;
-        createdAt: Date;
-        updatedAt: Date;
-    }>;
-    remove(id: string): Promise<{
-        id: string;
-        nome: string;
-        email: string;
-        telefone: string;
-        cargo: string;
-        ativo: boolean;
-        createdAt: Date;
-        updatedAt: Date;
-    }>;
+    create(createFuncionarioDto: CreateFuncionarioDto): Promise<any>;
+    findAll(): Promise<any>;
+    findOne(id: string): Promise<any>;
+    update(id: string, updateFuncionarioDto: UpdateFuncionarioDto): Promise<any>;
+    remove(id: string): Promise<any>;
 }
