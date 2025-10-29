@@ -54,7 +54,7 @@ export default function UpcomingSchedule() {
                         </div>
                         <div className="day-item">
                             <div className="day-number">13</div>
-                            <div className="day-name">Sábado</div>
+                            <div className="day-name">Sáb</div>
                         </div>
                     </div>
 
