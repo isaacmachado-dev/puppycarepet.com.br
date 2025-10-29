@@ -1,7 +1,7 @@
 [
   {
     "id": 0,
-    "name": "Joel Milla",
+    "name": "Joel Miller",
     "image": "/admin/funcionarios/joel.webp",
     "email": "joel.miller@thelastofus.com",
     "type": [
@@ -10,7 +10,7 @@
   },
   {
     "id": 1,
-    "name": "Ellie Mill",
+    "name": "Ellie Miller",
     "image": "/admin/funcionarios/ellie.jpg",
     "email": "ellie.williams@thelastofus.com",
     "type": [
@@ -20,7 +20,7 @@
   },
   {
     "id": 2,
-    "name": "Ricka Grima",
+    "name": "Rick Grim",
     "image": "/admin/funcionarios/rick.webp",
     "email": "rick.grimes@thewalkingdead.com",
     "type": [
@@ -29,7 +29,7 @@
   },
   {
     "id": 3,
-    "name": "R1ck",
+    "name": "Mortyyyy",
     "image": "/admin/funcionarios/rick.gif",
     "email": "morty@rickandmorty.com",
     "type": [
@@ -47,12 +47,13 @@
   },
   {
     "id": 5,
-    "name": "Negana",
+    "name": "Negan",
     "image": "/admin/funcionarios/negan.webp",
     "email": "negan@thewalkingdea.com",
     "type": [
       "administrador",
-      "funcionario"
+      "funcionario",
+      "condutor"
     ]
   }
 ]
