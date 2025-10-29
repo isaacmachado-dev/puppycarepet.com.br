@@ -1,0 +1,120 @@
+// Este é o seu arquivo de esquema Prisma.
+// Saiba mais na documentação: https://pris.ly/d/prisma-schema
+
+// Procurando maneiras de acelerar suas consultas ou escalar facilmente com suas funções serverless ou edge?
+
+// Experimente o Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Clientes {
+  id                  String           @id @default(uuid())
+  nome                String
+  email               String?          @unique
+  telefone            String
+  cpf                 String?          @unique
+  endereco_logradouro String
+  numero              String
+  bairro              String?
+  cidade              String
+  uf                  String
+  cep                 String
+  latitude            Float?
+  longitude           Float?
+  whatsapp_opt_in     Boolean          @default(false)
+  pets                Pets[]
+  ordens              OrdensServicos[]
+  mensagens           Mensagens[]
+  createdAt           DateTime         @default(now())
+  updatedAt           DateTime         @updatedAt
+}
+
+model Pets {
+  id          String           @id @default(uuid())
+  cliente_id  String
+  cliente     Clientes         @relation(fields: [cliente_id], references: [id])
+  nome        String
+  especie     String
+  raca        String?
+  porte       String?
+  nascimento  DateTime?
+  observacoes String?
+  ordens      OrdensServicos[]
+}
+
+model OrdensServicos {
+  id            String         @id @default(uuid())
+  cliente_id    String
+  pet_id        String
+  tipo          String
+  status        String         @default("agendado")
+  data_agendada DateTime
+  preco         Decimal?
+  observacoes   String?
+  clientes      Clientes       @relation(fields: [cliente_id], references: [id])
+  pet           Pets           @relation(fields: [pet_id], references: [id])
+  paradas       RotasParadas[]
+  statuses      Status[]
+}
+
+model Rotas {
+  id                    String         @id @default(uuid())
+  data                  DateTime
+  tipo                  String // coleta ou entrega
+  status                String         @default("planejada")
+  motorista             String?
+  kilometragem_prevista Float?
+  tempo_previsto        Int? // em minutos
+  paradas               RotasParadas[]
+}
+
+model RotasParadas {
+  id        String         @id @default(uuid())
+  rota_id   String
+  ordem_id  String
+  sequencia Int
+  latitude  Float
+  longitude Float
+  status    String         @default("pendente")
+  rota      Rotas          @relation(fields: [rota_id], references: [id])
+  ordem     OrdensServicos @relation(fields: [ordem_id], references: [id])
+}
+
+model Mensagens {
+  id              String   @id @default(uuid())
+  cliente_id      String
+  canal           String // whatsapp
+  template        String?
+  conteudo        String
+  status          String   @default("pendente")
+  meta_message_id String?
+  erro            String?
+  clientes        Clientes @relation(fields: [cliente_id], references: [id])
+  createdAt       DateTime @default(now())
+}
+
+model Funcionarios {
+  id        String   @id @default(uuid())
+  nome      String
+  email     String   @unique
+  telefone  String
+  cargo     String
+  ativo     Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Status {
+  id        String   @id @default(uuid())
+  ordem_id  String
+  status    String
+  timestamp DateTime @default(now())
+  ordem     OrdensServicos @relation(fields: [ordem_id], references: [id])
+}
