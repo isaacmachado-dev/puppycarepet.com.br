@@ -1,0 +1,145 @@
+import { OrdensServicosService } from './ordens-servicos.service';
+import { CreateOrdensServicoDto } from './dto/create-ordens-servico.dto';
+import { UpdateOrdensServicoDto } from './dto/update-ordens-servico.dto';
+export declare class OrdensServicosController {
+    private readonly ordensServicosService;
+    constructor(ordensServicosService: OrdensServicosService);
+    create(createOrdensServicoDto: CreateOrdensServicoDto): Promise<{
+        id: string;
+        tipo: string;
+        status: string;
+        data_agendada: Date;
+        preco: import("@prisma/client/runtime/library").Decimal | null;
+        observacoes: string | null;
+        cliente_id: string;
+        pet_id: string;
+    }>;
+    findAll(): Promise<({
+        clientes: {
+            id: string;
+            nome: string;
+            email: string | null;
+            telefone: string;
+            cpf: string | null;
+            endereco_logradouro: string;
+            numero: string;
+            bairro: string | null;
+            cidade: string;
+            uf: string;
+            cep: string;
+            latitude: number | null;
+            longitude: number | null;
+            whatsapp_opt_in: boolean;
+            createdAt: Date;
+            updatedAt: Date;
+        };
+        pet: {
+            id: string;
+            observacoes: string | null;
+            cliente_id: string;
+            nome: string;
+            especie: string;
+            raca: string | null;
+            porte: string | null;
+            nascimento: Date | null;
+        };
+        paradas: {
+            id: string;
+            status: string;
+            latitude: number;
+            longitude: number;
+            rota_id: string;
+            ordem_id: string;
+            sequencia: number;
+        }[];
+        statuses: {
+            id: string;
+            status: string;
+            ordem_id: string;
+            timestamp: Date;
+        }[];
+    } & {
+        id: string;
+        tipo: string;
+        status: string;
+        data_agendada: Date;
+        preco: import("@prisma/client/runtime/library").Decimal | null;
+        observacoes: string | null;
+        cliente_id: string;
+        pet_id: string;
+    })[]>;
+    findOne(id: string): Promise<{
+        clientes: {
+            id: string;
+            nome: string;
+            email: string | null;
+            telefone: string;
+            cpf: string | null;
+            endereco_logradouro: string;
+            numero: string;
+            bairro: string | null;
+            cidade: string;
+            uf: string;
+            cep: string;
+            latitude: number | null;
+            longitude: number | null;
+            whatsapp_opt_in: boolean;
+            createdAt: Date;
+            updatedAt: Date;
+        };
+        pet: {
+            id: string;
+            observacoes: string | null;
+            cliente_id: string;
+            nome: string;
+            especie: string;
+            raca: string | null;
+            porte: string | null;
+            nascimento: Date | null;
+        };
+        paradas: {
+            id: string;
+            status: string;
+            latitude: number;
+            longitude: number;
+            rota_id: string;
+            ordem_id: string;
+            sequencia: number;
+        }[];
+        statuses: {
+            id: string;
+            status: string;
+            ordem_id: string;
+            timestamp: Date;
+        }[];
+    } & {
+        id: string;
+        tipo: string;
+        status: string;
+        data_agendada: Date;
+        preco: import("@prisma/client/runtime/library").Decimal | null;
+        observacoes: string | null;
+        cliente_id: string;
+        pet_id: string;
+    }>;
+    update(id: string, updateOrdensServicoDto: UpdateOrdensServicoDto): Promise<{
+        id: string;
+        tipo: string;
+        status: string;
+        data_agendada: Date;
+        preco: import("@prisma/client/runtime/library").Decimal | null;
+        observacoes: string | null;
+        cliente_id: string;
+        pet_id: string;
+    }>;
+    remove(id: string): Promise<{
+        id: string;
+        tipo: string;
+        status: string;
+        data_agendada: Date;
+        preco: import("@prisma/client/runtime/library").Decimal | null;
+        observacoes: string | null;
+        cliente_id: string;
+        pet_id: string;
+    }>;
+}
