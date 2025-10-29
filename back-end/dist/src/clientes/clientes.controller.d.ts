@@ -1,0 +1,150 @@
+import { ClientesService } from './clientes.service';
+import { CreateClienteDto } from './dto/create-cliente.dto';
+import { UpdateClienteDto } from './dto/update-cliente.dto';
+export declare class ClientesController {
+    private readonly clientesService;
+    constructor(clientesService: ClientesService);
+    create(createClienteDto: CreateClienteDto): Promise<{
+        id: string;
+        nome: string;
+        email: string | null;
+        telefone: string;
+        cpf: string | null;
+        endereco_logradouro: string;
+        numero: string;
+        bairro: string | null;
+        cidade: string;
+        uf: string;
+        cep: string;
+        latitude: number | null;
+        longitude: number | null;
+        whatsapp_opt_in: boolean;
+        createdAt: Date;
+        updatedAt: Date;
+    }>;
+    findAll(): Promise<({
+        pets: {
+            id: string;
+            nome: string;
+            cliente_id: string;
+            especie: string;
+            raca: string | null;
+            porte: string | null;
+            nascimento: Date | null;
+            observacoes: string | null;
+        }[];
+        ordens: {
+            id: string;
+            cliente_id: string;
+            observacoes: string | null;
+            pet_id: string;
+            tipo: string;
+            status: string;
+            data_agendada: Date;
+            preco: import("@prisma/client/runtime/library").Decimal | null;
+        }[];
+    } & {
+        id: string;
+        nome: string;
+        email: string | null;
+        telefone: string;
+        cpf: string | null;
+        endereco_logradouro: string;
+        numero: string;
+        bairro: string | null;
+        cidade: string;
+        uf: string;
+        cep: string;
+        latitude: number | null;
+        longitude: number | null;
+        whatsapp_opt_in: boolean;
+        createdAt: Date;
+        updatedAt: Date;
+    })[]>;
+    findOne(id: string): Promise<{
+        pets: {
+            id: string;
+            nome: string;
+            cliente_id: string;
+            especie: string;
+            raca: string | null;
+            porte: string | null;
+            nascimento: Date | null;
+            observacoes: string | null;
+        }[];
+        ordens: {
+            id: string;
+            cliente_id: string;
+            observacoes: string | null;
+            pet_id: string;
+            tipo: string;
+            status: string;
+            data_agendada: Date;
+            preco: import("@prisma/client/runtime/library").Decimal | null;
+        }[];
+        mensagens: {
+            id: string;
+            createdAt: Date;
+            cliente_id: string;
+            status: string;
+            canal: string;
+            template: string | null;
+            conteudo: string;
+            meta_message_id: string | null;
+            erro: string | null;
+        }[];
+    } & {
+        id: string;
+        nome: string;
+        email: string | null;
+        telefone: string;
+        cpf: string | null;
+        endereco_logradouro: string;
+        numero: string;
+        bairro: string | null;
+        cidade: string;
+        uf: string;
+        cep: string;
+        latitude: number | null;
+        longitude: number | null;
+        whatsapp_opt_in: boolean;
+        createdAt: Date;
+        updatedAt: Date;
+    }>;
+    update(id: string, updateClienteDto: UpdateClienteDto): Promise<{
+        id: string;
+        nome: string;
+        email: string | null;
+        telefone: string;
+        cpf: string | null;
+        endereco_logradouro: string;
+        numero: string;
+        bairro: string | null;
+        cidade: string;
+        uf: string;
+        cep: string;
+        latitude: number | null;
+        longitude: number | null;
+        whatsapp_opt_in: boolean;
+        createdAt: Date;
+        updatedAt: Date;
+    }>;
+    remove(id: string): Promise<{
+        id: string;
+        nome: string;
+        email: string | null;
+        telefone: string;
+        cpf: string | null;
+        endereco_logradouro: string;
+        numero: string;
+        bairro: string | null;
+        cidade: string;
+        uf: string;
+        cep: string;
+        latitude: number | null;
+        longitude: number | null;
+        whatsapp_opt_in: boolean;
+        createdAt: Date;
+        updatedAt: Date;
+    }>;
+}

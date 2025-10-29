@@ -1,11 +1,12 @@
 import { FuncionariosService } from './funcionarios.service';
+import { CreateFuncionarioDto } from './dto/create-funcionario.dto';
+import { UpdateFuncionarioDto } from './dto/update-funcionario.dto';
 export declare class FuncionariosController {
     private readonly funcionariosService;
     constructor(funcionariosService: FuncionariosService);
-    findAll(): any;
-    update(id: string, body: {
-        name?: string;
-        email?: string;
-        type?: string[];
-    }): any;
+    create(createFuncionarioDto: CreateFuncionarioDto): Promise<any>;
+    findAll(): Promise<any>;
+    findOne(id: string): Promise<any>;
+    update(id: string, updateFuncionarioDto: UpdateFuncionarioDto): Promise<any>;
+    remove(id: string): Promise<any>;
 }
