@@ -23,7 +23,39 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+PuppyCare Back-end API - Sistema de gerenciamento de serviços de banho e tosa para pets.
+
+Desenvolvido com [NestJS](https://github.com/nestjs/nest), Prisma ORM e MySQL.
+
+## 🗄️ Database Setup (MySQL)
+
+### Opção 1: Setup Automático com Docker (Recomendado)
+
+```bash
+# Execute o script de setup
+.\setup-mysql.ps1
+
+# Ou use docker-compose diretamente
+docker-compose up -d
+npm run db:setup
+```
+
+### Opção 2: MySQL Local
+
+Consulte o arquivo [MYSQL_SETUP.md](./MYSQL_SETUP.md) para instruções detalhadas de instalação e configuração do MySQL local.
+
+### Configurar Banco de Dados Manualmente
+
+```bash
+# 1. Gerar o Prisma Client
+npm run prisma:generate
+
+# 2. Criar as tabelas
+npm run db:push
+
+# 3. Popular com dados de exemplo
+npm run seed
+```
 
 ## Project setup
 

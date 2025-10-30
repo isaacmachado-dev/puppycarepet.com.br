@@ -6,87 +6,87 @@ export declare class RotasParadasService {
     constructor(prisma: PrismaService);
     create(createRotasParadaDto: CreateRotasParadaDto): Promise<{
         id: string;
-        sequencia: number;
         latitude: number;
         longitude: number;
         status: string;
         rota_id: string;
         ordem_id: string;
+        sequencia: number;
     }>;
     findAll(): Promise<({
         rota: {
-            data: Date;
             id: string;
-            status: string;
             tipo: string;
+            status: string;
+            data: Date;
             motorista: string | null;
             kilometragem_prevista: number | null;
             tempo_previsto: number | null;
         };
         ordem: {
             id: string;
-            status: string;
-            tipo: string;
             cliente_id: string;
+            observacoes: string | null;
             pet_id: string;
+            tipo: string;
+            status: string;
             data_agendada: Date;
             preco: import("@prisma/client/runtime/library").Decimal | null;
-            observacoes: string | null;
         };
     } & {
         id: string;
-        sequencia: number;
         latitude: number;
         longitude: number;
         status: string;
         rota_id: string;
         ordem_id: string;
+        sequencia: number;
     })[]>;
     findOne(id: string): Promise<{
         rota: {
-            data: Date;
             id: string;
-            status: string;
             tipo: string;
+            status: string;
+            data: Date;
             motorista: string | null;
             kilometragem_prevista: number | null;
             tempo_previsto: number | null;
         };
         ordem: {
             id: string;
-            status: string;
-            tipo: string;
             cliente_id: string;
+            observacoes: string | null;
             pet_id: string;
+            tipo: string;
+            status: string;
             data_agendada: Date;
             preco: import("@prisma/client/runtime/library").Decimal | null;
-            observacoes: string | null;
         };
     } & {
         id: string;
-        sequencia: number;
         latitude: number;
         longitude: number;
         status: string;
         rota_id: string;
         ordem_id: string;
+        sequencia: number;
     }>;
     update(id: string, updateRotasParadaDto: UpdateRotasParadaDto): Promise<{
         id: string;
-        sequencia: number;
         latitude: number;
         longitude: number;
         status: string;
         rota_id: string;
         ordem_id: string;
+        sequencia: number;
     }>;
     remove(id: string): Promise<{
         id: string;
-        sequencia: number;
         latitude: number;
         longitude: number;
         status: string;
         rota_id: string;
         ordem_id: string;
+        sequencia: number;
     }>;
 }

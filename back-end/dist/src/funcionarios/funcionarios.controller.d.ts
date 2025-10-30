@@ -9,49 +9,49 @@ export declare class FuncionariosController {
         nome: string;
         email: string;
         telefone: string;
-        cargo: string;
-        ativo: boolean;
         createdAt: Date;
         updatedAt: Date;
+        cargo: string;
+        ativo: boolean;
     }>;
     findAll(): Promise<{
         id: string;
         nome: string;
         email: string;
         telefone: string;
-        cargo: string;
-        ativo: boolean;
         createdAt: Date;
         updatedAt: Date;
+        cargo: string;
+        ativo: boolean;
     }[]>;
     findOne(id: string): Promise<{
         id: string;
         nome: string;
         email: string;
         telefone: string;
-        cargo: string;
-        ativo: boolean;
         createdAt: Date;
         updatedAt: Date;
+        cargo: string;
+        ativo: boolean;
     }>;
     update(id: string, updateFuncionarioDto: UpdateFuncionarioDto): Promise<{
         id: string;
         nome: string;
         email: string;
         telefone: string;
-        cargo: string;
-        ativo: boolean;
         createdAt: Date;
         updatedAt: Date;
+        cargo: string;
+        ativo: boolean;
     }>;
     remove(id: string): Promise<{
         id: string;
         nome: string;
         email: string;
         telefone: string;
-        cargo: string;
-        ativo: boolean;
         createdAt: Date;
         updatedAt: Date;
+        cargo: string;
+        ativo: boolean;
     }>;
 }
