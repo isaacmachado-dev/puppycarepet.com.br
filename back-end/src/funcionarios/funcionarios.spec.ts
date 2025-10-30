@@ -6,7 +6,7 @@ describe('FuncionariosController', () => {
   let controller: FuncionariosController;
   let service: FuncionariosService;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [FuncionariosController],
       providers: [
