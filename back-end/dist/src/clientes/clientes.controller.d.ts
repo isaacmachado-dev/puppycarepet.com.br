@@ -6,10 +6,10 @@ export declare class ClientesController {
     constructor(clientesService: ClientesService);
     create(createClienteDto: CreateClienteDto): Promise<{
         id: string;
-        nome: string;
         email: string | null;
-        telefone: string;
         cpf: string | null;
+        nome: string;
+        telefone: string;
         endereco_logradouro: string;
         numero: string;
         bairro: string | null;
@@ -45,10 +45,10 @@ export declare class ClientesController {
         }[];
     } & {
         id: string;
-        nome: string;
         email: string | null;
-        telefone: string;
         cpf: string | null;
+        nome: string;
+        telefone: string;
         endereco_logradouro: string;
         numero: string;
         bairro: string | null;
@@ -95,10 +95,10 @@ export declare class ClientesController {
         }[];
     } & {
         id: string;
-        nome: string;
         email: string | null;
-        telefone: string;
         cpf: string | null;
+        nome: string;
+        telefone: string;
         endereco_logradouro: string;
         numero: string;
         bairro: string | null;
@@ -113,10 +113,10 @@ export declare class ClientesController {
     }>;
     update(id: string, updateClienteDto: UpdateClienteDto): Promise<{
         id: string;
-        nome: string;
         email: string | null;
-        telefone: string;
         cpf: string | null;
+        nome: string;
+        telefone: string;
         endereco_logradouro: string;
         numero: string;
         bairro: string | null;
@@ -131,10 +131,10 @@ export declare class ClientesController {
     }>;
     remove(id: string): Promise<{
         id: string;
-        nome: string;
         email: string | null;
-        telefone: string;
         cpf: string | null;
+        nome: string;
+        telefone: string;
         endereco_logradouro: string;
         numero: string;
         bairro: string | null;
