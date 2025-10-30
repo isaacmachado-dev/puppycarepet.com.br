@@ -23,18 +23,19 @@ class CreateOrdensServicoDto {
 }
 exports.CreateOrdensServicoDto = CreateOrdensServicoDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'ID do cliente' }),
+    (0, swagger_1.ApiProperty)({ description: 'ID do cliente', type: String }),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateOrdensServicoDto.prototype, "cliente_id", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'ID do pet' }),
+    (0, swagger_1.ApiProperty)({ description: 'ID do pet', type: String }),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateOrdensServicoDto.prototype, "pet_id", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Tipo de serviço (ex: banho, tosa, banho e tosa)',
+        type: String,
     }),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
@@ -43,24 +44,27 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Status da ordem de serviço',
         default: 'agendado',
+        type: String,
     }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateOrdensServicoDto.prototype, "status", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Data e hora agendada para o serviço' }),
+    (0, swagger_1.ApiProperty)({ description: 'Data e hora agendada para o serviço', type: String }),
     (0, class_validator_1.IsDateString)(),
     __metadata("design:type", String)
 ], CreateOrdensServicoDto.prototype, "data_agendada", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Preço do serviço' }),
+    (0, class_validator_1.IsDateString)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Preço do serviço', type: Number }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], CreateOrdensServicoDto.prototype, "preco", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Observações sobre o serviço' }),
+    (0, class_validator_1.IsNumber)(),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Observações sobre o serviço', type: String }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
