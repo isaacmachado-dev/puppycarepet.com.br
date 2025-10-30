@@ -7,20 +7,30 @@ export declare class PetsController {
     create(createPetDto: CreatePetDto): Promise<{
         id: string;
         nome: string;
+        cliente_id: string;
         especie: string;
         raca: string | null;
         porte: string | null;
         nascimento: Date | null;
         observacoes: string | null;
-        cliente_id: string;
     }>;
     findAll(): Promise<({
+        ordens: {
+            id: string;
+            cliente_id: string;
+            observacoes: string | null;
+            pet_id: string;
+            tipo: string;
+            status: string;
+            data_agendada: Date;
+            preco: import("@prisma/client/runtime/library").Decimal | null;
+        }[];
         cliente: {
             id: string;
-            nome: string;
             email: string | null;
-            telefone: string;
             cpf: string | null;
+            nome: string;
+            telefone: string;
             endereco_logradouro: string;
             numero: string;
             bairro: string | null;
@@ -33,33 +43,33 @@ export declare class PetsController {
             createdAt: Date;
             updatedAt: Date;
         };
-        ordens: {
-            id: string;
-            observacoes: string | null;
-            cliente_id: string;
-            pet_id: string;
-            tipo: string;
-            status: string;
-            data_agendada: Date;
-            preco: import("@prisma/client/runtime/library").Decimal | null;
-        }[];
     } & {
         id: string;
         nome: string;
+        cliente_id: string;
         especie: string;
         raca: string | null;
         porte: string | null;
         nascimento: Date | null;
         observacoes: string | null;
-        cliente_id: string;
     })[]>;
     findOne(id: string): Promise<{
+        ordens: {
+            id: string;
+            cliente_id: string;
+            observacoes: string | null;
+            pet_id: string;
+            tipo: string;
+            status: string;
+            data_agendada: Date;
+            preco: import("@prisma/client/runtime/library").Decimal | null;
+        }[];
         cliente: {
             id: string;
-            nome: string;
             email: string | null;
-            telefone: string;
             cpf: string | null;
+            nome: string;
+            telefone: string;
             endereco_logradouro: string;
             numero: string;
             bairro: string | null;
@@ -72,44 +82,34 @@ export declare class PetsController {
             createdAt: Date;
             updatedAt: Date;
         };
-        ordens: {
-            id: string;
-            observacoes: string | null;
-            cliente_id: string;
-            pet_id: string;
-            tipo: string;
-            status: string;
-            data_agendada: Date;
-            preco: import("@prisma/client/runtime/library").Decimal | null;
-        }[];
     } & {
         id: string;
         nome: string;
+        cliente_id: string;
         especie: string;
         raca: string | null;
         porte: string | null;
         nascimento: Date | null;
         observacoes: string | null;
-        cliente_id: string;
     }>;
     update(id: string, updatePetDto: UpdatePetDto): Promise<{
         id: string;
         nome: string;
+        cliente_id: string;
         especie: string;
         raca: string | null;
         porte: string | null;
         nascimento: Date | null;
         observacoes: string | null;
-        cliente_id: string;
     }>;
     remove(id: string): Promise<{
         id: string;
         nome: string;
+        cliente_id: string;
         especie: string;
         raca: string | null;
         porte: string | null;
         nascimento: Date | null;
         observacoes: string | null;
-        cliente_id: string;
     }>;
 }
