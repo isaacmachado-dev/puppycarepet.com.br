@@ -4,6 +4,7 @@ import { UpdateRotasParadaDto } from './dto/update-rotas-parada.dto';
 export declare class RotasParadasService {
     private prisma;
     constructor(prisma: PrismaService);
+<<<<<<< HEAD
     create(createRotasParadaDto: CreateRotasParadaDto): Promise<{
         id: string;
         latitude: number;
@@ -89,4 +90,11 @@ export declare class RotasParadasService {
         ordem_id: string;
         sequencia: number;
     }>;
+=======
+    create(createRotasParadaDto: CreateRotasParadaDto): Promise<any>;
+    findAll(): Promise<any>;
+    findOne(id: string): Promise<any>;
+    update(id: string, updateRotasParadaDto: UpdateRotasParadaDto): Promise<any>;
+    remove(id: string): Promise<any>;
+>>>>>>> 9522fd822d26e0b7511f145f861b137bf1e7e370
 }

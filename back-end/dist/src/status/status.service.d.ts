@@ -4,6 +4,7 @@ import { UpdateStatusDto } from './dto/update-status.dto';
 export declare class StatusService {
     private prisma;
     constructor(prisma: PrismaService);
+<<<<<<< HEAD
     create(createStatusDto: CreateStatusDto): Promise<{
         id: string;
         status: string;
@@ -56,4 +57,11 @@ export declare class StatusService {
         ordem_id: string;
         timestamp: Date;
     }>;
+=======
+    create(createStatusDto: CreateStatusDto): Promise<any>;
+    findAll(): Promise<any>;
+    findOne(id: string): Promise<any>;
+    update(id: string, updateStatusDto: UpdateStatusDto): Promise<any>;
+    remove(id: string): Promise<any>;
+>>>>>>> 9522fd822d26e0b7511f145f861b137bf1e7e370
 }

@@ -4,6 +4,7 @@ import { UpdateMensagemDto } from './dto/update-mensagem.dto';
 export declare class MensagensService {
     private prisma;
     constructor(prisma: PrismaService);
+<<<<<<< HEAD
     create(createMensagemDto: CreateMensagemDto): Promise<{
         id: string;
         createdAt: Date;
@@ -97,4 +98,11 @@ export declare class MensagensService {
         meta_message_id: string | null;
         erro: string | null;
     }>;
+=======
+    create(createMensagemDto: CreateMensagemDto): Promise<any>;
+    findAll(): Promise<any>;
+    findOne(id: string): Promise<any>;
+    update(id: string, updateMensagemDto: UpdateMensagemDto): Promise<any>;
+    remove(id: string): Promise<any>;
+>>>>>>> 9522fd822d26e0b7511f145f861b137bf1e7e370
 }
