@@ -4,6 +4,7 @@ import { UpdateOrdensServicoDto } from './dto/update-ordens-servico.dto';
 export declare class OrdensServicosService {
     private prisma;
     constructor(prisma: PrismaService);
+<<<<<<< HEAD
     create(createOrdensServicoDto: CreateOrdensServicoDto): Promise<{
         id: string;
         cliente_id: string;
@@ -142,4 +143,11 @@ export declare class OrdensServicosService {
         data_agendada: Date;
         preco: import("@prisma/client/runtime/library").Decimal | null;
     }>;
+=======
+    create(createOrdensServicoDto: CreateOrdensServicoDto): Promise<any>;
+    findAll(): Promise<any>;
+    findOne(id: string): Promise<any>;
+    update(id: string, updateOrdensServicoDto: UpdateOrdensServicoDto): Promise<any>;
+    remove(id: string): Promise<any>;
+>>>>>>> 9522fd822d26e0b7511f145f861b137bf1e7e370
 }

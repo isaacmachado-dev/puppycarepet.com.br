@@ -4,6 +4,7 @@ import { UpdatePetDto } from './dto/update-pet.dto';
 export declare class PetsService {
     private prisma;
     constructor(prisma: PrismaService);
+<<<<<<< HEAD
     create(createPetDto: CreatePetDto): Promise<{
         id: string;
         nome: string;
@@ -112,4 +113,11 @@ export declare class PetsService {
         nascimento: Date | null;
         observacoes: string | null;
     }>;
+=======
+    create(createPetDto: CreatePetDto): Promise<any>;
+    findAll(): Promise<any>;
+    findOne(id: string): Promise<any>;
+    update(id: string, updatePetDto: UpdatePetDto): Promise<any>;
+    remove(id: string): Promise<any>;
+>>>>>>> 9522fd822d26e0b7511f145f861b137bf1e7e370
 }

@@ -1,5 +1,4 @@
-import { CreateRotaDto } from './create-rota.dto';
-declare const UpdateRotaDto_base: import("@nestjs/common").Type<Partial<CreateRotaDto>>;
+declare const UpdateRotaDto_base: any;
 export declare class UpdateRotaDto extends UpdateRotaDto_base {
 }
 export {};
