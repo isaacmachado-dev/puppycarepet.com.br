@@ -4,7 +4,6 @@ import { UpdateRotaDto } from './dto/update-rota.dto';
 export declare class RotasController {
     private readonly rotasService;
     constructor(rotasService: RotasService);
-<<<<<<< HEAD
     create(createRotaDto: CreateRotaDto): Promise<{
         id: string;
         tipo: string;
@@ -92,11 +91,4 @@ export declare class RotasController {
         kilometragem_prevista: number | null;
         tempo_previsto: number | null;
     }>;
-=======
-    create(createRotaDto: CreateRotaDto): Promise<any>;
-    findAll(): Promise<any>;
-    findOne(id: string): Promise<any>;
-    update(id: string, updateRotaDto: UpdateRotaDto): Promise<any>;
-    remove(id: string): Promise<any>;
->>>>>>> 9522fd822d26e0b7511f145f861b137bf1e7e370
 }
