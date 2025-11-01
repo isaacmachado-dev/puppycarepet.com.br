@@ -47,33 +47,32 @@ export default function UpcomingSchedule() {
                         <div className="day-item day-active">
                             <div className="day-number">11</div>
                             <div className="day-name">Qui</div>
-<<<<<<< Updated upstream
-                        </div> 
-=======
-                        </div> SC 
->>>>>>> Stashed changes
-                        <div className="day-item">
-                            <div className="day-number">12</div>
-                            <div className="day-name">Sex</div>
-                        </div>
-                        <div className="day-item">
-                            <div className="day-number">13</div>
-                            <div className="day-name">Sáb</div>
-                        </div>
+
+                        </div >
+
                     </div>
 
-                    <div className="indicator-container">
-                        <div className="indicator-line"></div>
-                        <div className="indicator-dot"></div>
-                        <div className="indicator-dot"></div>
-                        <div className="indicator-dot"></div>
-                        <div className="indicator-dot indicator-active"></div>
-                        <div className="indicator-dot"></div>
-                        <div className="indicator-dot"></div>
-                    </div>
                 </div>
-            </div>
 
-        </div>
+                <div className="day-item">
+                    <div className="day-number">12</div>
+                    <div className="day-name">Sex</div>
+                </div>
+                <div className="day-item">
+                    <div className="day-number">13</div>
+                    <div className="day-name">Sáb</div>
+                </div>
+            </div >
+
+            <div className="indicator-container">
+                <div className="indicator-line"></div>
+                <div className="indicator-dot"></div>
+                <div className="indicator-dot"></div>
+                <div className="indicator-dot"></div>
+                <div className="indicator-dot indicator-active"></div>
+                <div className="indicator-dot"></div>
+                <div className="indicator-dot"></div>
+            </div>
+        </div >
     );
 }
