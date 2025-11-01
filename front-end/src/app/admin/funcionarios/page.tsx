@@ -20,15 +20,11 @@ export function FuncionariosPage() {
     const [searchName, setSearchName] = React.useState("");
     const [selectedTypes, setSelectedTypes] = React.useState<string[]>([]);
 
-
-
     // Estado para armazenar os funcionários
     const [funcionarios, setFuncionarios] = React.useState<Funcionario[]>([]);
     const [loading, setLoading] = React.useState(true);
 
     const [reload, setReload] = useState(false);
-
-
 
     // Buscar funcionários do back-end
     const fetchFuncionarios = () => {
