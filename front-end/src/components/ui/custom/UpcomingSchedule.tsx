@@ -47,7 +47,11 @@ export default function UpcomingSchedule() {
                         <div className="day-item day-active">
                             <div className="day-number">11</div>
                             <div className="day-name">Qui</div>
+<<<<<<< Updated upstream
                         </div> 
+=======
+                        </div> SC 
+>>>>>>> Stashed changes
                         <div className="day-item">
                             <div className="day-number">12</div>
                             <div className="day-name">Sex</div>
