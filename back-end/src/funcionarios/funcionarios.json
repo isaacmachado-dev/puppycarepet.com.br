@@ -1,62 +1,5 @@
 [
   {
-<<<<<<< HEAD
-    "id": 0,
-    "name": "Joel Miller",
-    "image": "/admin/funcionarios/joel.webp",
-    "email": "joel.miller@thelastofus.com",
-    "type": [
-      "administrador"
-    ]
-  },
-  {
-    "id": 1,
-    "name": "Ellie Miller",
-    "image": "/admin/funcionarios/ellie.jpg",
-    "email": "ellie.williams@thelastofus.com",
-    "type": [
-      "funcionario",
-      "condutor"
-    ]
-  },
-  {
-    "id": 2,
-    "name": "Rick Grim",
-    "image": "/admin/funcionarios/rick.webp",
-    "email": "rick.grimes@thewalkingdead.com",
-    "type": [
-      "administrador"
-    ]
-  },
-  {
-    "id": 3,
-    "name": "Mortyyyy",
-    "image": "/admin/funcionarios/rick.gif",
-    "email": "morty@rickandmorty.com",
-    "type": [
-      "administrador"
-    ]
-  },
-  {
-    "id": 4,
-    "name": "Daryl Dixon",
-    "image": "/admin/funcionarios/daryl.jpg",
-    "email": "daryl.dixon@thewalkingdead.com",
-    "type": [
-      "funcionario"
-    ]
-  },
-  {
-    "id": 5,
-    "name": "Negan",
-    "image": "/admin/funcionarios/negan.webp",
-    "email": "negan@thewalkingdea.com",
-    "type": [
-      "administrador",
-      "funcionario",
-      "condutor"
-    ]
-=======
     "funcionario_id": "F001",
     "data": "2025-10-28T10:00:00.000Z",
     "nome_funcionario": "Ana Souza",
@@ -91,6 +34,5 @@
     "nivel_acesso": "groomer",
     "email": "joao.pereira@puppycare.vet.br",
     "imagem_url": "https://puppycare.vet.br/admin/dist/img/jpgjoao_pereira.jpg"
->>>>>>> b9c18b024fb66ac32339438d82a399942791a0b2
   }
 ]
