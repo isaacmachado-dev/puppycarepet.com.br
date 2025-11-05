@@ -18,10 +18,10 @@ export declare class MensagensService {
     findAll(): Promise<({
         clientes: {
             id: string;
-            email: string | null;
-            cpf: string | null;
             nome: string;
+            email: string | null;
             telefone: string;
+            cpf: string | null;
             endereco_logradouro: string;
             numero: string;
             bairro: string | null;
@@ -48,10 +48,10 @@ export declare class MensagensService {
     findOne(id: string): Promise<{
         clientes: {
             id: string;
-            email: string | null;
-            cpf: string | null;
             nome: string;
+            email: string | null;
             telefone: string;
+            cpf: string | null;
             endereco_logradouro: string;
             numero: string;
             bairro: string | null;

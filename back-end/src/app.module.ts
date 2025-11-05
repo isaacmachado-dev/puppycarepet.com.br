@@ -10,9 +10,11 @@ import { RotasModule } from './rotas/rotas.module';
 import { RotasParadasModule } from './rotas-paradas/rotas-paradas.module';
 import { MensagensModule } from './mensagens/mensagens.module';
 import { StatusModule } from './status/status.module';
+import { PlanosModule } from './planos/planos.module';
+import { PacotesModule } from './pacotes/pacotes.module';
 
 @Module({
-  imports: [PrismaModule, FuncionariosModule, ClientesModule, PetsModule, OrdensServicosModule, RotasModule, RotasParadasModule, MensagensModule, StatusModule],
+  imports: [PrismaModule, FuncionariosModule, ClientesModule, PetsModule, OrdensServicosModule, RotasModule, RotasParadasModule, MensagensModule, StatusModule, PlanosModule, PacotesModule],
   controllers: [AppController],
   providers: [AppService],
 })

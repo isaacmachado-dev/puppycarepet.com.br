@@ -106,7 +106,66 @@ async function main() {
   }
   console.log('✅ Funcionarios seeded');
 
-  // 4) Ordens de Serviço (dependem de Clientes e Pets)
+  // 4) Planos (independente)
+  const planosData = [
+    {
+      id: 'plano_1',
+      nome: 'Plano Básico',
+      descricao: '4 banhos por mês',
+      preco: '199.90',
+      banhos_incluidos: 4,
+    },
+    {
+      id: 'plano_2',
+      nome: 'Plano Premium',
+      descricao: '8 banhos por mês + tosa',
+      preco: '349.90',
+      banhos_incluidos: 8,
+    },
+  ] as const;
+
+  for (const p of planosData) {
+    await prisma.planos.upsert({
+      where: { id: p.id },
+      update: {
+        nome: p.nome,
+        descricao: p.descricao || undefined,
+        preco: p.preco as any,
+        banhos_incluidos: p.banhos_incluidos,
+      },
+      create: p as any,
+    });
+  }
+  console.log('✅ Planos seeded');
+
+  // 5) Pacotes (dependem de Clientes e Planos)
+  const pacotesData = [
+    {
+      id: 'ass_1',
+      id_cliente: 'cli_1',
+      id_plano: 'plano_1',
+      datainicio: new Date(),
+      datafim: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 dias
+      banhos_utilizados: 1,
+    },
+  ] as const;
+
+  for (const a of pacotesData) {
+    await prisma.pacotes.upsert({
+      where: { id: a.id },
+      update: {
+        id_cliente: a.id_cliente,
+        id_plano: a.id_plano,
+        datainicio: a.datainicio,
+        datafim: a.datafim,
+        banhos_utilizados: a.banhos_utilizados,
+      },
+      create: a,
+    });
+  }
+  console.log('✅ Pacotes seeded');
+
+  // 6) Ordens de Serviço (dependem de Clientes e Pets)
   const ordensData = [
     {
       id: 'ord_1',
@@ -137,7 +196,7 @@ async function main() {
   }
   console.log('✅ OrdensServicos seeded');
 
-  // 5) Rotas (independente)
+  // 7) Rotas (independente)
   const rotasData = [
     {
       id: 'rota_1',
@@ -166,7 +225,7 @@ async function main() {
   }
   console.log('✅ Rotas seeded');
 
-  // 6) RotasParadas (dependem de Rotas e Ordens)
+  // 8) RotasParadas (dependem de Rotas e Ordens)
   const rotasParadasData = [
     {
       id: 'parada_1',
@@ -195,7 +254,7 @@ async function main() {
   }
   console.log('✅ RotasParadas seeded');
 
-  // 7) Mensagens (dependem de Clientes)
+  // 9) Mensagens (dependem de Clientes)
   const mensagensData = [
     {
       id: 'msg_1',
@@ -226,7 +285,7 @@ async function main() {
   }
   console.log('✅ Mensagens seeded');
 
-  // 8) Status (dependem de Ordens)
+  // 10) Status (dependem de Ordens)
   const statusData = [
     {
       id: 'stat_1',

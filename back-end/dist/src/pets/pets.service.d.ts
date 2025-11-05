@@ -27,10 +27,10 @@ export declare class PetsService {
         }[];
         cliente: {
             id: string;
-            email: string | null;
-            cpf: string | null;
             nome: string;
+            email: string | null;
             telefone: string;
+            cpf: string | null;
             endereco_logradouro: string;
             numero: string;
             bairro: string | null;
@@ -66,10 +66,10 @@ export declare class PetsService {
         }[];
         cliente: {
             id: string;
-            email: string | null;
-            cpf: string | null;
             nome: string;
+            email: string | null;
             telefone: string;
+            cpf: string | null;
             endereco_logradouro: string;
             numero: string;
             bairro: string | null;

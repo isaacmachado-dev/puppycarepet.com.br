@@ -6,8 +6,8 @@ export declare class FuncionariosController {
     constructor(funcionariosService: FuncionariosService);
     create(createFuncionarioDto: CreateFuncionarioDto): Promise<{
         id: string;
-        email: string;
         nome: string;
+        email: string;
         telefone: string;
         createdAt: Date;
         updatedAt: Date;
@@ -16,8 +16,8 @@ export declare class FuncionariosController {
     }>;
     findAll(): Promise<{
         id: string;
-        email: string;
         nome: string;
+        email: string;
         telefone: string;
         createdAt: Date;
         updatedAt: Date;
@@ -26,8 +26,8 @@ export declare class FuncionariosController {
     }[]>;
     findOne(id: string): Promise<{
         id: string;
-        email: string;
         nome: string;
+        email: string;
         telefone: string;
         createdAt: Date;
         updatedAt: Date;
@@ -36,8 +36,8 @@ export declare class FuncionariosController {
     }>;
     update(id: string, updateFuncionarioDto: UpdateFuncionarioDto): Promise<{
         id: string;
-        email: string;
         nome: string;
+        email: string;
         telefone: string;
         createdAt: Date;
         updatedAt: Date;
@@ -46,8 +46,8 @@ export declare class FuncionariosController {
     }>;
     remove(id: string): Promise<{
         id: string;
-        email: string;
         nome: string;
+        email: string;
         telefone: string;
         createdAt: Date;
         updatedAt: Date;
