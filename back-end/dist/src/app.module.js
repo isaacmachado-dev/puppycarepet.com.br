@@ -19,12 +19,14 @@ const rotas_module_1 = require("./rotas/rotas.module");
 const rotas_paradas_module_1 = require("./rotas-paradas/rotas-paradas.module");
 const mensagens_module_1 = require("./mensagens/mensagens.module");
 const status_module_1 = require("./status/status.module");
+const planos_module_1 = require("./planos/planos.module");
+const pacotes_module_1 = require("./pacotes/pacotes.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [prisma_module_1.PrismaModule, funcionarios_module_1.FuncionariosModule, clientes_module_1.ClientesModule, pets_module_1.PetsModule, ordens_servicos_module_1.OrdensServicosModule, rotas_module_1.RotasModule, rotas_paradas_module_1.RotasParadasModule, mensagens_module_1.MensagensModule, status_module_1.StatusModule],
+        imports: [prisma_module_1.PrismaModule, funcionarios_module_1.FuncionariosModule, clientes_module_1.ClientesModule, pets_module_1.PetsModule, ordens_servicos_module_1.OrdensServicosModule, rotas_module_1.RotasModule, rotas_paradas_module_1.RotasParadasModule, mensagens_module_1.MensagensModule, status_module_1.StatusModule, planos_module_1.PlanosModule, pacotes_module_1.PacotesModule],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })

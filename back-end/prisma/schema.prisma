@@ -14,6 +14,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Pacotes {
+  id                String   @id @default(uuid())
+  datainicio        DateTime
+  datafim           DateTime
+  banhos_utilizados Int      @default(0)
+  id_cliente        String
+  cliente           Clientes @relation(fields: [id_cliente], references: [id])
+  id_plano          String
+  plano             Planos   @relation(fields: [id_plano], references: [id])
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
 model Clientes {
   id                  String           @id @default(uuid())
   nome                String
@@ -32,6 +45,7 @@ model Clientes {
   pets                Pets[]
   ordens              OrdensServicos[]
   mensagens           Mensagens[]
+  pacotes             Pacotes[]
   createdAt           DateTime         @default(now())
   updatedAt           DateTime         @updatedAt
 }
@@ -47,6 +61,17 @@ model Pets {
   nascimento  DateTime?
   observacoes String?
   ordens      OrdensServicos[]
+}
+
+model Planos {
+  id               String    @id @default(uuid())
+  nome             String
+  descricao        String?
+  preco            Decimal
+  banhos_incluidos Int
+  pacotes          Pacotes[]
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
 }
 
 model OrdensServicos {
@@ -112,9 +137,9 @@ model Funcionarios {
 }
 
 model Status {
-  id        String   @id @default(uuid())
+  id        String         @id @default(uuid())
   ordem_id  String
   status    String
-  timestamp DateTime @default(now())
+  timestamp DateTime       @default(now())
   ordem     OrdensServicos @relation(fields: [ordem_id], references: [id])
 }

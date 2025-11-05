@@ -6,8 +6,8 @@ export declare class FuncionariosService {
     constructor(prisma: PrismaService);
     create(createFuncionarioDto: CreateFuncionarioDto): Promise<{
         id: string;
-        email: string;
         nome: string;
+        email: string;
         telefone: string;
         createdAt: Date;
         updatedAt: Date;
@@ -16,8 +16,8 @@ export declare class FuncionariosService {
     }>;
     findAll(): Promise<{
         id: string;
-        email: string;
         nome: string;
+        email: string;
         telefone: string;
         createdAt: Date;
         updatedAt: Date;
@@ -26,8 +26,8 @@ export declare class FuncionariosService {
     }[]>;
     findOne(id: string): Promise<{
         id: string;
-        email: string;
         nome: string;
+        email: string;
         telefone: string;
         createdAt: Date;
         updatedAt: Date;
@@ -36,8 +36,8 @@ export declare class FuncionariosService {
     }>;
     update(id: string, updateFuncionarioDto: UpdateFuncionarioDto): Promise<{
         id: string;
-        email: string;
         nome: string;
+        email: string;
         telefone: string;
         createdAt: Date;
         updatedAt: Date;
@@ -46,8 +46,8 @@ export declare class FuncionariosService {
     }>;
     remove(id: string): Promise<{
         id: string;
-        email: string;
         nome: string;
+        email: string;
         telefone: string;
         createdAt: Date;
         updatedAt: Date;
