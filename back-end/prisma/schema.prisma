@@ -75,8 +75,8 @@ model SERVICOS {
 }
 
 model USUARIOS {
-  ID_USUARIO   Int      @id @default(autoincrement())
-  NOME         String   @db.VarChar(100)
-  DESCRICAO    String?
-  SENHA_HASH   String   @db.VarChar(255)
+  ID_USUARIO Int     @id @default(autoincrement())
+  NOME       String  @db.VarChar(100)
+  DESCRICAO  String?
+  SENHA_HASH String  @db.VarChar(255)
 }
