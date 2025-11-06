@@ -8,27 +8,28 @@ export class ClientesService {
   constructor(private prisma: PrismaService) {}
 
   async create(createClienteDto: CreateClienteDto) {
-    return this.prisma.clientes.create({
+    return this.prisma.cLIENTES.create({
       data: createClienteDto,
     });
   }
 
   async findAll() {
-    return this.prisma.clientes.findMany({
+    return this.prisma.cLIENTES.findMany({
       include: {
-        pets: true,
-        ordens: true,
+        PETS: true,
+        PACOTES: true,
+        ATENDIMENTOS: true,
       },
     });
   }
 
-  async findOne(id: string) {
-    const cliente = await this.prisma.clientes.findUnique({
-      where: { id },
+  async findOne(id: number) {
+    const cliente = await this.prisma.cLIENTES.findUnique({
+      where: { ID_CLIENTE: id },
       include: {
-        pets: true,
-        ordens: true,
-        mensagens: true,
+        PETS: true,
+        PACOTES: true,
+        ATENDIMENTOS: true,
       },
     });
 
@@ -39,18 +40,18 @@ export class ClientesService {
     return cliente;
   }
 
-  async update(id: string, updateClienteDto: UpdateClienteDto) {
+  async update(id: number, updateClienteDto: UpdateClienteDto) {
     await this.findOne(id); // Check if exists
-    return this.prisma.clientes.update({
-      where: { id },
+    return this.prisma.cLIENTES.update({
+      where: { ID_CLIENTE: id },
       data: updateClienteDto,
     });
   }
 
-  async remove(id: string) {
+  async remove(id: number) {
     await this.findOne(id); // Check if exists
-    return this.prisma.clientes.delete({
-      where: { id },
+    return this.prisma.cLIENTES.delete({
+      where: { ID_CLIENTE: id },
     });
   }
 }

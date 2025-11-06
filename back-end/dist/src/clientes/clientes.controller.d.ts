@@ -5,146 +5,79 @@ export declare class ClientesController {
     private readonly clientesService;
     constructor(clientesService: ClientesService);
     create(createClienteDto: CreateClienteDto): Promise<{
-        id: string;
-        nome: string;
-        email: string | null;
-        telefone: string;
-        cpf: string | null;
-        endereco_logradouro: string;
-        numero: string;
-        bairro: string | null;
-        cidade: string;
-        uf: string;
-        cep: string;
-        latitude: number | null;
-        longitude: number | null;
-        whatsapp_opt_in: boolean;
-        createdAt: Date;
-        updatedAt: Date;
+        NOME: string;
+        ID_CLIENTE: number;
+        TELEFONE: string;
+        ENDERECO: string;
     }>;
     findAll(): Promise<({
-        pets: {
-            id: string;
-            nome: string;
-            cliente_id: string;
-            especie: string;
-            raca: string | null;
-            porte: string | null;
-            nascimento: Date | null;
-            observacoes: string | null;
+        ATENDIMENTOS: {
+            ID_SERVICO: number;
+            ID_CLIENTE: number;
+            ID_PET: number;
+            VALOR_COBRADO: import("@prisma/client/runtime/library").Decimal;
+            TIPO: string;
+            NOTAS: string | null;
+            ID_ATENDIMENTO: number;
         }[];
-        ordens: {
-            id: string;
-            cliente_id: string;
-            observacoes: string | null;
-            pet_id: string;
-            tipo: string;
-            status: string;
-            data_agendada: Date;
-            preco: import("@prisma/client/runtime/library").Decimal | null;
+        PACOTES: {
+            ID_SERVICO: number;
+            ID_CLIENTE: number;
+            QTD_BANHOS: number;
+            ID_ASSINATURA: number;
+        }[];
+        PETS: {
+            NOME: string;
+            ID_CLIENTE: number;
+            ID_PET: number;
+            RACA: string | null;
+            DATA_NASC: Date | null;
         }[];
     } & {
-        id: string;
-        nome: string;
-        email: string | null;
-        telefone: string;
-        cpf: string | null;
-        endereco_logradouro: string;
-        numero: string;
-        bairro: string | null;
-        cidade: string;
-        uf: string;
-        cep: string;
-        latitude: number | null;
-        longitude: number | null;
-        whatsapp_opt_in: boolean;
-        createdAt: Date;
-        updatedAt: Date;
+        NOME: string;
+        ID_CLIENTE: number;
+        TELEFONE: string;
+        ENDERECO: string;
     })[]>;
-    findOne(id: string): Promise<{
-        pets: {
-            id: string;
-            nome: string;
-            cliente_id: string;
-            especie: string;
-            raca: string | null;
-            porte: string | null;
-            nascimento: Date | null;
-            observacoes: string | null;
+    findOne(id: number): Promise<{
+        ATENDIMENTOS: {
+            ID_SERVICO: number;
+            ID_CLIENTE: number;
+            ID_PET: number;
+            VALOR_COBRADO: import("@prisma/client/runtime/library").Decimal;
+            TIPO: string;
+            NOTAS: string | null;
+            ID_ATENDIMENTO: number;
         }[];
-        ordens: {
-            id: string;
-            cliente_id: string;
-            observacoes: string | null;
-            pet_id: string;
-            tipo: string;
-            status: string;
-            data_agendada: Date;
-            preco: import("@prisma/client/runtime/library").Decimal | null;
+        PACOTES: {
+            ID_SERVICO: number;
+            ID_CLIENTE: number;
+            QTD_BANHOS: number;
+            ID_ASSINATURA: number;
         }[];
-        mensagens: {
-            id: string;
-            createdAt: Date;
-            cliente_id: string;
-            status: string;
-            canal: string;
-            template: string | null;
-            conteudo: string;
-            meta_message_id: string | null;
-            erro: string | null;
+        PETS: {
+            NOME: string;
+            ID_CLIENTE: number;
+            ID_PET: number;
+            RACA: string | null;
+            DATA_NASC: Date | null;
         }[];
     } & {
-        id: string;
-        nome: string;
-        email: string | null;
-        telefone: string;
-        cpf: string | null;
-        endereco_logradouro: string;
-        numero: string;
-        bairro: string | null;
-        cidade: string;
-        uf: string;
-        cep: string;
-        latitude: number | null;
-        longitude: number | null;
-        whatsapp_opt_in: boolean;
-        createdAt: Date;
-        updatedAt: Date;
+        NOME: string;
+        ID_CLIENTE: number;
+        TELEFONE: string;
+        ENDERECO: string;
     }>;
-    update(id: string, updateClienteDto: UpdateClienteDto): Promise<{
-        id: string;
-        nome: string;
-        email: string | null;
-        telefone: string;
-        cpf: string | null;
-        endereco_logradouro: string;
-        numero: string;
-        bairro: string | null;
-        cidade: string;
-        uf: string;
-        cep: string;
-        latitude: number | null;
-        longitude: number | null;
-        whatsapp_opt_in: boolean;
-        createdAt: Date;
-        updatedAt: Date;
+    update(id: number, updateClienteDto: UpdateClienteDto): Promise<{
+        NOME: string;
+        ID_CLIENTE: number;
+        TELEFONE: string;
+        ENDERECO: string;
     }>;
-    remove(id: string): Promise<{
-        id: string;
-        nome: string;
-        email: string | null;
-        telefone: string;
-        cpf: string | null;
-        endereco_logradouro: string;
-        numero: string;
-        bairro: string | null;
-        cidade: string;
-        uf: string;
-        cep: string;
-        latitude: number | null;
-        longitude: number | null;
-        whatsapp_opt_in: boolean;
-        createdAt: Date;
-        updatedAt: Date;
+    remove(id: number): Promise<{
+        NOME: string;
+        ID_CLIENTE: number;
+        TELEFONE: string;
+        ENDERECO: string;
     }>;
 }

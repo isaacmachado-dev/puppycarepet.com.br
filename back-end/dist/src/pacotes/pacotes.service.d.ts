@@ -5,109 +5,59 @@ export declare class PacotesService {
     private prisma;
     constructor(prisma: PrismaService);
     create(createPacoteDto: CreatePacoteDto): Promise<{
-        id: string;
-        createdAt: Date;
-        updatedAt: Date;
-        datainicio: Date;
-        datafim: Date;
-        banhos_utilizados: number;
-        id_cliente: string;
-        id_plano: string;
+        ID_SERVICO: number;
+        ID_CLIENTE: number;
+        QTD_BANHOS: number;
+        ID_ASSINATURA: number;
     }>;
     findAll(): Promise<({
-        cliente: {
-            id: string;
-            nome: string;
-            email: string | null;
-            telefone: string;
-            cpf: string | null;
-            endereco_logradouro: string;
-            numero: string;
-            bairro: string | null;
-            cidade: string;
-            uf: string;
-            cep: string;
-            latitude: number | null;
-            longitude: number | null;
-            whatsapp_opt_in: boolean;
-            createdAt: Date;
-            updatedAt: Date;
+        CLIENTE: {
+            NOME: string;
+            ID_CLIENTE: number;
+            TELEFONE: string;
+            ENDERECO: string;
         };
-        plano: {
-            id: string;
-            nome: string;
-            createdAt: Date;
-            updatedAt: Date;
-            preco: import("@prisma/client/runtime/library").Decimal;
-            descricao: string | null;
-            banhos_incluidos: number;
+        SERVICO: {
+            ID_SERVICO: number;
+            NOME: string;
+            DESCRICAO: string | null;
+            VALOR: import("@prisma/client/runtime/library").Decimal;
         };
     } & {
-        id: string;
-        createdAt: Date;
-        updatedAt: Date;
-        datainicio: Date;
-        datafim: Date;
-        banhos_utilizados: number;
-        id_cliente: string;
-        id_plano: string;
+        ID_SERVICO: number;
+        ID_CLIENTE: number;
+        QTD_BANHOS: number;
+        ID_ASSINATURA: number;
     })[]>;
-    findOne(id: string): Promise<{
-        cliente: {
-            id: string;
-            nome: string;
-            email: string | null;
-            telefone: string;
-            cpf: string | null;
-            endereco_logradouro: string;
-            numero: string;
-            bairro: string | null;
-            cidade: string;
-            uf: string;
-            cep: string;
-            latitude: number | null;
-            longitude: number | null;
-            whatsapp_opt_in: boolean;
-            createdAt: Date;
-            updatedAt: Date;
+    findOne(id: number): Promise<{
+        CLIENTE: {
+            NOME: string;
+            ID_CLIENTE: number;
+            TELEFONE: string;
+            ENDERECO: string;
         };
-        plano: {
-            id: string;
-            nome: string;
-            createdAt: Date;
-            updatedAt: Date;
-            preco: import("@prisma/client/runtime/library").Decimal;
-            descricao: string | null;
-            banhos_incluidos: number;
+        SERVICO: {
+            ID_SERVICO: number;
+            NOME: string;
+            DESCRICAO: string | null;
+            VALOR: import("@prisma/client/runtime/library").Decimal;
         };
     } & {
-        id: string;
-        createdAt: Date;
-        updatedAt: Date;
-        datainicio: Date;
-        datafim: Date;
-        banhos_utilizados: number;
-        id_cliente: string;
-        id_plano: string;
+        ID_SERVICO: number;
+        ID_CLIENTE: number;
+        QTD_BANHOS: number;
+        ID_ASSINATURA: number;
     }>;
-    update(id: string, updatePacoteDto: UpdatePacoteDto): Promise<{
-        id: string;
-        createdAt: Date;
-        updatedAt: Date;
-        datainicio: Date;
-        datafim: Date;
-        banhos_utilizados: number;
-        id_cliente: string;
-        id_plano: string;
+    update(id: number, updatePacoteDto: UpdatePacoteDto): Promise<{
+        ID_SERVICO: number;
+        ID_CLIENTE: number;
+        QTD_BANHOS: number;
+        ID_ASSINATURA: number;
     }>;
-    remove(id: string): Promise<{
-        id: string;
-        createdAt: Date;
-        updatedAt: Date;
-        datainicio: Date;
-        datafim: Date;
-        banhos_utilizados: number;
-        id_cliente: string;
-        id_plano: string;
+    remove(id: number): Promise<{
+        ID_SERVICO: number;
+        ID_CLIENTE: number;
+        QTD_BANHOS: number;
+        ID_ASSINATURA: number;
     }>;
 }

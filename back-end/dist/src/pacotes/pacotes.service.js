@@ -18,28 +18,28 @@ let PacotesService = class PacotesService {
         this.prisma = prisma;
     }
     async create(createPacoteDto) {
-        return this.prisma.pacotes.create({
+        return this.prisma.pACOTES.create({
             data: {
-                ...createPacoteDto,
-                datainicio: new Date(createPacoteDto.datainicio),
-                datafim: new Date(createPacoteDto.datafim),
+                ID_CLIENTE: createPacoteDto.ID_CLIENTE,
+                ID_SERVICO: createPacoteDto.ID_SERVICO,
+                QTD_BANHOS: createPacoteDto.QTD_BANHOS ?? 0,
             },
         });
     }
     async findAll() {
-        return this.prisma.pacotes.findMany({
+        return this.prisma.pACOTES.findMany({
             include: {
-                cliente: true,
-                plano: true,
+                CLIENTE: true,
+                SERVICO: true,
             },
         });
     }
     async findOne(id) {
-        const pacote = await this.prisma.pacotes.findUnique({
-            where: { id },
+        const pacote = await this.prisma.pACOTES.findUnique({
+            where: { ID_ASSINATURA: id },
             include: {
-                cliente: true,
-                plano: true,
+                CLIENTE: true,
+                SERVICO: true,
             },
         });
         if (!pacote) {
@@ -49,23 +49,19 @@ let PacotesService = class PacotesService {
     }
     async update(id, updatePacoteDto) {
         await this.findOne(id);
-        return this.prisma.pacotes.update({
-            where: { id },
+        return this.prisma.pACOTES.update({
+            where: { ID_ASSINATURA: id },
             data: {
-                ...updatePacoteDto,
-                datainicio: updatePacoteDto.datainicio
-                    ? new Date(updatePacoteDto.datainicio)
-                    : undefined,
-                datafim: updatePacoteDto.datafim
-                    ? new Date(updatePacoteDto.datafim)
-                    : undefined,
+                ID_CLIENTE: updatePacoteDto.ID_CLIENTE ?? undefined,
+                ID_SERVICO: updatePacoteDto.ID_SERVICO ?? undefined,
+                QTD_BANHOS: updatePacoteDto.QTD_BANHOS ?? undefined,
             },
         });
     }
     async remove(id) {
         await this.findOne(id);
-        return this.prisma.pacotes.delete({
-            where: { id },
+        return this.prisma.pACOTES.delete({
+            where: { ID_ASSINATURA: id },
         });
     }
 };

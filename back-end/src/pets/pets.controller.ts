@@ -1,12 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { PetsService } from './pets.service';
 import { CreatePetDto } from './dto/create-pet.dto';
@@ -40,7 +32,7 @@ export class PetsController {
   @ApiParam({ name: 'id', description: 'ID do pet' })
   @ApiResponse({ status: 200, description: 'Pet encontrado.' })
   @ApiResponse({ status: 404, description: 'Pet não encontrado.' })
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id', ParseIntPipe) id: number) {
     return this.petsService.findOne(id);
   }
 
@@ -49,7 +41,7 @@ export class PetsController {
   @ApiParam({ name: 'id', description: 'ID do pet' })
   @ApiResponse({ status: 200, description: 'Pet atualizado com sucesso.' })
   @ApiResponse({ status: 404, description: 'Pet não encontrado.' })
-  update(@Param('id') id: string, @Body() updatePetDto: UpdatePetDto) {
+  update(@Param('id', ParseIntPipe) id: number, @Body() updatePetDto: UpdatePetDto) {
     return this.petsService.update(id, updatePetDto);
   }
 
@@ -58,7 +50,7 @@ export class PetsController {
   @ApiParam({ name: 'id', description: 'ID do pet' })
   @ApiResponse({ status: 200, description: 'Pet removido com sucesso.' })
   @ApiResponse({ status: 404, description: 'Pet não encontrado.' })
-  remove(@Param('id') id: string) {
+  remove(@Param('id', ParseIntPipe) id: number) {
     return this.petsService.remove(id);
   }
 }

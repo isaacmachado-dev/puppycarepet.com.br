@@ -1,12 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { PacotesService } from './pacotes.service';
 import { CreatePacoteDto } from './dto/create-pacote.dto';
@@ -40,7 +32,7 @@ export class PacotesController {
     @ApiParam({ name: 'id', description: 'ID do pacote' })
     @ApiResponse({ status: 200, description: 'Pacote encontrado.' })
     @ApiResponse({ status: 404, description: 'Pacote não encontrado.' })
-    findOne(@Param('id') id: string) {
+    findOne(@Param('id', ParseIntPipe) id: number) {
         return this.pacotesService.findOne(id);
     }
 
@@ -49,7 +41,7 @@ export class PacotesController {
     @ApiParam({ name: 'id', description: 'ID do pacote' })
     @ApiResponse({ status: 200, description: 'Pacote atualizado com sucesso.' })
     @ApiResponse({ status: 404, description: 'Pacote não encontrado.' })
-    update(@Param('id') id: string, @Body() updatePacoteDto: UpdatePacoteDto) {
+    update(@Param('id', ParseIntPipe) id: number, @Body() updatePacoteDto: UpdatePacoteDto) {
         return this.pacotesService.update(id, updatePacoteDto);
     }
 
@@ -58,7 +50,7 @@ export class PacotesController {
     @ApiParam({ name: 'id', description: 'ID do pacote' })
     @ApiResponse({ status: 200, description: 'Pacote removido com sucesso.' })
     @ApiResponse({ status: 404, description: 'Pacote não encontrado.' })
-    remove(@Param('id') id: string) {
+    remove(@Param('id', ParseIntPipe) id: number) {
         return this.pacotesService.remove(id);
     }
 }

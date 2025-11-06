@@ -18,25 +18,26 @@ let ClientesService = class ClientesService {
         this.prisma = prisma;
     }
     async create(createClienteDto) {
-        return this.prisma.clientes.create({
+        return this.prisma.cLIENTES.create({
             data: createClienteDto,
         });
     }
     async findAll() {
-        return this.prisma.clientes.findMany({
+        return this.prisma.cLIENTES.findMany({
             include: {
-                pets: true,
-                ordens: true,
+                PETS: true,
+                PACOTES: true,
+                ATENDIMENTOS: true,
             },
         });
     }
     async findOne(id) {
-        const cliente = await this.prisma.clientes.findUnique({
-            where: { id },
+        const cliente = await this.prisma.cLIENTES.findUnique({
+            where: { ID_CLIENTE: id },
             include: {
-                pets: true,
-                ordens: true,
-                mensagens: true,
+                PETS: true,
+                PACOTES: true,
+                ATENDIMENTOS: true,
             },
         });
         if (!cliente) {
@@ -46,15 +47,15 @@ let ClientesService = class ClientesService {
     }
     async update(id, updateClienteDto) {
         await this.findOne(id);
-        return this.prisma.clientes.update({
-            where: { id },
+        return this.prisma.cLIENTES.update({
+            where: { ID_CLIENTE: id },
             data: updateClienteDto,
         });
     }
     async remove(id) {
         await this.findOne(id);
-        return this.prisma.clientes.delete({
-            where: { id },
+        return this.prisma.cLIENTES.delete({
+            where: { ID_CLIENTE: id },
         });
     }
 };
