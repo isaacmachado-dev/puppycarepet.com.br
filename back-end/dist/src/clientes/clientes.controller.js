@@ -67,9 +67,9 @@ __decorate([
     (0, swagger_1.ApiParam)({ name: 'id', description: 'ID do cliente' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Cliente encontrado.' }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Cliente não encontrado.' }),
-    __param(0, (0, common_1.Param)('id')),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], ClientesController.prototype, "findOne", null);
 __decorate([
@@ -78,10 +78,10 @@ __decorate([
     (0, swagger_1.ApiParam)({ name: 'id', description: 'ID do cliente' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Cliente atualizado com sucesso.' }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Cliente não encontrado.' }),
-    __param(0, (0, common_1.Param)('id')),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_cliente_dto_1.UpdateClienteDto]),
+    __metadata("design:paramtypes", [Number, update_cliente_dto_1.UpdateClienteDto]),
     __metadata("design:returntype", void 0)
 ], ClientesController.prototype, "update", null);
 __decorate([
@@ -90,9 +90,9 @@ __decorate([
     (0, swagger_1.ApiParam)({ name: 'id', description: 'ID do cliente' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Cliente removido com sucesso.' }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Cliente não encontrado.' }),
-    __param(0, (0, common_1.Param)('id')),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], ClientesController.prototype, "remove", null);
 exports.ClientesController = ClientesController = __decorate([

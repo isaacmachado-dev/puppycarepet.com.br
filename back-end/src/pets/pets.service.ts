@@ -8,29 +8,31 @@ export class PetsService {
   constructor(private prisma: PrismaService) {}
 
   async create(createPetDto: CreatePetDto) {
-    return this.prisma.pets.create({
+    return this.prisma.pETS.create({
       data: {
-        ...createPetDto,
-        nascimento: createPetDto.nascimento ? new Date(createPetDto.nascimento) : undefined,
+        ID_CLIENTE: createPetDto.ID_CLIENTE,
+        NOME: createPetDto.NOME,
+        RACA: createPetDto.RACA ?? undefined,
+        DATA_NASC: createPetDto.DATA_NASC ? new Date(createPetDto.DATA_NASC) : undefined,
       },
     });
   }
 
   async findAll() {
-    return this.prisma.pets.findMany({
+    return this.prisma.pETS.findMany({
       include: {
-        cliente: true,
-        ordens: true,
+        CLIENTE: true,
+        ATENDIMENTOS: true,
       },
     });
   }
 
-  async findOne(id: string) {
-    const pet = await this.prisma.pets.findUnique({
-      where: { id },
+  async findOne(id: number) {
+    const pet = await this.prisma.pETS.findUnique({
+      where: { ID_PET: id },
       include: {
-        cliente: true,
-        ordens: true,
+        CLIENTE: true,
+        ATENDIMENTOS: true,
       },
     });
 
@@ -41,21 +43,23 @@ export class PetsService {
     return pet;
   }
 
-  async update(id: string, updatePetDto: UpdatePetDto) {
+  async update(id: number, updatePetDto: UpdatePetDto) {
     await this.findOne(id);
-    return this.prisma.pets.update({
-      where: { id },
+    return this.prisma.pETS.update({
+      where: { ID_PET: id },
       data: {
-        ...updatePetDto,
-        nascimento: updatePetDto.nascimento ? new Date(updatePetDto.nascimento) : undefined,
+        ID_CLIENTE: (updatePetDto as any).ID_CLIENTE ?? undefined,
+        NOME: (updatePetDto as any).NOME ?? undefined,
+        RACA: (updatePetDto as any).RACA ?? undefined,
+        DATA_NASC: (updatePetDto as any).DATA_NASC ? new Date((updatePetDto as any).DATA_NASC) : undefined,
       },
     });
   }
 
-  async remove(id: string) {
+  async remove(id: number) {
     await this.findOne(id);
-    return this.prisma.pets.delete({
-      where: { id },
+    return this.prisma.pETS.delete({
+      where: { ID_PET: id },
     });
   }
 }

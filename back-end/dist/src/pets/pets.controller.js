@@ -67,9 +67,9 @@ __decorate([
     (0, swagger_1.ApiParam)({ name: 'id', description: 'ID do pet' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Pet encontrado.' }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Pet não encontrado.' }),
-    __param(0, (0, common_1.Param)('id')),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], PetsController.prototype, "findOne", null);
 __decorate([
@@ -78,10 +78,10 @@ __decorate([
     (0, swagger_1.ApiParam)({ name: 'id', description: 'ID do pet' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Pet atualizado com sucesso.' }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Pet não encontrado.' }),
-    __param(0, (0, common_1.Param)('id')),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_pet_dto_1.UpdatePetDto]),
+    __metadata("design:paramtypes", [Number, update_pet_dto_1.UpdatePetDto]),
     __metadata("design:returntype", void 0)
 ], PetsController.prototype, "update", null);
 __decorate([
@@ -90,9 +90,9 @@ __decorate([
     (0, swagger_1.ApiParam)({ name: 'id', description: 'ID do pet' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Pet removido com sucesso.' }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Pet não encontrado.' }),
-    __param(0, (0, common_1.Param)('id')),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], PetsController.prototype, "remove", null);
 exports.PetsController = PetsController = __decorate([
