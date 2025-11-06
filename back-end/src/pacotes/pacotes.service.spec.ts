@@ -13,7 +13,7 @@ describe('PacotesService', () => {
         {
           provide: PrismaService,
           useValue: {
-            pacotes: {
+            pACOTES: {
               create: jest.fn(),
               findMany: jest.fn(),
               findUnique: jest.fn(),
