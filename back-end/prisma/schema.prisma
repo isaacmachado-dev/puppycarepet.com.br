@@ -25,7 +25,15 @@ model ATENDIMENTOS {
   VALOR_COBRADO  Decimal
   TIPO           String                @db.VarChar(50)
   NOTAS          String?
-  IMAGENS        ATENDIMENTO_IMAGENS[] // one atendimento can have many imagens (back-relation for ATENDIMENTO_IMAGENS.ATENDIMENTO)
+  IMAGENS        ATENDIMENTO_IMAGENS[] // um atendimento pode ter várias imagens (back-relation para ATENDIMENTO_IMAGENS.ATENDIMENTO)
+  // --- Campos de rastreamento com prioridade para uso offline ---
+  PUBLIC_ID   String    @unique @default(uuid())
+  CREATED_AT  DateTime  @default(now())
+  UPDATED_AT  DateTime  @updatedAt
+  DELETED_AT  DateTime?
+  VERSION     Int       @default(1)
+
+  @@index([UPDATED_AT])
 }
 
 model ATENDIMENTO_IMAGENS {
@@ -34,6 +42,14 @@ model ATENDIMENTO_IMAGENS {
   ATENDIMENTO    ATENDIMENTOS @relation(fields: [ID_ATENDIMENTO], references: [ID_ATENDIMENTO])
   CAMINHO_IMAGEM String       @db.VarChar(255)
   DATA_UPLOAD    DateTime     @default(now())
+  // --- Campos de rastreamento com prioridade para uso offline ---
+  PUBLIC_ID   String    @unique @default(uuid())
+  CREATED_AT  DateTime  @default(now())
+  UPDATED_AT  DateTime  @updatedAt
+  DELETED_AT  DateTime?
+  VERSION     Int       @default(1)
+
+  @@index([UPDATED_AT])
 }
 
 model CLIENTES {
@@ -41,9 +57,17 @@ model CLIENTES {
   NOME         String         @db.VarChar(100)
   TELEFONE     String         @db.VarChar(20)
   ENDERECO     String         @db.VarChar(255)
-  PETS         PETS[] // one cliente can have many pets (back-relation for PETS.CLIENTE)
-  PACOTES      PACOTES[] // one cliente can have many pacotes (back-relation for PACOTES.CLIENTE)
-  ATENDIMENTOS ATENDIMENTOS[] // one cliente can have many atendimentos (back-relation for ATENDIMENTOS.CLIENTE)
+  PETS         PETS[] // um cliente pode ter vários pets (back-relation para PETS.CLIENTE)
+  PACOTES      PACOTES[] // um cliente pode ter vários pacotes (back-relation para PACOTES.CLIENTE)
+  ATENDIMENTOS ATENDIMENTOS[] // um cliente pode ter vários atendimentos (back-relation para ATENDIMENTOS.CLIENTE)
+  // --- Campos de rastreamento com prioridade para uso offline ---
+  PUBLIC_ID   String    @unique @default(uuid())
+  CREATED_AT  DateTime  @default(now())
+  UPDATED_AT  DateTime  @updatedAt
+  DELETED_AT  DateTime?
+  VERSION     Int       @default(1)
+
+  @@index([UPDATED_AT])
 }
 
 model PETS {
@@ -54,6 +78,14 @@ model PETS {
   ID_CLIENTE   Int
   CLIENTE      CLIENTES       @relation(fields: [ID_CLIENTE], references: [ID_CLIENTE])
   ATENDIMENTOS ATENDIMENTOS[]
+  // --- Campos de rastreamento com prioridade para uso offline ---
+  PUBLIC_ID   String    @unique @default(uuid())
+  CREATED_AT  DateTime  @default(now())
+  UPDATED_AT  DateTime  @updatedAt
+  DELETED_AT  DateTime?
+  VERSION     Int       @default(1)
+
+  @@index([UPDATED_AT])
 }
 
 model PACOTES {
@@ -63,6 +95,14 @@ model PACOTES {
   ID_SERVICO    Int
   SERVICO       SERVICOS @relation(fields: [ID_SERVICO], references: [ID_SERVICO])
   QTD_BANHOS    Int      @default(0)
+  // --- Campos de rastreamento com prioridade para uso offline ---
+  PUBLIC_ID   String    @unique @default(uuid())
+  CREATED_AT  DateTime  @default(now())
+  UPDATED_AT  DateTime  @updatedAt
+  DELETED_AT  DateTime?
+  VERSION     Int       @default(1)
+
+  @@index([UPDATED_AT])
 }
 
 model SERVICOS {
@@ -70,13 +110,29 @@ model SERVICOS {
   NOME         String         @db.VarChar(100)
   DESCRICAO    String?
   VALOR        Decimal
-  ATENDIMENTOS ATENDIMENTOS[] // one servico can have many atendimentos (back-relation for ATENDIMENTOS.SERVICO)
-  PACOTES      PACOTES[] // one servico can be in many pacotes (back-relation for PACOTES.SERVICO)
+  ATENDIMENTOS ATENDIMENTOS[] // um serviço pode ter vários atendimentos (back-relation para ATENDIMENTOS.SERVICO)
+  PACOTES      PACOTES[] // um serviço pode estar em vários pacotes (back-relation para PACOTES.SERVICO)
+  // --- Campos de rastreamento com prioridade para uso offline ---
+  PUBLIC_ID   String    @unique @default(uuid())
+  CREATED_AT  DateTime  @default(now())
+  UPDATED_AT  DateTime  @updatedAt
+  DELETED_AT  DateTime?
+  VERSION     Int       @default(1)
+
+  @@index([UPDATED_AT])
 }
 
 model USUARIOS {
-  ID_USUARIO   Int      @id @default(autoincrement())
-  NOME         String   @db.VarChar(100)
-  DESCRICAO    String?
-  SENHA_HASH   String   @db.VarChar(255)
+  ID_USUARIO Int     @id @default(autoincrement())
+  NOME       String  @db.VarChar(100)
+  DESCRICAO  String?
+  SENHA_HASH String  @db.VarChar(255)
+  // --- Campos de rastreamento com prioridade para uso offline ---
+  PUBLIC_ID   String    @unique @default(uuid())
+  CREATED_AT  DateTime  @default(now())
+  UPDATED_AT  DateTime  @updatedAt
+  DELETED_AT  DateTime?
+  VERSION     Int       @default(1)
+
+  @@index([UPDATED_AT])
 }
