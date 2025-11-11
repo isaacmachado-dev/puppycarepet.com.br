@@ -18,6 +18,7 @@ const swagger_1 = require("@nestjs/swagger");
 const pacotes_service_1 = require("./pacotes.service");
 const create_pacote_dto_1 = require("./dto/create-pacote.dto");
 const update_pacote_dto_1 = require("./dto/update-pacote.dto");
+const pacote_sync_dto_1 = require("./dto/pacote-sync.dto");
 let PacotesController = class PacotesController {
     pacotesService;
     constructor(pacotesService) {
@@ -37,6 +38,15 @@ let PacotesController = class PacotesController {
     }
     remove(id) {
         return this.pacotesService.remove(id);
+    }
+    getChanges(since) {
+        return this.pacotesService.getChanges(since);
+    }
+    batch(body) {
+        return this.pacotesService.batchUpsert(body);
+    }
+    softDeleteByPublicId(publicId) {
+        return this.pacotesService.softDeleteByPublicId(publicId);
     }
 };
 exports.PacotesController = PacotesController;
@@ -95,6 +105,33 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], PacotesController.prototype, "remove", null);
+__decorate([
+    (0, common_1.Get)('changes'),
+    (0, swagger_1.ApiOperation)({ summary: 'Listar alterações de pacotes desde um timestamp' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Mudanças retornadas com sucesso.' }),
+    __param(0, (0, common_1.Query)('since')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], PacotesController.prototype, "getChanges", null);
+__decorate([
+    (0, common_1.Post)('batch'),
+    (0, swagger_1.ApiOperation)({ summary: 'Aplicar lote de alterações de pacotes (upsert por PUBLIC_ID)' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Resultados do processamento do lote.' }),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [pacote_sync_dto_1.PacoteSyncBatchRequestDto]),
+    __metadata("design:returntype", void 0)
+], PacotesController.prototype, "batch", null);
+__decorate([
+    (0, common_1.Delete)('public/:publicId'),
+    (0, swagger_1.ApiOperation)({ summary: 'Soft delete por PUBLIC_ID (marca DELETED_AT)' }),
+    (0, swagger_1.ApiParam)({ name: 'publicId', description: 'PUBLIC_ID do pacote' }),
+    __param(0, (0, common_1.Param)('publicId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], PacotesController.prototype, "softDeleteByPublicId", null);
 exports.PacotesController = PacotesController = __decorate([
     (0, swagger_1.ApiTags)('pacotes'),
     (0, common_1.Controller)('pacotes'),

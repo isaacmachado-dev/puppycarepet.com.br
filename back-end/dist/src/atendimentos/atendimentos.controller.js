@@ -18,6 +18,7 @@ const swagger_1 = require("@nestjs/swagger");
 const atendimentos_service_1 = require("./atendimentos.service");
 const create_atendimento_dto_1 = require("./dto/create-atendimento.dto");
 const update_atendimento_dto_1 = require("./dto/update-atendimento.dto");
+const atendimento_sync_dto_1 = require("./dto/atendimento-sync.dto");
 let AtendimentosController = class AtendimentosController {
     atendimentosService;
     constructor(atendimentosService) {
@@ -37,6 +38,15 @@ let AtendimentosController = class AtendimentosController {
     }
     remove(id) {
         return this.atendimentosService.remove(id);
+    }
+    getChanges(since) {
+        return this.atendimentosService.getChanges(since);
+    }
+    batch(body) {
+        return this.atendimentosService.batchUpsert(body);
+    }
+    softDeleteByPublicId(publicId) {
+        return this.atendimentosService.softDeleteByPublicId(publicId);
     }
 };
 exports.AtendimentosController = AtendimentosController;
@@ -98,6 +108,33 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], AtendimentosController.prototype, "remove", null);
+__decorate([
+    (0, common_1.Get)('changes'),
+    (0, swagger_1.ApiOperation)({ summary: 'Listar alterações de atendimentos desde um timestamp' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Mudanças retornadas com sucesso.' }),
+    __param(0, (0, common_1.Query)('since')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], AtendimentosController.prototype, "getChanges", null);
+__decorate([
+    (0, common_1.Post)('batch'),
+    (0, swagger_1.ApiOperation)({ summary: 'Aplicar lote de alterações de atendimentos (upsert por PUBLIC_ID)' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Resultados do processamento do lote.' }),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [atendimento_sync_dto_1.AtendimentoSyncBatchRequestDto]),
+    __metadata("design:returntype", void 0)
+], AtendimentosController.prototype, "batch", null);
+__decorate([
+    (0, common_1.Delete)('public/:publicId'),
+    (0, swagger_1.ApiOperation)({ summary: 'Soft delete por PUBLIC_ID (marca DELETED_AT)' }),
+    (0, swagger_1.ApiParam)({ name: 'publicId', description: 'PUBLIC_ID do atendimento' }),
+    __param(0, (0, common_1.Param)('publicId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], AtendimentosController.prototype, "softDeleteByPublicId", null);
 exports.AtendimentosController = AtendimentosController = __decorate([
     (0, swagger_1.ApiTags)('atendimentos'),
     (0, common_1.Controller)('atendimentos'),
