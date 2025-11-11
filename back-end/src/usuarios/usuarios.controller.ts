@@ -7,11 +7,13 @@ import {
   Param,
   Delete,
   ParseIntPipe,
+  Query,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { UsuariosService } from './usuarios.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
+import { UsuarioSyncBatchRequestDto } from './dto/usuario-sync.dto';
 
 @ApiTags('usuarios')
 @Controller('usuarios')
@@ -45,6 +47,21 @@ export class UsuariosController {
     return this.usuariosService.findOne(id);
   }
 
+  // --- Offline-first sync endpoints ---
+  @Get('changes')
+  @ApiOperation({ summary: 'Listar alterações de usuários desde um timestamp' })
+  @ApiResponse({ status: 200, description: 'Mudanças retornadas com sucesso.' })
+  getChanges(@Query('since') since?: string) {
+    return this.usuariosService.getChanges(since);
+  }
+
+  @Post('batch')
+  @ApiOperation({ summary: 'Aplicar lote de alterações de usuários (upsert por PUBLIC_ID)' })
+  @ApiResponse({ status: 200, description: 'Resultados do processamento do lote.' })
+  batch(@Body() body: UsuarioSyncBatchRequestDto) {
+    return this.usuariosService.batchUpsert(body);
+  }
+
   @Patch(':id')
   @ApiOperation({ summary: 'Atualizar um usuário' })
   @ApiParam({ name: 'id', description: 'ID do usuário' })
@@ -64,5 +81,12 @@ export class UsuariosController {
   @ApiResponse({ status: 404, description: 'Usuário não encontrado.' })
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.usuariosService.remove(id);
+  }
+
+  @Delete('public/:publicId')
+  @ApiOperation({ summary: 'Soft delete por PUBLIC_ID (marca DELETED_AT)' })
+  @ApiParam({ name: 'publicId', description: 'PUBLIC_ID do usuário' })
+  softDeleteByPublicId(@Param('publicId') publicId: string) {
+    return this.usuariosService.softDeleteByPublicId(publicId);
   }
 }

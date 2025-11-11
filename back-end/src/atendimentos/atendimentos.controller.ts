@@ -7,11 +7,13 @@ import {
   Param,
   Delete,
   ParseIntPipe,
+  Query,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { AtendimentosService } from './atendimentos.service';
 import { CreateAtendimentoDto } from './dto/create-atendimento.dto';
 import { UpdateAtendimentoDto } from './dto/update-atendimento.dto';
+import { AtendimentoSyncBatchRequestDto } from './dto/atendimento-sync.dto';
 
 @ApiTags('atendimentos')
 @Controller('atendimentos')
@@ -67,5 +69,27 @@ export class AtendimentosController {
   @ApiResponse({ status: 404, description: 'Atendimento não encontrado.' })
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.atendimentosService.remove(id);
+  }
+
+  // --- Offline-first sync endpoints ---
+  @Get('changes')
+  @ApiOperation({ summary: 'Listar alterações de atendimentos desde um timestamp' })
+  @ApiResponse({ status: 200, description: 'Mudanças retornadas com sucesso.' })
+  getChanges(@Query('since') since?: string) {
+    return this.atendimentosService.getChanges(since);
+  }
+
+  @Post('batch')
+  @ApiOperation({ summary: 'Aplicar lote de alterações de atendimentos (upsert por PUBLIC_ID)' })
+  @ApiResponse({ status: 200, description: 'Resultados do processamento do lote.' })
+  batch(@Body() body: AtendimentoSyncBatchRequestDto) {
+    return this.atendimentosService.batchUpsert(body);
+  }
+
+  @Delete('public/:publicId')
+  @ApiOperation({ summary: 'Soft delete por PUBLIC_ID (marca DELETED_AT)' })
+  @ApiParam({ name: 'publicId', description: 'PUBLIC_ID do atendimento' })
+  softDeleteByPublicId(@Param('publicId') publicId: string) {
+    return this.atendimentosService.softDeleteByPublicId(publicId);
   }
 }
