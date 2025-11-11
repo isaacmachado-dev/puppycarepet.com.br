@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, Query } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { PacotesService } from './pacotes.service';
 import { CreatePacoteDto } from './dto/create-pacote.dto';
 import { UpdatePacoteDto } from './dto/update-pacote.dto';
+import { PacoteSyncBatchRequestDto } from './dto/pacote-sync.dto';
 
 @ApiTags('pacotes')
 @Controller('pacotes')
@@ -52,5 +53,27 @@ export class PacotesController {
     @ApiResponse({ status: 404, description: 'Pacote não encontrado.' })
     remove(@Param('id', ParseIntPipe) id: number) {
         return this.pacotesService.remove(id);
+    }
+
+    // --- Offline-first sync endpoints ---
+    @Get('changes')
+    @ApiOperation({ summary: 'Listar alterações de pacotes desde um timestamp' })
+    @ApiResponse({ status: 200, description: 'Mudanças retornadas com sucesso.' })
+    getChanges(@Query('since') since?: string) {
+        return this.pacotesService.getChanges(since);
+    }
+
+    @Post('batch')
+    @ApiOperation({ summary: 'Aplicar lote de alterações de pacotes (upsert por PUBLIC_ID)' })
+    @ApiResponse({ status: 200, description: 'Resultados do processamento do lote.' })
+    batch(@Body() body: PacoteSyncBatchRequestDto) {
+        return this.pacotesService.batchUpsert(body);
+    }
+
+    @Delete('public/:publicId')
+    @ApiOperation({ summary: 'Soft delete por PUBLIC_ID (marca DELETED_AT)' })
+    @ApiParam({ name: 'publicId', description: 'PUBLIC_ID do pacote' })
+    softDeleteByPublicId(@Param('publicId') publicId: string) {
+        return this.pacotesService.softDeleteByPublicId(publicId);
     }
 }

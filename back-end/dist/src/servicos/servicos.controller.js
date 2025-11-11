@@ -18,6 +18,7 @@ const swagger_1 = require("@nestjs/swagger");
 const servicos_service_1 = require("./servicos.service");
 const create_servico_dto_1 = require("./dto/create-servico.dto");
 const update_servico_dto_1 = require("./dto/update-servico.dto");
+const servico_sync_dto_1 = require("./dto/servico-sync.dto");
 let ServicosController = class ServicosController {
     servicosService;
     constructor(servicosService) {
@@ -37,6 +38,15 @@ let ServicosController = class ServicosController {
     }
     remove(id) {
         return this.servicosService.remove(id);
+    }
+    getChanges(since) {
+        return this.servicosService.getChanges(since);
+    }
+    batch(body) {
+        return this.servicosService.batchUpsert(body);
+    }
+    softDeleteByPublicId(publicId) {
+        return this.servicosService.softDeleteByPublicId(publicId);
     }
 };
 exports.ServicosController = ServicosController;
@@ -95,6 +105,33 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
 ], ServicosController.prototype, "remove", null);
+__decorate([
+    (0, common_1.Get)('changes'),
+    (0, swagger_1.ApiOperation)({ summary: 'Listar alterações de serviços desde um timestamp' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Mudanças retornadas com sucesso.' }),
+    __param(0, (0, common_1.Query)('since')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], ServicosController.prototype, "getChanges", null);
+__decorate([
+    (0, common_1.Post)('batch'),
+    (0, swagger_1.ApiOperation)({ summary: 'Aplicar lote de alterações de serviços (upsert por PUBLIC_ID)' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Resultados do processamento do lote.' }),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [servico_sync_dto_1.ServicoSyncBatchRequestDto]),
+    __metadata("design:returntype", void 0)
+], ServicosController.prototype, "batch", null);
+__decorate([
+    (0, common_1.Delete)('public/:publicId'),
+    (0, swagger_1.ApiOperation)({ summary: 'Soft delete por PUBLIC_ID (marca DELETED_AT)' }),
+    (0, swagger_1.ApiParam)({ name: 'publicId', description: 'PUBLIC_ID do serviço' }),
+    __param(0, (0, common_1.Param)('publicId')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", void 0)
+], ServicosController.prototype, "softDeleteByPublicId", null);
 exports.ServicosController = ServicosController = __decorate([
     (0, swagger_1.ApiTags)('servicos'),
     (0, common_1.Controller)('servicos'),
