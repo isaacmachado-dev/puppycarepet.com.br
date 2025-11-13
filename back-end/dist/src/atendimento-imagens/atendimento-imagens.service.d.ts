@@ -5,102 +5,12 @@ import { AtendimentoImagemSyncBatchRequestDto } from './dto/atendimento-imagem-s
 export declare class AtendimentoImagensService {
     private prisma;
     constructor(prisma: PrismaService);
-    create(createAtendimentoImagemDto: CreateAtendimentoImagemDto): Promise<{
-        PUBLIC_ID: string;
-        CREATED_AT: Date;
-        UPDATED_AT: Date;
-        DELETED_AT: Date | null;
-        VERSION: number;
-        ID_ATENDIMENTO: number;
-        ID_IMAGEM: number;
-        CAMINHO_IMAGEM: string;
-        DATA_UPLOAD: Date;
-    }>;
-    findAll(): Promise<({
-        ATENDIMENTO: {
-            ID_SERVICO: number;
-            PUBLIC_ID: string;
-            CREATED_AT: Date;
-            UPDATED_AT: Date;
-            DELETED_AT: Date | null;
-            VERSION: number;
-            ID_CLIENTE: number;
-            ID_PET: number;
-            VALOR_COBRADO: import("@prisma/client/runtime/library").Decimal;
-            TIPO: string;
-            NOTAS: string | null;
-            ID_ATENDIMENTO: number;
-        };
-    } & {
-        PUBLIC_ID: string;
-        CREATED_AT: Date;
-        UPDATED_AT: Date;
-        DELETED_AT: Date | null;
-        VERSION: number;
-        ID_ATENDIMENTO: number;
-        ID_IMAGEM: number;
-        CAMINHO_IMAGEM: string;
-        DATA_UPLOAD: Date;
-    })[]>;
-    findOne(id: number): Promise<{
-        ATENDIMENTO: {
-            ID_SERVICO: number;
-            PUBLIC_ID: string;
-            CREATED_AT: Date;
-            UPDATED_AT: Date;
-            DELETED_AT: Date | null;
-            VERSION: number;
-            ID_CLIENTE: number;
-            ID_PET: number;
-            VALOR_COBRADO: import("@prisma/client/runtime/library").Decimal;
-            TIPO: string;
-            NOTAS: string | null;
-            ID_ATENDIMENTO: number;
-        };
-    } & {
-        PUBLIC_ID: string;
-        CREATED_AT: Date;
-        UPDATED_AT: Date;
-        DELETED_AT: Date | null;
-        VERSION: number;
-        ID_ATENDIMENTO: number;
-        ID_IMAGEM: number;
-        CAMINHO_IMAGEM: string;
-        DATA_UPLOAD: Date;
-    }>;
-    update(id: number, updateAtendimentoImagemDto: UpdateAtendimentoImagemDto): Promise<{
-        PUBLIC_ID: string;
-        CREATED_AT: Date;
-        UPDATED_AT: Date;
-        DELETED_AT: Date | null;
-        VERSION: number;
-        ID_ATENDIMENTO: number;
-        ID_IMAGEM: number;
-        CAMINHO_IMAGEM: string;
-        DATA_UPLOAD: Date;
-    }>;
-    remove(id: number): Promise<{
-        PUBLIC_ID: string;
-        CREATED_AT: Date;
-        UPDATED_AT: Date;
-        DELETED_AT: Date | null;
-        VERSION: number;
-        ID_ATENDIMENTO: number;
-        ID_IMAGEM: number;
-        CAMINHO_IMAGEM: string;
-        DATA_UPLOAD: Date;
-    }>;
-    getChanges(since?: string): Promise<{
-        PUBLIC_ID: string;
-        CREATED_AT: Date;
-        UPDATED_AT: Date;
-        DELETED_AT: Date | null;
-        VERSION: number;
-        ID_ATENDIMENTO: number;
-        ID_IMAGEM: number;
-        CAMINHO_IMAGEM: string;
-        DATA_UPLOAD: Date;
-    }[]>;
+    create(createAtendimentoImagemDto: CreateAtendimentoImagemDto): Promise<any>;
+    findAll(): Promise<any>;
+    findOne(id: number): Promise<any>;
+    update(id: number, updateAtendimentoImagemDto: UpdateAtendimentoImagemDto): Promise<any>;
+    remove(id: number): Promise<any>;
+    getChanges(since?: string): Promise<any>;
     batchUpsert(body: AtendimentoImagemSyncBatchRequestDto): Promise<{
         results: {
             publicId: string;
@@ -109,15 +19,5 @@ export declare class AtendimentoImagensService {
         }[];
     }>;
     private applyOne;
-    softDeleteByPublicId(publicId: string): Promise<{
-        PUBLIC_ID: string;
-        CREATED_AT: Date;
-        UPDATED_AT: Date;
-        DELETED_AT: Date | null;
-        VERSION: number;
-        ID_ATENDIMENTO: number;
-        ID_IMAGEM: number;
-        CAMINHO_IMAGEM: string;
-        DATA_UPLOAD: Date;
-    }>;
+    softDeleteByPublicId(publicId: string): Promise<any>;
 }
