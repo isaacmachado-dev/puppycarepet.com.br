@@ -2,10 +2,10 @@ import { PrismaService } from '../prisma/prisma.service';
 import { CreateAtendimentoDto } from './dto/create-atendimento.dto';
 import { UpdateAtendimentoDto } from './dto/update-atendimento.dto';
 import { AtendimentoSyncBatchRequestDto } from './dto/atendimento-sync.dto';
-import { Decimal } from '@prisma/client/runtime/library';
 export declare class AtendimentosService {
     private prisma;
     constructor(prisma: PrismaService);
+<<<<<<< HEAD
     create(createAtendimentoDto: CreateAtendimentoDto): Promise<{
         ID_SERVICO: number;
         PUBLIC_ID: string;
@@ -182,6 +182,14 @@ export declare class AtendimentosService {
         NOTAS: string | null;
         ID_ATENDIMENTO: number;
     }[]>;
+=======
+    create(createAtendimentoDto: CreateAtendimentoDto): Promise<any>;
+    findAll(): Promise<any>;
+    findOne(id: number): Promise<any>;
+    update(id: number, updateAtendimentoDto: UpdateAtendimentoDto): Promise<any>;
+    remove(id: number): Promise<any>;
+    getChanges(since?: string): Promise<any>;
+>>>>>>> ba6edf4757fc0618df55ed46e6b8be5cb14dbba0
     batchUpsert(body: AtendimentoSyncBatchRequestDto): Promise<{
         results: {
             publicId: string;
@@ -190,18 +198,5 @@ export declare class AtendimentosService {
         }[];
     }>;
     private applyOne;
-    softDeleteByPublicId(publicId: string): Promise<{
-        ID_SERVICO: number;
-        PUBLIC_ID: string;
-        CREATED_AT: Date;
-        UPDATED_AT: Date;
-        DELETED_AT: Date | null;
-        VERSION: number;
-        ID_CLIENTE: number;
-        ID_PET: number;
-        VALOR_COBRADO: Decimal;
-        TIPO: string;
-        NOTAS: string | null;
-        ID_ATENDIMENTO: number;
-    }>;
+    softDeleteByPublicId(publicId: string): Promise<any>;
 }

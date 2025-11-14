@@ -5,118 +5,12 @@ import { PacoteSyncBatchRequestDto } from './dto/pacote-sync.dto';
 export declare class PacotesService {
     private prisma;
     constructor(prisma: PrismaService);
-    create(createPacoteDto: CreatePacoteDto): Promise<{
-        ID_SERVICO: number;
-        PUBLIC_ID: string;
-        CREATED_AT: Date;
-        UPDATED_AT: Date;
-        DELETED_AT: Date | null;
-        VERSION: number;
-        ID_CLIENTE: number;
-        QTD_BANHOS: number;
-        ID_ASSINATURA: number;
-    }>;
-    findAll(): Promise<({
-        CLIENTE: {
-            NOME: string;
-            PUBLIC_ID: string;
-            CREATED_AT: Date;
-            UPDATED_AT: Date;
-            DELETED_AT: Date | null;
-            VERSION: number;
-            ID_CLIENTE: number;
-            TELEFONE: string;
-            ENDERECO: string;
-        };
-        SERVICO: {
-            ID_SERVICO: number;
-            NOME: string;
-            DESCRICAO: string | null;
-            VALOR: import("@prisma/client/runtime/library").Decimal;
-            PUBLIC_ID: string;
-            CREATED_AT: Date;
-            UPDATED_AT: Date;
-            DELETED_AT: Date | null;
-            VERSION: number;
-        };
-    } & {
-        ID_SERVICO: number;
-        PUBLIC_ID: string;
-        CREATED_AT: Date;
-        UPDATED_AT: Date;
-        DELETED_AT: Date | null;
-        VERSION: number;
-        ID_CLIENTE: number;
-        QTD_BANHOS: number;
-        ID_ASSINATURA: number;
-    })[]>;
-    findOne(id: number): Promise<{
-        CLIENTE: {
-            NOME: string;
-            PUBLIC_ID: string;
-            CREATED_AT: Date;
-            UPDATED_AT: Date;
-            DELETED_AT: Date | null;
-            VERSION: number;
-            ID_CLIENTE: number;
-            TELEFONE: string;
-            ENDERECO: string;
-        };
-        SERVICO: {
-            ID_SERVICO: number;
-            NOME: string;
-            DESCRICAO: string | null;
-            VALOR: import("@prisma/client/runtime/library").Decimal;
-            PUBLIC_ID: string;
-            CREATED_AT: Date;
-            UPDATED_AT: Date;
-            DELETED_AT: Date | null;
-            VERSION: number;
-        };
-    } & {
-        ID_SERVICO: number;
-        PUBLIC_ID: string;
-        CREATED_AT: Date;
-        UPDATED_AT: Date;
-        DELETED_AT: Date | null;
-        VERSION: number;
-        ID_CLIENTE: number;
-        QTD_BANHOS: number;
-        ID_ASSINATURA: number;
-    }>;
-    update(id: number, updatePacoteDto: UpdatePacoteDto): Promise<{
-        ID_SERVICO: number;
-        PUBLIC_ID: string;
-        CREATED_AT: Date;
-        UPDATED_AT: Date;
-        DELETED_AT: Date | null;
-        VERSION: number;
-        ID_CLIENTE: number;
-        QTD_BANHOS: number;
-        ID_ASSINATURA: number;
-    }>;
-    remove(id: number): Promise<{
-        ID_SERVICO: number;
-        PUBLIC_ID: string;
-        CREATED_AT: Date;
-        UPDATED_AT: Date;
-        DELETED_AT: Date | null;
-        VERSION: number;
-        ID_CLIENTE: number;
-        QTD_BANHOS: number;
-        ID_ASSINATURA: number;
-    }>;
-    getChanges(since?: string): Promise<{
-        ID_SERVICO: number;
-        PUBLIC_ID: string;
-        CREATED_AT: Date;
-        UPDATED_AT: Date;
-        DELETED_AT: Date | null;
-        VERSION: number;
-        ID_CLIENTE: number;
-        QTD_BANHOS: number;
-        ID_ASSINATURA: number;
-    }[]>;
+    create(createPacoteDto: CreatePacoteDto): Promise<any>;
+    findAll(): Promise<any>;
+    findOne(id: number): Promise<any>;
+    update(id: number, updatePacoteDto: UpdatePacoteDto): Promise<any>;
+    remove(id: number): Promise<any>;
+    getChanges(since?: string): Promise<any>;
     batchUpsert(body: PacoteSyncBatchRequestDto): Promise<{
         results: {
             publicId: string;
@@ -125,15 +19,5 @@ export declare class PacotesService {
         }[];
     }>;
     private applyOne;
-    softDeleteByPublicId(publicId: string): Promise<{
-        ID_SERVICO: number;
-        PUBLIC_ID: string;
-        CREATED_AT: Date;
-        UPDATED_AT: Date;
-        DELETED_AT: Date | null;
-        VERSION: number;
-        ID_CLIENTE: number;
-        QTD_BANHOS: number;
-        ID_ASSINATURA: number;
-    }>;
+    softDeleteByPublicId(publicId: string): Promise<any>;
 }

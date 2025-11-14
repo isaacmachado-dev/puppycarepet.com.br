@@ -5,6 +5,7 @@ import { AtendimentoSyncBatchRequestDto } from './dto/atendimento-sync.dto';
 export declare class AtendimentosController {
     private readonly atendimentosService;
     constructor(atendimentosService: AtendimentosService);
+<<<<<<< HEAD
     create(createAtendimentoDto: CreateAtendimentoDto): Promise<{
         ID_SERVICO: number;
         PUBLIC_ID: string;
@@ -181,6 +182,14 @@ export declare class AtendimentosController {
         NOTAS: string | null;
         ID_ATENDIMENTO: number;
     }[]>;
+=======
+    create(createAtendimentoDto: CreateAtendimentoDto): Promise<any>;
+    findAll(): Promise<any>;
+    findOne(id: number): Promise<any>;
+    update(id: number, updateAtendimentoDto: UpdateAtendimentoDto): Promise<any>;
+    remove(id: number): Promise<any>;
+    getChanges(since?: string): Promise<any>;
+>>>>>>> ba6edf4757fc0618df55ed46e6b8be5cb14dbba0
     batch(body: AtendimentoSyncBatchRequestDto): Promise<{
         results: {
             publicId: string;
@@ -188,18 +197,5 @@ export declare class AtendimentosController {
             server?: any;
         }[];
     }>;
-    softDeleteByPublicId(publicId: string): Promise<{
-        ID_SERVICO: number;
-        PUBLIC_ID: string;
-        CREATED_AT: Date;
-        UPDATED_AT: Date;
-        DELETED_AT: Date | null;
-        VERSION: number;
-        ID_CLIENTE: number;
-        ID_PET: number;
-        VALOR_COBRADO: import("@prisma/client/runtime/library").Decimal;
-        TIPO: string;
-        NOTAS: string | null;
-        ID_ATENDIMENTO: number;
-    }>;
+    softDeleteByPublicId(publicId: string): Promise<any>;
 }

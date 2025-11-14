@@ -5,130 +5,12 @@ import { PetSyncBatchRequestDto } from './dto/pet-sync.dto';
 export declare class PetsController {
     private readonly petsService;
     constructor(petsService: PetsService);
-    create(createPetDto: CreatePetDto): Promise<{
-        NOME: string;
-        PUBLIC_ID: string;
-        CREATED_AT: Date;
-        UPDATED_AT: Date;
-        DELETED_AT: Date | null;
-        VERSION: number;
-        ID_CLIENTE: number;
-        ID_PET: number;
-        RACA: string | null;
-        DATA_NASC: Date | null;
-    }>;
-    findAll(): Promise<({
-        ATENDIMENTOS: {
-            ID_SERVICO: number;
-            PUBLIC_ID: string;
-            CREATED_AT: Date;
-            UPDATED_AT: Date;
-            DELETED_AT: Date | null;
-            VERSION: number;
-            ID_CLIENTE: number;
-            ID_PET: number;
-            VALOR_COBRADO: import("@prisma/client/runtime/library").Decimal;
-            TIPO: string;
-            NOTAS: string | null;
-            ID_ATENDIMENTO: number;
-        }[];
-        CLIENTE: {
-            NOME: string;
-            PUBLIC_ID: string;
-            CREATED_AT: Date;
-            UPDATED_AT: Date;
-            DELETED_AT: Date | null;
-            VERSION: number;
-            ID_CLIENTE: number;
-            TELEFONE: string;
-            ENDERECO: string;
-        };
-    } & {
-        NOME: string;
-        PUBLIC_ID: string;
-        CREATED_AT: Date;
-        UPDATED_AT: Date;
-        DELETED_AT: Date | null;
-        VERSION: number;
-        ID_CLIENTE: number;
-        ID_PET: number;
-        RACA: string | null;
-        DATA_NASC: Date | null;
-    })[]>;
-    findOne(id: number): Promise<{
-        ATENDIMENTOS: {
-            ID_SERVICO: number;
-            PUBLIC_ID: string;
-            CREATED_AT: Date;
-            UPDATED_AT: Date;
-            DELETED_AT: Date | null;
-            VERSION: number;
-            ID_CLIENTE: number;
-            ID_PET: number;
-            VALOR_COBRADO: import("@prisma/client/runtime/library").Decimal;
-            TIPO: string;
-            NOTAS: string | null;
-            ID_ATENDIMENTO: number;
-        }[];
-        CLIENTE: {
-            NOME: string;
-            PUBLIC_ID: string;
-            CREATED_AT: Date;
-            UPDATED_AT: Date;
-            DELETED_AT: Date | null;
-            VERSION: number;
-            ID_CLIENTE: number;
-            TELEFONE: string;
-            ENDERECO: string;
-        };
-    } & {
-        NOME: string;
-        PUBLIC_ID: string;
-        CREATED_AT: Date;
-        UPDATED_AT: Date;
-        DELETED_AT: Date | null;
-        VERSION: number;
-        ID_CLIENTE: number;
-        ID_PET: number;
-        RACA: string | null;
-        DATA_NASC: Date | null;
-    }>;
-    update(id: number, updatePetDto: UpdatePetDto): Promise<{
-        NOME: string;
-        PUBLIC_ID: string;
-        CREATED_AT: Date;
-        UPDATED_AT: Date;
-        DELETED_AT: Date | null;
-        VERSION: number;
-        ID_CLIENTE: number;
-        ID_PET: number;
-        RACA: string | null;
-        DATA_NASC: Date | null;
-    }>;
-    remove(id: number): Promise<{
-        NOME: string;
-        PUBLIC_ID: string;
-        CREATED_AT: Date;
-        UPDATED_AT: Date;
-        DELETED_AT: Date | null;
-        VERSION: number;
-        ID_CLIENTE: number;
-        ID_PET: number;
-        RACA: string | null;
-        DATA_NASC: Date | null;
-    }>;
-    getChanges(since?: string): Promise<{
-        NOME: string;
-        PUBLIC_ID: string;
-        CREATED_AT: Date;
-        UPDATED_AT: Date;
-        DELETED_AT: Date | null;
-        VERSION: number;
-        ID_CLIENTE: number;
-        ID_PET: number;
-        RACA: string | null;
-        DATA_NASC: Date | null;
-    }[]>;
+    create(createPetDto: CreatePetDto): Promise<any>;
+    findAll(): Promise<any>;
+    findOne(id: number): Promise<any>;
+    update(id: number, updatePetDto: UpdatePetDto): Promise<any>;
+    remove(id: number): Promise<any>;
+    getChanges(since?: string): Promise<any>;
     batch(body: PetSyncBatchRequestDto): Promise<{
         results: {
             publicId: string;
@@ -136,16 +18,5 @@ export declare class PetsController {
             server?: any;
         }[];
     }>;
-    softDeleteByPublicId(publicId: string): Promise<{
-        NOME: string;
-        PUBLIC_ID: string;
-        CREATED_AT: Date;
-        UPDATED_AT: Date;
-        DELETED_AT: Date | null;
-        VERSION: number;
-        ID_CLIENTE: number;
-        ID_PET: number;
-        RACA: string | null;
-        DATA_NASC: Date | null;
-    }>;
+    softDeleteByPublicId(publicId: string): Promise<any>;
 }

@@ -5,6 +5,7 @@ import { AtendimentoImagemSyncBatchRequestDto } from './dto/atendimento-imagem-s
 export declare class AtendimentoImagensController {
     private readonly atendimentoImagensService;
     constructor(atendimentoImagensService: AtendimentoImagensService);
+<<<<<<< HEAD
     create(createAtendimentoImagemDto: CreateAtendimentoImagemDto): Promise<{
         PUBLIC_ID: string;
         CREATED_AT: Date;
@@ -101,6 +102,14 @@ export declare class AtendimentoImagensController {
         DATA_UPLOAD: Date;
         ID_IMAGEM: number;
     }[]>;
+=======
+    create(createAtendimentoImagemDto: CreateAtendimentoImagemDto): Promise<any>;
+    findAll(): Promise<any>;
+    findOne(id: number): Promise<any>;
+    update(id: number, updateAtendimentoImagemDto: UpdateAtendimentoImagemDto): Promise<any>;
+    remove(id: number): Promise<any>;
+    getChanges(since?: string): Promise<any>;
+>>>>>>> ba6edf4757fc0618df55ed46e6b8be5cb14dbba0
     batch(body: AtendimentoImagemSyncBatchRequestDto): Promise<{
         results: {
             publicId: string;
@@ -108,6 +117,7 @@ export declare class AtendimentoImagensController {
             server?: any;
         }[];
     }>;
+<<<<<<< HEAD
     softDeleteByPublicId(publicId: string): Promise<{
         PUBLIC_ID: string;
         CREATED_AT: Date;
@@ -119,4 +129,7 @@ export declare class AtendimentoImagensController {
         DATA_UPLOAD: Date;
         ID_IMAGEM: number;
     }>;
+=======
+    softDeleteByPublicId(publicId: string): Promise<any>;
+>>>>>>> ba6edf4757fc0618df55ed46e6b8be5cb14dbba0
 }
