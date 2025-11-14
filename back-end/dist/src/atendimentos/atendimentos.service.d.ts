@@ -62,9 +62,9 @@ export declare class AtendimentosService {
             DELETED_AT: Date | null;
             VERSION: number;
             ID_ATENDIMENTO: number;
-            ID_IMAGEM: number;
             CAMINHO_IMAGEM: string;
             DATA_UPLOAD: Date;
+            ID_IMAGEM: number;
         }[];
     } & {
         ID_SERVICO: number;
@@ -122,9 +122,9 @@ export declare class AtendimentosService {
             DELETED_AT: Date | null;
             VERSION: number;
             ID_ATENDIMENTO: number;
-            ID_IMAGEM: number;
             CAMINHO_IMAGEM: string;
             DATA_UPLOAD: Date;
+            ID_IMAGEM: number;
         }[];
     } & {
         ID_SERVICO: number;
