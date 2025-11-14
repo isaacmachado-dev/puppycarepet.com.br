@@ -66,7 +66,7 @@ For more details, please see the README.md from 'back-end' folder on this projec
 ### Test units:
 
 ```bash
-# Enter the front-end folder:
+# Enter the back-end folder:
 cd back-end
 ```
 
