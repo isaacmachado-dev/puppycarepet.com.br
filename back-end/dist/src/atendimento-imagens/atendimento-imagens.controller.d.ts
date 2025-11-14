@@ -12,9 +12,9 @@ export declare class AtendimentoImagensController {
         DELETED_AT: Date | null;
         VERSION: number;
         ID_ATENDIMENTO: number;
-        ID_IMAGEM: number;
         CAMINHO_IMAGEM: string;
         DATA_UPLOAD: Date;
+        ID_IMAGEM: number;
     }>;
     findAll(): Promise<({
         ATENDIMENTO: {
@@ -38,9 +38,9 @@ export declare class AtendimentoImagensController {
         DELETED_AT: Date | null;
         VERSION: number;
         ID_ATENDIMENTO: number;
-        ID_IMAGEM: number;
         CAMINHO_IMAGEM: string;
         DATA_UPLOAD: Date;
+        ID_IMAGEM: number;
     })[]>;
     findOne(id: number): Promise<{
         ATENDIMENTO: {
@@ -64,9 +64,9 @@ export declare class AtendimentoImagensController {
         DELETED_AT: Date | null;
         VERSION: number;
         ID_ATENDIMENTO: number;
-        ID_IMAGEM: number;
         CAMINHO_IMAGEM: string;
         DATA_UPLOAD: Date;
+        ID_IMAGEM: number;
     }>;
     update(id: number, updateAtendimentoImagemDto: UpdateAtendimentoImagemDto): Promise<{
         PUBLIC_ID: string;
@@ -75,9 +75,9 @@ export declare class AtendimentoImagensController {
         DELETED_AT: Date | null;
         VERSION: number;
         ID_ATENDIMENTO: number;
-        ID_IMAGEM: number;
         CAMINHO_IMAGEM: string;
         DATA_UPLOAD: Date;
+        ID_IMAGEM: number;
     }>;
     remove(id: number): Promise<{
         PUBLIC_ID: string;
@@ -86,9 +86,9 @@ export declare class AtendimentoImagensController {
         DELETED_AT: Date | null;
         VERSION: number;
         ID_ATENDIMENTO: number;
-        ID_IMAGEM: number;
         CAMINHO_IMAGEM: string;
         DATA_UPLOAD: Date;
+        ID_IMAGEM: number;
     }>;
     getChanges(since?: string): Promise<{
         PUBLIC_ID: string;
@@ -97,9 +97,9 @@ export declare class AtendimentoImagensController {
         DELETED_AT: Date | null;
         VERSION: number;
         ID_ATENDIMENTO: number;
-        ID_IMAGEM: number;
         CAMINHO_IMAGEM: string;
         DATA_UPLOAD: Date;
+        ID_IMAGEM: number;
     }[]>;
     batch(body: AtendimentoImagemSyncBatchRequestDto): Promise<{
         results: {
@@ -115,8 +115,8 @@ export declare class AtendimentoImagensController {
         DELETED_AT: Date | null;
         VERSION: number;
         ID_ATENDIMENTO: number;
-        ID_IMAGEM: number;
         CAMINHO_IMAGEM: string;
         DATA_UPLOAD: Date;
+        ID_IMAGEM: number;
     }>;
 }
