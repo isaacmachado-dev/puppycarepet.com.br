@@ -94,10 +94,8 @@
 .day-number {
   font-size: 1.2rem;
   font-weight: 600;
-  height: 28px;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  padding-top: 5px;
 }
 
 .day-name {
@@ -106,18 +104,21 @@
   color: #666;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
+  padding-bottom: 5px;
 }
 
 
 .day-active .day-number,
 .day-active .day-name {
-  background-color: #f0ff7a;
+  background-color: #3C2472;
+  color: white;
 }
 
 .day-item:hover .day-number,
 .day-item:hover .day-name {
-  background-color: #cfcfcf;
+  background-color: #28184d;
   cursor: pointer;
+  color: white;
 
 }
 
@@ -141,7 +142,7 @@
 }
 
 .indicator-active {
-  background-color: #000;
+  background-color: #28184d;
 }
 
 .indicator-line {

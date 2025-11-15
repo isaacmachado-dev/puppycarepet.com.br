@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Typewriter } from "./Typewriter";
 import "../dog-loader.css"; // conforme já está certo
 
-export default function AdminHomeLoading({ loaded }: { loaded: boolean }) {
+export default function AdminHomeLoading({ loaded, funcionario }: { loaded: boolean, funcionario: string }) {
     const [visible, setVisible] = useState(true);
     const [minPassed, setMinPassed] = useState(false);
 
@@ -33,11 +33,11 @@ export default function AdminHomeLoading({ loaded }: { loaded: boolean }) {
     return (
         <div className="fixed inset-0 flex flex-col bg-[#1A112E] h-screen justify-center items-center z-50">
             <Typewriter
-                texts={["Bem-vindo(a) {funcionário}!"]}
+                texts={[`Bem-vindo(a) ${funcionario}!`]}
                 typeSpeed={100}
                 deleteSpeed={50}
                 pauseBetween={4000}
-                className="text text-3xl"
+                className="typewriter-font text text-7xl"
             />
             {/* Loader dog animado */}
             {/* From Uiverse.io by Emmaline-ozi */}
