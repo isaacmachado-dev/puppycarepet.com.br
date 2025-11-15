@@ -2,7 +2,7 @@ import { Children } from "react";
 
 export function AdminBlock({ children, className = " " }: { children: React.ReactNode, className?: string }) {
     return (
-        <div className={`bg-[#E9EEEA] p-[2rem] mt-10 rounded-[2rem] ${className}`}>
+        <div className={`bg-[#d1d6d2] p-[2rem] mt-10 rounded-[2rem] ${className}`}>
             {children}
         </div>
     );

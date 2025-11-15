@@ -1,6 +1,7 @@
 import { Dog, PawPrint, MoveRight } from "lucide-react";
-import "../upcoming-schedule.css";
-import { AdminBlock, AdminBlockTitle } from "./AdminSettings";
+import "./upcoming-schedule.css";
+import { AdminBlock, AdminBlockTitle } from "../../../../components/ui/custom/AdminSettings";
+import SectionChoices from "./SectionChoices";
 
 export default function UpcomingSchedule() {
   return (
@@ -80,46 +81,14 @@ export default function UpcomingSchedule() {
           </div>
         </div>
 
-        <div className="flex flex-row gap-15 justify-center mt-[40px] z-[10]">
+        <SectionChoices />
 
-          {/* testar essa cor dps 876CEB */}
-
-          <div className=" px-15 py-3 bg-[#FFFFFF] rounded-t-full border-black">
-            <button>Atendendo</button>
-          </div>
-
-          <div className="p-2 rounded-full">
-            <button>Próximos</button>
-          </div>
-
-          <div className="p-2 rounded-full">
-            <button>Revisar</button>
-          </div>
-
-          <div className="p-2 rounded-full">
-            <button>Disponiblidade</button>
-          </div>
-
-
-
-        </div>
-
-        <div className="bg-[#FFFFFF] -mt-[5px] p-[2rem] rounded-[16px]">
-
-
-
-          <div className="flex gap-2 items-center">
-
-            <Dog />
-            Malu
-
-          </div>
-        </div>
+       
 
       </div>
       <div>
 
-        <AdminBlock 
+        <AdminBlock
           className="cursor-pointer group">
           <div className="flex gap-2 cursor-pointer">
 

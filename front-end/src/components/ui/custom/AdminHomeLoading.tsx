@@ -33,7 +33,7 @@ export default function AdminHomeLoading({ loaded, funcionario }: { loaded: bool
     return (
         <div className="fixed inset-0 flex flex-col bg-[#1A112E] h-screen justify-center items-center z-50">
             <Typewriter
-                texts={[`Bom dia ${funcionario}!`]}
+                texts={[`Bem vindo(a) ${funcionario}!`]}
                 typeSpeed={100}
                 deleteSpeed={50}
                 pauseBetween={4000}

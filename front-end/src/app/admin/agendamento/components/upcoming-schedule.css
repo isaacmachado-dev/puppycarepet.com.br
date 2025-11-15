@@ -1,6 +1,6 @@
 /* From Uiverse.io by juyi_2230 */
 .meeting-card {
-  background-color: #e9eeea;
+  background-color: #d1d6d2;
   border-radius: 2rem;
   padding: 1.85rem;
   width: 100%;
@@ -136,7 +136,7 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: #d0d0ce;
+  background-color: #ffffff;
   position: relative;
   z-index: 2;
 }
@@ -151,7 +151,7 @@
   left: 32px;
   right: 32px;
   height: 1px;
-  border-top: 1.5px dashed #d0d0ce;
+  border-top: 1.5px dashed #e6e6e6;
   z-index: 1;
 }
 
