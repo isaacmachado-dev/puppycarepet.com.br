@@ -16,8 +16,8 @@ export default function AdminPage() {
 
     return (
         <div>
-            <div className="text-white">
-                <AdminHomeLoading loaded={true} />
+            <div className="text-white ">
+                <AdminHomeLoading loaded={true} funcionario="Mônica" />
             </div>
 
             <div className="relative flex min-h-screen bg-[#E3E3E3] text-black font-bold">
