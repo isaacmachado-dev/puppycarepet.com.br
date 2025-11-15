@@ -84,20 +84,20 @@ export default function UpcomingSchedule() {
 
           {/* testar essa cor dps 876CEB */}
 
-          <div className=" px-15 py-3 bg-[#FFFFFF] rounded-t-full">
-            <h2>Atendendo</h2>
+          <div className=" px-15 py-3 bg-[#FFFFFF] rounded-t-full border-black">
+            <button>Atendendo</button>
           </div>
 
           <div className="p-2 rounded-full">
-            <h2>Próximos</h2>
+            <button>Próximos</button>
           </div>
 
           <div className="p-2 rounded-full">
-            <h2>Revisar</h2>
+            <button>Revisar</button>
           </div>
 
           <div className="p-2 rounded-full">
-            <h2>Disponiblidade</h2>
+            <button>Disponiblidade</button>
           </div>
 
 
@@ -119,13 +119,14 @@ export default function UpcomingSchedule() {
       </div>
       <div>
 
-        <AdminBlock>
-          <div className="flex items-center gap-2">
+        <AdminBlock 
+          className="cursor-pointer group">
+          <div className="flex gap-2 cursor-pointer">
 
             <AdminBlockTitle>Verificar atendimentos </AdminBlockTitle>
 
             <MoveRight
-              className="h=10"
+              className="h-10 items-center transition-transform group-hover:translate-x-5 "
               width={100}
               height={50}
             />

@@ -8,7 +8,7 @@ export default function AdminHomeLoading({ loaded, funcionario }: { loaded: bool
 
     // Timer de 7 segundos
     useEffect(() => {
-        const timer = setTimeout(() => setMinPassed(true), 7000);
+        const timer = setTimeout(() => setMinPassed(true), 5000);
         return () => clearTimeout(timer);
     }, []);
 
@@ -33,7 +33,7 @@ export default function AdminHomeLoading({ loaded, funcionario }: { loaded: bool
     return (
         <div className="fixed inset-0 flex flex-col bg-[#1A112E] h-screen justify-center items-center z-50">
             <Typewriter
-                texts={[`Bem-vindo(a) ${funcionario}!`]}
+                texts={[`Bom dia ${funcionario}!`]}
                 typeSpeed={100}
                 deleteSpeed={50}
                 pauseBetween={4000}
