@@ -1,7 +1,5 @@
 "use client";
-
-import UpcomingSchedule from "@/components/ui/custom/UpcomingSchedule";
-import { useState } from "react";
+import UpcomingSchedule from "@/app/admin/agendamento/components/UpcomingSchedule";
 
 export default function AgendamentoPage() {
 
@@ -12,9 +10,6 @@ export default function AgendamentoPage() {
             <UpcomingSchedule />
 
         </div>
-
-
-
 
     )
 
