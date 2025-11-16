@@ -83,8 +83,6 @@ export default function UpcomingSchedule() {
 
         <SectionChoices />
 
-       
-
       </div>
       <div>
 

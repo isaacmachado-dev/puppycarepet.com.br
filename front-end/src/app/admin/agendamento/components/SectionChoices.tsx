@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Atendendo } from "./sections/Atendendo";
-import Proximos from "./sections/Proximos";
+import { Proximos } from "./sections/Proximos";
 import Revisar from "./sections/Revisar";
 import Disponibilidade from "./sections/Disponiblidade";
+
 
 const BUTTONS = [
     { id: "Atendendo", label: "Atendendo" },
@@ -20,8 +21,8 @@ export default function SectionChoices() {
                 {BUTTONS.map(btn => (
                     <div key={btn.id} className="py-3 rounded-full">
                         <button
-                            className={`cursor-pointer py-3 transition-ease-in-out 
-                        ${active === btn.id ? "bg-white px-15 bg-[white] rounded-t-full text-black" : "text-black"}
+                            className={`cursor-pointer py-3 transition-all duration-300
+                        ${active === btn.id ? "bg-white px-15 bg-[white] rounded-t-full text-black font-extrabold" : "text-black"}
                         `}
 
                             onClick={() => setActive(btn.id)}
@@ -37,12 +38,14 @@ export default function SectionChoices() {
 
             </div>
 
-            <div>
+            <div className="transition-all">
                 <div className="bg-white -mt-[15px] p-[2rem] rounded-[16px]">
-                    {active === "Atendendo" && <Atendendo />}
-                    {active === "Proximos" && <Proximos />}
-                    {active === "Revisar" && <Revisar />}
-                    {active === "Disponibilidade" && <Disponibilidade />}
+                    <div key={active} className="fade-slide-in">
+                        {active === "Atendendo" && <Atendendo />}
+                        {active === "Proximos" && <Proximos />}
+                        {active === "Revisar" && <Revisar />}
+                        {active === "Disponibilidade" && <Disponibilidade />}
+                    </div>
                 </div>
             </div>
 
