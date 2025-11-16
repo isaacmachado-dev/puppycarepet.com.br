@@ -23,7 +23,13 @@ const ITEMS: AgendaItem[] = [
         services: ["Banho"],
         price: "R$ 80,00",
     },
-    // depois você só adiciona mais objetos aqui
+    {
+        time: "11:00",
+        pet: "Flash",
+        owner: "Barry Allen",
+        services: ["Banho"],
+        price: "R$ 80,00",
+    },
 ];
 
 function AgendaRow({ item }: { item: AgendaItem }) {
@@ -43,7 +49,7 @@ function AgendaRow({ item }: { item: AgendaItem }) {
             </button>
 
 
-            <div className="grid grid-cols-[80px_90px_200px] items-center gap-4">
+            <div className="grid grid-cols-[80px_100px_200px] items-center mx-auto gap-4">
 
                 {/* pet */}
                 <span className="flex flex-row items-center gap-2 text-sm">
@@ -63,8 +69,8 @@ function AgendaRow({ item }: { item: AgendaItem }) {
                 </span>
 
                 {/* serviços + valor */}
-                <div className="flex flex-row items-center gap-2 bg-green-400 rounded-md">
-                    <div className="flex flex-row gap-2">
+                <div className="flex flex-row items-center gap-1 bg-green-400 rounded-md">
+                    <div className="flex flex-row">
                         {item.services.map(service => (
                             <span
                                 key={service}
