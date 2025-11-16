@@ -11,7 +11,7 @@ export default function UpcomingSchedule() {
         <div className="header">
           <div className="title">Atendimentos<br />Chegando</div>
           <div className="date-selector" id="month-selector">
-            <span>Setembro</span>
+            <span>Novembro</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="18"
@@ -62,7 +62,7 @@ export default function UpcomingSchedule() {
 
             </div >
             <div className="day-item">
-              <div className="day-number">13</div>
+              <div className="day-number">14</div>
               <div className="day-name">Dom</div>
 
             </div >
