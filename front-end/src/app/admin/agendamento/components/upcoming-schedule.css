@@ -1,6 +1,6 @@
 /* From Uiverse.io by juyi_2230 */
 .meeting-card {
-  background-color: #e9eeea;
+  background-color: #d1d6d2;
   border-radius: 2rem;
   padding: 1.85rem;
   width: 100%;
@@ -94,10 +94,8 @@
 .day-number {
   font-size: 1.2rem;
   font-weight: 600;
-  height: 28px;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  padding-top: 5px;
 }
 
 .day-name {
@@ -106,18 +104,21 @@
   color: #666;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
+  padding-bottom: 5px;
 }
 
 
 .day-active .day-number,
 .day-active .day-name {
-  background-color: #f0ff7a;
+  background-color: #3C2472;
+  color: white;
 }
 
 .day-item:hover .day-number,
 .day-item:hover .day-name {
-  background-color: #cfcfcf;
+  background-color: #28184d;
   cursor: pointer;
+  color: white;
 
 }
 
@@ -135,13 +136,13 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background-color: #d0d0ce;
+  background-color: #ffffff;
   position: relative;
   z-index: 2;
 }
 
 .indicator-active {
-  background-color: #000;
+  background-color: #28184d;
 }
 
 .indicator-line {
@@ -150,7 +151,7 @@
   left: 32px;
   right: 32px;
   height: 1px;
-  border-top: 1.5px dashed #d0d0ce;
+  border-top: 1.5px dashed #e6e6e6;
   z-index: 1;
 }
 
