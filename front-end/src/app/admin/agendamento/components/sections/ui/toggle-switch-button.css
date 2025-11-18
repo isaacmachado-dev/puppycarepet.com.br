@@ -20,6 +20,7 @@
     cursor: grab;
     font-size: var(--toggle-size);
     transition: background 0.3s ease;
+    border: 2px solid black;
 }
 
 .theme-checkbox--left {
