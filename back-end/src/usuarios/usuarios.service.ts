@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import * as bcrypt from 'bcryptjs';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
@@ -8,9 +9,34 @@ import { UsuarioSyncBatchRequestDto, UsuarioSyncItemDto } from './dto/usuario-sy
 export class UsuariosService {
   constructor(private prisma: PrismaService) {}
 
+  async findByNome(nome: string) {
+    return this.prisma.uSUARIOS.findFirst({
+      where: { NOME: nome },
+    });
+  }
+
+  async login(nome: string, senha: string): Promise<{ token: string }> {
+    const usuario = await this.findByNome(nome);
+    if (!usuario) throw new NotFoundException('Usuário não encontrado');
+    const senhaValida = await bcrypt.compare(senha, usuario.SENHA_HASH);
+    if (!senhaValida) throw new NotFoundException('Senha inválida');
+    const jwt = require('jsonwebtoken');
+    const token = jwt.sign(
+      { id: usuario.ID_USUARIO },
+      process.env.JWT_SECRET || 'secret',
+      { expiresIn: '1d' },
+    );
+    return { token };
+  }
+
   async create(createUsuarioDto: CreateUsuarioDto) {
+    const senhaHash = await bcrypt.hash(createUsuarioDto.SENHA, 10);
+    const { SENHA, ...rest } = createUsuarioDto;
     return this.prisma.uSUARIOS.create({
-      data: createUsuarioDto,
+      data: {
+        ...rest,
+        SENHA_HASH: senhaHash,
+      },
     });
   }
 
@@ -18,35 +44,8 @@ export class UsuariosService {
     return this.prisma.uSUARIOS.findMany();
   }
 
-  async findOne(id: number) {
-    const usuario = await this.prisma.uSUARIOS.findUnique({
-      where: { ID_USUARIO: id },
-    });
-
-    if (!usuario) {
-      throw new NotFoundException(`Usuário com ID ${id} não encontrado`);
-    }
-
-    return usuario;
-  }
-
-  async update(id: number, updateUsuarioDto: UpdateUsuarioDto) {
-    await this.findOne(id);
-    return this.prisma.uSUARIOS.update({
-      where: { ID_USUARIO: id },
-      data: updateUsuarioDto,
-    });
-  }
-
-  async remove(id: number) {
-    await this.findOne(id);
-    return this.prisma.uSUARIOS.delete({
-      where: { ID_USUARIO: id },
-    });
-  }
-
   // --- Offline-first sync logic ---
-  async getChanges(since?: string) {
+  public async getChanges(since?: string) {
     const sinceDate = since ? new Date(since) : new Date(0);
     return this.prisma.uSUARIOS.findMany({
       where: {
@@ -59,7 +58,7 @@ export class UsuariosService {
     });
   }
 
-  async batchUpsert(body: UsuarioSyncBatchRequestDto) {
+  public async batchUpsert(body: UsuarioSyncBatchRequestDto) {
     const results = [] as Array<{ publicId: string; status: 'applied' | 'conflict' | 'skipped'; server?: any }>;
 
     for (const item of body.items) {
