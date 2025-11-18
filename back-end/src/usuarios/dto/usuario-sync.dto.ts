@@ -23,7 +23,7 @@ export class UsuarioSyncItemDto {
   @IsString()
   SENHA_HASH?: string;
 
-  @ApiProperty({ required: false, description: 'ISO timestamp of the update' })
+  @ApiProperty({ required: false, description: 'Carimbo de data/hora ISO da atualização' })
   @IsOptional()
   @IsISO8601()
   UPDATED_AT?: string;
@@ -33,7 +33,7 @@ export class UsuarioSyncItemDto {
   @IsInt()
   VERSION?: number;
 
-  @ApiProperty({ required: false, description: 'ISO timestamp for soft delete or null' })
+  @ApiProperty({ required: false, description: 'Carimbo de data/hora ISO para exclusão lógica ou null' })
   @IsOptional()
   @IsISO8601()
   DELETED_AT?: string | null;
