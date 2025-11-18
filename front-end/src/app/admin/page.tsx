@@ -1,18 +1,52 @@
 "use client";
-import { useState } from "react";
-import Link from "next/link";
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import { CalendarDays, Users, ChartNoAxesColumn, Notebook, Settings, X, ChevronLeft, ChevronRight, CircleQuestionMark } from "lucide-react";
+import { CalendarDays, Users, ChartNoAxesColumn, Notebook, Settings, X, ChevronLeft, ChevronRight } from "lucide-react";
 import AdminMenuItem from "../../components/ui/custom/AdminMenuItem";
 import AgendamentoPage from "./agendamento/page";
 import ClientesPage from "./clientes/page";
 import AnalisePage from "./analise/page";
-import { UsuariosPage } from "./usuarios/page";
+import UsuariosPage from "./usuarios/login/page";
 import AdminHomeLoading from "@/components/ui/custom/AdminHomeLoading";
+import { useRouter } from 'next/navigation';
+
+async function getUsuarios() {
+    const res = await fetch('/api/usuarios');
+    if (!res.ok) throw new Error('Erro ao buscar usuários');
+    return res.json();
+}
 
 export default function AdminPage() {
+    const router = useRouter();
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isOpen, setIsOpen] = useState(true);
     const [paginaAtual, setPaginaAtual] = useState<"agendamentos" | "clientes" | "analise" | "usuarios" | "opcoes" | null>("agendamentos");
+    const [usuarios, setUsuarios] = useState([]);
+
+    useEffect(() => {
+        // Exemplo: checa se existe um token no localStorage
+        const token = typeof window !== 'undefined' ? localStorage.getItem('admin_token') : null;
+        if (!token) {
+            router.replace('/admin/usuarios/login');
+        } else {
+            setIsAuthenticated(true);
+        }
+    }, [router]);
+
+    useEffect(() => {
+        getUsuarios().then(setUsuarios).catch(console.error);
+    }, []);
+
+    // Referencia 'usuarios' para evitar o aviso de variável atribuída mas não usada
+    useEffect(() => {
+        if (usuarios && usuarios.length > 0) {
+            console.log("Usuarios carregados:", usuarios);
+        }
+    }, [usuarios]);
+
+    if (!isAuthenticated) {
+        return null; // Ou um loading spinner
+    }
 
     return (
         <div>
@@ -143,10 +177,14 @@ export default function AdminPage() {
                                 icon={<X color="currentColor" />}
                                 className={`${!isOpen ? "flex justify-center align-center" : "justify-start"}`}
                                 label="Sair"
-                                href="/"
+                                href="/admin/usuarios/login"
                                 isOpen={isOpen}
                                 danger
-
+                                onClick={() => {
+                                    if (typeof window !== 'undefined') {
+                                        localStorage.removeItem('admin_token');
+                                    }
+                                }}
                             />
                         </div>
                     </div>

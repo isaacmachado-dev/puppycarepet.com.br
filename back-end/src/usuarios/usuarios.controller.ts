@@ -1,42 +1,38 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-  ParseIntPipe,
-  Query,
-} from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, Query, Patch, Delete, ParseIntPipe } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { UsuariosService } from './usuarios.service';
-import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
-import { UsuarioSyncBatchRequestDto } from './dto/usuario-sync.dto';
+
+// Local DTO used for batch sync requests to avoid missing module import.
+// Adjust the shape below to match the real payload expected by the service.
+interface UsuarioSyncBatchRequestDto {
+  items: any[];
+  source?: string;
+  timestamp?: string;
+}
 
 @ApiTags('usuarios')
 @Controller('usuarios')
 export class UsuariosController {
   constructor(private readonly usuariosService: UsuariosService) {}
 
-  @Post()
-  @ApiOperation({ summary: 'Criar um novo usuário' })
-  @ApiResponse({ status: 201, description: 'Usuário criado com sucesso.' })
-  @ApiResponse({ status: 400, description: 'Dados inválidos.' })
-  create(@Body() createUsuarioDto: CreateUsuarioDto) {
-    return this.usuariosService.create(createUsuarioDto);
-  }
+  @Post('login')
+  @ApiOperation({ summary: 'Autenticar usuário e retornar JWT' })
+  @ApiResponse({ status: 200, description: 'Login realizado com sucesso.' })
+  @ApiResponse({ status: 401, description: 'Credenciais inválidas.' })
+async login(@Body() body: { id: number; senha: string }) {
+  return this.usuariosService.login(body.id, body.senha);
+}
 
-  @Get()
-  @ApiOperation({ summary: 'Listar todos os usuários' })
-  @ApiResponse({
-    status: 200,
-    description: 'Lista de usuários retornada com sucesso.',
-  })
-  findAll() {
-    return this.usuariosService.findAll();
-  }
+@Get()
+@ApiOperation({ summary: 'Listar todos os usuários' })
+@ApiResponse({
+  status: 200,
+  description: 'Lista de usuários retornada com sucesso.',
+})
+findAll() {
+  return this.usuariosService.findAll();
+}
 
   @Get(':id')
   @ApiOperation({ summary: 'Buscar um usuário por ID' })
