@@ -15,8 +15,8 @@ export class CreateUsuarioDto {
   @IsString()
   DESCRICAO?: string;
 
-  @ApiProperty({ description: 'Senha (hash)', example: 'hash_bcrypt_aqui' })
+  @ApiProperty({ description: 'Senha (texto puro, será hasheada)', example: 'minhasenha123' })
   @IsString()
   @MinLength(6)
-  SENHA_HASH: string;
+  SENHA: string;
 }

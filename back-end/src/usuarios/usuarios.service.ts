@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import * as bcrypt from 'bcryptjs';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
@@ -8,9 +9,34 @@ import { UsuarioSyncBatchRequestDto, UsuarioSyncItemDto } from './dto/usuario-sy
 export class UsuariosService {
   constructor(private prisma: PrismaService) {}
 
+  async findById(id: number) {
+    return this.prisma.uSUARIOS.findUnique({
+      where: { ID_USUARIO: id },
+    });
+  }
+
+  async login(id: number, senha: string) {
+    const usuario = await this.findById(id);
+    if (!usuario) throw new NotFoundException('Usuário não encontrado');
+    const senhaValida = await bcrypt.compare(senha, usuario.SENHA_HASH);
+    if (!senhaValida) throw new NotFoundException('Senha inválida');
+    const jwt = require('jsonwebtoken');
+    const token = jwt.sign(
+      { id: usuario.ID_USUARIO },
+      process.env.JWT_SECRET || 'secret',
+      { expiresIn: '1d' },
+    );
+    return { token };
+  }
+
   async create(createUsuarioDto: CreateUsuarioDto) {
+    const senhaHash = await bcrypt.hash(createUsuarioDto.SENHA, 10);
+    const { SENHA, ...rest } = createUsuarioDto;
     return this.prisma.uSUARIOS.create({
-      data: createUsuarioDto,
+      data: {
+        ...rest,
+        SENHA_HASH: senhaHash,
+      },
     });
   }
 
@@ -44,6 +70,9 @@ export class UsuariosService {
       where: { ID_USUARIO: id },
     });
   }
+
+  // --- Offline-first sync logic ---
+
 
   // --- Offline-first sync logic ---
   async getChanges(since?: string) {
