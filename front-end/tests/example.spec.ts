@@ -17,7 +17,6 @@ test('Admin page has title', async ({ page }) => {
 test('Apertando botao Admin', async ({ page }) => {
   await page.goto('http://localhost:3000/admin');
   // Click the get started link.
-  await page.getByRole('button', { name: 'Entrar' }).click();
   await page.locator('div').filter({ hasText: 'Clientes' }).nth(5).click();
   await page.locator('div').filter({ hasText: 'Análise' }).nth(5).click();
   await page.getByText('Usuários').click();
