@@ -9,14 +9,14 @@ import { UsuarioSyncBatchRequestDto, UsuarioSyncItemDto } from './dto/usuario-sy
 export class UsuariosService {
   constructor(private prisma: PrismaService) {}
 
-  async findById(id: number) {
-    return this.prisma.uSUARIOS.findUnique({
-      where: { ID_USUARIO: id },
+  async findByNome(nome: string) {
+    return this.prisma.uSUARIOS.findFirst({
+      where: { NOME: nome },
     });
   }
 
-  async login(id: number, senha: string) {
-    const usuario = await this.findById(id);
+  async login(nome: string, senha: string): Promise<{ token: string }> {
+    const usuario = await this.findByNome(nome);
     if (!usuario) throw new NotFoundException('Usuário não encontrado');
     const senhaValida = await bcrypt.compare(senha, usuario.SENHA_HASH);
     if (!senhaValida) throw new NotFoundException('Senha inválida');
@@ -44,38 +44,8 @@ export class UsuariosService {
     return this.prisma.uSUARIOS.findMany();
   }
 
-  async findOne(id: number) {
-    const usuario = await this.prisma.uSUARIOS.findUnique({
-      where: { ID_USUARIO: id },
-    });
-
-    if (!usuario) {
-      throw new NotFoundException(`Usuário com ID ${id} não encontrado`);
-    }
-
-    return usuario;
-  }
-
-  async update(id: number, updateUsuarioDto: UpdateUsuarioDto) {
-    await this.findOne(id);
-    return this.prisma.uSUARIOS.update({
-      where: { ID_USUARIO: id },
-      data: updateUsuarioDto,
-    });
-  }
-
-  async remove(id: number) {
-    await this.findOne(id);
-    return this.prisma.uSUARIOS.delete({
-      where: { ID_USUARIO: id },
-    });
-  }
-
   // --- Offline-first sync logic ---
-
-
-  // --- Offline-first sync logic ---
-  async getChanges(since?: string) {
+  public async getChanges(since?: string) {
     const sinceDate = since ? new Date(since) : new Date(0);
     return this.prisma.uSUARIOS.findMany({
       where: {
@@ -88,7 +58,7 @@ export class UsuariosService {
     });
   }
 
-  async batchUpsert(body: UsuarioSyncBatchRequestDto) {
+  public async batchUpsert(body: UsuarioSyncBatchRequestDto) {
     const results = [] as Array<{ publicId: string; status: 'applied' | 'conflict' | 'skipped'; server?: any }>;
 
     for (const item of body.items) {

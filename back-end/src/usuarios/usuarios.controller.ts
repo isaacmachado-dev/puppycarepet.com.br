@@ -20,8 +20,8 @@ export class UsuariosController {
   @ApiOperation({ summary: 'Autenticar usuário e retornar JWT' })
   @ApiResponse({ status: 200, description: 'Login realizado com sucesso.' })
   @ApiResponse({ status: 401, description: 'Credenciais inválidas.' })
-async login(@Body() body: { id: number; senha: string }) {
-  return this.usuariosService.login(body.id, body.senha);
+async login(@Body() body: { nome: string; senha: string }) {
+  return this.usuariosService.login(body.nome, body.senha);
 }
 
 @Get()
@@ -33,15 +33,6 @@ async login(@Body() body: { id: number; senha: string }) {
 findAll() {
   return this.usuariosService.findAll();
 }
-
-  @Get(':id')
-  @ApiOperation({ summary: 'Buscar um usuário por ID' })
-  @ApiParam({ name: 'id', description: 'ID do usuário' })
-  @ApiResponse({ status: 200, description: 'Usuário encontrado.' })
-  @ApiResponse({ status: 404, description: 'Usuário não encontrado.' })
-  findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.usuariosService.findOne(id);
-  }
 
   // --- Offline-first sync endpoints ---
   @Get('changes')
@@ -58,26 +49,7 @@ findAll() {
     return this.usuariosService.batchUpsert(body);
   }
 
-  @Patch(':id')
-  @ApiOperation({ summary: 'Atualizar um usuário' })
-  @ApiParam({ name: 'id', description: 'ID do usuário' })
-  @ApiResponse({ status: 200, description: 'Usuário atualizado com sucesso.' })
-  @ApiResponse({ status: 404, description: 'Usuário não encontrado.' })
-  update(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() updateUsuarioDto: UpdateUsuarioDto,
-  ) {
-    return this.usuariosService.update(id, updateUsuarioDto);
-  }
 
-  @Delete(':id')
-  @ApiOperation({ summary: 'Remover um usuário' })
-  @ApiParam({ name: 'id', description: 'ID do usuário' })
-  @ApiResponse({ status: 200, description: 'Usuário removido com sucesso.' })
-  @ApiResponse({ status: 404, description: 'Usuário não encontrado.' })
-  remove(@Param('id', ParseIntPipe) id: number) {
-    return this.usuariosService.remove(id);
-  }
 
   @Delete('public/:publicId')
   @ApiOperation({ summary: 'Soft delete por PUBLIC_ID (marca DELETED_AT)' })
