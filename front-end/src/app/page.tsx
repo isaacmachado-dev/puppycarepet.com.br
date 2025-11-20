@@ -1,18 +1,16 @@
 import Image from "next/image";
-import DogSection from "./sections/DogSection";
-import CatSection from "./sections/CatSection";
-import OurServices from "./sections/OurServices";
-import HomeScreen from "./components/HomeScreen";
-import { SetupSection } from "./components/ConfigSection";
-import { AdminButton } from "./components/AdminButton";
+import DogSection from "../components/sections/DogSection";
+import CatSection from "../components/sections/CatSection";
+import OurServices from "../components/sections/OurServices";
+import HomeScreen from "../components/ui/custom/HomeScreen";
+import { SetupSection } from "../components/ui/custom/ConfigSection";
+import { AdminButton } from "../components/ui/custom/AdminButton";
 
 import Link from "next/link";
-
 export default function Home() {
   return (
     <div className="font-sans bg-[#E72989] text-white">
       <main>
-
         <HomeScreen>
           <SetupSection>
             <div className="flex flex-col items-center gap-5 sm:flex-row sm:items-center sm:gap-10">
@@ -94,8 +92,6 @@ export default function Home() {
         <div>
           <AdminButton />
         </div>
-
-
 
       </main >
 

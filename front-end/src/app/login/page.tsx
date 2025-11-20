@@ -1,8 +1,7 @@
 "use client";
 import Image from "next/image";
-import H2 from "@/app/components/TextSection";
+import H2 from "@/components/ui/custom/TextSection";
 import { useRouter } from 'next/navigation';
-
 
 export default function LoginPage() {
     const router = useRouter();
