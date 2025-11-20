@@ -1,51 +1,85 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsuariosService = void 0;
 const common_1 = require("@nestjs/common");
+const bcrypt = __importStar(require("bcryptjs"));
 const prisma_service_1 = require("../prisma/prisma.service");
 let UsuariosService = class UsuariosService {
     prisma;
     constructor(prisma) {
         this.prisma = prisma;
     }
+    async findByEmail(email) {
+        return this.prisma.uSUARIOS.findFirst({
+            where: { EMAIL: email },
+        });
+    }
+    async login(email, senha) {
+        const usuario = await this.findByEmail(email);
+        if (!usuario)
+            throw new common_1.NotFoundException('Usuário não encontrado');
+        const senhaValida = await bcrypt.compare(senha, usuario.SENHA_HASH);
+        if (!senhaValida)
+            throw new common_1.NotFoundException('Senha inválida');
+        const jwt = require('jsonwebtoken');
+        const token = jwt.sign({ id: usuario.ID_USUARIO }, process.env.JWT_SECRET || 'secret', { expiresIn: '1d' });
+        return { token };
+    }
     async create(createUsuarioDto) {
+        const senhaHash = await bcrypt.hash(createUsuarioDto.SENHA, 10);
+        const { SENHA, EMAIL, ...rest } = createUsuarioDto;
         return this.prisma.uSUARIOS.create({
-            data: createUsuarioDto,
+            data: {
+                ...rest,
+                EMAIL,
+                SENHA_HASH: senhaHash,
+            },
         });
     }
     async findAll() {
         return this.prisma.uSUARIOS.findMany();
-    }
-    async findOne(id) {
-        const usuario = await this.prisma.uSUARIOS.findUnique({
-            where: { ID_USUARIO: id },
-        });
-        if (!usuario) {
-            throw new common_1.NotFoundException(`Usuário com ID ${id} não encontrado`);
-        }
-        return usuario;
-    }
-    async update(id, updateUsuarioDto) {
-        await this.findOne(id);
-        return this.prisma.uSUARIOS.update({
-            where: { ID_USUARIO: id },
-            data: updateUsuarioDto,
-        });
-    }
-    async remove(id) {
-        await this.findOne(id);
-        return this.prisma.uSUARIOS.delete({
-            where: { ID_USUARIO: id },
-        });
     }
     async getChanges(since) {
         const sinceDate = since ? new Date(since) : new Date(0);
@@ -68,11 +102,12 @@ let UsuariosService = class UsuariosService {
         return { results };
     }
     async applyOne(item) {
-        const { PUBLIC_ID, UPDATED_AT, VERSION, DELETED_AT, NOME, DESCRICAO, SENHA_HASH } = item;
+        const { PUBLIC_ID, UPDATED_AT, VERSION, DELETED_AT, NOME, EMAIL, DESCRICAO, SENHA_HASH } = item;
         if (!PUBLIC_ID) {
             const created = await this.prisma.uSUARIOS.create({
                 data: {
                     NOME: NOME ?? 'Sem nome',
+                    EMAIL: EMAIL ?? '',
                     DESCRICAO: DESCRICAO ?? null,
                     SENHA_HASH: SENHA_HASH ?? '',
                     DELETED_AT: DELETED_AT ? new Date(DELETED_AT) : null,
@@ -86,6 +121,7 @@ let UsuariosService = class UsuariosService {
                 data: {
                     PUBLIC_ID,
                     NOME: NOME ?? 'Sem nome',
+                    EMAIL: EMAIL ?? '',
                     DESCRICAO: DESCRICAO ?? null,
                     SENHA_HASH: SENHA_HASH ?? '',
                     DELETED_AT: DELETED_AT ? new Date(DELETED_AT) : null,
@@ -99,6 +135,7 @@ let UsuariosService = class UsuariosService {
                 where: { PUBLIC_ID },
                 data: {
                     NOME: NOME ?? existing.NOME,
+                    EMAIL: typeof EMAIL !== 'undefined' ? EMAIL : existing.EMAIL,
                     DESCRICAO: typeof DESCRICAO !== 'undefined' ? DESCRICAO : existing.DESCRICAO,
                     SENHA_HASH: typeof SENHA_HASH !== 'undefined' ? SENHA_HASH : existing.SENHA_HASH,
                     DELETED_AT: typeof DELETED_AT !== 'undefined' ? (DELETED_AT ? new Date(DELETED_AT) : null) : existing.DELETED_AT,
@@ -112,6 +149,7 @@ let UsuariosService = class UsuariosService {
                 where: { PUBLIC_ID },
                 data: {
                     NOME: NOME ?? existing.NOME,
+                    EMAIL: typeof EMAIL !== 'undefined' ? EMAIL : existing.EMAIL,
                     DESCRICAO: typeof DESCRICAO !== 'undefined' ? DESCRICAO : existing.DESCRICAO,
                     SENHA_HASH: typeof SENHA_HASH !== 'undefined' ? SENHA_HASH : existing.SENHA_HASH,
                     DELETED_AT: typeof DELETED_AT !== 'undefined' ? (DELETED_AT ? new Date(DELETED_AT) : null) : existing.DELETED_AT,

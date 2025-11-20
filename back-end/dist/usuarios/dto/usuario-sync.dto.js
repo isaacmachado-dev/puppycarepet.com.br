@@ -16,6 +16,7 @@ const class_validator_1 = require("class-validator");
 class UsuarioSyncItemDto {
     PUBLIC_ID;
     NOME;
+    EMAIL;
     DESCRICAO;
     SENHA_HASH;
     UPDATED_AT;
@@ -39,6 +40,12 @@ __decorate([
     (0, swagger_1.ApiProperty)({ required: false }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UsuarioSyncItemDto.prototype, "EMAIL", void 0);
+__decorate([
+    (0, swagger_1.ApiProperty)({ required: false }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", Object)
 ], UsuarioSyncItemDto.prototype, "DESCRICAO", void 0);
 __decorate([
@@ -48,7 +55,7 @@ __decorate([
     __metadata("design:type", String)
 ], UsuarioSyncItemDto.prototype, "SENHA_HASH", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ required: false, description: 'ISO timestamp of the update' }),
+    (0, swagger_1.ApiProperty)({ required: false, description: 'Carimbo de data/hora ISO da atualização' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsISO8601)(),
     __metadata("design:type", String)
@@ -60,7 +67,7 @@ __decorate([
     __metadata("design:type", Number)
 ], UsuarioSyncItemDto.prototype, "VERSION", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ required: false, description: 'ISO timestamp for soft delete or null' }),
+    (0, swagger_1.ApiProperty)({ required: false, description: 'Carimbo de data/hora ISO para exclusão lógica ou null' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsISO8601)(),
     __metadata("design:type", Object)
