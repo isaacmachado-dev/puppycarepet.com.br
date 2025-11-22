@@ -2,6 +2,10 @@ import { Controller, Post, Body, Get, Param, Query, Patch, Delete, ParseIntPipe 
 import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { UsuariosService } from './usuarios.service';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
+<<<<<<< HEAD
+=======
+import { LoginDto } from './dto/create-usuario.dto';
+>>>>>>> 717ebcc590e432dd78d0bc3f56607f106a3fa708
 
 // Local DTO used for batch sync requests to avoid missing module import.
 // Adjust the shape below to match the real payload expected by the service.
@@ -17,12 +21,21 @@ export class UsuariosController {
   constructor(private readonly usuariosService: UsuariosService) {}
 
   @Post('login')
+<<<<<<< HEAD
   @ApiOperation({ summary: 'Autenticar usuário e retornar JWT' })
   @ApiResponse({ status: 200, description: 'Login realizado com sucesso.' })
   @ApiResponse({ status: 401, description: 'Credenciais inválidas.' })
 async login(@Body() body: { nome: string; senha: string }) {
   return this.usuariosService.login(body.nome, body.senha);
 }
+=======
+  @ApiOperation({ summary: 'Autenticar usuário e retornar JWT por EMAIL' })
+  @ApiResponse({ status: 200, description: 'Login realizado com sucesso.' })
+  @ApiResponse({ status: 401, description: 'Credenciais inválidas.' })
+  async login(@Body() body: LoginDto) {
+    return this.usuariosService.login(body.email, body.senha);
+  }
+>>>>>>> 717ebcc590e432dd78d0bc3f56607f106a3fa708
 
 @Get()
 @ApiOperation({ summary: 'Listar todos os usuários' })
@@ -49,7 +62,10 @@ findAll() {
     return this.usuariosService.batchUpsert(body);
   }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 717ebcc590e432dd78d0bc3f56607f106a3fa708
 
   @Delete('public/:publicId')
   @ApiOperation({ summary: 'Soft delete por PUBLIC_ID (marca DELETED_AT)' })

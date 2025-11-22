@@ -5,7 +5,11 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 export default function LoginPage() {
+<<<<<<< HEAD
   const [nome, setNome] = useState("");
+=======
+  const [email, setEmail] = useState("");
+>>>>>>> 717ebcc590e432dd78d0bc3f56607f106a3fa708
   const [senha, setSenha] = useState("");
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -18,7 +22,7 @@ export default function LoginPage() {
       const res = await fetch("http://localhost:4000/usuarios/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nome, senha }),
+        body: JSON.stringify({ email, senha }),
       });
       const data = await res.json();
       if (res.ok && data.token) {
@@ -51,11 +55,19 @@ export default function LoginPage() {
             />
           </div>
           <input
+<<<<<<< HEAD
             type="text"
             placeholder="Nome do Usuário"
             className="w-full p-2 mb-4 border-1 border-black rounded"
             value={nome}
             onChange={(e) => setNome(e.target.value)}
+=======
+            type="email"
+            placeholder="E-mail"
+            className="w-full p-2 mb-4 border-1 border-black rounded"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+>>>>>>> 717ebcc590e432dd78d0bc3f56607f106a3fa708
             required
           />
           <div className="relative mb-4">
