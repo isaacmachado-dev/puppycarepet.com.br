@@ -9,16 +9,6 @@ import { UsuarioSyncBatchRequestDto, UsuarioSyncItemDto } from './dto/usuario-sy
 export class UsuariosService {
   constructor(private prisma: PrismaService) {}
 
-<<<<<<< HEAD
-  async findByNome(nome: string) {
-    return this.prisma.uSUARIOS.findFirst({
-      where: { NOME: nome },
-    });
-  }
-
-  async login(nome: string, senha: string): Promise<{ token: string }> {
-    const usuario = await this.findByNome(nome);
-=======
   async findByEmail(email: string) {
     return this.prisma.uSUARIOS.findFirst({
       where: { EMAIL: email },
@@ -27,7 +17,6 @@ export class UsuariosService {
 
   async login(email: string, senha: string): Promise<{ token: string }> {
     const usuario = await this.findByEmail(email);
->>>>>>> 717ebcc590e432dd78d0bc3f56607f106a3fa708
     if (!usuario) throw new NotFoundException('Usuário não encontrado');
     const senhaValida = await bcrypt.compare(senha, usuario.SENHA_HASH);
     if (!senhaValida) throw new NotFoundException('Senha inválida');
@@ -42,18 +31,11 @@ export class UsuariosService {
 
   async create(createUsuarioDto: CreateUsuarioDto) {
     const senhaHash = await bcrypt.hash(createUsuarioDto.SENHA, 10);
-<<<<<<< HEAD
-    const { SENHA, ...rest } = createUsuarioDto;
-    return this.prisma.uSUARIOS.create({
-      data: {
-        ...rest,
-=======
     const { SENHA, EMAIL, ...rest } = createUsuarioDto;
     return this.prisma.uSUARIOS.create({
       data: {
         ...rest,
         EMAIL,
->>>>>>> 717ebcc590e432dd78d0bc3f56607f106a3fa708
         SENHA_HASH: senhaHash,
       },
     });
