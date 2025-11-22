@@ -51,13 +51,13 @@ let UsuariosService = class UsuariosService {
     constructor(prisma) {
         this.prisma = prisma;
     }
-    async findByNome(nome) {
+    async findByEmail(email) {
         return this.prisma.uSUARIOS.findFirst({
-            where: { NOME: nome },
+            where: { EMAIL: email },
         });
     }
-    async login(nome, senha) {
-        const usuario = await this.findByNome(nome);
+    async login(email, senha) {
+        const usuario = await this.findByEmail(email);
         if (!usuario)
             throw new common_1.NotFoundException('Usuário não encontrado');
         const senhaValida = await bcrypt.compare(senha, usuario.SENHA_HASH);
@@ -69,10 +69,11 @@ let UsuariosService = class UsuariosService {
     }
     async create(createUsuarioDto) {
         const senhaHash = await bcrypt.hash(createUsuarioDto.SENHA, 10);
-        const { SENHA, ...rest } = createUsuarioDto;
+        const { SENHA, EMAIL, ...rest } = createUsuarioDto;
         return this.prisma.uSUARIOS.create({
             data: {
                 ...rest,
+                EMAIL,
                 SENHA_HASH: senhaHash,
             },
         });
