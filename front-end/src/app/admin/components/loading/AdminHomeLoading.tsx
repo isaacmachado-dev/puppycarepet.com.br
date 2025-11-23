@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Typewriter } from "./Typewriter";
-import "../dog-loader.css"; // conforme já está certo
+import "./dog-loader.css"; // conforme já está certo
 
 export default function AdminHomeLoading({ loaded, funcionario }: { loaded: boolean, funcionario: string }) {
     const [visible, setVisible] = useState(true);
@@ -8,7 +8,7 @@ export default function AdminHomeLoading({ loaded, funcionario }: { loaded: bool
 
     // Timer de 7 segundos
     useEffect(() => {
-        const timer = setTimeout(() => setMinPassed(true), 5000);
+        const timer = setTimeout(() => setMinPassed(true), 7000);
         return () => clearTimeout(timer);
     }, []);
 
@@ -32,16 +32,20 @@ export default function AdminHomeLoading({ loaded, funcionario }: { loaded: bool
 
     return (
         <div className="fixed inset-0 flex flex-col bg-[#1A112E] h-screen justify-center items-center z-50">
-            <Typewriter
-                texts={[`Bem vindo(a) ${funcionario}!`]}
-                typeSpeed={100}
-                deleteSpeed={50}
-                pauseBetween={4000}
-                className="typewriter-font text text-7xl"
-            />
+            <div className="ml-50">
+                <Typewriter
+                    texts={[`Bem vindo(a) ${funcionario}!`]}
+                    typeSpeed={100}
+                    deleteSpeed={50}
+                    pauseAfterWrite={6000}
+                    className="typewriter-font justify-center text-center justify-center"
+                    style={{ fontSize: "7rem", lineHeight: 1 }}
+
+                />
+            </div>
             {/* Loader dog animado */}
             {/* From Uiverse.io by Emmaline-ozi */}
-            <div className="main relative">
+            <div className="main relative justify-center">
                 <div className="dog absolute inset-0 z-0">
                     <div className="dog__paws">
                         <div className="dog__bl-leg leg">

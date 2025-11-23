@@ -93,7 +93,7 @@
     "coverageDirectory": "../coverage",
     "testEnvironment": "node",
     "maxWorkers": "50%",
-    "testTimeout": 10000,
+    "testTimeout": 1e4,
     "bail": false,
     "cache": true
   }
