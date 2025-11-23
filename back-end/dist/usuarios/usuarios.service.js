@@ -44,46 +44,67 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsuariosService = void 0;
 const common_1 = require("@nestjs/common");
-const bcrypt = __importStar(require("bcryptjs"));
 const prisma_service_1 = require("../prisma/prisma.service");
+const library_1 = require("@prisma/client/runtime/library");
+const bcrypt = __importStar(require("bcryptjs"));
+const jwt = __importStar(require("jsonwebtoken"));
 let UsuariosService = class UsuariosService {
     prisma;
     constructor(prisma) {
         this.prisma = prisma;
     }
-    async findByEmail(email) {
-        return this.prisma.uSUARIOS.findFirst({
-            where: { EMAIL: email },
-        });
-    }
     async login(email, senha) {
-        const usuario = await this.findByEmail(email);
+        const usuario = await this.prisma.uSUARIOS.findUnique({ where: { EMAIL: email } });
         if (!usuario)
             throw new common_1.NotFoundException('Usuário não encontrado');
         const senhaValida = await bcrypt.compare(senha, usuario.SENHA_HASH);
         if (!senhaValida)
             throw new common_1.NotFoundException('Senha inválida');
-        const jwt = require('jsonwebtoken');
-        const token = jwt.sign({ id: usuario.ID_USUARIO }, process.env.JWT_SECRET || 'secret', { expiresIn: '1d' });
+        const token = jwt.sign({ id: usuario.ID_USUARIO, nome: usuario.NOME, email: usuario.EMAIL }, process.env.JWT_SECRET || 'secret', { expiresIn: '1d' });
         return { token };
     }
-    async create(createUsuarioDto) {
-        const senhaHash = await bcrypt.hash(createUsuarioDto.SENHA, 10);
-        const { SENHA, EMAIL, ...rest } = createUsuarioDto;
-        return this.prisma.uSUARIOS.create({
-            data: {
-                ...rest,
-                EMAIL,
-                SENHA_HASH: senhaHash,
-            },
+    async create(createServicoDto) {
+        return this.prisma.sERVICOS.create({
+            data: createServicoDto,
         });
     }
     async findAll() {
-        return this.prisma.uSUARIOS.findMany();
+        return this.prisma.sERVICOS.findMany({
+            include: {
+                ATENDIMENTOS: true,
+                PACOTES: true,
+            },
+        });
+    }
+    async findOne(id) {
+        const servico = await this.prisma.sERVICOS.findUnique({
+            where: { ID_SERVICO: id },
+            include: {
+                ATENDIMENTOS: true,
+                PACOTES: true,
+            },
+        });
+        if (!servico) {
+            throw new common_1.NotFoundException(`Serviço com ID ${id} não encontrado`);
+        }
+        return servico;
+    }
+    async update(id, updateServicoDto) {
+        await this.findOne(id);
+        return this.prisma.sERVICOS.update({
+            where: { ID_SERVICO: id },
+            data: updateServicoDto,
+        });
+    }
+    async remove(id) {
+        await this.findOne(id);
+        return this.prisma.sERVICOS.delete({
+            where: { ID_SERVICO: id },
+        });
     }
     async getChanges(since) {
         const sinceDate = since ? new Date(since) : new Date(0);
-        return this.prisma.uSUARIOS.findMany({
+        return this.prisma.sERVICOS.findMany({
             where: {
                 OR: [
                     { UPDATED_AT: { gt: sinceDate } },
@@ -102,28 +123,26 @@ let UsuariosService = class UsuariosService {
         return { results };
     }
     async applyOne(item) {
-        const { PUBLIC_ID, UPDATED_AT, VERSION, DELETED_AT, NOME, EMAIL, DESCRICAO, SENHA_HASH } = item;
+        const { PUBLIC_ID, UPDATED_AT, VERSION, DELETED_AT, NOME, DESCRICAO, VALOR } = item;
         if (!PUBLIC_ID) {
-            const created = await this.prisma.uSUARIOS.create({
+            const created = await this.prisma.sERVICOS.create({
                 data: {
-                    NOME: NOME ?? 'Sem nome',
-                    EMAIL: EMAIL ?? '',
+                    NOME: NOME ?? 'Serviço',
                     DESCRICAO: DESCRICAO ?? null,
-                    SENHA_HASH: SENHA_HASH ?? '',
+                    VALOR: VALOR ? new library_1.Decimal(VALOR.toString()) : new library_1.Decimal(0),
                     DELETED_AT: DELETED_AT ? new Date(DELETED_AT) : null,
                 },
             });
             return { publicId: created.PUBLIC_ID, status: 'applied' };
         }
-        const existing = await this.prisma.uSUARIOS.findUnique({ where: { PUBLIC_ID } });
+        const existing = await this.prisma.sERVICOS.findUnique({ where: { PUBLIC_ID } });
         if (!existing) {
-            const created = await this.prisma.uSUARIOS.create({
+            const created = await this.prisma.sERVICOS.create({
                 data: {
                     PUBLIC_ID,
-                    NOME: NOME ?? 'Sem nome',
-                    EMAIL: EMAIL ?? '',
+                    NOME: NOME ?? 'Serviço',
                     DESCRICAO: DESCRICAO ?? null,
-                    SENHA_HASH: SENHA_HASH ?? '',
+                    VALOR: VALOR ? new library_1.Decimal(VALOR.toString()) : new library_1.Decimal(0),
                     DELETED_AT: DELETED_AT ? new Date(DELETED_AT) : null,
                 },
             });
@@ -131,27 +150,25 @@ let UsuariosService = class UsuariosService {
         }
         const incomingUpdated = UPDATED_AT ? new Date(UPDATED_AT) : undefined;
         if (incomingUpdated && incomingUpdated > existing.UPDATED_AT) {
-            const updated = await this.prisma.uSUARIOS.update({
+            const updated = await this.prisma.sERVICOS.update({
                 where: { PUBLIC_ID },
                 data: {
                     NOME: NOME ?? existing.NOME,
-                    EMAIL: typeof EMAIL !== 'undefined' ? EMAIL : existing.EMAIL,
                     DESCRICAO: typeof DESCRICAO !== 'undefined' ? DESCRICAO : existing.DESCRICAO,
-                    SENHA_HASH: typeof SENHA_HASH !== 'undefined' ? SENHA_HASH : existing.SENHA_HASH,
+                    VALOR: typeof VALOR !== 'undefined' ? new library_1.Decimal(VALOR.toString()) : existing.VALOR,
                     DELETED_AT: typeof DELETED_AT !== 'undefined' ? (DELETED_AT ? new Date(DELETED_AT) : null) : existing.DELETED_AT,
                     VERSION: { increment: 1 },
                 },
             });
             return { publicId: updated.PUBLIC_ID, status: 'applied' };
         }
-        if (!incomingUpdated && (NOME !== undefined || DESCRICAO !== undefined || SENHA_HASH !== undefined || typeof DELETED_AT !== 'undefined')) {
-            const updated = await this.prisma.uSUARIOS.update({
+        if (!incomingUpdated && (NOME !== undefined || typeof DESCRICAO !== 'undefined' || typeof VALOR !== 'undefined' || typeof DELETED_AT !== 'undefined')) {
+            const updated = await this.prisma.sERVICOS.update({
                 where: { PUBLIC_ID },
                 data: {
                     NOME: NOME ?? existing.NOME,
-                    EMAIL: typeof EMAIL !== 'undefined' ? EMAIL : existing.EMAIL,
                     DESCRICAO: typeof DESCRICAO !== 'undefined' ? DESCRICAO : existing.DESCRICAO,
-                    SENHA_HASH: typeof SENHA_HASH !== 'undefined' ? SENHA_HASH : existing.SENHA_HASH,
+                    VALOR: typeof VALOR !== 'undefined' ? new library_1.Decimal(VALOR.toString()) : existing.VALOR,
                     DELETED_AT: typeof DELETED_AT !== 'undefined' ? (DELETED_AT ? new Date(DELETED_AT) : null) : existing.DELETED_AT,
                     VERSION: { increment: 1 },
                 },
@@ -161,10 +178,10 @@ let UsuariosService = class UsuariosService {
         return { publicId: existing.PUBLIC_ID, status: 'conflict', server: existing };
     }
     async softDeleteByPublicId(publicId) {
-        const existing = await this.prisma.uSUARIOS.findUnique({ where: { PUBLIC_ID: publicId } });
+        const existing = await this.prisma.sERVICOS.findUnique({ where: { PUBLIC_ID: publicId } });
         if (!existing)
-            throw new common_1.NotFoundException(`Usuário com PUBLIC_ID ${publicId} não encontrado`);
-        return this.prisma.uSUARIOS.update({
+            throw new common_1.NotFoundException(`Serviço com PUBLIC_ID ${publicId} não encontrado`);
+        return this.prisma.sERVICOS.update({
             where: { PUBLIC_ID: publicId },
             data: { DELETED_AT: new Date(), VERSION: { increment: 1 } },
         });

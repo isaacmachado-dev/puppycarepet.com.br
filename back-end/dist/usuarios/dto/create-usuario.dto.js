@@ -54,7 +54,10 @@ __decorate([
     __metadata("design:type", String)
 ], CreateUsuarioDto.prototype, "DESCRICAO", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Senha (texto puro, será hasheada)', example: 'minhasenha123' }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Senha (texto puro, será hasheada)',
+        example: 'minhasenha123',
+    }),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.MinLength)(6),
     __metadata("design:type", String)

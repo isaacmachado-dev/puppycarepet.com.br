@@ -16,13 +16,14 @@ exports.UsuariosController = void 0;
 const common_1 = require("@nestjs/common");
 const swagger_1 = require("@nestjs/swagger");
 const usuarios_service_1 = require("./usuarios.service");
+const create_usuario_dto_1 = require("./dto/create-usuario.dto");
 let UsuariosController = class UsuariosController {
     usuariosService;
     constructor(usuariosService) {
         this.usuariosService = usuariosService;
     }
     async login(body) {
-        return this.usuariosService.login(body.nome, body.senha);
+        return this.usuariosService.login(body.email, body.senha);
     }
     findAll() {
         return this.usuariosService.findAll();
@@ -40,12 +41,12 @@ let UsuariosController = class UsuariosController {
 exports.UsuariosController = UsuariosController;
 __decorate([
     (0, common_1.Post)('login'),
-    (0, swagger_1.ApiOperation)({ summary: 'Autenticar usuário e retornar JWT' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Autenticar usuário e retornar JWT por EMAIL' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Login realizado com sucesso.' }),
     (0, swagger_1.ApiResponse)({ status: 401, description: 'Credenciais inválidas.' }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [create_usuario_dto_1.LoginDto]),
     __metadata("design:returntype", Promise)
 ], UsuariosController.prototype, "login", null);
 __decorate([

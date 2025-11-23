@@ -19,6 +19,7 @@ import ClientesPage from "./clientes/page";
 import AnalisePage from "./analise/page";
 import { FuncionariosPage as Usuarios } from "./usuarios/page";
 import { useRouter } from "next/navigation";
+import AdminHomeLoading from "@/app/admin/components/loading/AdminHomeLoading";
 
 async function getUsuarios() {
   const res = await fetch("/api/usuarios");
@@ -77,8 +78,15 @@ export default function AdminPage() {
     return null; // Ou um loading spinner
   }
 
+
+
   return (
     <div>
+
+      <div className="text-white ">
+        <AdminHomeLoading loaded={true} funcionario="Mônica" />
+      </div>
+
       <div className="relative flex min-h-screen bg-[#E3E3E3] text-black font-bold">
         <aside
           className={`relative z-10 bg-[#1A112E] shadow-lg py-4 px-4 transition-all duration-300 ${isOpen ? "w-[250px]" : "w-[125px]"
