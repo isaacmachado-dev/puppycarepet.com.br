@@ -2,18 +2,23 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateServicoDto } from '../servicos/dto/create-servico.dto';
 import { UpdateServicoDto } from '../servicos/dto/update-servico.dto';
-import { ServicoSyncBatchRequestDto, ServicoSyncItemDto } from '../servicos/dto/servico-sync.dto';
-import { Decimal } from '@prisma/client/runtime/library';
+import {
+  ServicoSyncBatchRequestDto,
+  ServicoSyncItemDto,
+} from '../servicos/dto/servico-sync.dto';
+import { Prisma } from '@prisma/client';
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 
 @Injectable()
 export class UsuariosService {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   // LOGIN DE USUÁRIO (FUNCIONAL)
   async login(email: string, senha: string) {
-    const usuario = await this.prisma.uSUARIOS.findUnique({ where: { EMAIL: email } });
+    const usuario = await this.prisma.uSUARIOS.findUnique({
+      where: { EMAIL: email },
+    });
     if (!usuario) throw new NotFoundException('Usuário não encontrado');
 
     const senhaValida = await bcrypt.compare(senha, usuario.SENHA_HASH);
@@ -22,7 +27,7 @@ export class UsuariosService {
     const token = jwt.sign(
       { id: usuario.ID_USUARIO, nome: usuario.NOME, email: usuario.EMAIL },
       process.env.JWT_SECRET || 'secret',
-      { expiresIn: '1d' }
+      { expiresIn: '1d' },
     );
     return { token };
   }
@@ -88,7 +93,11 @@ export class UsuariosService {
   }
 
   async batchUpsert(body: ServicoSyncBatchRequestDto) {
-    const results = [] as Array<{ publicId: string; status: 'applied' | 'conflict' | 'skipped'; server?: any }>;
+    const results = [] as Array<{
+      publicId: string;
+      status: 'applied' | 'conflict' | 'skipped';
+      server?: any;
+    }>;
 
     for (const item of body.items) {
       const res = await this.applyOne(item);
@@ -98,29 +107,49 @@ export class UsuariosService {
     return { results };
   }
 
-  private async applyOne(item: ServicoSyncItemDto): Promise<{ publicId: string; status: 'applied' | 'conflict' | 'skipped'; server?: any }> {
-    const { PUBLIC_ID, UPDATED_AT, VERSION, DELETED_AT, NOME, DESCRICAO, VALOR } = item;
+  private async applyOne(
+    item: ServicoSyncItemDto,
+  ): Promise<{
+    publicId: string;
+    status: 'applied' | 'conflict' | 'skipped';
+    server?: any;
+  }> {
+    const {
+      PUBLIC_ID,
+      UPDATED_AT,
+      VERSION,
+      DELETED_AT,
+      NOME,
+      DESCRICAO,
+      VALOR,
+    } = item;
 
     if (!PUBLIC_ID) {
       const created = await this.prisma.sERVICOS.create({
         data: {
           NOME: NOME ?? 'Serviço',
           DESCRICAO: DESCRICAO ?? null,
-          VALOR: VALOR ? new Decimal(VALOR.toString()) : new Decimal(0),
+          VALOR: VALOR
+            ? new Prisma.Decimal(VALOR.toString())
+            : new Prisma.Decimal(0),
           DELETED_AT: DELETED_AT ? new Date(DELETED_AT) : null,
         },
       });
       return { publicId: created.PUBLIC_ID, status: 'applied' };
     }
 
-    const existing = await this.prisma.sERVICOS.findUnique({ where: { PUBLIC_ID } });
+    const existing = await this.prisma.sERVICOS.findUnique({
+      where: { PUBLIC_ID },
+    });
     if (!existing) {
       const created = await this.prisma.sERVICOS.create({
         data: {
           PUBLIC_ID,
           NOME: NOME ?? 'Serviço',
           DESCRICAO: DESCRICAO ?? null,
-          VALOR: VALOR ? new Decimal(VALOR.toString()) : new Decimal(0),
+          VALOR: VALOR
+            ? new Prisma.Decimal(VALOR.toString())
+            : new Prisma.Decimal(0),
           DELETED_AT: DELETED_AT ? new Date(DELETED_AT) : null,
         },
       });
@@ -133,35 +162,68 @@ export class UsuariosService {
         where: { PUBLIC_ID },
         data: {
           NOME: NOME ?? existing.NOME,
-          DESCRICAO: typeof DESCRICAO !== 'undefined' ? DESCRICAO : existing.DESCRICAO,
-          VALOR: typeof VALOR !== 'undefined' ? new Decimal(VALOR.toString()) : existing.VALOR,
-          DELETED_AT: typeof DELETED_AT !== 'undefined' ? (DELETED_AT ? new Date(DELETED_AT) : null) : existing.DELETED_AT,
+          DESCRICAO:
+            typeof DESCRICAO !== 'undefined' ? DESCRICAO : existing.DESCRICAO,
+          VALOR:
+            typeof VALOR !== 'undefined'
+              ? new Prisma.Decimal(VALOR.toString())
+              : existing.VALOR,
+          DELETED_AT:
+            typeof DELETED_AT !== 'undefined'
+              ? DELETED_AT
+                ? new Date(DELETED_AT)
+                : null
+              : existing.DELETED_AT,
           VERSION: { increment: 1 },
         },
       });
       return { publicId: updated.PUBLIC_ID, status: 'applied' };
     }
 
-    if (!incomingUpdated && (NOME !== undefined || typeof DESCRICAO !== 'undefined' || typeof VALOR !== 'undefined' || typeof DELETED_AT !== 'undefined')) {
+    if (
+      !incomingUpdated &&
+      (NOME !== undefined ||
+        typeof DESCRICAO !== 'undefined' ||
+        typeof VALOR !== 'undefined' ||
+        typeof DELETED_AT !== 'undefined')
+    ) {
       const updated = await this.prisma.sERVICOS.update({
         where: { PUBLIC_ID },
         data: {
           NOME: NOME ?? existing.NOME,
-          DESCRICAO: typeof DESCRICAO !== 'undefined' ? DESCRICAO : existing.DESCRICAO,
-          VALOR: typeof VALOR !== 'undefined' ? new Decimal(VALOR.toString()) : existing.VALOR,
-          DELETED_AT: typeof DELETED_AT !== 'undefined' ? (DELETED_AT ? new Date(DELETED_AT) : null) : existing.DELETED_AT,
+          DESCRICAO:
+            typeof DESCRICAO !== 'undefined' ? DESCRICAO : existing.DESCRICAO,
+          VALOR:
+            typeof VALOR !== 'undefined'
+              ? new Prisma.Decimal(VALOR.toString())
+              : existing.VALOR,
+          DELETED_AT:
+            typeof DELETED_AT !== 'undefined'
+              ? DELETED_AT
+                ? new Date(DELETED_AT)
+                : null
+              : existing.DELETED_AT,
           VERSION: { increment: 1 },
         },
       });
       return { publicId: existing.PUBLIC_ID, status: 'applied' };
     }
 
-    return { publicId: existing.PUBLIC_ID, status: 'conflict', server: existing };
+    return {
+      publicId: existing.PUBLIC_ID,
+      status: 'conflict',
+      server: existing,
+    };
   }
 
   async softDeleteByPublicId(publicId: string) {
-    const existing = await this.prisma.sERVICOS.findUnique({ where: { PUBLIC_ID: publicId } });
-    if (!existing) throw new NotFoundException(`Serviço com PUBLIC_ID ${publicId} não encontrado`);
+    const existing = await this.prisma.sERVICOS.findUnique({
+      where: { PUBLIC_ID: publicId },
+    });
+    if (!existing)
+      throw new NotFoundException(
+        `Serviço com PUBLIC_ID ${publicId} não encontrado`,
+      );
     return this.prisma.sERVICOS.update({
       where: { PUBLIC_ID: publicId },
       data: { DELETED_AT: new Date(), VERSION: { increment: 1 } },

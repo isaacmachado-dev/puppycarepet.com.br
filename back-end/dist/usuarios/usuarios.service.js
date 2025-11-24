@@ -45,7 +45,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsuariosService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
-const library_1 = require("@prisma/client/runtime/library");
+const client_1 = require("@prisma/client");
 const bcrypt = __importStar(require("bcryptjs"));
 const jwt = __importStar(require("jsonwebtoken"));
 let UsuariosService = class UsuariosService {
@@ -54,7 +54,9 @@ let UsuariosService = class UsuariosService {
         this.prisma = prisma;
     }
     async login(email, senha) {
-        const usuario = await this.prisma.uSUARIOS.findUnique({ where: { EMAIL: email } });
+        const usuario = await this.prisma.uSUARIOS.findUnique({
+            where: { EMAIL: email },
+        });
         if (!usuario)
             throw new common_1.NotFoundException('Usuário não encontrado');
         const senhaValida = await bcrypt.compare(senha, usuario.SENHA_HASH);
@@ -123,26 +125,32 @@ let UsuariosService = class UsuariosService {
         return { results };
     }
     async applyOne(item) {
-        const { PUBLIC_ID, UPDATED_AT, VERSION, DELETED_AT, NOME, DESCRICAO, VALOR } = item;
+        const { PUBLIC_ID, UPDATED_AT, VERSION, DELETED_AT, NOME, DESCRICAO, VALOR, } = item;
         if (!PUBLIC_ID) {
             const created = await this.prisma.sERVICOS.create({
                 data: {
                     NOME: NOME ?? 'Serviço',
                     DESCRICAO: DESCRICAO ?? null,
-                    VALOR: VALOR ? new library_1.Decimal(VALOR.toString()) : new library_1.Decimal(0),
+                    VALOR: VALOR
+                        ? new client_1.Prisma.Decimal(VALOR.toString())
+                        : new client_1.Prisma.Decimal(0),
                     DELETED_AT: DELETED_AT ? new Date(DELETED_AT) : null,
                 },
             });
             return { publicId: created.PUBLIC_ID, status: 'applied' };
         }
-        const existing = await this.prisma.sERVICOS.findUnique({ where: { PUBLIC_ID } });
+        const existing = await this.prisma.sERVICOS.findUnique({
+            where: { PUBLIC_ID },
+        });
         if (!existing) {
             const created = await this.prisma.sERVICOS.create({
                 data: {
                     PUBLIC_ID,
                     NOME: NOME ?? 'Serviço',
                     DESCRICAO: DESCRICAO ?? null,
-                    VALOR: VALOR ? new library_1.Decimal(VALOR.toString()) : new library_1.Decimal(0),
+                    VALOR: VALOR
+                        ? new client_1.Prisma.Decimal(VALOR.toString())
+                        : new client_1.Prisma.Decimal(0),
                     DELETED_AT: DELETED_AT ? new Date(DELETED_AT) : null,
                 },
             });
@@ -155,30 +163,52 @@ let UsuariosService = class UsuariosService {
                 data: {
                     NOME: NOME ?? existing.NOME,
                     DESCRICAO: typeof DESCRICAO !== 'undefined' ? DESCRICAO : existing.DESCRICAO,
-                    VALOR: typeof VALOR !== 'undefined' ? new library_1.Decimal(VALOR.toString()) : existing.VALOR,
-                    DELETED_AT: typeof DELETED_AT !== 'undefined' ? (DELETED_AT ? new Date(DELETED_AT) : null) : existing.DELETED_AT,
+                    VALOR: typeof VALOR !== 'undefined'
+                        ? new client_1.Prisma.Decimal(VALOR.toString())
+                        : existing.VALOR,
+                    DELETED_AT: typeof DELETED_AT !== 'undefined'
+                        ? DELETED_AT
+                            ? new Date(DELETED_AT)
+                            : null
+                        : existing.DELETED_AT,
                     VERSION: { increment: 1 },
                 },
             });
             return { publicId: updated.PUBLIC_ID, status: 'applied' };
         }
-        if (!incomingUpdated && (NOME !== undefined || typeof DESCRICAO !== 'undefined' || typeof VALOR !== 'undefined' || typeof DELETED_AT !== 'undefined')) {
+        if (!incomingUpdated &&
+            (NOME !== undefined ||
+                typeof DESCRICAO !== 'undefined' ||
+                typeof VALOR !== 'undefined' ||
+                typeof DELETED_AT !== 'undefined')) {
             const updated = await this.prisma.sERVICOS.update({
                 where: { PUBLIC_ID },
                 data: {
                     NOME: NOME ?? existing.NOME,
                     DESCRICAO: typeof DESCRICAO !== 'undefined' ? DESCRICAO : existing.DESCRICAO,
-                    VALOR: typeof VALOR !== 'undefined' ? new library_1.Decimal(VALOR.toString()) : existing.VALOR,
-                    DELETED_AT: typeof DELETED_AT !== 'undefined' ? (DELETED_AT ? new Date(DELETED_AT) : null) : existing.DELETED_AT,
+                    VALOR: typeof VALOR !== 'undefined'
+                        ? new client_1.Prisma.Decimal(VALOR.toString())
+                        : existing.VALOR,
+                    DELETED_AT: typeof DELETED_AT !== 'undefined'
+                        ? DELETED_AT
+                            ? new Date(DELETED_AT)
+                            : null
+                        : existing.DELETED_AT,
                     VERSION: { increment: 1 },
                 },
             });
             return { publicId: existing.PUBLIC_ID, status: 'applied' };
         }
-        return { publicId: existing.PUBLIC_ID, status: 'conflict', server: existing };
+        return {
+            publicId: existing.PUBLIC_ID,
+            status: 'conflict',
+            server: existing,
+        };
     }
     async softDeleteByPublicId(publicId) {
-        const existing = await this.prisma.sERVICOS.findUnique({ where: { PUBLIC_ID: publicId } });
+        const existing = await this.prisma.sERVICOS.findUnique({
+            where: { PUBLIC_ID: publicId },
+        });
         if (!existing)
             throw new common_1.NotFoundException(`Serviço com PUBLIC_ID ${publicId} não encontrado`);
         return this.prisma.sERVICOS.update({

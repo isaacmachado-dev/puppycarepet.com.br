@@ -231,7 +231,7 @@ export default function AdminPage() {
                 className={`${!isOpen ? "flex justify-center align-center" : "justify-start"
                   }`}
                 label="Sair"
-                href="/admin/usuarios/acessar"
+                href="/login"
                 isOpen={isOpen}
                 danger
                 onClick={() => {
