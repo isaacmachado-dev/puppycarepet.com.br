@@ -109,7 +109,7 @@ export default function LoginPage() {
                 <span>
                   <p className="text-sm text-black">
                     <a
-                      href="/admin/usuarios/ForgotPassword"
+                      href="/login/esqueci-a-senha"
                       className="relative group"
                     >
                       <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-black transition-all duration-300 group-hover:w-full"></span>
@@ -120,7 +120,7 @@ export default function LoginPage() {
                 <span>
                   <p className="text-sm text-black">
                     <a
-                      href="/admin/usuarios/NewAccount"
+                      href="/login/criar-uma-nova-conta"
                       className="relative group"
                     >
                       <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-black transition-all duration-300 group-hover:w-full"></span>

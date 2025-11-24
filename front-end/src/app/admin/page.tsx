@@ -22,7 +22,7 @@ import { useRouter } from "next/navigation";
 import AdminHomeLoading from "@/app/admin/components/loading/AdminHomeLoading";
 
 async function getUsuarios() {
-  const res = await fetch("/api/usuarios");
+  const res = await fetch("/admin/usuarios/api/usuarios");
   if (!res.ok) throw new Error("Erro ao buscar usuários");
   return res.json();
 }
@@ -203,7 +203,7 @@ export default function AdminPage() {
                     ? "flex justify-center align-center"
                     : "justify-start"
                     }`}
-                  label="Usuários"
+                  label="Funcionários"
                   href=""
                   isOpen={isOpen}
                   active={paginaAtual === "usuarios"}
