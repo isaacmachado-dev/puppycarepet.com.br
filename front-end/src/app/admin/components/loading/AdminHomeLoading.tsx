@@ -32,14 +32,14 @@ export default function AdminHomeLoading({ loaded, funcionario }: { loaded: bool
 
     return (
         <div className="fixed inset-0 flex flex-col bg-[#1A112E] h-screen justify-center items-center z-50">
-            <div className="ml-50">
+            <div className="flex justify-center">
                 <Typewriter
                     texts={[`Bem vindo(a) ${funcionario}!`]}
                     typeSpeed={100}
                     deleteSpeed={50}
                     pauseAfterWrite={6000}
                     className="typewriter-font justify-center text-center justify-center"
-                    style={{ fontSize: "7rem", lineHeight: 1 }}
+                    style={{ fontSize: "10rem", lineHeight: 1 }}
 
                 />
             </div>

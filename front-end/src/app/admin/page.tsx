@@ -17,15 +17,16 @@ import AdminMenuItem from "../../components/ui/custom/AdminMenuItem";
 import AgendamentoPage from "./agendamento/page";
 import ClientesPage from "./clientes/page";
 import AnalisePage from "./analise/page";
-import { FuncionariosPage as Usuarios } from "./usuarios/page";
+import { UsuariosPage as Usuarios } from "./usuarios/page";
 import { useRouter } from "next/navigation";
 import AdminHomeLoading from "@/app/admin/components/loading/AdminHomeLoading";
+import { getUsuarios } from "../api/api";
 
-async function getUsuarios() {
-  const res = await fetch("/admin/usuarios/api/usuarios");
-  if (!res.ok) throw new Error("Erro ao buscar usuários");
-  return res.json();
-}
+// async function getUsuarios() {
+//   const res = await fetch("/api/usuarios");
+//   if (!res.ok) throw new Error("Erro ao buscar usuários");
+//   return res.json();
+// }
 
 export default function AdminPage() {
   const router = useRouter();
@@ -116,26 +117,16 @@ export default function AdminPage() {
               >
                 Admin
               </span>
+
               {/* Texto Puppy Care */}
-              {/*
               <p
-                className={`text-white transition-all duration-300 overflow-hidden ${
-                  isOpen ? "opacity-100 max-w-[200px]" : "opacity-0 max-w-0"
-                }`}
+                className={`text-white transition-all duration-300 overflow-hidden ${isOpen ? "opacity-100 max-w-[200px]" : "opacity-0 max-w-0"
+                  }`}
               >
                 Puppy Care
               </p>
-              */}
-              {/* Nome do usuário autenticado */}
-              <span
-                className={`text-white text-sm transition-all duration-300 overflow-hidden ${isOpen
-                  ? "opacity-100 max-w-[150px] ml-2"
-                  : "opacity-0 max-w-0"
-                  }`}
-              >
-                {nomeUsuario}
-              </span>
-              {/* Botão Chevron alinhado ao Admin */}
+
+
               <button
                 className="absolute -right-4 top-1/2 -translate-y-1/2 translate-x-3 bg-[#333] hover:bg-white focus:outline-none rounded-md border-2 border-[#AAAAAA] cursor-pointer"
                 onClick={() => setIsOpen(!isOpen)}
@@ -203,7 +194,7 @@ export default function AdminPage() {
                     ? "flex justify-center align-center"
                     : "justify-start"
                     }`}
-                  label="Funcionários"
+                  label="Usuários"
                   href=""
                   isOpen={isOpen}
                   active={paginaAtual === "usuarios"}

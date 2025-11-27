@@ -12,7 +12,7 @@ import * as jwt from 'jsonwebtoken';
 
 @Injectable()
 export class UsuariosService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   // LOGIN DE USUÁRIO (FUNCIONAL)
   async login(email: string, senha: string) {
@@ -39,12 +39,8 @@ export class UsuariosService {
   }
 
   async findAll() {
-    return this.prisma.sERVICOS.findMany({
-      include: {
-        ATENDIMENTOS: true,
-        PACOTES: true,
-      },
-    });
+    return this.prisma.uSUARIOS.findMany();
+
   }
 
   async findOne(id: number) {
