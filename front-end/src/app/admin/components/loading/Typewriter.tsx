@@ -70,24 +70,7 @@ export const Typewriter: React.FC<TypewriterProps> = ({
   return (
     <span className={`${className} block`} style={style}>
       {currentText.substring(0, charIndex)}
-      <span
-        className={
-          "typewriter-cursor font-extrabold text-white inline-block" +
-          (showCursorBlink
-            ? " animate-blink"
-            : showCursorOut
-              ? " cursorOut"
-              : "")
-        }
-        style={{
-          fontSize: "1.3em",
-          verticalAlign: "middle",
-          opacity: showCursorBlink || showCursorOut ? 1 : 0,
-          transition: "opacity 0.2s"
-        }}
-      >
-        _
-      </span>
+
     </span>
   );
 };

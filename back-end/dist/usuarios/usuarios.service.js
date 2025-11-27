@@ -71,12 +71,7 @@ let UsuariosService = class UsuariosService {
         });
     }
     async findAll() {
-        return this.prisma.sERVICOS.findMany({
-            include: {
-                ATENDIMENTOS: true,
-                PACOTES: true,
-            },
-        });
+        return this.prisma.uSUARIOS.findMany();
     }
     async findOne(id) {
         const servico = await this.prisma.sERVICOS.findUnique({

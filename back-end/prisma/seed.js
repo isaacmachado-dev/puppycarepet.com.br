@@ -42,21 +42,40 @@ async function seedClientes() {
         list: all,
     };
 }
+
 async function seedUsuarios() {
     const count = await prisma.uSUARIOS.count();
+
     if (count === 0) {
         await prisma.uSUARIOS.createMany({
             data: [
-                { NOME: 'Administrador', DESCRICAO: 'Usuário administrador padrão', SENHA_HASH: 'hash_teste' },
-                { NOME: 'Operador', DESCRICAO: 'Usuário operador', SENHA_HASH: 'hash_teste' },
+                {
+                    NOME: 'Joel Miller',
+                    DESCRICAO: 'Usuário administrador padrão',
+                    SENHA_HASH: 'hash_teste',
+                    EMAIL: 'admin@puppycarepet.com.br',
+                    FOTO_USUARIO: '/teste.png',
+                },
+                {
+                    NOME: 'Operador',
+                    DESCRICAO: 'Usuário operador',
+                    SENHA_HASH: 'hash_teste',
+                    EMAIL: 'operador@puppycarepet.com.br',
+                    FOTO_USUARIO: '/teste.png',
+                },
             ],
         });
         console.log('✅ USUARIOS created');
-    }
-    else {
-        console.log('ℹ️ USUARIOS already have data, skipping creation');
+    } else {
+        // Atualiza FOTO_USUARIO de quem não tem
+        await prisma.uSUARIOS.updateMany({
+            where: { FOTO_USUARIO: null },
+            data: { FOTO_USUARIO: '/teste.png' },
+        });
+        console.log('ℹ️ USUARIOS already exist, updated FOTO_USUARIO where null');
     }
 }
+
 async function seedPets(clienteId) {
     const count = await prisma.pETS.count({ where: { ID_CLIENTE: clienteId } });
     if (count === 0) {
@@ -146,9 +165,9 @@ async function main() {
 }
 main()
     .catch((e) => {
-    console.error('❌ Seed failed:', e);
-    process.exit(1);
-})
+        console.error('❌ Seed failed:', e);
+        process.exit(1);
+    })
     .finally(async () => {
-    await prisma.$disconnect();
-});
+        await prisma.$disconnect();
+    });
