@@ -1,9 +1,12 @@
 import { PrismaClient } from '@prisma/client';
 import * as bcrypt from 'bcryptjs';
+import { seedUsuariosExemplo } from './seed-exemplo';
 
 const prisma = new PrismaClient();
 
+
 async function seedServicos() {
+
   const count = await prisma.sERVICOS.count();
   if (count === 0) {
     await prisma.sERVICOS.createMany({
@@ -44,37 +47,9 @@ async function seedClientes() {
   } as const;
 }
 
-async function seedUsuarios() {
-  const count = await prisma.uSUARIOS.count();
 
-  if (count === 0) {
-    await prisma.uSUARIOS.createMany({
-      data: [
-        {
-          NOME: 'Joel Miller',
-          DESCRICAO: 'Usuário administrador padrão',
-          SENHA_HASH: 'hash_teste',
-          EMAIL: 'admin@puppycarepet.com.br',
-          FOTO_USUARIO: 'https://tse2.mm.bing.net/th/id/OIP.4inw8f6TBDvBAsgH77ysNgHaGA?rs=1&pid=ImgDetMain&o=7&rm=3',
-        },
-        {
-          NOME: 'Operador',
-          DESCRICAO: 'Usuário operador',
-          SENHA_HASH: 'hash_teste',
-          EMAIL: 'operador@puppycarepet.com.br',
-          FOTO_USUARIO: '/teste.png',
-        },
-      ],
-    });
-    console.log('✅ USUARIOS created');
-  } else {
-    await prisma.uSUARIOS.updateMany({
-      where: { FOTO_USUARIO: null },
-      data: { FOTO_USUARIO: '/teste.png' },
-    });
-    console.log('ℹ️ USUARIOS already exist, updated FOTO_USUARIO where null');
-  }
-}
+seedUsuariosExemplo();
+
 
 async function seedPets(clienteId: number) {
   const count = await prisma.pETS.count({ where: { ID_CLIENTE: clienteId } });
@@ -159,7 +134,7 @@ async function main() {
   // Independent first
   const { byName: servicosByName } = await seedServicos();
   const { byName: clientesByName } = await seedClientes();
-  await seedUsuarios();
+  await seedUsuariosExemplo();
 
   // Dependent
   const maria = clientesByName['Maria Silva'] || (await prisma.cLIENTES.findFirst({ orderBy: { ID_CLIENTE: 'asc' } }))!;
