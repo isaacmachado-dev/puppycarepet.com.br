@@ -67,6 +67,15 @@ export class UsuariosService {
     });
   }
 
+  async updateFoto(id: number, foto: string | null) {
+    await this.findOne(id);
+    return this.prisma.uSUARIOS.update({
+      where: { ID_USUARIO: id },
+      data: { FOTO_USUARIO: foto },
+    });
+  }
+
+
   async remove(id: number) {
     await this.findOne(id);
     return this.prisma.sERVICOS.delete({
@@ -226,3 +235,4 @@ export class UsuariosService {
     });
   }
 }
+

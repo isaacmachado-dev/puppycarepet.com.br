@@ -12,6 +12,11 @@ interface UsuarioSyncBatchRequestDto {
   timestamp?: string;
 }
 
+class UpdateFotoDto {
+  foto: string | null;
+}
+
+
 @ApiTags('usuarios')
 @Controller('usuarios')
 export class UsuariosController {
@@ -33,6 +38,14 @@ export class UsuariosController {
   })
   findAll() {
     return this.usuariosService.findAll();
+  }
+
+  @Patch(':id/foto')
+  async updateFoto(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: UpdateFotoDto,
+  ) {
+    return this.usuariosService.updateFoto(id, body.foto);
   }
 
   // --- Offline-first sync endpoints ---

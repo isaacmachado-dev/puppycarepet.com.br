@@ -46,18 +46,33 @@ async function seedClientes() {
 
 async function seedUsuarios() {
   const count = await prisma.uSUARIOS.count();
+
   if (count === 0) {
-    const senhaAdmin = await bcrypt.hash('admin123', 10);
-    const senhaOperador = await bcrypt.hash('operador123', 10);
     await prisma.uSUARIOS.createMany({
       data: [
-        { NOME: 'Administrador', DESCRICAO: 'Usuário administrador padrão', EMAIL: 'admin@puppycarepet.com.br', SENHA_HASH: senhaAdmin },
-        { NOME: 'Operador', DESCRICAO: 'Usuário operador', EMAIL: 'operador@puppycarepet.com.br', SENHA_HASH: senhaOperador },
+        {
+          NOME: 'Joel Miller',
+          DESCRICAO: 'Usuário administrador padrão',
+          SENHA_HASH: 'hash_teste',
+          EMAIL: 'admin@puppycarepet.com.br',
+          FOTO_USUARIO: 'https://tse2.mm.bing.net/th/id/OIP.4inw8f6TBDvBAsgH77ysNgHaGA?rs=1&pid=ImgDetMain&o=7&rm=3',
+        },
+        {
+          NOME: 'Operador',
+          DESCRICAO: 'Usuário operador',
+          SENHA_HASH: 'hash_teste',
+          EMAIL: 'operador@puppycarepet.com.br',
+          FOTO_USUARIO: '/teste.png',
+        },
       ],
     });
     console.log('✅ USUARIOS created');
   } else {
-    console.log('ℹ️ USUARIOS already have data, skipping creation');
+    await prisma.uSUARIOS.updateMany({
+      where: { FOTO_USUARIO: null },
+      data: { FOTO_USUARIO: '/teste.png' },
+    });
+    console.log('ℹ️ USUARIOS already exist, updated FOTO_USUARIO where null');
   }
 }
 
