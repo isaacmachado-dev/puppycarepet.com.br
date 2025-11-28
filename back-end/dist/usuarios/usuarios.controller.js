@@ -17,6 +17,9 @@ const common_1 = require("@nestjs/common");
 const swagger_1 = require("@nestjs/swagger");
 const usuarios_service_1 = require("./usuarios.service");
 const create_usuario_dto_1 = require("./dto/create-usuario.dto");
+class UpdateFotoDto {
+    foto;
+}
 let UsuariosController = class UsuariosController {
     usuariosService;
     constructor(usuariosService) {
@@ -27,6 +30,9 @@ let UsuariosController = class UsuariosController {
     }
     findAll() {
         return this.usuariosService.findAll();
+    }
+    async updateFoto(id, body) {
+        return this.usuariosService.updateFoto(id, body.foto);
     }
     getChanges(since) {
         return this.usuariosService.getChanges(since);
@@ -60,6 +66,14 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], UsuariosController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Patch)(':id/foto'),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, UpdateFotoDto]),
+    __metadata("design:returntype", Promise)
+], UsuariosController.prototype, "updateFoto", null);
 __decorate([
     (0, common_1.Get)('changes'),
     (0, swagger_1.ApiOperation)({ summary: 'Listar alterações de usuários desde um timestamp' }),
