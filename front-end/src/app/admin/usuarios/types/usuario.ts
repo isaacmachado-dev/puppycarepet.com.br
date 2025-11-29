@@ -7,10 +7,10 @@ export enum UsuarioRole {
 
 /** Representa um usuário do sistema */
 export interface Usuario {
-  type: any;
   id: number;
   name: string;
   image: string;
   email: string;
-  roles: UsuarioRole[];
+  type: UsuarioRole[];   // reflete TIPOS no banco
+  roles?: UsuarioRole[]; // se quiser manter separado ou remover se não usar
 }

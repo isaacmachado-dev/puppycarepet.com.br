@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
+import { Input } from "@/app/admin/usuarios/components/lib/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { useEffect, useState } from "react"
@@ -20,11 +20,11 @@ import {
     DropdownMenuItem,
     DropdownMenuLabel,
     DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/app/admin/usuarios/components/lib/dropdown-menu"
 import { EllipsisVertical } from "lucide-react";
-import { Button } from "../../../components/ui/button";
-import AdminTypeEmployee from "../../../components/ui/custom/AdminTypeEmployee";
-import { Usuario } from "./types/usuario";
+import { Button } from "../../../../components/ui/button";
+import AdminTypeEmployee from "./AdminTypeEmployee";
+import { Usuario } from "../types/usuario";
 
 interface DropdownMenuDialogProps {
     usuario: Usuario;
@@ -72,6 +72,7 @@ export default function DropdownMenuDialog({ usuario, onUpdated }: DropdownMenuD
                                 name="filename"
                                 defaultValue={usuario.name}
                                 onChange={e => setName(e.target.value)}
+                                className=""
                             />
                         </Field>
                         <Field>
