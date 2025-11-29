@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import DropdownMenuDialog from './UsuarioConfig';
-import { Usuario } from './types/usuario';
+import { Usuario } from '../types/usuario';
 
 
 interface UsuariosCardProps {
@@ -54,7 +54,7 @@ export default function UsuariosCard({ usuarios, onUpdated }: UsuariosCardProps)
 
       console.log("USUARIOS NORMALIZADOS:", normalizados)
     });
-    
+
 
   return (
     <div className="grid grid-cols-4 gap-4 mt-10">

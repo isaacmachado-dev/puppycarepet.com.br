@@ -130,6 +130,7 @@ model USUARIOS {
   EMAIL      String    @unique @db.VarChar(150)
   SENHA_HASH String    @db.VarChar(255)
   FOTO_USUARIO String? @db.VarChar(255)
+  TIPOS      String[]  @default([])
   // --- Campos de rastreamento com prioridade para uso offline ---
   PUBLIC_ID  String    @unique @default(uuid())
   CREATED_AT DateTime  @default(now())

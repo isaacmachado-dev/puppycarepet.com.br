@@ -5,21 +5,37 @@ const prisma = new PrismaClient();
 
 export async function seedUsuariosExemplo() {
     // Usuários de exemplo (Ellie, Morty, Naruto)
-    await prisma.uSUARIOS.upsert({
-        where: { EMAIL: 'ellie.williams@puppycarepet.com.br' },
-        create: {
-            NOME: 'Ellie Williams',
-            DESCRICAO: 'Usuário operador',
-            SENHA_HASH: 'hash_teste',
-            EMAIL: 'ellie.williams@puppycarepet.com.br',
-            FOTO_USUARIO: '/usuarios/ellie-williams.png',
-        },
-        update: {
-            NOME: 'Ellie Williams',
-            DESCRICAO: 'Usuário operador',
-            FOTO_USUARIO: '/usuarios/ellie-williams.jpg',
-        },
+    await prisma.uSUARIOS.createMany({
+        data: [
+            {
+                NOME: 'Ellie Williams',
+                DESCRICAO: 'Usuário operador',
+                SENHA_HASH: 'hash_teste',
+                EMAIL: 'ellie.williams@puppycarepet.com.br',
+                FOTO_USUARIO: '/usuarios/ellie-williams.jpg',
+                TIPOS: ['colaborador'],
+            },
+            {
+                NOME: 'Rock Lee',
+                DESCRICAO: 'Usuário operador',
+                SENHA_HASH: 'hash_teste',
+                EMAIL: 'rock.lee@puppycarepet.com.br',
+                FOTO_USUARIO: '/usuarios/ʀᴏᴄᴋ ʟᴇᴇ.jpg',
+                TIPOS: ['condutor'],
+            },
+            {
+                NOME: 'Joel Miller',
+                DESCRICAO: 'Usuário operador',
+                SENHA_HASH: 'hash_teste',
+                EMAIL: 'joel.miller@puppycarepet.com.br',
+                FOTO_USUARIO: '/usuarios/joel-miller.webp',
+                TIPOS: ['condutor', 'administrador'],
+            }
+
+        ],
+        skipDuplicates: true, // evita erro se EMAIL já existir
     });
+
 
     await prisma.uSUARIOS.upsert({
         where: { EMAIL: 'rick@puppycarepet.com.br' },
@@ -97,6 +113,7 @@ export async function seedUsuariosExemplo() {
         data: {
             NOME: 'Joel Miller',
             FOTO_USUARIO: '/joel-miller.webp',
+            TIPOS: ['administrador'],
         },
     });
 
@@ -107,12 +124,12 @@ export async function seedUsuariosExemplo() {
             DESCRICAO: 'Usuário operador',
             SENHA_HASH: 'hash_teste',
             EMAIL: 'Robin@puppycarepet.com.br',
-            FOTO_USUARIO: '/usuarios/Robin.jpg',
+            FOTO_USUARIO: '/usuarios/robin.jpg',
         },
         update: {
             NOME: 'Robin',
             DESCRICAO: 'Usuário operador',
-            FOTO_USUARIO: '/usuarios/Robin.jpg',
+            FOTO_USUARIO: '/usuarios/robin.jpg',
         },
     });
 

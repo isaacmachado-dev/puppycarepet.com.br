@@ -56,13 +56,7 @@ async function seedUsuarios() {
                     EMAIL: 'admin@puppycarepet.com.br',
                     FOTO_USUARIO: '/teste.png',
                 },
-                {
-                    NOME: 'Operador',
-                    DESCRICAO: 'Usuário operador',
-                    SENHA_HASH: 'hash_teste',
-                    EMAIL: 'operador@puppycarepet.com.br',
-                    FOTO_USUARIO: '/teste.png',
-                },
+
             ],
         });
         console.log('✅ USUARIOS created');

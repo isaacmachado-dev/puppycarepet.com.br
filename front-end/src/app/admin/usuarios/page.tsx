@@ -6,8 +6,8 @@ import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu"
 import { User, CarFront, ShieldUser } from "lucide-react"
 
 import { AdminBlock, AdminBlockTitle } from "@/components/ui/custom/AdminSettings"
-import AdminTypeEmployee from "@/components/ui/custom/AdminTypeEmployee"
-import UsuariosCard from "@/app/admin/usuarios/UsuarioCard"
+import AdminTypeEmployee from "@/app/admin/usuarios/components/AdminTypeEmployee"
+import UsuariosCard from "@/app/admin/usuarios/components/UsuarioCard"
 import { Usuario, UsuarioRole } from "./types/usuario"
 
 type Checked = DropdownMenuCheckboxItemProps["checked"]
@@ -42,29 +42,20 @@ export function UsuariosPage() {
           name: u.NOME ?? u.nome ?? u.name ?? "Sem nome",
           email: u.EMAIL ?? u.email ?? "",
           image: u.FOTO_USUARIO ?? u.avatar ?? u.image ?? "",
-          type: Array.isArray(u.TIPO_USUARIO)
-            ? u.TIPO_USUARIO
+          type: Array.isArray(u.TIPOS)
+            ? u.TIPOS
             : Array.isArray(u.type)
               ? u.type
-              : u.TIPO_USUARIO
-                ? [u.TIPO_USUARIO]
+              : u.TIPOS
+                ? [u.TIPOS]
                 : u.type
                   ? Array.isArray(u.type)
                     ? u.type
                     : [u.type]
                   : [],
-          roles: Array.isArray(u.ROLES_USUARIO)
-            ? u.ROLES_USUARIO
-            : Array.isArray(u.roles)
-              ? u.roles
-              : u.ROLES_USUARIO
-                ? [u.ROLES_USUARIO]
-                : u.roles
-                  ? Array.isArray(u.roles)
-                    ? u.roles
-                    : [u.roles]
-                  : [],
-        }))
+          roles: [], // ou remove se não usar
+        }));
+
 
         console.log("USUARIOS NORMALIZADOS:", normalizados)
 
@@ -81,8 +72,8 @@ export function UsuariosPage() {
     fetchFuncionarios()
   }, [reload])
 
-  const numFuncionarios = funcionarios.filter((f) =>
-    (f.type ?? []).includes("funcionario" as UsuarioRole),
+  const numColaboradores = funcionarios.filter((f) =>
+    (f.type ?? []).includes("colaborador" as UsuarioRole),
   ).length
 
   const condutores = funcionarios.filter((f) =>
@@ -119,8 +110,8 @@ export function UsuariosPage() {
           <div className="flex flex-row gap-10">
             <div className="bg-white p-10 rounded-md flex flex-col items-center text-center w-40">
               <User className="flex" width="40px" height="40px" />
-              <h1>Funcionários</h1>
-              <p>{numFuncionarios}</p>
+              <h1>Colaboradores</h1>
+              <p>{numColaboradores}</p>
             </div>
 
             <div className="bg-white p-10 rounded-md flex flex-col items-center text-center w-40">
@@ -151,7 +142,7 @@ export function UsuariosPage() {
             <input
               type="text"
               placeholder="Digite o nome..."
-              className="bg-[#D9D9D9] p-2 rounded-sm outline-none focus:ring-2 focus:ring-[#2A2D34] hover:bg-white text-sm font-bold leading-5 w-80 h-10"
+              className="bg-white rounded-md p-2 pl-4 focus:ring-2 focus:ring-[#2A2D34] text-sm font-bold leading-5 w-80 h-10 hover:text-gray-200/50 hover:text-gray-800 hover:bg-gray-200/50 transition-colors duration-300 focus:outline-2 focus:outline-black hover:outline-2  leading-5"
               value={searchName}
               onChange={(e) => setSearchName(e.target.value)}
             />
