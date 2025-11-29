@@ -5,32 +5,38 @@ const prisma = new PrismaClient();
 
 export async function seedUsuariosExemplo() {
     // Usuários de exemplo (Ellie, Morty, Naruto)
+
+    const senhaAdmin = await bcrypt.hash('admin123', 10);
+    const senhaOperador = await bcrypt.hash('operador123', 10);
+
     await prisma.uSUARIOS.createMany({
         data: [
             {
-                NOME: 'Ellie Williams',
+                NOME: 'Joel Miller',
                 DESCRICAO: 'Usuário operador',
-                SENHA_HASH: 'hash_teste',
+                SENHA_HASH: senhaAdmin,
+                EMAIL: 'joel.miller@puppycarepet.com.br',
+                FOTO_USUARIO: '/usuarios/joel-miller.webp',
+                TIPOS: ['condutor', 'administrador'],
+            },
+
+            {
+                NOME: 'Ellie Williams',
+                DESCRICAO: 'Usuário administrador padrão',
+                SENHA_HASH: senhaAdmin,
                 EMAIL: 'ellie.williams@puppycarepet.com.br',
                 FOTO_USUARIO: '/usuarios/ellie-williams.jpg',
-                TIPOS: ['colaborador'],
+                TIPOS: ['administrador'],
             },
             {
                 NOME: 'Rock Lee',
                 DESCRICAO: 'Usuário operador',
-                SENHA_HASH: 'hash_teste',
+                SENHA_HASH: 'senhaOperador',
                 EMAIL: 'rock.lee@puppycarepet.com.br',
                 FOTO_USUARIO: '/usuarios/ʀᴏᴄᴋ ʟᴇᴇ.jpg',
                 TIPOS: ['condutor'],
             },
-            {
-                NOME: 'Joel Miller',
-                DESCRICAO: 'Usuário operador',
-                SENHA_HASH: 'hash_teste',
-                EMAIL: 'joel.miller@puppycarepet.com.br',
-                FOTO_USUARIO: '/usuarios/joel-miller.webp',
-                TIPOS: ['condutor', 'administrador'],
-            }
+
 
         ],
         skipDuplicates: true, // evita erro se EMAIL já existir
