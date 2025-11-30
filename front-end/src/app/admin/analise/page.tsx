@@ -1,9 +1,29 @@
 import { AdminBlock, AdminBlockTitle } from "../../../components/ui/custom/AdminSettings";
+import { ChartPieInteractive } from "./components/chart-pie-interactive";
+import { ChartRadialShape } from "./components/chart-radial-shape";
 
 export default function AnalisePage() {
   return (
     <div>
-      <AdminBlock>
+
+      <AdminBlock className="">
+        <AdminBlockTitle>Resumo Geral</AdminBlockTitle>
+
+        <div className="bg-white rounded-xl p-5">
+          <div className="flex flex-row gap-5 justify-center">
+
+            <div className="basis-1/2 max-w-xl">
+              <ChartPieInteractive />
+            </div>
+            <div className="basis-1/2 max-w-xl">
+              <ChartRadialShape />
+            </div>
+          </div>
+        </div>
+
+      </AdminBlock>
+
+      {/* <AdminBlock>
         <AdminBlockTitle>Análise Estatística</AdminBlockTitle>
 
         <div className="flex flex-row">
@@ -63,7 +83,7 @@ export default function AnalisePage() {
             </div>
           </div>
         </div>
-      </AdminBlock>
+      </AdminBlock> */}
     </div>
   );
 }

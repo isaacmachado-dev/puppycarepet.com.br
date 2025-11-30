@@ -40,10 +40,10 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(process.env.PORT ?? 4000);
-  console.log('[X] - Backend rodando na porta 4000...');
+  await app.listen(process.env.PORT ?? 4000, '0.0.0.0');
+  console.log(`[X] - Backend rodando na porta ${process.env.PORT ?? 4000}`);
   console.log(
-    '[📚] - Documentação Swagger disponível em: http://localhost:4000/api',
+    `[📚] - Documentação Swagger disponível em: http://localhost:${process.env.PORT ?? 4000}/api`,
   );
 }
 void bootstrap();
