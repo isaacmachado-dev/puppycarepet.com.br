@@ -31,7 +31,7 @@ export async function seedUsuariosExemplo() {
             {
                 NOME: 'Rock Lee',
                 DESCRICAO: 'Usuário operador',
-                SENHA_HASH: 'senhaOperador',
+                SENHA_HASH: senhaOperador,
                 EMAIL: 'rock.lee@puppycarepet.com.br',
                 FOTO_USUARIO: '/usuarios/ʀᴏᴄᴋ ʟᴇᴇ.jpg',
                 TIPOS: ['condutor'],
@@ -48,14 +48,20 @@ export async function seedUsuariosExemplo() {
         create: {
             NOME: 'Mortyyyyyyy',
             DESCRICAO: 'Usuário operador',
-            SENHA_HASH: 'hash_teste',
+            SENHA_HASH: senhaAdmin,
             EMAIL: 'rick@puppycarepet.com.br',
             FOTO_USUARIO: '/usuarios/rick.gif',
+            TIPOS: ['administrador', 'condutor'],
+
         },
         update: {
             NOME: 'Mortyyyyyyy',
             DESCRICAO: 'Usuário operador',
+            SENHA_HASH: senhaAdmin,
             FOTO_USUARIO: '/usuarios/rick.gif',
+            TIPOS: ['administrador', 'condutor'],
+
+
         },
     });
 
@@ -64,14 +70,17 @@ export async function seedUsuariosExemplo() {
         create: {
             NOME: 'Po',
             DESCRICAO: 'Usuário operador',
-            SENHA_HASH: 'hash_teste',
+            SENHA_HASH: senhaOperador,
             EMAIL: 'po@puppycarepet.com.br',
             FOTO_USUARIO: '/usuarios/★.jpg',
         },
         update: {
             NOME: 'Po',
             DESCRICAO: 'Usuário operador',
+            SENHA_HASH: senhaOperador,
             FOTO_USUARIO: '/usuarios/★.jpg',
+            TIPOS: ['colaborador'],
+
         },
     });
 
@@ -80,14 +89,19 @@ export async function seedUsuariosExemplo() {
         create: {
             NOME: 'Rock Lee',
             DESCRICAO: 'Usuário operador',
-            SENHA_HASH: 'hash_teste',
+            SENHA_HASH: senhaOperador,
             EMAIL: 'rock.lee@puppycarepet.com.br',
             FOTO_USUARIO: '/usuarios/ʀᴏᴄᴋ ʟᴇᴇ.jpg',
+            TIPOS: ['colaborador'],
+
         },
         update: {
             NOME: 'Rock Lee',
             DESCRICAO: 'Usuário operador',
+            SENHA_HASH: senhaOperador,
             FOTO_USUARIO: '/usuarios/ʀᴏᴄᴋ ʟᴇᴇ.jpg',
+            TIPOS: ['colaborador'],
+
         },
     });
 
@@ -96,14 +110,19 @@ export async function seedUsuariosExemplo() {
         create: {
             NOME: 'Squirtle',
             DESCRICAO: 'Usuário operador',
-            SENHA_HASH: 'hash_teste',
+            SENHA_HASH: senhaOperador,
             EMAIL: 'squirtle@puppycarepet.com.br',
             FOTO_USUARIO: '/usuarios/squirtle.jpg',
+            TIPOS: ['condutor'],
+
         },
         update: {
             NOME: 'Squirtle',
             DESCRICAO: 'Usuário operador',
+            SENHA_HASH: senhaOperador,
             FOTO_USUARIO: '/usuarios/squirtle.jpg',
+            TIPOS: ['colaborador'],
+
         },
     });
 
@@ -128,14 +147,19 @@ export async function seedUsuariosExemplo() {
         create: {
             NOME: 'Robin',
             DESCRICAO: 'Usuário operador',
-            SENHA_HASH: 'hash_teste',
+            SENHA_HASH: senhaAdmin,
             EMAIL: 'Robin@puppycarepet.com.br',
             FOTO_USUARIO: '/usuarios/robin.jpg',
+            TIPOS: ['administrador', 'colaborador'],
+
         },
         update: {
             NOME: 'Robin',
             DESCRICAO: 'Usuário operador',
             FOTO_USUARIO: '/usuarios/robin.jpg',
+            SENHA_HASH: senhaAdmin,
+            TIPOS: ['administrador', 'colaborador'],
+
         },
     });
 

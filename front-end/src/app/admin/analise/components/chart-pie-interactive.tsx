@@ -29,7 +29,7 @@ import {
 export const description = "An interactive pie chart"
 
 const desktopData = [
-  { month: "Janeiro", desktop: 186, fill: "var(--color-Janeiro)" },
+  { month: "Janeiro", desktop: 106, fill: "var(--color-Janeiro)" },
   { month: "Fevereiro", desktop: 305, fill: "var(--color-Fevereiro)" },
   { month: "Março", desktop: 237, fill: "var(--color-Março)" },
   { month: "Abril", desktop: 173, fill: "var(--color-Abril)" },
@@ -198,7 +198,7 @@ export function ChartPieInteractive() {
 
 
       </CardContent>
-      <Select value={activeMonth} onValueChange={setActiveMonth}>
+      <Select value={activeMonth} onValueChange={setActiveMonth} >
         <SelectTrigger
           className="mx-auto h-7 w-[130px] rounded-lg pl-2.5"
           aria-label="Select a value"
