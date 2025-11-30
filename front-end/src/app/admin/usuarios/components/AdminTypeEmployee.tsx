@@ -15,6 +15,8 @@ import { cn } from "@/lib/utils"  // ← Adicione isso
 
 type Checked = DropdownMenuCheckboxItemProps["checked"]
 
+
+
 export default function AdminTypeEmployee({
     className,
     value = [],
