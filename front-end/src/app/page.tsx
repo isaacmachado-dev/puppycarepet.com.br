@@ -36,7 +36,7 @@ export default function Home() {
                   priority
                 />
                 {/* Banho & Tosa Mobile */}
-                <p className="text-sm ml-[8vw] font-bold sm:block">Banho & Tosa</p>
+                <p className="text-sm mx-auto font-bold sm:block">Banho & Tosa</p>
               </div>
 
               <div className="text-5xl sm:text-7xl font-bold order-3 sm:order-2 text-center sm:text-left">
@@ -63,8 +63,8 @@ export default function Home() {
               <div className="flex justify-center items-center w-full place-self-auto">
 
                 <Link
-                  href="#"
-                  className="rounded-md bg-[#1A89A2] px-10 py-4 hover:bg-[#186E81] text-white font-semibold tracking-[2] transform transition-transform duration-200 hover:scale-120 will-change-auto mt-5 text-center sm:-ml-20 sm:text-xl"
+                  href="/login"
+                  className="rounded-md bg-[#1A89A2] px-10 py-4 hover:bg-[#186E81] text-white font-semibold tracking-[2] transform transition-transform duration-200 hover:scale-120 will-change-auto mt-5 text-center sm:-mx-auto sm:text-xl"
                 >
                   Agende agora
                 </Link>
@@ -89,9 +89,9 @@ export default function Home() {
           <OurServices />
         </div>
 
-        <div>
+        {/* <div>
           <AdminButton />
-        </div>
+        </div> */}
 
       </main >
 

@@ -22,7 +22,7 @@ import { ChartConfig, ChartContainer } from "@/app/admin/analise/components/char
 export const description = "A radial chart with a custom shape"
 
 const chartData = [
-  { browser: "safari", visitors: 1260, fill: "url(#safariGradient)" },
+  { browser: "safari", visitors: 1260, fill: "var(--chart-12)" },
 ]
 
 const chartConfig = {
@@ -31,7 +31,7 @@ const chartConfig = {
   },
   safari: {
     label: "Safari",
-    color: "var(--chart-2)",
+    color: "var(--chart-8)",
   },
 } satisfies ChartConfig
 
@@ -39,8 +39,8 @@ export function ChartRadialShape() {
   return (
     <Card className="flex flex-col h-full">
       <CardHeader className="items-center pb-0">
-        <CardTitle>Gráfico radial</CardTitle>
-        <CardDescription>Janeiro - Dezembro 2025</CardDescription>
+        <CardTitle>Gráfico visitantes totais anualmente</CardTitle>
+        <CardDescription>2025</CardDescription>
       </CardHeader>
       <CardContent className="my-auto">
         <ChartContainer
@@ -49,25 +49,17 @@ export function ChartRadialShape() {
         >
           <RadialBarChart
             data={chartData}
-            endAngle={20}
+            endAngle={120}
             innerRadius={80}
             outerRadius={140}
 
           >
-            <defs>
-              <linearGradient id="safariGradient" x1="0" y1="0" x2="0" y2="1">
-                {/* topo: pega uma das suas cores, por exemplo chart-1 */}
-                <stop offset="0%" stopColor="var(--chart-6)" />
-                {/* baixo: outra, por exemplo chart-12 */}
-                <stop offset="100%" stopColor="var(--chart-1)" />
-              </linearGradient>
-            </defs>
 
             <PolarGrid
               gridType="circle"
               radialLines={false}
               stroke="none"
-              className="first:fill-[oklch(5%_0.22434_326.114)] last:fill-background"
+              className="first:fill-[oklch(100%_0.22434_326.114)] last:fill-background"
               polarRadius={[86, 74]}
             />
 
