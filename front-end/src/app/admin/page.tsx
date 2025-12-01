@@ -85,7 +85,7 @@ export default function AdminPage() {
     <div>
 
       <div className="text-white ">
-        <AdminHomeLoading loaded={true} funcionario="Mônica" />
+        <AdminHomeLoading loaded={true} funcionario={nomeUsuario || "Mônica"} />
       </div>
 
       <div className="relative flex min-h-screen bg-[#E3E3E3] text-black font-bold">
