@@ -11,8 +11,6 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
-  // Connection URL moved to prisma.config.ts (see https://pris.ly/d/config-datasource).
 }
 
 model ATENDIMENTOS {
@@ -58,6 +56,7 @@ model CLIENTES {
   NOME         String         @db.VarChar(100)
   TELEFONE     String         @db.VarChar(20)
   ENDERECO     String         @db.VarChar(255)
+  FOTO_USUARIO Boolean        @default(false)
   PETS         PETS[] // um cliente pode ter vários pets (back-relation para PETS.CLIENTE)
   PACOTES      PACOTES[] // um cliente pode ter vários pacotes (back-relation para PACOTES.CLIENTE)
   ATENDIMENTOS ATENDIMENTOS[] // um cliente pode ter vários atendimentos (back-relation para ATENDIMENTOS.CLIENTE)
@@ -124,19 +123,18 @@ model SERVICOS {
 }
 
 model USUARIOS {
-  ID_USUARIO Int       @id @default(autoincrement())
-  NOME       String    @db.VarChar(100)
-  DESCRICAO  String?
-  EMAIL      String    @unique @db.VarChar(150)
-  SENHA_HASH String    @db.VarChar(255)
-  FOTO_USUARIO String? @db.VarChar(255)
-  TIPOS      String[]  @default([])
+  ID_USUARIO   Int       @id @default(autoincrement())
+  NOME         String    @db.VarChar(100)
+  DESCRICAO    String?
+  EMAIL        String    @unique @db.VarChar(150)
+  SENHA_HASH   String    @db.VarChar(255)
+  TIPOS        String[]  @default([])
   // --- Campos de rastreamento com prioridade para uso offline ---
-  PUBLIC_ID  String    @unique @default(uuid())
-  CREATED_AT DateTime  @default(now())
-  UPDATED_AT DateTime  @updatedAt
-  DELETED_AT DateTime?
-  VERSION    Int       @default(1)
+  PUBLIC_ID    String    @unique @default(uuid())
+  CREATED_AT   DateTime  @default(now())
+  UPDATED_AT   DateTime  @updatedAt
+  DELETED_AT   DateTime?
+  VERSION      Int       @default(1)
 
   @@index([UPDATED_AT])
 }
