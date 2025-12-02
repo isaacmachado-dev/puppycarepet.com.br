@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Typewriter } from "./Typewriter";
-import "./dog-loader.css"; // conforme já está certo
+import "./dog-loader.css";
 
 export default function AdminHomeLoading({ loaded, funcionario }: { loaded: boolean, funcionario: string }) {
     const [visible, setVisible] = useState(true);
@@ -28,6 +28,20 @@ export default function AdminHomeLoading({ loaded, funcionario }: { loaded: bool
         };
     }, [visible]);
 
+    // Permitir pular carregamento via tecla ou mouse
+    useEffect(() => {
+        if (!visible) return;
+        const skipLoading = () => setVisible(false);
+
+        window.addEventListener("mousedown", skipLoading);
+        window.addEventListener("keydown", skipLoading);
+
+        return () => {
+            window.removeEventListener("mousedown", skipLoading);
+            window.removeEventListener("keydown", skipLoading);
+        };
+    }, [visible]);
+
     if (!visible) return null;
 
     return (
@@ -38,13 +52,11 @@ export default function AdminHomeLoading({ loaded, funcionario }: { loaded: bool
                     typeSpeed={100}
                     deleteSpeed={50}
                     pauseAfterWrite={6000}
-                    className="typewriter-font justify-center text-center justify-center"
+                    className="typewriter-font justify-center text-center"
                     style={{ fontSize: "10rem", lineHeight: 1 }}
-
                 />
             </div>
             {/* Loader dog animado */}
-            {/* From Uiverse.io by Emmaline-ozi */}
             <div className="main relative justify-center">
                 <div className="dog absolute inset-0 z-0">
                     <div className="dog__paws">
@@ -61,11 +73,9 @@ export default function AdminHomeLoading({ loaded, funcionario }: { loaded: bool
                             <div className="dog__fr-top top"></div>
                         </div>
                     </div>
-
                     <div className="dog__body">
                         <div className="dog__tail"></div>
                     </div>
-
                     <div className="dog__head">
                         <div className="dog__snout">
                             <div className="dog__eyes">
@@ -74,14 +84,12 @@ export default function AdminHomeLoading({ loaded, funcionario }: { loaded: bool
                             </div>
                         </div>
                     </div>
-
                     <div className="dog__head-c">
                         <div className="dog__ear-r"></div>
                         <div className="dog__ear-l"></div>
                     </div>
                 </div>
             </div>
-
         </div>
     );
 }

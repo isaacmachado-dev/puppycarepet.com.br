@@ -97,7 +97,7 @@ let UsuariosService = class UsuariosService {
         await this.findOne(id);
         return this.prisma.uSUARIOS.update({
             where: { ID_USUARIO: id },
-            data: { FOTO_USUARIO: foto },
+            data: { FOTO: foto },
         });
     }
     async remove(id) {

@@ -54,19 +54,19 @@ async function seedUsuarios() {
                     DESCRICAO: 'Usuário administrador padrão',
                     SENHA_HASH: 'hash_teste',
                     EMAIL: 'admin@puppycarepet.com.br',
-                    FOTO_USUARIO: '/teste.png',
+                    FOTO: '/teste.png',
                 },
 
             ],
         });
         console.log('✅ USUARIOS created');
     } else {
-        // Atualiza FOTO_USUARIO de quem não tem
+        // Atualiza FOTO de quem não tem
         await prisma.uSUARIOS.updateMany({
-            where: { FOTO_USUARIO: null },
-            data: { FOTO_USUARIO: '/teste.png' },
+            where: { FOTO: null },
+            data: { FOTO: '/teste.png' },
         });
-        console.log('ℹ️ USUARIOS already exist, updated FOTO_USUARIO where null');
+        console.log('ℹ️ USUARIOS already exist, updated FOTO where null');
     }
 }
 

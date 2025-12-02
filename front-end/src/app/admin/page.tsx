@@ -79,8 +79,6 @@ export default function AdminPage() {
     return null; // Ou um loading spinner
   }
 
-
-
   return (
     <div>
 
