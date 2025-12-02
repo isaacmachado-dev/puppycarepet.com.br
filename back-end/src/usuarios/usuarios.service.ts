@@ -71,7 +71,7 @@ export class UsuariosService {
     await this.findOne(id);
     return this.prisma.uSUARIOS.update({
       where: { ID_USUARIO: id },
-      data: { FOTO_USUARIO: foto } as any,
+      data: { FOTO: foto } as any,
     });
   }
 

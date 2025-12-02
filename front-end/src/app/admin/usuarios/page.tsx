@@ -41,7 +41,7 @@ export function UsuariosPage() {
           id: u.ID_USUARIO ?? u.id ?? u.ID ?? "",
           name: u.NOME ?? u.nome ?? u.name ?? "Sem nome",
           email: u.EMAIL ?? u.email ?? "",
-          image: u.FOTO_USUARIO ?? u.avatar ?? u.image ?? "",
+          image: u.FOTO ?? u.avatar ?? u.image ?? "",
           type: Array.isArray(u.TIPOS)
             ? u.TIPOS
             : Array.isArray(u.type)

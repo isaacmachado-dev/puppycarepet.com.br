@@ -11,6 +11,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url = env("DATABASE_URL")
 }
 
 model ATENDIMENTOS {
@@ -127,6 +128,7 @@ model USUARIOS {
   NOME         String    @db.VarChar(100)
   DESCRICAO    String?
   EMAIL        String    @unique @db.VarChar(150)
+  FOTO         String? @db.VarChar(255)
   SENHA_HASH   String    @db.VarChar(255)
   TIPOS        String[]  @default([])
   // --- Campos de rastreamento com prioridade para uso offline ---
