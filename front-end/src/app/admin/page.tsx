@@ -238,7 +238,6 @@ export default function AdminPage() {
             {paginaAtual === "clientes" && <ClientesPage />}
             {paginaAtual === "analise" && <AnalisePage />}
             {paginaAtual === "usuarios" && <Usuarios />}
-            {/* AlterarSenha agora só aparece na página interna de usuários */}
           </section>
         </main>
       </div>
