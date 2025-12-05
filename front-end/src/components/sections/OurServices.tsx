@@ -9,7 +9,7 @@ export default function OurServices() {
 
                 <div className="bg-white rounded-lg mt-5 p-5">
 
-                    <H2 className="text-black">
+                    <H2 className="text-black mb-5">
                         Conheça os nossos serviços
                     </H2>
 

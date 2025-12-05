@@ -3,23 +3,40 @@
 import { useState } from "react";
 import { Dog } from "lucide-react";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
 export function Atendendo() {
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+    const [file, setFile] = useState<File | null>(null);
+    const [showConfirm, setShowConfirm] = useState(false);
 
     function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
-        const file = event.target.files?.[0];
-        if (!file) return;
+        const selected = event.target.files?.[0];
+        if (!selected) return;
 
-        const url = URL.createObjectURL(file);
+        const url = URL.createObjectURL(selected);
         setPreviewUrl(url);
+        setFile(selected);
+        setShowConfirm(true); // abre o modal
     }
 
+    async function handleConfirm() {
+        if (!file) return;
+        // TODO: enviar pro backend aqui (FormData + fetch)
+        setShowConfirm(false);
+    }
+
+    function handleCancel() {
+        setPreviewUrl(null);
+        setFile(null);
+        setShowConfirm(false);
+    }
+
+
     return (
-        <div>
+        <div className="space-y-4">
             <div className="p-2 border-2 border-black rounded-md w-max mx-auto">
                 <div className="flex flex-col items-center justify-center gap-2">
-                    {/* input escondido */}
                     <input
                         id="pet-photo"
                         type="file"
@@ -28,11 +45,13 @@ export function Atendendo() {
                         className="hidden"
                     />
 
-                    {/* label que engloba a imagem: clique nela abre o input */}
                     <label htmlFor="pet-photo" className="cursor-pointer">
                         <div className="w-[300px] h-[300px] relative">
                             <Image
-                                src={previewUrl || "https://placehold.co/300x300.png?text=Imagem"}
+                                src={
+                                    previewUrl ||
+                                    "https://placehold.co/300x300.png?text=Imagem"
+                                }
                                 alt="Dog"
                                 className="object-cover rounded-md border"
                                 fill
@@ -46,6 +65,39 @@ export function Atendendo() {
                     </div>
                 </div>
             </div>
+
+            {showConfirm && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+                    <div className="w-full max-w-sm rounded-lg bg-white p-4 shadow-lg">
+                        <h2 className="mb-2 text-base font-semibold">
+                            Enviar foto do pet?
+                        </h2>
+                        <p className="mb-4 text-sm text-gray-600">
+                            Deseja mesmo enviar esta imagem para o servidor?
+                        </p>
+
+                        <div className="flex justify-end gap-2 text-sm">
+                            <button
+                                onClick={handleCancel}
+                                className="rounded-md bg-gray-200 px-3 py-1 hover:bg-gray-300 cursor-pointer"
+                            >
+                                Cancelar
+                            </button>
+                            <Button
+                                type="button"
+                                onClick={handleConfirm}
+                                className="cursor-pointer"
+                            >
+                                Sim, enviar
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
+
+
+
 }
+

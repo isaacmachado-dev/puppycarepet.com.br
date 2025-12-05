@@ -105,9 +105,12 @@ const chartConfig = {
 
 } satisfies ChartConfig
 
+
+
 export function ChartPieInteractive() {
   const id = "pie-interactive"
   const [activeMonth, setActiveMonth] = React.useState(desktopData[0].month)
+
 
   const activeIndex = React.useMemo(
     () => desktopData.findIndex((item) => item.month === activeMonth),
@@ -195,23 +198,22 @@ export function ChartPieInteractive() {
             </Pie>
           </PieChart>
         </ChartContainer>
-
-
       </CardContent>
+      
       <Select value={activeMonth} onValueChange={setActiveMonth} >
         <SelectTrigger
           className="mx-auto h-7 w-[130px] rounded-lg pl-2.5"
-          aria-label="Select a value"
+          aria-label="Selecione um valor"
         >
-          <SelectValue placeholder="Select month" />
+          <SelectValue placeholder="Selecione um mês" />
         </SelectTrigger>
         <SelectContent align="center" className="rounded-xl">
           {months.map((key) => {
             const config = chartConfig[key as keyof typeof chartConfig]
+            if (!config) return null
 
-            if (!config) {
-              return null
-            }
+            // narrow the type so TypeScript knows color may not exist
+            const color = "color" in config ? config.color : undefined
 
             return (
               <SelectItem
@@ -222,11 +224,9 @@ export function ChartPieInteractive() {
                 <div className="flex items-center gap-2 text-xs">
                   <span
                     className="flex h-3 w-3 shrink-0 rounded-xs"
-                    style={{
-                      backgroundColor: `var(--color-${key})`,
-                    }}
+                    style={{ backgroundColor: color }}
                   />
-                  {config?.label}
+                  {config.label}
                 </div>
               </SelectItem>
             )
