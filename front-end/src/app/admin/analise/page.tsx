@@ -1,6 +1,7 @@
 import { AdminBlock, AdminBlockTitle } from "../../../components/ui/custom/AdminSettings";
 import { ChartPieInteractive } from "./components/chart-pie-interactive";
 import { ChartRadialShape } from "./components/chart-radial-shape";
+import { ChartAreaInteractive } from "./components/chart-area-interactive";
 
 export default function AnalisePage() {
   return (
@@ -22,6 +23,10 @@ export default function AnalisePage() {
         </div>
 
       </AdminBlock>
+
+      <AdminBlock className="mt-10">
+        <ChartAreaInteractive />
+      </AdminBlock >
 
       {
         /* 
