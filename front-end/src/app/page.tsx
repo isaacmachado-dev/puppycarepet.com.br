@@ -4,7 +4,8 @@ import CatSection from "../components/sections/CatSection";
 import OurServices from "../components/sections/OurServices";
 import HomeScreen from "../components/ui/custom/HomeScreen";
 import { SetupSection } from "../components/ui/custom/ConfigSection";
-import { AdminButton } from "../components/ui/custom/AdminButton";
+// import { AdminButton } from "../components/ui/custom/AdminButton";
+import FooterClient from "../components/ui/custom/FooterClient";
 
 import Link from "next/link";
 export default function Home() {
@@ -93,8 +94,8 @@ export default function Home() {
           <AdminButton />
         </div> */}
 
-      </main >
-
-    </div >
+      </main>
+      <FooterClient />
+    </div>
   );
 }

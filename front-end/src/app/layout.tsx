@@ -18,11 +18,21 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 
+  // Esconde o rodapé nas rotas de login, criar-uma-nova-conta e esqueci-a-senha
+  let hideFooter = false;
+  if (typeof window !== "undefined") {
+    const path = window.location.pathname;
+    hideFooter = [
+      "/login",
+      "/login/crie-uma-nova-conta",
+      "/login/esqueci-a-senha"
+    ].some((segment) => path.startsWith(segment));
+  }
   return (
     <html lang="pt-br" className={inter.variable}>
       <body>
         {children}
-        <FooterClient />
+        {!hideFooter && <FooterClient />}
       </body>
     </html>
   );
