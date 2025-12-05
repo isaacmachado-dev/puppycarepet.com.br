@@ -63,6 +63,7 @@ const ITEMS: AgendaItem[] = [
         price: "R$ 80,00",
     },
 ];
+// 
 
 function AgendaRow({ item }: { item: AgendaItem }) {
     const STATES: Array<"-50%" | "0%" | "50%"> = ["-50%", "0%", "50%"];

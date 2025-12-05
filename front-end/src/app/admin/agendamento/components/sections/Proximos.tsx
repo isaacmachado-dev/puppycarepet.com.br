@@ -90,7 +90,7 @@ function AgendaRow({ item }: { item: AgendaItem }) {
 
             {/* settings */}
 
-            <button className="bg-primary p-2 rounded-md text-white font-bold hover:bg-primary/80 transition-colors cursor-pointer flex items-center justify-center ml-auto">
+            <button className="bg-primary p-2 rounded-md text-white font-bold hover:bg-primary/80 transition-colors cursor-pointer flex items-center justify-center">
                 <Settings2 size={20} />
             </button>
 
