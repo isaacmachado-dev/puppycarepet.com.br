@@ -17,6 +17,10 @@
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar: var(--sidebar);
   --color-chart-full-gradient: var(--chart-full-gradient);
+  --color-chart-interactive-vendas: var(--chart-interactive-vendas);
+  --color-chart-interactive-clicks: var(--chart-interactive-clicks);
+
+
   --color-chart-12: var(--chart-12);
   --color-chart-11: var(--chart-11);
   --color-chart-10: var(--chart-10);
@@ -84,6 +88,8 @@
   --chart-10: oklch(20% 0.22434 326.114);
   --chart-11: oklch(10% 0.22434 326.114);
   --chart-12: oklch(5% 0.22434 326.114);
+  --color-chart-interactive-vendas: oklch(50% 0.12045 142.105);
+  --color-chart-interactive-clicks: oklch(80% 0.19381 146.345);
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: oklch(0.205 0 0);
