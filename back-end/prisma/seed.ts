@@ -3,179 +3,90 @@ import * as bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
-
-async function seedUsuariosExemplo() {
-  // Usuários de exemplo (Ellie, Morty, Naruto)
-
+async function seedUsuarios() {
+  // Usuários de exemplo (admin e clientes)
   const senhaAdmin = await bcrypt.hash('admin123', 10);
-  const senhaOperador = await bcrypt.hash('operador123', 10);
+  const senhaCliente = await bcrypt.hash('cliente123', 10);
 
   await prisma.uSUARIOS.createMany({
     data: [
       {
-        NOME: 'Joel Miller',
-        DESCRICAO: 'Usuário operador',
+        NOME: 'Mônica Pereira',
+        DESCRICAO: 'Usuário administrador',
         SENHA_HASH: senhaAdmin,
-        EMAIL: 'joel.miller@puppycarepet.com.br',
-        FOTO: '/usuarios/joel-miller.webp',
-        TIPOS: ['condutor', 'administrador'],
-      },
-
-      {
-        NOME: 'Ellie Williams',
-        DESCRICAO: 'Usuário administrador padrão',
-        SENHA_HASH: senhaAdmin,
-        EMAIL: 'ellie.williams@puppycarepet.com.br',
-        FOTO: '/usuarios/ellie-williams.jpg',
+        EMAIL: 'monica@puppycarepet.com.br',
+        FOTO: '/usuarios/monica.jpg',
         TIPOS: ['administrador'],
       },
       {
+        NOME: 'Joel Miller',
+        DESCRICAO: 'Usuário cliente',
+        SENHA_HASH: senhaCliente,
+        EMAIL: 'joel.miller@puppycarepet.com.br',
+        FOTO: '/usuarios/joel-miller.webp',
+        TIPOS: ['cliente'],
+      },
+      {
         NOME: 'Rock Lee',
-        DESCRICAO: 'Usuário operador',
-        SENHA_HASH: senhaOperador,
+        DESCRICAO: 'Usuário cliente',
+        SENHA_HASH: senhaCliente,
         EMAIL: 'rock.lee@puppycarepet.com.br',
         FOTO: '/usuarios/ʀᴏᴄᴋ ʟᴇᴇ.jpg',
-        TIPOS: ['condutor'],
+        TIPOS: ['cliente'],
       },
-
-
+      {
+        NOME: 'Morty Smith',
+        DESCRICAO: 'Usuário cliente',
+        SENHA_HASH: senhaCliente,
+        EMAIL: 'morty.smith@puppycarepet.com.br',
+        FOTO: '/usuarios/morty-smith.jpg',
+        TIPOS: ['cliente'],
+      },
+      {
+        NOME: 'Po',
+        DESCRICAO: 'Usuário cliente',
+        SENHA_HASH: senhaCliente,
+        EMAIL: 'po@puppycarepet.com.br',
+        FOTO: '/usuarios/po.jpg',
+        TIPOS: ['cliente'],
+      },
+      {
+        NOME: 'Squirtle',
+        DESCRICAO: 'Usuário cliente',
+        SENHA_HASH: senhaCliente,
+        EMAIL: 'squirtle@puppycarepet.com.br',
+        FOTO: '/usuarios/squirtle.jpg',
+        TIPOS: ['cliente'],
+      },
+      {
+        NOME: 'Robin',
+        DESCRICAO: 'Usuário cliente',
+        SENHA_HASH: senhaCliente,
+        EMAIL: 'robin@puppycarepet.com.br',
+        FOTO: '/usuarios/robin.jpg',
+        TIPOS: ['cliente'],
+      },
     ],
-    skipDuplicates: true, // evita erro se EMAIL já existir
+    skipDuplicates: true,
   });
-
-
-  await prisma.uSUARIOS.upsert({
-    where: { EMAIL: 'rick@puppycarepet.com.br' },
-    create: {
-      NOME: 'Mortyyyyyyy',
-      DESCRICAO: 'Usuário operador',
-      SENHA_HASH: senhaAdmin,
-      EMAIL: 'rick@puppycarepet.com.br',
-      FOTO: '/usuarios/rick.gif',
-      TIPOS: ['administrador', 'condutor'],
-
-    },
-    update: {
-      NOME: 'Mortyyyyyyy',
-      DESCRICAO: 'Usuário operador',
-      SENHA_HASH: senhaAdmin,
-      FOTO: '/usuarios/rick.gif',
-      TIPOS: ['administrador', 'condutor'],
-
-
-    },
-  });
-
-  await prisma.uSUARIOS.upsert({
-    where: { EMAIL: 'po@puppycarepet.com.br' },
-    create: {
-      NOME: 'Po',
-      DESCRICAO: 'Usuário operador',
-      SENHA_HASH: senhaOperador,
-      EMAIL: 'po@puppycarepet.com.br',
-      FOTO: '/usuarios/★.jpg',
-    },
-    update: {
-      NOME: 'Po',
-      DESCRICAO: 'Usuário operador',
-      SENHA_HASH: senhaOperador,
-      FOTO: '/usuarios/★.jpg',
-      TIPOS: ['colaborador'],
-
-    },
-  });
-
-  await prisma.uSUARIOS.upsert({
-    where: { EMAIL: 'rock.lee@puppycarepet.com.br' },
-    create: {
-      NOME: 'Rock Lee',
-      DESCRICAO: 'Usuário operador',
-      SENHA_HASH: senhaOperador,
-      EMAIL: 'rock.lee@puppycarepet.com.br',
-      FOTO: '/usuarios/ʀᴏᴄᴋ ʟᴇᴇ.jpg',
-      TIPOS: ['colaborador'],
-
-    },
-    update: {
-      NOME: 'Rock Lee',
-      DESCRICAO: 'Usuário operador',
-      SENHA_HASH: senhaOperador,
-      FOTO: '/usuarios/ʀᴏᴄᴋ ʟᴇᴇ.jpg',
-      TIPOS: ['colaborador'],
-
-    },
-  });
-
-  await prisma.uSUARIOS.upsert({
-    where: { EMAIL: 'squirtle@puppycarepet.com.br' },
-    create: {
-      NOME: 'Squirtle',
-      DESCRICAO: 'Usuário operador',
-      SENHA_HASH: senhaOperador,
-      EMAIL: 'squirtle@puppycarepet.com.br',
-      FOTO: '/usuarios/squirtle.jpg',
-      TIPOS: ['condutor'],
-
-    },
-    update: {
-      NOME: 'Squirtle',
-      DESCRICAO: 'Usuário operador',
-      SENHA_HASH: senhaOperador,
-      FOTO: '/usuarios/squirtle.jpg',
-      TIPOS: ['colaborador'],
-
-    },
-  });
-
-  // Ajuste genérico de FOTO null, se ainda quiser manter
-  await prisma.uSUARIOS.updateMany({
-    where: { FOTO: null },
-    data: { FOTO: '/teste.png' },
-  });
-
-  // Atualiza admin e operador se existirem
-  await prisma.uSUARIOS.updateMany({
-    where: { EMAIL: 'admin@puppycarepet.com.br' },
-    data: {
-      NOME: 'Joel Miller',
-      FOTO: '/joel-miller.webp',
-      TIPOS: ['administrador'],
-    },
-  });
-
-  await prisma.uSUARIOS.upsert({
-    where: { EMAIL: 'Robin@puppycarepet.com.br' },
-    create: {
-      NOME: 'Robin',
-      DESCRICAO: 'Usuário operador',
-      SENHA_HASH: senhaAdmin,
-      EMAIL: 'Robin@puppycarepet.com.br',
-      FOTO: '/usuarios/robin.jpg',
-      TIPOS: ['administrador', 'colaborador'],
-
-    },
-    update: {
-      NOME: 'Robin',
-      DESCRICAO: 'Usuário operador',
-      FOTO: '/usuarios/robin.jpg',
-      SENHA_HASH: senhaAdmin,
-      TIPOS: ['administrador', 'colaborador'],
-
-    },
-  });
-
-  console.log('✅ USUARIOS exemplo upserted');
+  console.log('✅ USUARIOS exemplo inseridos');
 }
 
-
 async function seedServicos() {
-
   const count = await prisma.sERVICOS.count();
   if (count === 0) {
     await prisma.sERVICOS.createMany({
       data: [
-        { NOME: 'Banho', DESCRICAO: 'Banho completo para pets', VALOR: '79.90' },
-        { NOME: 'Tosa', DESCRICAO: 'Tosa higiênica e completa', VALOR: '120.00' },
+        {
+          NOME: 'Carlos',
+          DESCRICAO: 'Banho completo para pets',
+          VALOR: '79.90',
+        },
+        {
+          NOME: 'Marisa',
+          DESCRICAO: 'Tosa higiênica e completa',
+          VALOR: '120.00',
+        },
       ],
     });
     console.log('✅ SERVICOS created');
@@ -195,8 +106,16 @@ async function seedClientes() {
   if (count === 0) {
     await prisma.cLIENTES.createMany({
       data: [
-        { NOME: 'Maria Silva', TELEFONE: '11999990001', ENDERECO: 'Rua A, 123 - Centro, São Paulo/SP' },
-        { NOME: 'João Pereira', TELEFONE: '11988880002', ENDERECO: 'Av. B, 200 - Bela Vista, São Paulo/SP' },
+        {
+          NOME: 'Maria Silva',
+          TELEFONE: '11999990001',
+          ENDERECO: 'Rua A, 123 - Centro, São Paulo/SP',
+        },
+        {
+          NOME: 'João Pereira',
+          TELEFONE: '11988880002',
+          ENDERECO: 'Av. B, 200 - Bela Vista, São Paulo/SP',
+        },
       ],
     });
     console.log('✅ CLIENTES created');
@@ -210,29 +129,50 @@ async function seedClientes() {
   } as const;
 }
 
-
-seedUsuariosExemplo();
-
+seedUsuarios();
 
 async function seedPets(clienteId: number) {
   const count = await prisma.pETS.count({ where: { ID_CLIENTE: clienteId } });
   if (count === 0) {
     await prisma.pETS.createMany({
       data: [
-        { NOME: 'Rex', RACA: 'Vira-lata', DATA_NASC: new Date('2020-01-01'), ID_CLIENTE: clienteId },
-        { NOME: 'Luna', RACA: 'Poodle', DATA_NASC: new Date('2019-06-10'), ID_CLIENTE: clienteId },
+        {
+          ID_PET: 1,
+          NOME: 'Rex',
+          ESPECIE: 'Cachorro',
+          IDADE: 8,
+          RACA: 'Vira-lata',
+          PORTE: 'Médio',
+          DATA_NASC: new Date('2020-01-01'),
+          ID_CLIENTE: clienteId,
+          
+        },
+        {
+          ID_PET: 2,
+          NOME: 'Luna',
+          ESPECIE: 'Gato',
+          IDADE: 5,
+          RACA: 'Siamês',
+          PORTE: 'Pequeno',
+          DATA_NASC: new Date('2019-06-10'),
+          ID_CLIENTE: clienteId,
+        },
       ],
     });
-    console.log('✅ PETS created');
+    console.log('✅ PETS criado');
   } else {
-    console.log('ℹ️ PETS already have data for this cliente, skipping creation');
+    console.log(
+      'ℹ️ PETS já existe para cliente, pulando criação',
+    );
   }
   const all = await prisma.pETS.findMany({ where: { ID_CLIENTE: clienteId } });
   return all;
 }
 
 async function seedPacotes(clienteId: number, servicoId: number) {
-  const count = await prisma.pACOTES.count({ where: { ID_CLIENTE: clienteId, ID_SERVICO: servicoId } });
+  const count = await prisma.pACOTES.count({
+    where: { ID_CLIENTE: clienteId, ID_SERVICO: servicoId },
+  });
   if (count === 0) {
     await prisma.pACOTES.create({
       data: {
@@ -243,7 +183,9 @@ async function seedPacotes(clienteId: number, servicoId: number) {
     });
     console.log('✅ PACOTES created');
   } else {
-    console.log('ℹ️ PACOTES already have data for this cliente/servico, skipping creation');
+    console.log(
+      'ℹ️ PACOTES já existe para este cliente/serviço, pulando criação',
+    );
   }
 }
 
@@ -261,15 +203,21 @@ async function seedAtendimentos(
         ID_CLIENTE: clienteId,
         ID_PET: petId,
         ID_SERVICO: servicoId,
+        HORARIO_ATENDIMENTO: '14:00',
         VALOR_COBRADO: '79.90',
-        TIPO: 'banho',
+        PULGAS: true,
+        CARRAPATOS: false,
+        DATA_ATENDIMENTO: new Date(),
+        SERVICOS_DISPONIVEIS: ['Banho', 'Tosa'],
         NOTAS: 'Primeira visita',
       },
     });
-    console.log('✅ ATENDIMENTOS created');
+    console.log('✅ ATENDIMENTOS criado');
     return atendimento;
   } else {
-    console.log('ℹ️ ATENDIMENTOS already exists for this relation, using first');
+    console.log(
+      'ℹ️ ATENDIMENTOS já existe para este cliente/pet/serviço, buscando o primeiro',
+    );
     return prisma.aTENDIMENTOS.findFirst({
       where: { ID_CLIENTE: clienteId, ID_PET: petId, ID_SERVICO: servicoId },
       orderBy: { ID_ATENDIMENTO: 'asc' },
@@ -278,44 +226,64 @@ async function seedAtendimentos(
 }
 
 async function seedAtendimentoImagens(atendimentoId: number) {
-  const count = await prisma.aTENDIMENTO_IMAGENS.count({ where: { ID_ATENDIMENTO: atendimentoId } });
+  const count = await prisma.aTENDIMENTO_IMAGENS.count({
+    where: { ID_ATENDIMENTO: atendimentoId },
+  });
   if (count === 0) {
     await prisma.aTENDIMENTO_IMAGENS.createMany({
       data: [
-        { ID_ATENDIMENTO: atendimentoId, CAMINHO_IMAGEM: '/uploads/atendimentos/1/foto1.jpg' },
+        {
+          ID_ATENDIMENTO: atendimentoId,
+          CAMINHO_IMAGEM: '/uploads/atendimentos/1/foto1.jpg',
+        },
       ],
     });
-    console.log('✅ ATENDIMENTO_IMAGENS created');
+    console.log('✅ ATENDIMENTO_IMAGENS criado');
   } else {
-    console.log('ℹ️ ATENDIMENTO_IMAGENS already exist for this atendimento, skipping creation');
+    console.log(
+      'ℹ️ ATENDIMENTO_IMAGENS já existe para este atendimento, pulando criação',
+    );
   }
 }
 
 async function main() {
-  console.log('🔄 Seeding database (new schema)...');
+  console.log('🔄 Enviando banco de dados (novo esquema)...');
 
   // Independent first
   const { byName: servicosByName } = await seedServicos();
   const { byName: clientesByName } = await seedClientes();
-  await seedUsuariosExemplo();
+  await seedUsuarios();
 
   // Dependent
-  const maria = clientesByName['Maria Silva'] || (await prisma.cLIENTES.findFirst({ orderBy: { ID_CLIENTE: 'asc' } }))!;
-  const banho = servicosByName['Banho'] || (await prisma.sERVICOS.findFirst({ orderBy: { ID_SERVICO: 'asc' } }))!;
+  const maria =
+    clientesByName['Maria Silva'] ||
+    (await prisma.cLIENTES.findFirst({ orderBy: { ID_CLIENTE: 'asc' } }))!;
+  const banho =
+    servicosByName['Banho'] ||
+    (await prisma.sERVICOS.findFirst({ orderBy: { ID_SERVICO: 'asc' } }))!;
 
   const pets = await seedPets(maria.ID_CLIENTE);
-  const pet = pets[0] || (await prisma.pETS.findFirst({ where: { ID_CLIENTE: maria.ID_CLIENTE }, orderBy: { ID_PET: 'asc' } }))!;
+  const pet =
+    pets[0] ||
+    (await prisma.pETS.findFirst({
+      where: { ID_CLIENTE: maria.ID_CLIENTE },
+      orderBy: { ID_PET: 'asc' },
+    }))!;
 
   await seedPacotes(maria.ID_CLIENTE, banho.ID_SERVICO);
-  const atendimento = await seedAtendimentos(maria.ID_CLIENTE, pet.ID_PET, banho.ID_SERVICO);
+  const atendimento = await seedAtendimentos(
+    maria.ID_CLIENTE,
+    pet.ID_PET,
+    banho.ID_SERVICO,
+  );
   await seedAtendimentoImagens(atendimento.ID_ATENDIMENTO);
 
-  console.log('🌟 Seeding finished (new schema)!');
+  console.log('🌟 Envio concluído (novo esquema)!');
 }
 
 main()
   .catch((e) => {
-    console.error('❌ Seed failed:', e);
+    console.error('❌ Falha no envio:', e);
     process.exit(1);
   })
   .finally(async () => {

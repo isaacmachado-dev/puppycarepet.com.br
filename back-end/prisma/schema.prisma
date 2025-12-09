@@ -11,7 +11,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  // url = env("DATABASE_URL") // Usar essa linha para gerar um cliente Prisma localmente
+  //url = env("DATABASE_URL") // Usar essa linha para gerar um cliente Prisma localmente
 }
 
 model ATENDIMENTOS {
@@ -25,6 +25,9 @@ model ATENDIMENTOS {
   VALOR_COBRADO  Decimal
   TIPO           String                @db.VarChar(50)
   NOTAS          String?
+  TELEFONE_DONO  String?               @db.VarChar(20)
+  IDADE_PET      String?               @db.VarChar(20)
+  PORTE_PET      String?               @db.VarChar(20)
   IMAGENS        ATENDIMENTO_IMAGENS[] // um atendimento pode ter várias imagens (back-relation para ATENDIMENTO_IMAGENS.ATENDIMENTO)
   // --- Campos de rastreamento com prioridade para uso offline ---
   PUBLIC_ID      String                @unique @default(uuid())
