@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+import { LoginHeader } from "../components/LoginHeader";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -53,29 +53,12 @@ export default function CreateNewAccount() {
   return (
     <section className="min-h-screen bg-[#1A112E] text-black">
       <div className="flex flex-row gap-2 p-8 absolute">
-        <span className="bg-[#FECE14] p-2 rounded-md text-black">
-          Criar Uma Nova Conta
-        </span>
-        <p className="p-2 text-white">Puppy Care</p>
+       <LoginHeader label="Criar Conta" text="Puppy Care" />
       </div>
       <div className="flex flex-col justify-center items-center px-5 min-h-screen">
         <div className="bg-white items-center justify-center align-middle p-8 rounded-xl w-full max-w-4xl shadow-lg">
           <div className="flex flex-col items-center justify-center gap-3">
-            <Image
-              src="/logos/brand/logo-redondo-maior-rosa.png"
-              alt="Petshop Puppy Care"
-              width={300}
-              height={300}
-              className="object-contain"
-              priority
-            />
-            <h2 className="text-2xl font-bold mb-6 text-center">
-              Criar Uma Nova Conta
-            </h2>
-            <p className="mb-4 text-center text-gray-700">
-              Digite seu e-mail cadastrado para receber instruções de
-              recuperação.
-            </p>
+
             <form onSubmit={handleSubmit}>
               {/* Primeira linha: Nome, E-mail, Senha */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
@@ -204,10 +187,7 @@ export default function CreateNewAccount() {
               <div className="flex justify-between items-center mt-4">
                 <span>
                   <p className="text-sm text-black">
-                    <a
-                      href="/login"
-                      className="relative group"
-                    >
+                    <a href="/login" className="relative group">
                       <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-black transition-all duration-300 group-hover:w-full"></span>
                       Acessar minha conta
                     </a>
@@ -215,10 +195,7 @@ export default function CreateNewAccount() {
                 </span>
                 <span>
                   <p className="text-sm text-black">
-                    <a
-                      href="/login/esqueci-a-senha"
-                      className="relative group"
-                    >
+                    <a href="/login/esqueci-a-senha" className="relative group">
                       <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-black transition-all duration-300 group-hover:w-full"></span>
                       Esqueceu a senha?
                     </a>

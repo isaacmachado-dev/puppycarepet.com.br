@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+import { LoginHeader } from "../components/LoginHeader";
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -42,23 +42,13 @@ export default function ResetPassword() {
   return (
     <section className="min-h-screen bg-[#1A112E] text-black">
       <div className="flex flex-row gap-2 p-8 absolute">
-        <span className="bg-[#FECE14] p-2 rounded-md text-black">
-          Redefinir Senha
-        </span>
-        <p className="p-2 text-white">Puppy Care</p>
+        <LoginHeader label="Redefinir Senha" text="Puppy Care" className="text-white" />
       </div>
 
       <div className="flex flex-col justify-center items-center px-5 min-h-screen">
         <div className="bg-white items-center justify-center align-middle p-8 rounded-xl w-full max-w-lg shadow-lg">
           <div className="flex flex-col items-center justify-center gap-6">
-            <Image
-              src="/logos/brand/logo-redondo-maior-rosa.png"
-              alt="Petshop Puppy Care"
-              width={300}
-              height={300}
-              className="object-contain"
-              priority
-            />
+            
             <h2 className="text-2xl font-bold mb-4 text-center">
               Redefinir a Senha
             </h2>

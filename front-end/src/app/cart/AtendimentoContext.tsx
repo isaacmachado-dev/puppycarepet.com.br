@@ -1,6 +1,6 @@
 "use client";
 import { createContext, useContext, useState, ReactNode } from "react";
-import { Atendimento } from "../../types/atendimento";
+import { Atendimento } from "./types/atendimento";
 
 interface AtendimentoContextProps {
   atendimento: Partial<Atendimento>;

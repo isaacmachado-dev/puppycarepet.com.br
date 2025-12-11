@@ -14,7 +14,7 @@ export async function getUsuario(id: string) {
   return res.json();
 }
 
-export async function updateUsuario(id: string, data: any) {
+export async function updateUsuario(id: string, data: HTMLFormElement) {
   const res = await fetch(`/api/usuarios/${id}`, {
     method: 'PATCH',
     headers: { 'Content-Type': 'application/json' },

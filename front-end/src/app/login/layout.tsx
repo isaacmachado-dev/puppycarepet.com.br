@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "Login - Puppy Care",
-    description: "Bla bla bla",
+  title: "Login - Puppy Care",
+  description: "Bla bla bla",
 };
 
-export default function LoginLayout({ children }: { children: React.ReactNode }) {
-    return (
-        <section className="">
-            {children}
-        </section>
-    );
+export default function LoginLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <section className="min-h-screen bg-[#1A112E] text-black">
+      {children}
+    </section>
+  );
 }

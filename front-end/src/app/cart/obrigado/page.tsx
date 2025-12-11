@@ -21,7 +21,7 @@ export default function ThankYouPage() {
 
   const ToolbarButtonGroup = () => {
     return (
-      <section>
+      <section className="bg-white p-10 rounded-xl shadow-lg w-3/4">
         <CartTitleHeader title="Obrigado pela sua atenção!" />
         <CartSubTitleHeader subtitle="Recebemos a sua resposta! Em breve entraremos em contato para confirmar o agendamento do atendimento do seu pet." />
         {error && (

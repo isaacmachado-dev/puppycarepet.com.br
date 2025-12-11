@@ -28,7 +28,7 @@ export default function AvailableServicesPage() {
     const [selected, setSelected] = useState<string[]>(["Tosa"]);
 
     return (
-      <section>
+      <section className="bg-white p-10 rounded-xl shadow-lg w-3/4">
         <CartTitleHeader title="Qual é o temperamento do seu pet?" />
         <CartSubTitleHeader subtitle="Prezando o bem estar do seu pet e dos seus profissionais não atendemos cães agressivos." />
         {error && (
@@ -58,12 +58,8 @@ export default function AvailableServicesPage() {
               </div>
             </div>
           </div>
-          <div>
-            <div className="flex justify-between items-center mt-4">
-              <span className="flex-1 flex justify-end">
-                <CartButton nextHref="/cart/obrigado" />
-              </span>
-            </div>
+          <div className="flex w-full justify-end mt-6">
+            <CartButton nextHref="/cart/obrigado" />
           </div>
         </form>
       </section>
