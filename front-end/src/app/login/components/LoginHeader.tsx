@@ -1,14 +1,14 @@
 import React from "react";
 import Image from "next/image";
 
-interface CartHeaderProps {
+interface LoginHeaderProps {
   label: string;
   text: string;
   className?: string;
   priority?: boolean;
 }
 
-export const CartHeader: React.FC<CartHeaderProps> = ({ label, text, className = "object-contain", priority = true }) => {
+export const LoginHeader: React.FC<LoginHeaderProps> = ({ label, text, className = "object-contain", priority = true }) => {
   return (
     <div className="flex flex-row justify-start mb-6 gap-[3px] items-center">
       <Image

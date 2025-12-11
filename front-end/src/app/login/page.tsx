@@ -1,15 +1,11 @@
 "use client";
-import Image from "next/image";
+
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
+import { LoginHeader } from "./components/LoginHeader";
 
 export default function LoginPage() {
-  // const router = useRouter();
-  // const handleLoginClick = () => {
-  //     router.push('/admin');
-  // }
-
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [error, setError] = useState("");
@@ -41,22 +37,13 @@ export default function LoginPage() {
   return (
     <section className="min-h-screen bg-[#1A112E] text-black">
       <div className="flex flex-row gap-2 p-8 absolute">
-        <span className="bg-[#FECE14] p-2 rounded-md text-black">Acesso</span>
-        <p className="p-2 text-white">Puppy Care</p>
+        <LoginHeader label="Acesso" text="Puppy Care" />
       </div>
 
       <div className="flex flex-col justify-center items-center px-5 min-h-screen">
         <div className="bg-white items-center justify-center align-middle p-8 rounded-xl w-full max-w-lg shadow-lg">
           <div className="flex flex-col items-center justify-center gap-6">
-            <Image
-              src="/logos/brand/logo-redondo-maior-rosa.png"
-              alt="Petshop Puppy Care"
-              width={300}
-              height={300}
-              className="object-contain"
-              priority
-            />
-            <h1 className="font-bold text-black text-2xl mb-4">Login</h1>
+           
             <form
               className="flex flex-col gap-4 w-full"
               onSubmit={handleSubmit}
@@ -102,10 +89,7 @@ export default function LoginPage() {
               <div className="flex justify-between items-center mt-4">
                 <span>
                   <p className="text-sm text-black">
-                    <a
-                      href="/login/esqueci-a-senha"
-                      className="relative group"
-                    >
+                    <a href="/login/esqueci-a-senha" className="relative group">
                       <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-black transition-all duration-300 group-hover:w-full"></span>
                       Esqueceu a senha?
                     </a>

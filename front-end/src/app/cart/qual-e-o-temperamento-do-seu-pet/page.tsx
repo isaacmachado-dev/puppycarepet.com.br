@@ -28,8 +28,11 @@ export default function YourPetTemperamentPage() {
     const [activeOption, setActiveOption] = useState("Bonzinho");
 
     return (
-      <section>
-        <CartTitleHeader title="Qual é o temperamento do seu pet?" />
+      <section className="bg-white p-10 rounded-xl shadow-lg w-3/4">
+        <CartTitleHeader
+          title="Qual é o temperamento do seu pet?"
+          backStep="qual-e-o-temperamento-do-pet"
+        />
         <CartSubTitleHeader subtitle="Prezando o bem estar do seu pet e dos seus profissionais não atendemos cães agressivos." />
         {error && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 w-full max-w-lg">
@@ -37,26 +40,19 @@ export default function YourPetTemperamentPage() {
           </div>
         )}
         <form onSubmit={handleSubmit}>
-          {/* Bloco único: Horários */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <div className="flex flex-col col-span-1">
-              <div className="flex gap-4 h-full items-end">
-                <span className="font-semibold mb-2 text-sm text-gray-700">
-                  <CartYourPetTemperament
-                    label="Selecione uma opção"
-                    activeOption={activeOption}
-                    setActiveOption={setActiveOption}
-                  />
-                  <input
-                    type="hidden"
-                    name="temperamento"
-                    value={activeOption}
-                    onChange={() => {}} // Placeholder to maintain structure
-                  />
-                </span>
-              </div>
-            </div>
-          </div>
+          <span className="grid grid-cols-1 md:grid-cols-1 gap-6 mt-4">
+            <CartYourPetTemperament
+              label="Selecione uma opção"
+              activeOption={activeOption}
+              setActiveOption={setActiveOption}
+            />
+            <input
+              type="hidden"
+              name="temperamento"
+              value={activeOption}
+              onChange={() => {}} // Adicionado para evitar aviso de campo não controlado
+            />
+          </span>
           <div>
             <div className="flex justify-between items-center mt-4">
               <span className="flex-1 flex justify-end">
