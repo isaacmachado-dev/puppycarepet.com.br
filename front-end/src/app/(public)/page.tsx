@@ -1,11 +1,11 @@
 import Image from "next/image";
-import DogSection from "../components/sections/DogSection";
-import CatSection from "../components/sections/CatSection";
-import OurServices from "../components/sections/OurServices";
-import HomeScreen from "../components/ui/custom/HomeScreen";
-import { SetupSection } from "../components/ui/custom/ConfigSection";
+import DogSection from "../../components/sections/DogSection";
+import CatSection from "../../components/sections/CatSection";
+import OurServices from "../../components/sections/OurServices";
+import HomeScreen from "../../components/ui/custom/HomeScreen";
+import { SetupSection } from "../../components/ui/custom/ConfigSection";
 // import { AdminButton } from "../components/ui/custom/AdminButton";
-import FooterClient from "../components/ui/custom/FooterClient";
+import FooterClient from "../../components/ui/custom/FooterClient";
 
 import Link from "next/link";
 export default function Home() {
@@ -64,7 +64,7 @@ export default function Home() {
               <div className="flex justify-center items-center w-full place-self-auto">
 
                 <Link
-                  href="/cart"
+                  href="/atendimento"
                   className="rounded-md bg-[#1A89A2] px-10 py-4 hover:bg-[#186E81] text-white font-semibold tracking-[2] transform transition-transform duration-200 hover:scale-120 will-change-auto mt-5 text-center sm:-mx-auto sm:text-xl"
                 >
                   Agende agora

@@ -18,13 +18,13 @@ const cartStepOrder = [
 ];
 
 const cartSteps = {
-  cart: "/cart",
-  "horario-de-atendimento": "/cart/horario-de-atendimento",
-  "seu-pet-tem-pulga-ou-carrapato": "/cart/seu-pet-tem-pulga-ou-carrapato",
-  "qual-e-o-temperamento-do-pet": "/cart/qual-e-o-temperamento-do-seu-pet",
-  "possui-alguma-alergia-ou-alguma-doenca": "/cart/possui-alguma-alergia-ou-alguma-doenca",
-  "servicos-disponiveis": "/cart/servicos-disponiveis",
-  obrigado: "/cart/obrigado",
+  cart: "/atendimento/cart",
+  "horario-de-atendimento": "/atendimento/cart/horario-de-atendimento",
+  "seu-pet-tem-pulga-ou-carrapato": "/atendimento/cart/seu-pet-tem-pulga-ou-carrapato",
+  "qual-e-o-temperamento-do-pet": "/atendimento/cart/qual-e-o-temperamento-do-seu-pet",
+  "possui-alguma-alergia-ou-alguma-doenca": "/atendimento/cart/possui-alguma-alergia-ou-alguma-doenca",
+  "servicos-disponiveis": "/atendimento/cart/servicos-disponiveis",
+  obrigado: "/atendimento/cart/obrigado",
 };
 
 export const CartTitleHeader: React.FC<CartTitleHeaderProps> = ({ title, backStep = "cart" }) => {

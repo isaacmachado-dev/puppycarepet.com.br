@@ -128,7 +128,7 @@ export default function CartWelcome() {
             <CartLinkInfo />
           </div>
           <div className="flex justify-end">
-            <CartButton nextHref="/cart/horario-de-atendimento" />
+            <CartButton nextHref="/atendimento/cart/horario-de-atendimento" />
           </div>
         </div>
       </form>
