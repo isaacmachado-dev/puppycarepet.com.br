@@ -18,11 +18,10 @@ export const CartFleaTick: React.FC<CartFleaTickProps> = ({ label, value, setVal
             variant={value === option.label ? "default" : "outline"}
             onClick={() => setValue(option.label)}
             aria-pressed={value === option.label}
-            className={`px-8 py-4 text-lg rounded-lg font-bold flex items-center gap-2 h-[48px] border-2 transition-colors ${
-              value === option.label
+            className={`px-8 py-4 text-lg rounded-lg font-bold flex items-center gap-2 cursor-pointer h-[48px] border-2 transition-colors ${value === option.label
                 ? option.color
                 : "bg-white text-black border-gray-300 hover:bg-gray-100"
-            }`}
+              }`}
           >
             {option.label}
           </Button>

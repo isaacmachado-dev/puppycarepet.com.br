@@ -1,4 +1,4 @@
-import { Usuario } from "../../atendimento/cart/types/usuario";
+import { Usuario } from "../../cart/types/usuario";
 
 export async function loginUser(data: { email: string; password: string }): Promise<Usuario> {
     const res = await fetch("http://localhost:3000/auth/login", {

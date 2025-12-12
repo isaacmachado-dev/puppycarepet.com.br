@@ -67,7 +67,7 @@ export default function CartWelcome() {
                 label="Nome do dono de pet"
                 name="name"
                 placeholder="Nome do dono do pet"
-                className="p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-[#E72989] transition w-full"
+                className="p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-[#E72989] transition w-full "
                 required
               />
             </span>
@@ -128,7 +128,10 @@ export default function CartWelcome() {
             <CartLinkInfo />
           </div>
           <div className="flex justify-end">
-            <CartButton nextHref="/atendimento/cart/horario-de-atendimento" />
+            <CartButton
+              nextHref="/cart/horario-de-atendimento"
+
+            />
           </div>
         </div>
       </form>

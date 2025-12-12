@@ -1,11 +1,11 @@
 "use client";
 import { useState } from "react";
-import { CartButton } from "../components/CartButton";
-import { CartOpeningHours } from "../components/CartOpeningHours";
+import { CartFleaTick } from "../components/CartFleaTick";
 import { CartTitleHeader } from "../components/CartTitleHeader";
 import { CartSubTitleHeader } from "../components/CartSubTitleHeader";
+import { CartButton } from "../components/CartButton";
 
-export default function OpeningHoursPage() {
+export default function FleasOrTicksPage() {
   const [error, setError] = useState("");
 
   async function handleSubmit(e: React.FormEvent) {
@@ -21,15 +21,15 @@ export default function OpeningHoursPage() {
   }
 
   const ToolbarButtonGroup = () => {
-    const [activeOption, setActiveOption] = useState("09:30");
+    const [activeOption, setActiveOption] = useState("Não tem");
 
     return (
       <section className="bg-white p-10 rounded-xl shadow-lg w-3/4">
         <CartTitleHeader
-          title="Horário de atendimento"
-          backStep="horario-de-atendimento"
+          title="Seu pet tem pulga ou carrapato?"
+          backStep="seu-pet-tem-pulga-ou-carrapato"
         />
-        <CartSubTitleHeader subtitle="Escolha um dos horários para buscarmos seu pet ou levar ele até nós!" />
+        <CartSubTitleHeader subtitle="Essa informação é importante para garantirmos a segurança do seu pet e dos nossos profissionais durante o atendimento." />
         {error && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 w-full max-w-lg">
             {error}
@@ -38,15 +38,20 @@ export default function OpeningHoursPage() {
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 md:grid-cols-1 gap-6 mt-4">
             <span className="font-semibold mb-2 text-sm text-gray-700">
-              <CartOpeningHours
-                label="Selecione o horário"
-                activeOption={activeOption}
-                setActiveOption={setActiveOption}
+              <CartFleaTick
+                label="Selecione uma opção"
+                value={activeOption}
+                setValue={setActiveOption}
+              />
+              <input
+                type="hidden"
+                name="pulgaOuCarrapato"
+                value={activeOption}
               />
             </span>
           </div>
           <div className="flex w-full justify-end mt-6">
-            <CartButton nextHref="/atendimento/cart/seu-pet-tem-pulga-ou-carrapato" />
+            <CartButton nextHref="/cart/qual-e-o-temperamento-do-seu-pet" />
           </div>
         </form>
       </section>

@@ -19,11 +19,10 @@ export const CartAlergicSick: React.FC<CartAlergicSickProps> = ({ label }) => {
             variant={alergiaOption === "Sim" ? "default" : "outline"}
             onClick={() => setAlergiaOption("Sim")}
             aria-pressed={alergiaOption === "Sim"}
-            className={`h-[48px] min-w-[100px] text-base px-8 py-4 font-bold flex items-center justify-center transition ${
-              alergiaOption === "Sim"
-                ? "bg-[#1A112E] text-white hover:bg-[#0A002E]"
-                : "bg-white text-[#1A112E] border-2 border-[#1A112E] hover:bg-[#f3f3f3]"
-            }`}
+            className={`cursor-pointer h-[48px] min-w-[100px] text-base px-8 py-4 font-bold flex items-center justify-center transition ${alergiaOption === "Sim"
+              ? "bg-[#1A112E] text-white hover:bg-[#0A002E]"
+              : "bg-white text-[#1A112E] border-2 border-[#1A112E] hover:bg-[#f3f3f3]"
+              }`}
           >
             Sim
           </Button>
@@ -46,11 +45,10 @@ export const CartAlergicSick: React.FC<CartAlergicSickProps> = ({ label }) => {
             variant={alergiaOption === "Não" ? "default" : "outline"}
             onClick={() => setAlergiaOption("Não")}
             aria-pressed={alergiaOption === "Não"}
-            className={`h-[48px] min-w-[80px] text-base px-8 py-3 font-bold flex items-center justify-center transition ${
-              alergiaOption === "Não"
-                ? "bg-[#1A112E] text-white hover:bg-[#0A002E]"
-                : "bg-white text-[#1A112E] border-2 border-[#1A112E] hover:bg-[#f3f3f3]"
-            }`}
+            className={`cursor-pointer h-[48px] min-w-[80px] text-base px-8 py-3 font-bold flex items-center justify-center transition ${alergiaOption === "Não"
+              ? "bg-[#1A112E] text-white hover:bg-[#0A002E]"
+              : "bg-white text-[#1A112E] border-2 border-[#1A112E] hover:bg-[#f3f3f3]"
+              }`}
           >
             Não
           </Button>
@@ -64,11 +62,10 @@ export const CartAlergicSick: React.FC<CartAlergicSickProps> = ({ label }) => {
             variant={doencaOption === "Sim" ? "default" : "outline"}
             onClick={() => setDoencaOption("Sim")}
             aria-pressed={doencaOption === "Sim"}
-            className={`h-[48px] min-w-[100px] text-base px-8 py-4 font-bold flex items-center justify-center transition ${
-              doencaOption === "Sim"
-                ? "bg-[#1A112E] text-white hover:bg-[#0A002E]"
-                : "bg-white text-[#1A112E] border-2 border-[#1A112E] hover:bg-[#f3f3f3]"
-            }`}
+            className={`cursor-pointer h-[48px] min-w-[100px] text-base px-8 py-4 font-bold flex items-center justify-center transition ${doencaOption === "Sim"
+              ? "bg-[#1A112E] text-white hover:bg-[#0A002E]"
+              : "bg-white text-[#1A112E] border-2 border-[#1A112E] hover:bg-[#f3f3f3]"
+              }`}
           >
             Sim
           </Button>
@@ -91,11 +88,10 @@ export const CartAlergicSick: React.FC<CartAlergicSickProps> = ({ label }) => {
             variant={doencaOption === "Não" ? "default" : "outline"}
             onClick={() => setDoencaOption("Não")}
             aria-pressed={doencaOption === "Não"}
-            className={`h-[48px] min-w-[100px] text-base px-8 py-4 font-bold flex items-center justify-center transition ${
-              doencaOption === "Não"
-                ? "bg-[#1A112E] text-white hover:bg-[#0A002E]"
-                : "bg-white text-[#1A112E] border-2 border-[#1A112E] hover:bg-[#f3f3f3]"
-            }`}
+            className={`cursor-pointer h-[48px] min-w-[100px] text-base px-8 py-4 font-bold flex items-center justify-center transition ${doencaOption === "Não"
+              ? "bg-[#1A112E] text-white hover:bg-[#0A002E]"
+              : "bg-white text-[#1A112E] border-2 border-[#1A112E] hover:bg-[#f3f3f3]"
+              }`}
           >
             Não
           </Button>
