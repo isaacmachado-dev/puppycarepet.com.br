@@ -18,13 +18,13 @@ const cartStepOrder = [
 ];
 
 const cartSteps = {
-  cart: "/atendimento/cart",
-  "horario-de-atendimento": "/atendimento/cart/horario-de-atendimento",
-  "seu-pet-tem-pulga-ou-carrapato": "/atendimento/cart/seu-pet-tem-pulga-ou-carrapato",
-  "qual-e-o-temperamento-do-pet": "/atendimento/cart/qual-e-o-temperamento-do-seu-pet",
-  "possui-alguma-alergia-ou-alguma-doenca": "/atendimento/cart/possui-alguma-alergia-ou-alguma-doenca",
-  "servicos-disponiveis": "/atendimento/cart/servicos-disponiveis",
-  obrigado: "/atendimento/cart/obrigado",
+  cart: "/",
+  "horario-de-atendimento": "/cart/horario-de-atendimento",
+  "seu-pet-tem-pulga-ou-carrapato": "/cart/seu-pet-tem-pulga-ou-carrapato",
+  "qual-e-o-temperamento-do-pet": "/cart/qual-e-o-temperamento-do-seu-pet",
+  "possui-alguma-alergia-ou-alguma-doenca": "/cart/possui-alguma-alergia-ou-alguma-doenca",
+  "servicos-disponiveis": "/cart/servicos-disponiveis",
+  obrigado: "/cart/obrigado",
 };
 
 export const CartTitleHeader: React.FC<CartTitleHeaderProps> = ({ title, backStep = "cart" }) => {
@@ -37,7 +37,7 @@ export const CartTitleHeader: React.FC<CartTitleHeaderProps> = ({ title, backSte
       <button
         type="button"
         onClick={() => (window.location.href = prevHref)}
-        className="bg-[#FFFFFF] text-[#1A112E] hover:bg-[#FFFFFF] text-[#0A002E] transition rounded-full p-2 flex items-center justify-center"
+        className="bg-[#FFFFFF] text-[#1A112E] hover:bg-[#FFFFFF] text-[#0A002E] transition rounded-full p-2 flex items-center justify-center cursor-pointer"
         aria-label="Voltar"
         style={{ width: 40, height: 40 }}
       >

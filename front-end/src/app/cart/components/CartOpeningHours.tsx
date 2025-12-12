@@ -21,12 +21,11 @@ export const CartOpeningHours: React.FC<CartOpeningHoursProps> = ({
             variant={activeOption === hour ? "default" : "outline"}
             onClick={() => setActiveOption(hour)}
             aria-pressed={activeOption === hour}
-            className={`h-[48px] min-w-[100px] text-base px-8 py-4 font-bold flex items-center justify-center transition
-            ${
-              activeOption === hour
+            className={`h-[48px] min-w-[100px] text-base px-8 py-4 font-bold flex items-center justify-center transition cursor-pointer
+            ${activeOption === hour
                 ? "bg-[#1A112E] text-white hover:bg-[#0A002E]"
                 : "bg-white text-[#1A112E] border-2 border-[#1A112E] hover:bg-[#f3f3f3]"
-            }
+              }
             `}
           >
             {hour}

@@ -59,7 +59,7 @@ export default function AvailableServicesPage() {
             </div>
           </div>
           <div className="flex w-full justify-end mt-6">
-            <CartButton nextHref="/atendimento/cart/obrigado" />
+            <CartButton nextHref="/cart/obrigado" />
           </div>
         </form>
       </section>

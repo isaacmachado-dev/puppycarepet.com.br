@@ -34,7 +34,7 @@ export const CartButton: React.FC<CartButtonProps> = ({
   return (
     <div className="flex justify-end mt-6">
       <button
-        className="bg-[#1A112E] text-white hover:bg-[#0A002E] transition px-8 py-4 text-lg rounded-lg font-bold flex items-center gap-2 h-[48px]"
+        className="bg-[#1A112E] text-white hover:bg-[#0A002E] transition px-8 py-4 text-lg rounded-lg font-bold flex items-center gap-2 h-[48px] cursor-pointer"
         aria-label={buttonText}
         style={{ width: 190, height: 56 }}
         onClick={handleClick}

@@ -40,7 +40,7 @@ export default function YourPetTemperamentPage() {
           </div>
         )}
         <form onSubmit={handleSubmit}>
-          <span className="grid grid-cols-1 md:grid-cols-1 gap-6 mt-4">
+          <span className="grid grid-cols-1 md:grid-cols-1 gap-6 mt-4 cursor-pointer">
             <CartYourPetTemperament
               label="Selecione uma opção"
               activeOption={activeOption}
@@ -56,7 +56,7 @@ export default function YourPetTemperamentPage() {
           <div>
             <div className="flex justify-between items-center mt-4">
               <span className="flex-1 flex justify-end">
-                <CartButton nextHref="/atendimento/cart/possui-alguma-alergia-ou-alguma-doenca" />
+                <CartButton nextHref="/cart/possui-alguma-alergia-ou-alguma-doenca" />
               </span>
             </div>
           </div>

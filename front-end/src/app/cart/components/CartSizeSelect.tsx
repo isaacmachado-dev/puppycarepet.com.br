@@ -14,7 +14,7 @@ export const CartSizeSelect: React.FC<CartSizeSelectProps> = ({ label, ...props 
   <div className="flex flex-col col-span-1">
     <label>{label}</label>
     <select
-      className="p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-[#E72989] transition w-full"
+      className="p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-[#E72989] transition w-full cursor-pointer"
       {...props}
     >
       <option value="" disabled>
@@ -22,7 +22,11 @@ export const CartSizeSelect: React.FC<CartSizeSelectProps> = ({ label, ...props 
       </option>
       {sizes.map((opt) => (
         <option key={opt.value} value={opt.value}>
-          {opt.label}
+
+          <div >
+            {opt.label}
+          </div>
+
         </option>
       ))}
     </select>
