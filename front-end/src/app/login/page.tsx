@@ -1,9 +1,8 @@
 "use client";
-
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
-import { LoginHeader } from "./components/LoginHeader";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -37,13 +36,24 @@ export default function LoginPage() {
   return (
     <section className="min-h-screen bg-[#1A112E] text-black">
       <div className="flex flex-row gap-2 p-8 absolute">
-        <LoginHeader label="Acesso" text="Puppy Care" />
+        <span className="bg-[#FECE14] p-2 rounded-md text-black">Acesso</span>
+        <p className="p-2 text-white">Puppy Care</p>
       </div>
 
       <div className="flex flex-col justify-center items-center px-5 min-h-screen">
-        <div className="bg-white items-center justify-center align-middle p-8 rounded-xl w-full max-w-lg shadow-lg">
-          <div className="flex flex-col items-center justify-center gap-6">
-           
+        <div className="bg-white items-center justify-center align-middle p-8 rounded-xl w-full max-w-md shadow-lg">
+          <div className="flex flex-col items-center justify-center gap-3">
+            <Image
+              src="/logos/brand/logo-redondo-maior-rosa.png"
+              alt="Petshop Puppy Care"
+              width={300}
+              height={300}
+              className="object-contain"
+              priority
+            />
+
+            <h1 className="font-bold text-black text-xl">Login</h1>
+
             <form
               className="flex flex-col gap-4 w-full"
               onSubmit={handleSubmit}
@@ -52,7 +62,7 @@ export default function LoginPage() {
                 name="username"
                 type="email"
                 placeholder="E-mail"
-                className="p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-[#E72989] transition w-full"
+                className="text-black bg-white rounded-md p-2 pl-4 placeholder-black hover:placeholder-black hover:text-black hover:bg-gray-200/50 transition-colors duration-300 focus:outline-2 focus:outline-black hover:outline-2 hover:outline-gray-200"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -62,34 +72,41 @@ export default function LoginPage() {
                   name="password"
                   type={showPassword ? "text" : "password"}
                   placeholder="Senha"
-                  className="p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-[#E72989] transition w-full"
+                  className=" text-black bg-white  rounded-md p-2 pl-4 placeholder-black group-hover:text-black group-hover:placeholder-black group-hover:bg-gray-200/50 transition-colors duration-300 focus:outline-2 focus:outline-black group-hover:outline-2 hover:outline-gray-200 w-full pr-4 "
                   value={senha}
                   onChange={(e) => setSenha(e.target.value)}
                   required
                 />
-                <button
-                  type="button"
-                  className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-[#E72989]"
-                  onClick={() => setShowPassword((prev) => !prev)}
-                  tabIndex={-1}
-                >
-                  {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                </button>
+
+                <div className="container">
+                  <button
+                    type="button"
+                    className="text-black absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-black cursor-pointer ease-in-out duration-300"
+                    onClick={() => setShowPassword((v) => !v)}
+                    tabIndex={-1}
+                  >
+                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
+                </div>
               </div>
+
               <button
                 type="submit"
-                className="w-full bg-[#E72989] text-white rounded-lg p-3 hover:bg-[#dc197b] font-bold text-lg transition-transform hover:scale-105 will-change-auto transition-colors duration-300 cursor-pointer"
+                className="bg-[#E72989] text-white rounded-md p-2 hover:bg-[#dc197b] font-bold tracking-[2] transition-transform hover:scale-105 will-change-auto transition-colors duration-300 cursor-pointer"
               >
                 Entrar
               </button>
-              <div className="h-0 text-red-600 font-semibold text-center flex items-center justify-center mt-2">
+              <div className="h-0 text-red-600 font-semibold text-center flex items-center justify-center">
                 {error || ""}
               </div>
 
               <div className="flex justify-between items-center mt-4">
                 <span>
                   <p className="text-sm text-black">
-                    <a href="/login/esqueci-a-senha" className="relative group">
+                    <a
+                      href="/login/esqueci-a-senha"
+                      className="relative group"
+                    >
                       <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-black transition-all duration-300 group-hover:w-full"></span>
                       Esqueceu a senha?
                     </a>

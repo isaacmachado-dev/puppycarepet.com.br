@@ -17,10 +17,13 @@ import AdminMenuItem from "../../components/ui/custom/AdminMenuItem";
 import AgendamentoPage from "./agendamento/page";
 import ClientesPage from "./clientes/page";
 import AnalisePage from "./analise/page";
-import { UsuariosPage as Usuarios } from "./usuarios/page";
+import UsuariosPage from "./usuarios/page";
+import OpcoesPage from "./opcoes/page";
+
 import { useRouter } from "next/navigation";
 import AdminHomeLoading from "@/app/admin/components/loading/AdminHomeLoading";
 import { getUsuarios } from "../api/api";
+
 
 // async function getUsuarios() {
 //   const res = await fetch("/api/usuarios");
@@ -86,7 +89,7 @@ export default function AdminPage() {
         <AdminHomeLoading loaded={true} funcionario={nomeUsuario || "Mônica"} />
       </div>
 
-      <div className="relative flex min-h-screen bg-[#E3E3E3] text-black font-bold">
+      <div className="relative flex min-h-screen text-black font-bold">
         <aside
           className={`relative z-10 bg-[#1A112E] shadow-lg py-4 px-4 transition-all duration-300 ${isOpen ? "w-[250px]" : "w-[125px]"
             }`}
@@ -207,7 +210,7 @@ export default function AdminPage() {
                     : "justify-start"
                     }`}
                   label="Opções"
-                  href="#"
+                  href=""
                   isOpen={isOpen}
                   active={paginaAtual === "opcoes"}
                   onClick={() => setPaginaAtual("opcoes")}
@@ -237,7 +240,8 @@ export default function AdminPage() {
             {paginaAtual === "agendamentos" && <AgendamentoPage />}
             {paginaAtual === "clientes" && <ClientesPage />}
             {paginaAtual === "analise" && <AnalisePage />}
-            {paginaAtual === "usuarios" && <Usuarios />}
+            {paginaAtual === "usuarios" && <UsuariosPage />}
+            {paginaAtual === "opcoes" && <OpcoesPage />}
           </section>
         </main>
       </div>

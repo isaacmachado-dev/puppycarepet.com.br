@@ -24,7 +24,7 @@ const ITEMS: AgendaItem[] = [
         price: "R$ 80,00",
     },
     {
-        time: "11:00",
+        time: "12:00",
         pet: "Flash",
         owner: "Barry Allen",
         services: ["Banho"],
