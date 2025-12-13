@@ -70,18 +70,18 @@ function AgendaRow({ item }: { item: AgendaItem }) {
 
     const [shift, setShift] = useState<"-50%" | "0%" | "50%">("0%");
     return (
-        <div className="flex flex-row p-2 border-2 border-black rounded-md mt-10">
+        <div className="flex flex-row p-2 border-2 border-black dark:border-white dark:text-white rounded-md mt-10">
 
             <div>
                 {/* horário */}
 
                 <div>
-                    <span className="text-2xl pt-4 pb-10 px-5 bg-gray-200 border-2 border-black rounded-md items-center">
+                    <span className="text-2xl pt-4 pb-10 px-5 bg-gray-200 border-2 border-black dark:border-white rounded-md items-center text-black">
                         {item.time}
 
                     </span>
                     <br />
-                    <span className="flex justify-center">
+                    <span className="flex justify-center text-black">
                         {item.day}
                     </span>
                 </div>
@@ -121,7 +121,7 @@ function AgendaRow({ item }: { item: AgendaItem }) {
                             </span>
                         ))}
                     </div>
-                    <span className="font-bold text-sm whitespace-nowrap ml-auto m-2">
+                    <span className="font-bold text-sm whitespace-nowrap ml-auto m-2 dark:text-black">
                         {item.price}
                     </span>
                 </div>

@@ -83,6 +83,11 @@
   margin-bottom: 20px;
 }
 
+.dark .date-nav-container {
+  background-color: #171717;
+  color: white;
+}
+
 .day-item {
   display: flex;
   flex-direction: column;

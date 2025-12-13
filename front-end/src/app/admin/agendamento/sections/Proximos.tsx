@@ -34,17 +34,19 @@ const ITEMS: AgendaItem[] = [
 
 function AgendaRow({ item }: { item: AgendaItem }) {
     return (
-        <div className="flex flex-row p-2 border-2 border-black rounded-md mt-10">
+        <div className="flex flex-row p-2 border-2 border-black dark:border-white dark:text-white rounded-md mt-10">
 
             <div>
                 {/* horário */}
-                <span className="text-3xl p-4 bg-gray-200 border-2 border-black rounded-md text-center mr-2">
+                <span className="text-3xl p-4 bg-gray-200 border-3 border-black dark:border-white 
+                dark:text-black
+                rounded-md text-center mr-2">
                     {item.time}
                 </span>
             </div>
 
             {/* play */}
-            <button className="bg-primary p-2 rounded-md text-white font-bold hover:bg-primary/80 transition-colors cursor-pointer flex items-center justify-center mr-2">
+            <button className="bg-primary p-2 rounded-md text-white font-bold hover:bg-primary/80 transition-colors cursor-pointer flex items-center justify-center mr-2 dark:text-black">
                 <Play size={20} />
             </button>
 
@@ -80,7 +82,7 @@ function AgendaRow({ item }: { item: AgendaItem }) {
                             </span>
                         ))}
                     </div>
-                    <span className="font-bold text-sm whitespace-nowrap ml-auto m-2">
+                    <span className="font-bold text-sm whitespace-nowrap ml-auto m-2 dark:text-black">
                         {item.price}
                     </span>
                 </div>

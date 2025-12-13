@@ -108,19 +108,19 @@ export default function UsuariosPage() {
 
         <div className="flex justify-center">
           <div className="flex flex-row gap-10">
-            <div className="bg-white p-10 rounded-md flex flex-col items-center text-center w-40">
+            <div className="bg-white dark:bg-[#171717] dark:text-white p-10 rounded-md flex flex-col items-center text-center w-40">
               <User className="flex" width="40px" height="40px" />
               <h1>Colaboradores</h1>
               <p>{numColaboradores}</p>
             </div>
 
-            <div className="bg-white p-10 rounded-md flex flex-col items-center text-center w-40">
+            <div className="bg-white dark:bg-[#171717] dark:text-white p-10 rounded-md flex flex-col items-center text-center w-40">
               <CarFront className="flex" width="40px" height="40px" />
               <h1>Condutores</h1>
               <p>{condutores}</p>
             </div>
 
-            <div className="bg-white p-10 rounded-md flex flex-col items-center text-center w-40">
+            <div className="bg-white dark:bg-[#171717] dark:text-white p-10 rounded-md flex flex-col items-center text-center w-40">
               <ShieldUser className="flex" width="40px" height="40px" />
               <h1>Administradores</h1>
               <p>{administradores}</p>
@@ -138,18 +138,18 @@ export default function UsuariosPage() {
 
         <div className="flex flex-row gap-2 flex-wrap items-center justify-center">
           <div>
-            <h2>Nome</h2>
+            <h2 className="dark:text-white">Nome</h2>
             <input
               type="text"
               placeholder="Digite o nome..."
-              className="bg-white dark:bg-[#171717] rounded-md p-2 pl-4 text-sm font-bold leading-5 w-80 h-10 dark:text-white hover:text-gray-200/50 hover:text-gray-800 hover:bg-gray-200/50 transition-colors duration-300 focus:outline-2 focus:outline-black leading-5 dark:hover:bg-input/50"
+              className="bg-white dark:bg-[#171717] rounded-md p-2 pl-4 text-sm font-bold leading-5 w-80 h-10 dark:text-white hover:text-gray-200/50 hover:text-gray-800 hover:bg-gray-200/50 transition-colors duration-300 focus:outline-2 focus:outline-black leading-5 dark:hover:bg-input/50 focus:outline-transparent"
               value={searchName}
               onChange={(e) => setSearchName(e.target.value)}
             />
           </div>
 
           <div>
-            <h2>Tipo de usuário</h2>
+            <h2 className="dark:text-white">Tipo de usuário</h2>
             <AdminTypeEmployee value={selectedTypes} onChange={setSelectedTypes} />
           </div>
         </div>

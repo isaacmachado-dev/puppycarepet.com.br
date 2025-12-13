@@ -22,7 +22,7 @@ export default function SectionChoices() {
                     <div key={btn.id} className="py-3 rounded-full">
                         <button
                             className={`cursor-pointer py-3 transition-all duration-300
-                        ${active === btn.id ? "bg-[#FFFFFF] px-15  rounded-t-full text-black font-extrabold " : "bg-transparent text-black"}
+                        ${active === btn.id ? "bg-[#FFFFFF] dark:bg-[#171717] text-black dark:text-white px-15  rounded-t-full text-black font-extrabold " : "bg-transparent text-black dark:text-white"}
                         `}
 
                             onClick={() => setActive(btn.id)}
@@ -39,7 +39,7 @@ export default function SectionChoices() {
             </div>
 
             <div className="transition-all">
-                <div className="bg-[#ffffff] -mt-[15px] p-[2rem] rounded-[16px]">
+                <div className="bg-[#ffffff] dark:bg-[#171717] -mt-[15px] p-[2rem] rounded-[16px]">
                     <div key={active} className="fade-slide-in">
                         {active === "Atendendo" && <Atendendo />}
                         {active === "Proximos" && <Proximos />}

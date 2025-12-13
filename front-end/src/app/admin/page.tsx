@@ -153,7 +153,7 @@ export default function AdminPage() {
                   href=""
                   isOpen={isOpen}
                   className={`${!isOpen
-                    ? "flex justify-center align-center"
+                    ? "flex justify-center items-center"
                     : "justify-start"
                     }`}
                   active={paginaAtual === "agendamentos"}
@@ -167,7 +167,7 @@ export default function AdminPage() {
                   href=""
                   isOpen={isOpen}
                   className={`${!isOpen
-                    ? "flex justify-center align-center"
+                    ? "flex justify-center items-center"
                     : "justify-start"
                     }`}
                   active={paginaAtual === "clientes"}
@@ -178,7 +178,7 @@ export default function AdminPage() {
                 <AdminMenuItem
                   icon={<ChartNoAxesColumn color="currentColor" />}
                   className={`${!isOpen
-                    ? "flex justify-center align-center"
+                    ? "flex justify-center items-center"
                     : "justify-start"
                     }`}
                   label="Análise"
@@ -192,7 +192,7 @@ export default function AdminPage() {
                 <AdminMenuItem
                   icon={<Notebook color="currentColor" />}
                   className={`${!isOpen
-                    ? "flex justify-center align-center"
+                    ? "flex justify-center items-center"
                     : "justify-start"
                     }`}
                   label="Usuários"
@@ -206,7 +206,7 @@ export default function AdminPage() {
                 <AdminMenuItem
                   icon={<Settings color="currentColor" />}
                   className={`${!isOpen
-                    ? "flex justify-center align-center"
+                    ? "flex justify-center items-center"
                     : "justify-start"
                     }`}
                   label="Opções"
@@ -220,7 +220,7 @@ export default function AdminPage() {
             <div className="text-black hover:text-white transition-all duration-300">
               <AdminMenuItem
                 icon={<X color="currentColor" />}
-                className={`${!isOpen ? "flex justify-center align-center" : "justify-start"
+                className={`${!isOpen ? "flex justify-center items-center" : "justify-start"
                   }`}
                 label="Sair"
                 href="/login"

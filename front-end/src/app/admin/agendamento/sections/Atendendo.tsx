@@ -59,9 +59,10 @@ export function Atendendo() {
                         </div>
                     </label>
 
-                    <div className="flex flex-row gap-2 items-center">
+                    <div className="flex flex-row gap-2 items-center dark:text-white">
+
                         <Dog className="w-8 h-8" />
-                        <span className="font-bold text-lg">Malu</span>
+                        <span className="font-bold text-lg ">Malu</span>
                     </div>
                 </div>
             </div>
