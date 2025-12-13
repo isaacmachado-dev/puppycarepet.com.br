@@ -10,7 +10,7 @@ export default function AnalisePage() {
       <AdminBlock className="">
         <AdminBlockTitle>Resumo Geral</AdminBlockTitle>
 
-        <div className="bg-white rounded-xl p-5">
+        <div className="bg-white dark:bg-[#171717] rounded-xl p-5">
           <div className="flex flex-row gap-5 justify-center">
 
             <div className="basis-1/2 max-w-xl">
@@ -22,7 +22,7 @@ export default function AnalisePage() {
           </div>
         </div>
 
-      </AdminBlock>
+      </AdminBlock >
 
       <AdminBlock className="mt-10">
         <ChartAreaInteractive />
@@ -97,6 +97,6 @@ export default function AnalisePage() {
 
 
 
-    </div>
+    </div >
   );
 }

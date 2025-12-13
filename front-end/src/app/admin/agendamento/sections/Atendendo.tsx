@@ -67,8 +67,8 @@ export function Atendendo() {
             </div>
 
             {showConfirm && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-                    <div className="w-full max-w-sm rounded-lg bg-white p-4 shadow-lg">
+                <div className="fixed inset-0 z-50 flex items-center justify-center">
+                    <div className="w-full max-w-sm rounded-lg p-4 shadow-lg">
                         <h2 className="mb-2 text-base font-semibold">
                             Enviar foto do pet?
                         </h2>

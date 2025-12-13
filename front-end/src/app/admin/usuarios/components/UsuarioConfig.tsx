@@ -79,7 +79,7 @@ export default function DropdownMenuDialog({
     return (
         <>
             <DropdownMenu modal={false}>
-                <DropdownMenuTrigger asChild className="group cursor-pointer bg-[#FFFFFF] hover:ring-2 ring-[#9A9A9A]  dark:bg-[#242424] dark:hover:bg-[#242424] focus:outline-2 data-[state=open]:ring-2 outline-blue-500" >
+                <DropdownMenuTrigger asChild className="group cursor-pointer bg-[#FFFFFF] hover:ring-2 ring-[#9A9A9A]  dark:bg-[#171717] dark:hover:bg-[#171717] focus:outline-2 data-[state=open]:ring-2 outline-blue-500" >
                     <Button
                         variant="outline"
                         aria-label="Open menu"

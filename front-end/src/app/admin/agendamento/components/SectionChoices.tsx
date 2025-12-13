@@ -17,18 +17,18 @@ export default function SectionChoices() {
 
     return (
         <>
-            <div className="flex flex-row gap-20 justify-center mt-[40px] z-[10]">
+            <div className="flex flex-row gap-20 justify-center mt-[40px] z-[10] ">
                 {BUTTONS.map(btn => (
                     <div key={btn.id} className="py-3 rounded-full">
                         <button
                             className={`cursor-pointer py-3 transition-all duration-300
-                        ${active === btn.id ? "bg-white px-15 bg-[white] rounded-t-full text-black font-extrabold" : "text-black"}
+                        ${active === btn.id ? "bg-[#FFFFFF] px-15  rounded-t-full text-black font-extrabold " : "bg-transparent text-black"}
                         `}
 
                             onClick={() => setActive(btn.id)}
                             // Opcional: bloqueia novamente clique no botão já ativo
                             disabled={active === btn.id}
-                            style={active === btn.id ? { opacity: 0.8, cursor: "default" } : {}}
+                            style={active === btn.id ? { opacity: 1, cursor: "default" } : {}}
                         >
                             {btn.label}
                         </button>
@@ -39,7 +39,7 @@ export default function SectionChoices() {
             </div>
 
             <div className="transition-all">
-                <div className="bg-white -mt-[15px] p-[2rem] rounded-[16px]">
+                <div className="bg-[#ffffff] -mt-[15px] p-[2rem] rounded-[16px]">
                     <div key={active} className="fade-slide-in">
                         {active === "Atendendo" && <Atendendo />}
                         {active === "Proximos" && <Proximos />}
