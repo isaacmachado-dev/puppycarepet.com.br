@@ -12,7 +12,7 @@ import { Usuario, UsuarioRole } from "./types/usuario"
 
 type Checked = DropdownMenuCheckboxItemProps["checked"]
 
-export function UsuariosPage() {
+export default function UsuariosPage() {
   const [showStatusBar, setShowStatusBar] = React.useState<Checked>(true)
   const [showActivityBar, setShowActivityBar] = React.useState<Checked>(false)
   const [showPanel, setShowPanel] = React.useState<Checked>(false)

@@ -79,9 +79,16 @@ export default function DropdownMenuDialog({
     return (
         <>
             <DropdownMenu modal={false}>
-                <DropdownMenuTrigger asChild className="cursor-pointer">
-                    <Button variant="outline" aria-label="Open menu" size="icon-sm">
-                        <EllipsisVertical />
+                <DropdownMenuTrigger asChild className="group cursor-pointer bg-[#FFFFFF] hover:ring-2 ring-[#9A9A9A]  dark:bg-[#242424] dark:hover:bg-[#242424] focus:outline-2 data-[state=open]:ring-2 outline-blue-500" >
+                    <Button
+                        variant="outline"
+                        aria-label="Open menu"
+                        size="icon-sm"
+                    >
+                        <div className="text-[#242424]  dark:text-[#E3E3E3] dark:group-hover:text-[#FFFFFF]">
+                            <EllipsisVertical
+                            />
+                        </div>
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-40" align="end">

@@ -1,6 +1,6 @@
 import { Dog, Play, Settings2, UserRound } from "lucide-react";
 import { useState } from "react";
-import { ToggleSwitchButton } from "./ui/ToggleSwitchButton";
+import { ToggleSwitchButton } from "./components/ToggleSwitchButton";
 
 
 

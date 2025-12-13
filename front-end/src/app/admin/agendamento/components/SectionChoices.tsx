@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Atendendo } from "./sections/Atendendo";
-import { Proximos } from "./sections/Proximos";
-import { Revisar } from "./sections/Revisar";
-import Disponibilidade from "./sections/Disponiblidade";
+import { Atendendo } from "../sections/Atendendo";
+import { Proximos } from "../sections/Proximos";
+import { Revisar } from "../sections/Revisar";
+import Disponibilidade from "../sections/Disponiblidade";
 
 
 const BUTTONS = [
