@@ -8,7 +8,7 @@ export default function OpcoesPage() {
             <AdminBlock>
                 <AdminBlockTitle>Tema</AdminBlockTitle>
 
-                <div className="flex flex-row gap-4 bg-white p-5 rounded-[2rem]">
+                <div className="flex flex-row gap-4 bg-white dark:bg-[#171717] dark:text-white p-5 rounded-[2rem]">
                     <ModeSwitchDarkLight />
                     <span className="my-auto">
                         Modo escuro

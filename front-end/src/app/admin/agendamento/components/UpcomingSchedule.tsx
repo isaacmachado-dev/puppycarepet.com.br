@@ -93,7 +93,7 @@ export default function UpcomingSchedule() {
 
         <AdminBlock
           className="cursor-pointer group">
-          <div className="flex gap-2 cursor-pointer">
+          <div className="flex gap-2 cursor-pointer text-black dark:text-white">
 
             <AdminBlockTitle>Verificar atendimentos </AdminBlockTitle>
 

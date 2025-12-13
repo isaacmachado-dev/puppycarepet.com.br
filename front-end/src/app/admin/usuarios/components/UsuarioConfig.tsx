@@ -122,6 +122,8 @@ export default function DropdownMenuDialog({
                                 name="filename"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
+                                className="dark:text-black/80 dark:hover:bg-input/50 dark:hover:text-white"
+
                             />
                         </Field>
 
@@ -132,6 +134,7 @@ export default function DropdownMenuDialog({
                                 name="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
+                                className="dark:text-black/80 dark:hover:bg-input/50 outline-0 border-0 m-0 ring-0 dark:hover:text-white"
                             />
                         </Field>
 
