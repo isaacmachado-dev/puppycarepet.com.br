@@ -35,7 +35,7 @@ export function Atendendo() {
 
     return (
         <div className="space-y-4">
-            <div className="p-2 border-2 border-black rounded-md w-max mx-auto">
+            <div className="p-2 border-2 border-black dark:border-white rounded-md w-max mx-auto">
                 <div className="flex flex-col items-center justify-center gap-2">
                     <input
                         id="pet-photo"
