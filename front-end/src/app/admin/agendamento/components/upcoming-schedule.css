@@ -1,11 +1,8 @@
 /* From Uiverse.io by juyi_2230 */
 .meeting-card {
-  background-color: #d1d6d2;
   border-radius: 2rem;
-  padding: 1.85rem;
   width: 100%;
   max-width: 100%;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   /* justify-items: center; */
@@ -24,6 +21,11 @@
   font-size: 1.85rem;
   font-weight: bold;
   line-height: 1.2;
+}
+
+.dark .title {
+  color: #ffffff;
+
 }
 
 .date-selector {
@@ -54,10 +56,18 @@
   margin-bottom: 2rem;
 }
 
+
 .calls-info span {
   margin-left: 0.5rem;
   font-size: 0.875rem;
 }
+
+.dark .calls-info span {
+  margin-left: 0.5rem;
+  font-size: 0.875rem;
+  color: #ffffff;
+}
+
 
 .date-nav-and-indicators {
   position: relative;

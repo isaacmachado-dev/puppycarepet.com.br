@@ -1,7 +1,9 @@
+import { AdminBlock, AdminBlockTitle } from "@/components/ui/custom/AdminSettings";
+
 export default function ClientesPage() {
     return (
-        <div>
-            <h1>Teste texto clientes</h1>
-        </div>
+        <AdminBlock>
+            <AdminBlockTitle>Pets cadastrados</AdminBlockTitle>
+        </AdminBlock>
     );
 }

@@ -104,7 +104,7 @@ export default function UsuariosPage() {
   return (
     <div className="flex flex-col gap-10">
       <AdminBlock>
-        <AdminBlockTitle>Gerenciamento de Funcionários</AdminBlockTitle>
+        <AdminBlockTitle>Quantidade de Funcionários</AdminBlockTitle>
 
         <div className="flex justify-center">
           <div className="flex flex-row gap-10">
@@ -130,7 +130,7 @@ export default function UsuariosPage() {
 
         <hr className="h-1 bg-white mx-auto rounded-full my-6 w-3/4" />
 
-        <h2 className="text-center">Total funcionários: {totalFuncionarios}</h2>
+        <h2 className="text-center dark:text-white">Total funcionários: {totalFuncionarios}</h2>
       </AdminBlock>
 
       <AdminBlock>
@@ -142,7 +142,7 @@ export default function UsuariosPage() {
             <input
               type="text"
               placeholder="Digite o nome..."
-              className="bg-white rounded-md p-2 pl-4 focus:ring-2 focus:ring-[#2A2D34] text-sm font-bold leading-5 w-80 h-10 hover:text-gray-200/50 hover:text-gray-800 hover:bg-gray-200/50 transition-colors duration-300 focus:outline-2 focus:outline-black hover:outline-2  leading-5"
+              className="bg-white dark:bg-[#171717] rounded-md p-2 pl-4 text-sm font-bold leading-5 w-80 h-10 dark:text-white hover:text-gray-200/50 hover:text-gray-800 hover:bg-gray-200/50 transition-colors duration-300 focus:outline-2 focus:outline-black leading-5 dark:hover:bg-input/50"
               value={searchName}
               onChange={(e) => setSearchName(e.target.value)}
             />
@@ -158,6 +158,6 @@ export default function UsuariosPage() {
           <UsuariosCard usuarios={filteredFuncionarios} onUpdated={() => setReload((r) => !r)} />
         </div>
       </AdminBlock>
-    </div>
+    </div >
   )
 }

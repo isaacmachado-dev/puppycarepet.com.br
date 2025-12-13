@@ -12,16 +12,17 @@ export default function ModeSwitchDarkLight() {
     if (!darked) return null;
 
     const isDarked = theme === 'dark';
+    const isLight = theme === 'light';
 
     return (
         <div>
             {/* From Uiverse.io by CacaceRoberto */}
             <label className="switch cursor-pointer">
-                <input 
-                    type="checkbox" 
-                    id="toggle" 
-                    checked={isDarked}
-                    onChange={() => setTheme(isDarked ? 'light' : 'dark')}
+                <input
+                    type="checkbox"
+                    id="toggle"
+                    checked={isLight}
+                    onChange={() => setTheme(isLight ? 'dark' : 'light')}
 
                 />
                 <span className="slider">

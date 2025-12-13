@@ -6,7 +6,7 @@ export default function AgendamentoPage() {
     return (
 
         <div>
-
+            
             <UpcomingSchedule />
 
         </div>
