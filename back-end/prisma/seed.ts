@@ -21,50 +21,50 @@ async function seedUsuarios() {
       {
         NOME: 'Joel Miller',
         DESCRICAO: 'Usuário cliente',
-        SENHA_HASH: senhaCliente,
+        SENHA_HASH: senhaAdmin,
         EMAIL: 'joel.miller@puppycarepet.com.br',
         FOTO: '/usuarios/joel-miller.webp',
-        TIPOS: ['cliente'],
+        TIPOS: ['administrador'],
       },
       {
         NOME: 'Rock Lee',
         DESCRICAO: 'Usuário cliente',
-        SENHA_HASH: senhaCliente,
+        SENHA_HASH: senhaAdmin,
         EMAIL: 'rock.lee@puppycarepet.com.br',
-        FOTO: '/usuarios/ʀᴏᴄᴋ ʟᴇᴇ.jpg',
-        TIPOS: ['cliente'],
+        FOTO: '/usuarios/rock-lee.jpg',
+        TIPOS: ['condutor', 'colaborador', 'condutor'],
       },
       {
         NOME: 'Morty Smith',
         DESCRICAO: 'Usuário cliente',
-        SENHA_HASH: senhaCliente,
+        SENHA_HASH: senhaAdmin,
         EMAIL: 'morty.smith@puppycarepet.com.br',
-        FOTO: '/usuarios/morty-smith.jpg',
-        TIPOS: ['cliente'],
+        FOTO: '/usuarios/rick.gif',
+        TIPOS: ['administrador'],
       },
       {
         NOME: 'Po',
         DESCRICAO: 'Usuário cliente',
-        SENHA_HASH: senhaCliente,
+        SENHA_HASH: senhaAdmin,
         EMAIL: 'po@et.com.br',
         FOTO: '/usuarios/po.jpg',
-        TIPOS: ['cliente'],
+        TIPOS: ['colaborador', 'condutor'],
       },
       {
         NOME: 'Squirtle',
         DESCRICAO: 'Usuário cliente',
-        SENHA_HASH: senhaCliente,
+        SENHA_HASH: senhaAdmin,
         EMAIL: 'squirtle@puppycarepet.com.br',
         FOTO: '/usuarios/squirtle.jpg',
-        TIPOS: ['cliente'],
+        TIPOS: ['colaborador'],
       },
       {
         NOME: 'Robin',
         DESCRICAO: 'Usuário cliente',
-        SENHA_HASH: senhaCliente,
+        SENHA_HASH: senhaAdmin,
         EMAIL: 'robin@puppycarepet.com.br',
         FOTO: '/usuarios/robin.jpg',
-        TIPOS: ['cliente'],
+        TIPOS: ['colaborador', 'administrador'],
       },
     ],
     skipDuplicates: true,
@@ -128,8 +128,6 @@ async function seedClientes() {
     list: all,
   } as const;
 }
-
-seedUsuarios();
 
 // async function seedPets(clienteId: number) {
 //   const count = await prisma.pETS.count({ where: { ID_CLIENTE: clienteId } });
