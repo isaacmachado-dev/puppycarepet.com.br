@@ -53,7 +53,7 @@ async function seedUsuarios() {
                     NOME: 'Joel Miller',
                     DESCRICAO: 'Usuário administrador padrão',
                     SENHA_HASH: 'hash_teste',
-                    EMAIL: 'admin@puppycarepet.com.br',
+                    EMAIL: 'admin@et.com.br',
                     FOTO: '/teste.png',
                 },
 
