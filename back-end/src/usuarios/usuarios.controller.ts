@@ -1,21 +1,21 @@
-import { Controller, Post, Body, Get, Param, Query, Patch, Delete, ParseIntPipe } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  Param,
+  Patch,
+  Delete,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { UsuariosService } from './usuarios.service';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { LoginDto } from './dto/create-usuario.dto';
 
-// Local DTO used for batch sync requests to avoid missing module import.
-// Adjust the shape below to match the real payload expected by the service.
-interface UsuarioSyncBatchRequestDto {
-  items: any[];
-  source?: string;
-  timestamp?: string;
-}
-
 class UpdateFotoDto {
   foto: string | null;
 }
-
 
 @ApiTags('usuarios')
 @Controller('usuarios')
@@ -40,7 +40,16 @@ export class UsuariosController {
     return this.usuariosService.findAll();
   }
 
+  @Get(':id')
+  @ApiOperation({ summary: 'Obter usuário por ID' })
+  @ApiParam({ name: 'id', description: 'ID_USUARIO' })
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.usuariosService.findOne(id);
+  }
+
   @Patch(':id/foto')
+  @ApiOperation({ summary: 'Atualizar foto do usuário por ID' })
+  @ApiParam({ name: 'id', description: 'ID_USUARIO' })
   async updateFoto(
     @Param('id', ParseIntPipe) id: number,
     @Body() body: UpdateFotoDto,
@@ -48,26 +57,20 @@ export class UsuariosController {
     return this.usuariosService.updateFoto(id, body.foto);
   }
 
-  // --- Offline-first sync endpoints ---
-  @Get('changes')
-  @ApiOperation({ summary: 'Listar alterações de usuários desde um timestamp' })
-  @ApiResponse({ status: 200, description: 'Mudanças retornadas com sucesso.' })
-  getChanges(@Query('since') since?: string) {
-    return this.usuariosService.getChanges(since);
+  @Patch(':id')
+  @ApiOperation({ summary: 'Atualizar dados do usuário por ID' })
+  @ApiParam({ name: 'id', description: 'ID_USUARIO' })
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: UpdateUsuarioDto,
+  ) {
+    return this.usuariosService.update(id, body);
   }
 
-  @Post('batch')
-  @ApiOperation({ summary: 'Aplicar lote de alterações de usuários (upsert por PUBLIC_ID)' })
-  @ApiResponse({ status: 200, description: 'Resultados do processamento do lote.' })
-  batch(@Body() body: UsuarioSyncBatchRequestDto) {
-    return this.usuariosService.batchUpsert(body);
-  }
-
-
-  @Delete('public/:publicId')
-  @ApiOperation({ summary: 'Soft delete por PUBLIC_ID (marca DELETED_AT)' })
-  @ApiParam({ name: 'publicId', description: 'PUBLIC_ID do usuário' })
-  softDeleteByPublicId(@Param('publicId') publicId: string) {
-    return this.usuariosService.softDeleteByPublicId(publicId);
+  @Delete(':id')
+  @ApiOperation({ summary: 'Deletar usuário por ID' })
+  @ApiParam({ name: 'id', description: 'ID_USUARIO' })
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.usuariosService.remove(id);
   }
 }

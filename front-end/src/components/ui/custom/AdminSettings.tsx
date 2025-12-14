@@ -1,5 +1,3 @@
-import { Children } from "react";
-
 export function AdminBlock({ children, className = " " }: { children: React.ReactNode, className?: string }) {
     return (
         <div className={`bg-[#d1d6d2] dark:bg-[#3A3A3A] p-[2rem] mt-10 rounded-[2rem] ${className}`}>

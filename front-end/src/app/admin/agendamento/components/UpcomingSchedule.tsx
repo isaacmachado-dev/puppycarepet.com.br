@@ -1,4 +1,4 @@
-import { Dog, PawPrint, MoveRight } from "lucide-react";
+import { PawPrint, MoveRight } from "lucide-react";
 import "./upcoming-schedule.css";
 import { AdminBlock, AdminBlockTitle } from "../../../../components/ui/custom/AdminSettings";
 import SectionChoices from "./SectionChoices";

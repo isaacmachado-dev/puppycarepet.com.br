@@ -2,20 +2,16 @@
 
 import * as React from "react"
 import { useEffect, useState } from "react"
-import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu"
 import { User, CarFront, ShieldUser } from "lucide-react"
 
 import { AdminBlock, AdminBlockTitle } from "@/components/ui/custom/AdminSettings"
 import AdminTypeEmployee from "@/app/admin/usuarios/components/AdminTypeEmployee"
 import UsuariosCard from "@/app/admin/usuarios/components/UsuarioCard"
-import { Usuario, UsuarioRole } from "./types/usuario"
+import { Usuario, UsuarioApi, UsuarioRole } from "./types/usuario"
 
-type Checked = DropdownMenuCheckboxItemProps["checked"]
 
 export default function UsuariosPage() {
-  const [showStatusBar, setShowStatusBar] = React.useState<Checked>(true)
-  const [showActivityBar, setShowActivityBar] = React.useState<Checked>(false)
-  const [showPanel, setShowPanel] = React.useState<Checked>(false)
+
 
   const [searchName, setSearchName] = React.useState("")
   const [selectedTypes, setSelectedTypes] = React.useState<string[]>([])
@@ -23,6 +19,7 @@ export default function UsuariosPage() {
   const [funcionarios, setFuncionarios] = React.useState<Usuario[]>([])
   const [loading, setLoading] = React.useState(true)
   const [reload, setReload] = useState(false)
+
 
   const fetchFuncionarios = () => {
     setLoading(true)
@@ -34,28 +31,29 @@ export default function UsuariosPage() {
           throw new Error(error?.error || "Erro ao buscar usuários")
         }
 
-        const data = await res.json()
+        const data = (await res.json()) as UsuarioApi[]
         console.log("USUARIOS RAW DATA:", data)
 
-        const normalizados: Usuario[] = (Array.isArray(data) ? data : []).map((u: any) => ({
-          id: u.ID_USUARIO ?? u.id ?? u.ID ?? "",
-          name: u.NOME ?? u.nome ?? u.name ?? "Sem nome",
-          email: u.EMAIL ?? u.email ?? "",
-          image: u.FOTO ?? u.avatar ?? u.image ?? "",
-          type: Array.isArray(u.TIPOS)
-            ? u.TIPOS
-            : Array.isArray(u.type)
-              ? u.type
-              : u.TIPOS
-                ? [u.TIPOS]
-                : u.type
-                  ? Array.isArray(u.type)
-                    ? u.type
-                    : [u.type]
-                  : [],
-          roles: [], // ou remove se não usar
-        }));
-
+        const normalizados: Usuario[] = (Array.isArray(data) ? data : []).map((_u) => ({
+          id:
+            _u.ID_USUARIO ??
+            Number(_u.id ?? _u.ID ?? 0), // fallback se usar os outros campos
+          name: _u.NOME ?? _u.nome ?? _u.name ?? "Sem nome",
+          email: _u.EMAIL ?? _u.email ?? "",
+          image: _u.FOTO ?? _u.avatar ?? _u.image ?? "",
+          type: (Array.isArray(_u.TIPOS)
+            ? _u.TIPOS
+            : Array.isArray(_u.type)
+              ? _u.type
+              : _u.TIPOS
+                ? [_u.TIPOS]
+                : _u.type
+                  ? Array.isArray(_u.type)
+                    ? _u.type
+                    : [_u.type]
+                  : []) as UsuarioRole[],
+          roles: [],
+        }))
 
         console.log("USUARIOS NORMALIZADOS:", normalizados)
 

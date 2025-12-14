@@ -7,7 +7,7 @@ import { Decimal } from '@prisma/client/runtime/library';
 
 @Injectable()
 export class ServicosService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   async create(createServicoDto: CreateServicoDto) {
     return this.prisma.sERVICOS.create({
@@ -70,7 +70,11 @@ export class ServicosService {
   }
 
   async batchUpsert(body: ServicoSyncBatchRequestDto) {
-    const results = [] as Array<{ publicId: string; status: 'applied' | 'conflict' | 'skipped'; server?: any }>;
+    const results: Array<{
+      publicId: string;
+      status: 'applied' | 'conflict' | 'skipped';
+      server?: any;
+    }> = [];
 
     for (const item of body.items) {
       const res = await this.applyOne(item);
@@ -80,8 +84,21 @@ export class ServicosService {
     return { results };
   }
 
-  private async applyOne(item: ServicoSyncItemDto): Promise<{ publicId: string; status: 'applied' | 'conflict' | 'skipped'; server?: any }> {
-    const { PUBLIC_ID, UPDATED_AT, VERSION, DELETED_AT, NOME, DESCRICAO, VALOR } = item;
+  private async applyOne(
+    item: ServicoSyncItemDto,
+  ): Promise<{
+    publicId: string;
+    status: 'applied' | 'conflict' | 'skipped';
+    server?: any;
+  }> {
+    const {
+      PUBLIC_ID,
+      UPDATED_AT,
+      DELETED_AT,
+      NOME,
+      DESCRICAO,
+      VALOR,
+    } = item;
 
     if (!PUBLIC_ID) {
       const created = await this.prisma.sERVICOS.create({
@@ -117,21 +134,37 @@ export class ServicosService {
           NOME: NOME ?? existing.NOME,
           DESCRICAO: typeof DESCRICAO !== 'undefined' ? DESCRICAO : existing.DESCRICAO,
           VALOR: typeof VALOR !== 'undefined' ? new Decimal(VALOR.toString()) : existing.VALOR,
-          DELETED_AT: typeof DELETED_AT !== 'undefined' ? (DELETED_AT ? new Date(DELETED_AT) : null) : existing.DELETED_AT,
+          DELETED_AT:
+            typeof DELETED_AT !== 'undefined'
+              ? DELETED_AT
+                ? new Date(DELETED_AT)
+                : null
+              : existing.DELETED_AT,
           VERSION: { increment: 1 },
         },
       });
       return { publicId: updated.PUBLIC_ID, status: 'applied' };
     }
 
-    if (!incomingUpdated && (NOME !== undefined || typeof DESCRICAO !== 'undefined' || typeof VALOR !== 'undefined' || typeof DELETED_AT !== 'undefined')) {
+    if (
+      !incomingUpdated &&
+      (NOME !== undefined ||
+        typeof DESCRICAO !== 'undefined' ||
+        typeof VALOR !== 'undefined' ||
+        typeof DELETED_AT !== 'undefined')
+    ) {
       const updated = await this.prisma.sERVICOS.update({
         where: { PUBLIC_ID },
         data: {
           NOME: NOME ?? existing.NOME,
           DESCRICAO: typeof DESCRICAO !== 'undefined' ? DESCRICAO : existing.DESCRICAO,
           VALOR: typeof VALOR !== 'undefined' ? new Decimal(VALOR.toString()) : existing.VALOR,
-          DELETED_AT: typeof DELETED_AT !== 'undefined' ? (DELETED_AT ? new Date(DELETED_AT) : null) : existing.DELETED_AT,
+          DELETED_AT:
+            typeof DELETED_AT !== 'undefined'
+              ? DELETED_AT
+                ? new Date(DELETED_AT)
+                : null
+              : existing.DELETED_AT,
           VERSION: { increment: 1 },
         },
       });
@@ -143,7 +176,9 @@ export class ServicosService {
 
   async softDeleteByPublicId(publicId: string) {
     const existing = await this.prisma.sERVICOS.findUnique({ where: { PUBLIC_ID: publicId } });
-    if (!existing) throw new NotFoundException(`Serviço com PUBLIC_ID ${publicId} não encontrado`);
+    if (!existing) {
+      throw new NotFoundException(`Serviço com PUBLIC_ID ${publicId} não encontrado`);
+    }
     return this.prisma.sERVICOS.update({
       where: { PUBLIC_ID: publicId },
       data: { DELETED_AT: new Date(), VERSION: { increment: 1 } },

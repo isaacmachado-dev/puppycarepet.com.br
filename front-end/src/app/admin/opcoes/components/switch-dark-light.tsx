@@ -11,7 +11,7 @@ export default function ModeSwitchDarkLight() {
     useEffect(() => setDarked(true), []);
     if (!darked) return null;
 
-    const isDarked = theme === 'dark';
+    // const isDarked = theme === 'dark';
     const isLight = theme === 'light';
 
     return (

@@ -18,7 +18,7 @@ import { ServicoSyncBatchRequestDto } from './dto/servico-sync.dto';
 @ApiTags('servicos')
 @Controller('servicos')
 export class ServicosController {
-  constructor(private readonly servicosService: ServicosService) {}
+  constructor(private readonly servicosService: ServicosService) { }
 
   @Post()
   @ApiOperation({ summary: 'Criar um novo serviço' })

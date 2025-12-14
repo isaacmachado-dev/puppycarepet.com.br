@@ -1,20 +1,13 @@
 import {
     DropdownMenu,
     DropdownMenuContent,
-    DropdownMenuGroup,
-    DropdownMenuItem,
-    DropdownMenuLabel,
     DropdownMenuTrigger,
     DropdownMenuSeparator,
     DropdownMenuCheckboxItem,
 } from "@/app/admin/usuarios/components/lib/dropdown-menu"
-import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { useEffect, useState } from "react"
 import { cn } from "@/lib/utils"  // ← Adicione isso
-
-type Checked = DropdownMenuCheckboxItemProps["checked"]
-
 
 
 export default function AdminTypeEmployee({

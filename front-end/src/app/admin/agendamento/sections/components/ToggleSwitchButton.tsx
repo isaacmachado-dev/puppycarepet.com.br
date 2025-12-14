@@ -11,7 +11,6 @@ export function ToggleSwitchButton() {
   const startThumbRef = useRef(0);
 
   const onPointerDown = (e: React.PointerEvent<HTMLInputElement>) => {
-    e.preventDefault();
     const input = ref.current;
     if (!input) return;
 
@@ -39,7 +38,7 @@ export function ToggleSwitchButton() {
     setThumbX(next);
   };
 
-  const onPointerUp = (e: React.PointerEvent<HTMLInputElement>) => {
+  const onPointerUp = () => {
     if (!isDragging) return;
     setIsDragging(false);
 

@@ -32,6 +32,7 @@ class CreateUsuarioDto {
     EMAIL;
     DESCRICAO;
     SENHA;
+    TIPOS;
 }
 exports.CreateUsuarioDto = CreateUsuarioDto;
 __decorate([
@@ -62,3 +63,13 @@ __decorate([
     (0, class_validator_1.MinLength)(6),
     __metadata("design:type", String)
 ], CreateUsuarioDto.prototype, "SENHA", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Tipos/papéis do usuário',
+        example: ['administrador'],
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsArray)(),
+    (0, class_validator_1.IsString)({ each: true }),
+    __metadata("design:type", Array)
+], CreateUsuarioDto.prototype, "TIPOS", void 0);
