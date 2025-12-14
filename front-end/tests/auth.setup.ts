@@ -8,6 +8,7 @@ setup('Setup de login com estado salvo', async ({ page }) => {
 
     await page.goto('http://localhost:3000/');
     await page.getByRole('link', { name: 'Agende agora' }).click();
+    await page.getByRole('link', { name: 'Acesse sua conta' }).click();
     await page.getByRole('textbox', { name: 'E-mail' }).click();
     await page.getByRole('textbox', { name: 'E-mail' }).fill('joel.miller@puppycarepet.com.br');
     await page.getByRole('textbox', { name: 'E-mail' }).press('Tab');
@@ -23,6 +24,10 @@ setup('Setup de login com estado salvo', async ({ page }) => {
     if (!fs.existsSync(authDir)) {
         fs.mkdirSync(authDir, { recursive: true });
     }
+
+
+    console.log('Logado com sucesso!');
+    console.log('Salvando estado de autenticação em:', authFile);
 
     await page.context().storageState({ path: authFile });
 
