@@ -8,7 +8,11 @@ async function bootstrap() {
 
   // Habilitar CORS
   app.enableCors({
-    origin: 'http://localhost:3000',
+    origin: [
+      'http://localhost:3000',
+      'https://puppycarepet.com.br',
+      'https://www.puppycarepet.com.br',
+    ],
     credentials: true,
   });
 
