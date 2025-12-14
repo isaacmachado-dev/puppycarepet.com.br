@@ -46,7 +46,7 @@ async function seedUsuarios() {
         NOME: 'Po',
         DESCRICAO: 'Usuário cliente',
         SENHA_HASH: senhaCliente,
-        EMAIL: 'po@puppycarepet.com.br',
+        EMAIL: 'po@et.com.br',
         FOTO: '/usuarios/po.jpg',
         TIPOS: ['cliente'],
       },
