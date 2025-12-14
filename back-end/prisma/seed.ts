@@ -131,43 +131,43 @@ async function seedClientes() {
 
 seedUsuarios();
 
-async function seedPets(clienteId: number) {
-  const count = await prisma.pETS.count({ where: { ID_CLIENTE: clienteId } });
-  if (count === 0) {
-    await prisma.pETS.createMany({
-      data: [
-        {
-          ID_PET: 1,
-          NOME: 'Rex',
-          ESPECIE: 'Cachorro',
-          IDADE: 8,
-          RACA: 'Vira-lata',
-          PORTE: 'Médio',
-          DATA_NASC: new Date('2020-01-01'),
-          ID_CLIENTE: clienteId,
-          
-        },
-        {
-          ID_PET: 2,
-          NOME: 'Luna',
-          ESPECIE: 'Gato',
-          IDADE: 5,
-          RACA: 'Siamês',
-          PORTE: 'Pequeno',
-          DATA_NASC: new Date('2019-06-10'),
-          ID_CLIENTE: clienteId,
-        },
-      ],
-    });
-    console.log('✅ PETS criado');
-  } else {
-    console.log(
-      'ℹ️ PETS já existe para cliente, pulando criação',
-    );
-  }
-  const all = await prisma.pETS.findMany({ where: { ID_CLIENTE: clienteId } });
-  return all;
-}
+// async function seedPets(clienteId: number) {
+//   const count = await prisma.pETS.count({ where: { ID_CLIENTE: clienteId } });
+//   if (count === 0) {
+//     await prisma.pETS.createMany({
+//       data: [
+//         {
+//           ID_PET: 1,
+//           NOME: 'Rex',
+//           ESPECIE: 'Cachorro',
+//           IDADE: 8,
+//           RACA: 'Vira-lata',
+//           PORTE: 'Médio',
+//           DATA_NASC: new Date('2020-01-01'),
+//           ID_CLIENTE: clienteId,
+
+//         },
+//         {
+//           ID_PET: 2,
+//           NOME: 'Luna',
+//           ESPECIE: 'Gato',
+//           IDADE: 5,
+//           RACA: 'Siamês',
+//           PORTE: 'Pequeno',
+//           DATA_NASC: new Date('2019-06-10'),
+//           ID_CLIENTE: clienteId,
+//         },
+//       ],
+//     });
+//     console.log('✅ PETS criado');
+//   } else {
+//     console.log(
+//       'ℹ️ PETS já existe para cliente, pulando criação',
+//     );
+//   }
+//   const all = await prisma.pETS.findMany({ where: { ID_CLIENTE: clienteId } });
+//   return all;
+// }
 
 async function seedPacotes(clienteId: number, servicoId: number) {
   const count = await prisma.pACOTES.count({
@@ -189,41 +189,41 @@ async function seedPacotes(clienteId: number, servicoId: number) {
   }
 }
 
-async function seedAtendimentos(
-  clienteId: number,
-  petId: number,
-  servicoId: number,
-) {
-  const count = await prisma.aTENDIMENTOS.count({
-    where: { ID_CLIENTE: clienteId, ID_PET: petId, ID_SERVICO: servicoId },
-  });
-  if (count === 0) {
-    const atendimento = await prisma.aTENDIMENTOS.create({
-      data: {
-        ID_CLIENTE: clienteId,
-        ID_PET: petId,
-        ID_SERVICO: servicoId,
-        HORARIO_ATENDIMENTO: '14:00',
-        VALOR_COBRADO: '79.90',
-        PULGAS: true,
-        CARRAPATOS: false,
-        DATA_ATENDIMENTO: new Date(),
-        SERVICOS_DISPONIVEIS: ['Banho', 'Tosa'],
-        NOTAS: 'Primeira visita',
-      },
-    });
-    console.log('✅ ATENDIMENTOS criado');
-    return atendimento;
-  } else {
-    console.log(
-      'ℹ️ ATENDIMENTOS já existe para este cliente/pet/serviço, buscando o primeiro',
-    );
-    return prisma.aTENDIMENTOS.findFirst({
-      where: { ID_CLIENTE: clienteId, ID_PET: petId, ID_SERVICO: servicoId },
-      orderBy: { ID_ATENDIMENTO: 'asc' },
-    }) as any;
-  }
-}
+// async function seedAtendimentos(
+//   clienteId: number,
+//   petId: number,
+//   servicoId: number,
+// ) {
+//   const count = await prisma.aTENDIMENTOS.count({
+//     where: { ID_CLIENTE: clienteId, ID_PET: petId, ID_SERVICO: servicoId },
+//   });
+//   if (count === 0) {
+//     const atendimento = await prisma.aTENDIMENTOS.create({
+//       data: {
+//         ID_CLIENTE: clienteId,
+//         ID_PET: petId,
+//         ID_SERVICO: servicoId,
+//         // HORARIO_ATENDIMENTO: '14:00',
+//         VALOR_COBRADO: '79.90',
+//         PULGAS: true,
+//         CARRAPATOS: false,
+//         DATA_ATENDIMENTO: new Date(),
+//         SERVICOS_DISPONIVEIS: ['Banho', 'Tosa'],
+//         NOTAS: 'Primeira visita',
+//       },
+//     });
+//     console.log('✅ ATENDIMENTOS criado');
+//     return atendimento;
+//   } else {
+//     console.log(
+//       'ℹ️ ATENDIMENTOS já existe para este cliente/pet/serviço, buscando o primeiro',
+//     );
+//     return prisma.aTENDIMENTOS.findFirst({
+//       where: { ID_CLIENTE: clienteId, ID_PET: petId, ID_SERVICO: servicoId },
+//       orderBy: { ID_ATENDIMENTO: 'asc' },
+//     }) as any;
+//   }
+// }
 
 async function seedAtendimentoImagens(atendimentoId: number) {
   const count = await prisma.aTENDIMENTO_IMAGENS.count({
@@ -262,23 +262,23 @@ async function main() {
     servicosByName['Banho'] ||
     (await prisma.sERVICOS.findFirst({ orderBy: { ID_SERVICO: 'asc' } }))!;
 
-  const pets = await seedPets(maria.ID_CLIENTE);
-  const pet =
-    pets[0] ||
-    (await prisma.pETS.findFirst({
-      where: { ID_CLIENTE: maria.ID_CLIENTE },
-      orderBy: { ID_PET: 'asc' },
-    }))!;
+  //   const pets = await seedPets(maria.ID_CLIENTE);
+  // const pet =
+  //   pets[0] ||
+  //   (await prisma.pETS.findFirst({
+  //     where: { ID_CLIENTE: maria.ID_CLIENTE },
+  //     orderBy: { ID_PET: 'asc' },
+  //   }))!;
 
   await seedPacotes(maria.ID_CLIENTE, banho.ID_SERVICO);
-  const atendimento = await seedAtendimentos(
-    maria.ID_CLIENTE,
-    pet.ID_PET,
-    banho.ID_SERVICO,
-  );
-  await seedAtendimentoImagens(atendimento.ID_ATENDIMENTO);
+  // const atendimento = await seedAtendimentos(
+  //   maria.ID_CLIENTE,
+  //   pet.ID_PET,
+  //   banho.ID_SERVICO,
+  // );
+  // await seedAtendimentoImagens(atendimento.ID_ATENDIMENTO);
 
-  console.log('🌟 Envio concluído (novo esquema)!');
+  // console.log('🌟 Envio concluído (novo esquema)!');
 }
 
 main()
