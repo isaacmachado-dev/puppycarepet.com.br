@@ -1,6 +1,6 @@
 import { SectionYellow, SetupSection, PurpleButton } from "./components/ConfigSection";
 import H2 from "./components/TextSection";
-import { CarFront, ShowerHead, Dog, ShoppingCart, Info, Phone } from 'lucide-react';
+import { CarFront, ShowerHead, Dog, ShoppingCart, Info } from 'lucide-react';
 
 export default function OurServices() {
     return (

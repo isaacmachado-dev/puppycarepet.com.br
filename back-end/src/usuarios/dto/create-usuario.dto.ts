@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsOptional, MinLength } from 'class-validator';
+import { IsString, IsOptional, MinLength, IsArray } from 'class-validator';
 
 export class LoginDto {
   /**
@@ -43,4 +43,13 @@ export class CreateUsuarioDto {
   @IsString()
   @MinLength(6)
   SENHA: string;
+
+  @ApiPropertyOptional({
+    description: 'Tipos/papéis do usuário',
+    example: ['administrador'],
+  })
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  TIPOS?: string[];
 }

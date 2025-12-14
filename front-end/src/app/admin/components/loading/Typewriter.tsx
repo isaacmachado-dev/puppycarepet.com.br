@@ -22,7 +22,7 @@ export const Typewriter: React.FC<TypewriterProps> = ({
 }) => {
   const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [showCursorOut, setShowCursorOut] = useState(false);
+  const [, setShowCursorOut] = useState(false);
 
   const currentText = texts[0];
 
@@ -61,11 +61,6 @@ export const Typewriter: React.FC<TypewriterProps> = ({
 
     return () => clearTimeout(timer);
   }, [charIndex, isDeleting, currentText, typeSpeed, deleteSpeed, pauseAfterWrite, pauseAfterDelete]);
-
-  // Mostra caret animado durante digitação/remoção, animado ao terminar, invisível na pausa
-  const showCursorBlink =
-    ((!isDeleting && charIndex < currentText.length) ||
-      (isDeleting && charIndex > 0)) && !showCursorOut;
 
   return (
     <span className={`${className} block`} style={style}>

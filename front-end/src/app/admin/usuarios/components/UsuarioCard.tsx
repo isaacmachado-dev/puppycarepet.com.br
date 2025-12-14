@@ -23,7 +23,7 @@ export default function UsuariosCard({ usuarios, onUpdated }: UsuariosCardProps)
       const data = await res.json()
       console.log("USUARIOS RAW DATA:", data)
 
-      const normalizados: Usuario[] = (Array.isArray(data) ? data : []).map((u: any) => ({
+      const normalizados: Usuario[] = (Array.isArray(data) ? data : []).map((u) => ({
         id: u.ID_USUARIO ?? u.id ?? u.ID ?? "",
         name: u.NOME ?? u.nome ?? u.name ?? "Sem nome",
         email: u.EMAIL ?? u.email ?? "",

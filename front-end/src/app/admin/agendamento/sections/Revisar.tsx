@@ -1,5 +1,4 @@
-import { Dog, Play, Settings2, UserRound } from "lucide-react";
-import { useState } from "react";
+import { Dog, UserRound } from "lucide-react";
 import { ToggleSwitchButton } from "./components/ToggleSwitchButton";
 
 
@@ -66,9 +65,7 @@ const ITEMS: AgendaItem[] = [
 // 
 
 function AgendaRow({ item }: { item: AgendaItem }) {
-    const STATES: Array<"-50%" | "0%" | "50%"> = ["-50%", "0%", "50%"];
 
-    const [shift, setShift] = useState<"-50%" | "0%" | "50%">("0%");
     return (
         <div className="flex flex-row p-2 border-2 border-black dark:border-white dark:text-white rounded-md mt-10">
 

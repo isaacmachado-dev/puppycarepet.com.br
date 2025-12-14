@@ -1,8 +1,6 @@
-import Image from "next/image";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/app/admin/usuarios/components/lib/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+
 import { useEffect, useState } from "react";
 import {
     Dialog,
@@ -79,7 +77,7 @@ export default function DropdownMenuDialog({
     return (
         <>
             <DropdownMenu modal={false}>
-                <DropdownMenuTrigger asChild className="group cursor-pointer bg-[#FFFFFF] hover:ring-2 ring-[#9A9A9A]  dark:bg-[#171717] dark:hover:bg-[#171717] focus:outline-2 data-[state=open]:ring-2 outline-blue-500" >
+                <DropdownMenuTrigger asChild className="group border-0 cursor-pointer bg-[#FFFFFF] hover:ring-2 ring-[#9A9A9A]  dark:bg-[#171717] dark:hover:bg-[#171717] focus:outline-2 data-[state=open]:ring-2" >
                     <Button
                         variant="outline"
                         aria-label="Open menu"

@@ -16,6 +16,7 @@ exports.UsuariosController = void 0;
 const common_1 = require("@nestjs/common");
 const swagger_1 = require("@nestjs/swagger");
 const usuarios_service_1 = require("./usuarios.service");
+const update_usuario_dto_1 = require("./dto/update-usuario.dto");
 const create_usuario_dto_1 = require("./dto/create-usuario.dto");
 class UpdateFotoDto {
     foto;
@@ -31,17 +32,17 @@ let UsuariosController = class UsuariosController {
     findAll() {
         return this.usuariosService.findAll();
     }
+    findOne(id) {
+        return this.usuariosService.findOne(id);
+    }
     async updateFoto(id, body) {
         return this.usuariosService.updateFoto(id, body.foto);
     }
-    getChanges(since) {
-        return this.usuariosService.getChanges(since);
+    update(id, body) {
+        return this.usuariosService.update(id, body);
     }
-    batch(body) {
-        return this.usuariosService.batchUpsert(body);
-    }
-    softDeleteByPublicId(publicId) {
-        return this.usuariosService.softDeleteByPublicId(publicId);
+    remove(id) {
+        return this.usuariosService.remove(id);
     }
 };
 exports.UsuariosController = UsuariosController;
@@ -67,7 +68,18 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], UsuariosController.prototype, "findAll", null);
 __decorate([
+    (0, common_1.Get)(':id'),
+    (0, swagger_1.ApiOperation)({ summary: 'Obter usuário por ID' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'ID_USUARIO' }),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", void 0)
+], UsuariosController.prototype, "findOne", null);
+__decorate([
     (0, common_1.Patch)(':id/foto'),
+    (0, swagger_1.ApiOperation)({ summary: 'Atualizar foto do usuário por ID' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'ID_USUARIO' }),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -75,32 +87,24 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UsuariosController.prototype, "updateFoto", null);
 __decorate([
-    (0, common_1.Get)('changes'),
-    (0, swagger_1.ApiOperation)({ summary: 'Listar alterações de usuários desde um timestamp' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'Mudanças retornadas com sucesso.' }),
-    __param(0, (0, common_1.Query)('since')),
+    (0, common_1.Patch)(':id'),
+    (0, swagger_1.ApiOperation)({ summary: 'Atualizar dados do usuário por ID' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'ID_USUARIO' }),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Number, update_usuario_dto_1.UpdateUsuarioDto]),
     __metadata("design:returntype", void 0)
-], UsuariosController.prototype, "getChanges", null);
+], UsuariosController.prototype, "update", null);
 __decorate([
-    (0, common_1.Post)('batch'),
-    (0, swagger_1.ApiOperation)({ summary: 'Aplicar lote de alterações de usuários (upsert por PUBLIC_ID)' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'Resultados do processamento do lote.' }),
-    __param(0, (0, common_1.Body)()),
+    (0, common_1.Delete)(':id'),
+    (0, swagger_1.ApiOperation)({ summary: 'Deletar usuário por ID' }),
+    (0, swagger_1.ApiParam)({ name: 'id', description: 'ID_USUARIO' }),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", void 0)
-], UsuariosController.prototype, "batch", null);
-__decorate([
-    (0, common_1.Delete)('public/:publicId'),
-    (0, swagger_1.ApiOperation)({ summary: 'Soft delete por PUBLIC_ID (marca DELETED_AT)' }),
-    (0, swagger_1.ApiParam)({ name: 'publicId', description: 'PUBLIC_ID do usuário' }),
-    __param(0, (0, common_1.Param)('publicId')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
-], UsuariosController.prototype, "softDeleteByPublicId", null);
+], UsuariosController.prototype, "remove", null);
 exports.UsuariosController = UsuariosController = __decorate([
     (0, swagger_1.ApiTags)('usuarios'),
     (0, common_1.Controller)('usuarios'),

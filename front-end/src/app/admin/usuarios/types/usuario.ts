@@ -14,3 +14,19 @@ export interface Usuario {
   type: UsuarioRole[];   // reflete TIPOS no banco
   roles?: UsuarioRole[]; // se quiser manter separado ou remover se não usar
 }
+
+export type UsuarioApi = {
+  ID_USUARIO?: number;
+  id?: string;
+  ID?: string;
+  NOME?: string;
+  nome?: string;
+  name?: string;
+  EMAIL?: string;
+  email?: string;
+  FOTO?: string;
+  avatar?: string;
+  image?: string;
+  TIPOS?: string | string[];
+  type?: string | string[];
+};
