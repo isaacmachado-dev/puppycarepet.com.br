@@ -1,6 +1,7 @@
 import React from "react";
 
-interface CartSizeSelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
+interface CartSizeSelectProps
+  extends React.SelectHTMLAttributes<HTMLSelectElement> {
   label: string;
 }
 
@@ -10,7 +11,10 @@ const sizes = [
   { value: "Grande", label: "Grande" },
 ];
 
-export const CartSizeSelect: React.FC<CartSizeSelectProps> = ({ label, ...props }) => (
+export const CartSizeSelect: React.FC<CartSizeSelectProps> = ({
+  label,
+  ...props
+}) => (
   <div className="flex flex-col col-span-1">
     <label>{label}</label>
     <select
@@ -22,11 +26,7 @@ export const CartSizeSelect: React.FC<CartSizeSelectProps> = ({ label, ...props 
       </option>
       {sizes.map((opt) => (
         <option key={opt.value} value={opt.value}>
-
-          <div >
-            {opt.label}
-          </div>
-
+          {opt.label}
         </option>
       ))}
     </select>
