@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+import { LoginHeader } from "./components/LoginHeader";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
@@ -36,22 +36,13 @@ export default function LoginPage() {
   return (
     <section className="min-h-screen bg-[#1A112E] text-black">
       <div className="flex flex-row gap-2 p-8 absolute">
-        <span className="bg-[#FECE14] p-2 rounded-md text-black">Acesso</span>
-        <p className="p-2 text-white">Puppy Care</p>
+        <LoginHeader label="Login" text="Puppy Care" />
       </div>
 
       <div className="flex flex-col justify-center items-center px-5 min-h-screen">
         <div className="bg-white items-center justify-center align-middle p-8 rounded-xl w-full max-w-md shadow-lg">
           <div className="flex flex-col items-center justify-center gap-3">
-            <Image
-              src="/logos/brand/logo-redondo-maior-rosa.png"
-              alt="Petshop Puppy Care"
-              width={300}
-              height={300}
-              className="object-contain"
-              priority
-            />
-
+            
             <h1 className="font-bold text-black text-xl">Login</h1>
 
             <form
@@ -62,7 +53,7 @@ export default function LoginPage() {
                 name="username"
                 type="email"
                 placeholder="E-mail"
-                className="text-black bg-white rounded-md p-2 pl-4 placeholder-black hover:placeholder-black hover:text-black hover:bg-gray-200/50 transition-colors duration-300 focus:outline-2 focus:outline-black hover:outline-2 hover:outline-gray-200"
+                className="p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-[#E72989] transition w-full"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -72,7 +63,7 @@ export default function LoginPage() {
                   name="password"
                   type={showPassword ? "text" : "password"}
                   placeholder="Senha"
-                  className=" text-black bg-white  rounded-md p-2 pl-4 placeholder-black group-hover:text-black group-hover:placeholder-black group-hover:bg-gray-200/50 transition-colors duration-300 focus:outline-2 focus:outline-black group-hover:outline-2 hover:outline-gray-200 w-full pr-4 "
+                  className="p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-[#E72989] transition w-full"
                   value={senha}
                   onChange={(e) => setSenha(e.target.value)}
                   required
