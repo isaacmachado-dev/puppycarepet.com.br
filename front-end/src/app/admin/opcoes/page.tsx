@@ -1,3 +1,4 @@
+'use client';
 import { AdminBlock, AdminBlockTitle } from "@/components/ui/custom/AdminSettings";
 import "./components/switch-dark-light.css";
 import ModeSwitchDarkLight from "./components/switch-dark-light";

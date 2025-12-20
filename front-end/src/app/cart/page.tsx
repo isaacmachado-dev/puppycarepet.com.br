@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import { CartButton } from "./components/CartButton";
 import { CartAge } from "./components/CartAge";
@@ -25,22 +26,24 @@ export default function CartWelcome() {
         (form.elements.namedItem("petName") as HTMLInputElement)?.value || "";
       const petBreed =
         (form.elements.namedItem("petBreed") as HTMLSelectElement)?.value || "";
-      // Adapte os IDs conforme necessário (mock ou busca real)
+
       const payload = {
-        ID_CLIENTE: 1, // Exemplo: buscar ou criar cliente
-        ID_PET: 1, // Exemplo: buscar ou criar pet
-        ID_SERVICO: 1, // Exemplo: serviço padrão ou selecionado
-        VALOR_COBRADO: 79.9, // Exemplo: valor fixo ou calculado
-        TIPO: "banho", // Exemplo: tipo fixo ou selecionado
+        ID_CLIENTE: 1,
+        ID_PET: 1,
+        ID_SERVICO: 1,
+        VALOR_COBRADO: 79.9,
+        TIPO: "banho",
         NOTAS: `Nome: ${name}, Telefone: ${telephone}, Pet: ${petName}, Raça: ${petBreed}`,
       };
+
       const res = await fetch("http://localhost:3000/atendimentos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
+
       if (!res.ok) throw new Error("Erro ao salvar atendimento");
-      // Sucesso: pode redirecionar ou mostrar mensagem
+
       alert("Atendimento salvo com sucesso!");
     } catch (err) {
       console.error(err);
@@ -55,23 +58,27 @@ export default function CartWelcome() {
           {error}
         </div>
       )}
+
       <form onSubmit={handleSubmit}>
         <h2 className="font-bold text-black text-2xl mb-4 text-left w-full">
           Diga-me sobre vocês
         </h2>
-        <div className="grid grid-cols-3 md:grid-cols-3 gap-6">
+
+        {/* Linha 1: dono + telefone + pet */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="flex flex-col col-span-1">
             <span className="font-semibold mb-2 text-sm text-gray-700">
               <CartInput
                 type="text"
-                label="Nome do dono de pet"
+                label="Nome do dono"
                 name="name"
-                placeholder="Nome do dono do pet"
-                className="p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-[#E72989] transition w-full "
+                placeholder="Seu nome"
+                className="p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-[#E72989] transition w-full"
                 required
               />
             </span>
           </div>
+
           <div className="flex flex-col col-span-1">
             <span className="w-full font-semibold mb-2 text-sm text-gray-700">
               <CartInput
@@ -84,21 +91,24 @@ export default function CartWelcome() {
               />
             </span>
           </div>
+
           <div className="flex flex-col col-span-1">
             <span className="w-full font-semibold mb-2 text-sm text-gray-700">
               <CartInput
                 type="text"
                 name="petName"
                 label="Nome do pet"
-                placeholder="Nome do pet"
+                placeholder="Nome do seu pet"
                 className="p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-[#E72989] transition w-full"
                 required
               />
             </span>
           </div>
         </div>
-        <div className="grid grid-cols-4 md:grid-cols-4 gap-6 mt-4">
-          <div className="flex flex-col col-span-1">
+
+        {/* Linha 2: espécie, raça, idade, porte */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-4">
+          <div className="flex flex-col">
             <span className="w-full font-semibold mb-2 text-sm text-gray-700">
               <CartSpeciesSelect
                 label="Espécie"
@@ -107,31 +117,35 @@ export default function CartWelcome() {
               />
             </span>
           </div>
-          <div className="flex flex-col col-span-1">
+
+          <div className="flex flex-col">
             <span className="font-semibold mb-2 text-sm text-gray-700">
               <CartBreedSelect label="Raça do pet" species={activeOption} />
             </span>
           </div>
-          <div className="flex flex-col col-span-1">
+
+          <div className="flex flex-col">
             <span className="font-semibold mb-2 text-sm text-gray-700">
               <CartAge label="Idade do pet" />
             </span>
           </div>
-          <div className="flex flex-col col-span-1">
+
+          <div className="flex flex-col">
             <span className="font-semibold mb-2 text-sm text-gray-700">
               <CartSizeSelect label="Porte" />
             </span>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-6 mt-6 items-center">
+
+
+        {/* Linha 3: info + botão */}
+        <div className="flex flex-row md:grid md:grid-cols-1 md:grid-cols-2 gap-6 mt-6 items-center">
           <div>
             <CartLinkInfo />
           </div>
-          <div className="flex justify-end">
-            <CartButton
-              nextHref="/cart/horario-de-atendimento"
 
-            />
+          <div className="flex justify-end">
+            <CartButton nextHref="/cart/horario-de-atendimento" />
           </div>
         </div>
       </form>
