@@ -10,7 +10,7 @@ interface CartSpeciesSelectProps {
 export const CartSpeciesSelect: React.FC<CartSpeciesSelectProps> = ({ label, value, setValue }) => {
   return (
     <div className="flex flex-col col-span-1">
-      <label className="mb-1">{label}</label>
+      <label className="">{label}</label>
       <div className="flex gap-2">
         {species.map((specie) => (
           <Button
@@ -18,7 +18,7 @@ export const CartSpeciesSelect: React.FC<CartSpeciesSelectProps> = ({ label, val
             variant={value === specie.label ? "default" : "outline"}
             onClick={() => setValue(specie.label)}
             aria-pressed={value === specie.label}
-            className={`px-8 py-4 text-lg rounded-lg font-bold flex items-center gap-2 h-[48px] border-2 transition-colors cursor-pointer ${value === specie.label
+            className={`px-8 py-4 text-lg rounded-lg font-bold flex items-center gap-2 h-[48px] border-2 transition-colors cursor-pointer mx-auto md:mx-0 ${value === specie.label
               ? specie.color
               : "bg-white text-black border-gray-300 hover:bg-gray-100"
               }`}

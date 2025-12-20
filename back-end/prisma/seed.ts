@@ -20,7 +20,7 @@ async function seedUsuarios() {
       },
       {
         NOME: 'Joel Miller',
-        DESCRICAO: 'Usuário cliente',
+        DESCRICAO: 'Usuário administrador',
         SENHA_HASH: senhaAdmin,
         EMAIL: 'joel.miller@puppycarepet.com.br',
         FOTO: '/usuarios/joel-miller.webp',
@@ -28,7 +28,7 @@ async function seedUsuarios() {
       },
       {
         NOME: 'Rock Lee',
-        DESCRICAO: 'Usuário cliente',
+        DESCRICAO: 'Usuário administrador',
         SENHA_HASH: senhaAdmin,
         EMAIL: 'rock.lee@puppycarepet.com.br',
         FOTO: '/usuarios/rock-lee.jpg',
@@ -36,7 +36,7 @@ async function seedUsuarios() {
       },
       {
         NOME: 'Morty Smith',
-        DESCRICAO: 'Usuário cliente',
+        DESCRICAO: 'Usuário administrador',
         SENHA_HASH: senhaAdmin,
         EMAIL: 'morty.smith@puppycarepet.com.br',
         FOTO: '/usuarios/rick.gif',
@@ -44,7 +44,7 @@ async function seedUsuarios() {
       },
       {
         NOME: 'Po',
-        DESCRICAO: 'Usuário cliente',
+        DESCRICAO: 'Usuário administrador',
         SENHA_HASH: senhaAdmin,
         EMAIL: 'po@et.com.br',
         FOTO: '/usuarios/po.jpg',
@@ -52,7 +52,7 @@ async function seedUsuarios() {
       },
       {
         NOME: 'Squirtle',
-        DESCRICAO: 'Usuário cliente',
+        DESCRICAO: 'Usuário administrador',
         SENHA_HASH: senhaAdmin,
         EMAIL: 'squirtle@puppycarepet.com.br',
         FOTO: '/usuarios/squirtle.jpg',
@@ -60,7 +60,7 @@ async function seedUsuarios() {
       },
       {
         NOME: 'Robin',
-        DESCRICAO: 'Usuário cliente',
+        DESCRICAO: 'Usuário administrador',
         SENHA_HASH: senhaAdmin,
         EMAIL: 'robin@puppycarepet.com.br',
         FOTO: '/usuarios/robin.jpg',

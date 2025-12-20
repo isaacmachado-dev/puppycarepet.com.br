@@ -24,13 +24,6 @@ import { useRouter } from "next/navigation";
 import AdminHomeLoading from "@/app/admin/components/loading/AdminHomeLoading";
 import { getUsuarios } from "../api/api";
 
-
-// async function getUsuarios() {
-//   const res = await fetch("/api/usuarios");
-//   if (!res.ok) throw new Error("Erro ao buscar usuários");
-//   return res.json();
-// }
-
 export default function AdminPage() {
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -44,20 +37,19 @@ export default function AdminPage() {
     | "alterarSenha"
     | null
   >("agendamentos");
-  const [usuarios, setUsuarios] = useState([]);
+  const [usuarios, setUsuarios] = useState<any[]>([]);
   const [nomeUsuario, setNomeUsuario] = useState<string>("");
 
   useEffect(() => {
-    // Exemplo: checa se existe um token no localStorage
     const token =
       typeof window !== "undefined"
         ? localStorage.getItem("admin_token")
         : null;
+
     if (!token) {
       router.replace("/admin/usuarios/login");
     } else {
       setIsAuthenticated(true);
-      // Decodifica o nome do usuário do token JWT
       try {
         const payload = JSON.parse(atob(token.split(".")[1]));
         setNomeUsuario(payload.nome || "Usuário");
@@ -71,7 +63,6 @@ export default function AdminPage() {
     getUsuarios().then(setUsuarios).catch(console.error);
   }, []);
 
-  // Referencia 'usuarios' para evitar o aviso de variável atribuída mas não usada
   useEffect(() => {
     if (usuarios && usuarios.length > 0) {
       console.log("Usuarios carregados:", usuarios);
@@ -79,7 +70,7 @@ export default function AdminPage() {
   }, [usuarios]);
 
   if (!isAuthenticated) {
-    return null; // Ou um loading spinner
+    return null;
   }
 
   return (
@@ -91,7 +82,7 @@ export default function AdminPage() {
 
       <div className="relative flex min-h-screen text-black font-bold">
         <aside
-          className={`relative z-10 bg-[#1A112E] shadow-lg py-4 px-4 transition-all duration-300 ${isOpen ? "w-[250px]" : "w-[125px]"
+          className={`relative z-10 bg-[#1A112E] shadow-lg py-4 px-4 invisible md:visible transition-all duration-300 ${isOpen ? "w-[250px]" : "w-[125px]"
             }`}
         >
           <div className="sticky top-5 flex flex-col gap-2">
@@ -235,8 +226,9 @@ export default function AdminPage() {
             </div>
           </div>
         </aside>
+
         <main className="flex-1 p-6">
-          <section className="">
+          <section>
             {paginaAtual === "agendamentos" && <AgendamentoPage />}
             {paginaAtual === "clientes" && <ClientesPage />}
             {paginaAtual === "analise" && <AnalisePage />}

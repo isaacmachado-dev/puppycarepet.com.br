@@ -6,10 +6,11 @@ import { useTheme } from 'next-themes';
 
 export default function ModeSwitchDarkLight() {
     const { theme, setTheme } = useTheme();
-    const [darked, setDarked] = useState(false);
+    const [mounted, setMounted] = useState(false);
 
-    useEffect(() => setDarked(true), []);
-    if (!darked) return null;
+    useEffect(() => setMounted(true), []);
+
+    if (!mounted) return null;
 
     // const isDarked = theme === 'dark';
     const isLight = theme === 'light';
