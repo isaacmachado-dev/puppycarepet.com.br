@@ -24,7 +24,7 @@ export default function FleasOrTicksPage() {
     const [activeOption, setActiveOption] = useState("Não tem");
 
     return (
-      <section className="bg-white p-10 rounded-xl shadow-lg w-3/4">
+      <section className="bg-white w-[90%] p-10 rounded-xl shadow-lg">
         <CartTitleHeader
           title="Seu pet tem pulga ou carrapato?"
           backStep="seu-pet-tem-pulga-ou-carrapato"

@@ -24,10 +24,10 @@ export default function OpeningHoursPage() {
     const [activeOption, setActiveOption] = useState("09:30");
 
     return (
-      <section className="bg-white p-10 rounded-xl shadow-lg w-3/4">
+      <section className="bg-white w-[90%] p-10 rounded-xl shadow-lg">
         <CartTitleHeader
           title="Horário de atendimento"
-          backStep="horario-de-atendimento"
+          backStep="cart"
         />
         <CartSubTitleHeader subtitle="Escolha um dos horários para buscarmos seu pet ou levar ele até nós!" />
         {error && (

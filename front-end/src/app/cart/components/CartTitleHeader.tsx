@@ -18,7 +18,7 @@ const cartStepOrder = [
 ];
 
 const cartSteps = {
-  cart: "/",
+  cart: "/cart",
   "horario-de-atendimento": "/cart/horario-de-atendimento",
   "seu-pet-tem-pulga-ou-carrapato": "/cart/seu-pet-tem-pulga-ou-carrapato",
   "qual-e-o-temperamento-do-pet": "/cart/qual-e-o-temperamento-do-seu-pet",

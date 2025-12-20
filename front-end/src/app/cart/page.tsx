@@ -52,7 +52,7 @@ export default function CartWelcome() {
   }
 
   return (
-    <section className="bg-white p-10 rounded-xl shadow-lg">
+    <section className="bg-white w-[90%] p-10 rounded-xl shadow-lg">
       {error && (
         <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 w-full max-w-lg">
           {error}

@@ -28,7 +28,7 @@ export default function YourPetTemperamentPage() {
     const [activeOption, setActiveOption] = useState("Bonzinho");
 
     return (
-      <section className="bg-white p-10 rounded-xl shadow-lg w-3/4">
+      <section className="bg-white w-[90%] p-10 rounded-xl shadow-lg w-3/4">
         <CartTitleHeader
           title="Qual é o temperamento do seu pet?"
           backStep="qual-e-o-temperamento-do-pet"

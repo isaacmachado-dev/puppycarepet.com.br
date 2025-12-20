@@ -12,7 +12,7 @@ export default function CartLayout({
         <div className="flex flex-row gap-2 p-8">
           <CartHeader label="Atendimento" text="Puppy Care" />
         </div>
-        <div className="flex flex-col justify-center items-center px-5">
+        <div className="flex flex-col items-center">
           {children}
         </div>
       </section>
