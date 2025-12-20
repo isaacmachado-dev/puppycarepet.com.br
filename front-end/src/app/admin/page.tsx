@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import type { Usuario } from "./usuarios/types/usuario.ts"; // exemplo
 
 import {
   CalendarDays,
@@ -23,6 +24,7 @@ import OpcoesPage from "./opcoes/page";
 import { useRouter } from "next/navigation";
 import AdminHomeLoading from "@/app/admin/components/loading/AdminHomeLoading";
 import { getUsuarios } from "../api/api";
+import { UsuarioApi } from "./usuarios/types/usuario";
 
 export default function AdminPage() {
   const router = useRouter();
@@ -37,7 +39,7 @@ export default function AdminPage() {
     | "alterarSenha"
     | null
   >("agendamentos");
-  const [usuarios, setUsuarios] = useState<any[]>([]);
+  const [usuarios, setUsuarios] = useState<Usuario[]>([]);
   const [nomeUsuario, setNomeUsuario] = useState<string>("");
 
   useEffect(() => {
