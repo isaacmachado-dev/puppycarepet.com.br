@@ -15,14 +15,14 @@ export const CartYourPetTemperament: React.FC<CartYourPetTemperamentProps> = ({
   return (
     <div className="flex flex-col col-span-1">
       <label>{label}</label>
-      <div className="flex gap-4 h-full items-end mt-2">
+      <div className="flex flex-col gap-2 h-full items-end mt-2">
         {["Medroso", "Bonzinho", "Ansioso"].map((option) => (
           <Button
             key={option}
             variant={activeOption === option ? "default" : "outline"}
             onClick={() => setActiveOption(option)}
             aria-pressed={activeOption === option}
-            className={`h-[48px] min-w-[100px] text-base px-8 py-4 font-bold flex items-center justify-center transition
+            className={`h-[48px] min-w-[100px] w-full text-base px-8 py-4 font-bold flex items-center justify-center transition
                 ${activeOption === option
                 ? "bg-[#1A112E] text-white hover:bg-[#0A002E] cursor-pointer"
                 : "bg-white text-[#1A112E] border-2 border-[#1A112E] hover:bg-[#f3f3f3] cursor-pointer"

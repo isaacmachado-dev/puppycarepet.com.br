@@ -11,7 +11,7 @@ export const CartFleaTick: React.FC<CartFleaTickProps> = ({ label, value, setVal
   return (
     <div className="flex flex-col col-span-1">
       <label className="mb-1">{label}</label>
-      <div className="flex gap-2">
+      <div className="flex flex-col gap-2">
         {fleaTickOptions.map((option) => (
           <Button
             key={option.label}
@@ -19,8 +19,8 @@ export const CartFleaTick: React.FC<CartFleaTickProps> = ({ label, value, setVal
             onClick={() => setValue(option.label)}
             aria-pressed={value === option.label}
             className={`px-8 py-4 text-lg rounded-lg font-bold flex items-center gap-2 cursor-pointer h-[48px] border-2 transition-colors ${value === option.label
-                ? option.color
-                : "bg-white text-black border-gray-300 hover:bg-gray-100"
+              ? option.color
+              : "bg-white text-black border-gray-300 hover:bg-gray-100"
               }`}
           >
             {option.label}
