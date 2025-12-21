@@ -1,3 +1,4 @@
+import { ChevronLeft } from "lucide-react";
 import React from "react";
 
 
@@ -9,21 +10,21 @@ interface CartTitleHeaderProps {
 
 const cartStepOrder = [
   "cart",
-  "horario-de-atendimento",
-  "seu-pet-tem-pulga-ou-carrapato",
-  "qual-e-o-temperamento-do-pet",
-  "possui-alguma-alergia-ou-alguma-doenca",
   "servicos-disponiveis",
+  "possui-alguma-alergia-ou-alguma-doenca",
+  "seu-pet-tem-pulga-ou-carrapato",
+  "horario-de-atendimento",
+  "qual-e-o-temperamento-do-pet",
   "obrigado",
 ];
 
 const cartSteps = {
   cart: "/cart",
-  "horario-de-atendimento": "/cart/horario-de-atendimento",
-  "seu-pet-tem-pulga-ou-carrapato": "/cart/seu-pet-tem-pulga-ou-carrapato",
-  "qual-e-o-temperamento-do-pet": "/cart/qual-e-o-temperamento-do-seu-pet",
-  "possui-alguma-alergia-ou-alguma-doenca": "/cart/possui-alguma-alergia-ou-alguma-doenca",
   "servicos-disponiveis": "/cart/servicos-disponiveis",
+  "possui-alguma-alergia-ou-alguma-doenca": "/cart/possui-alguma-alergia-ou-alguma-doenca",
+  "seu-pet-tem-pulga-ou-carrapato": "/cart/seu-pet-tem-pulga-ou-carrapato",
+  "horario-de-atendimento": "/cart/horario-de-atendimento",
+  "qual-e-o-temperamento-do-pet": "/cart/qual-e-o-temperamento-do-seu-pet",
   obrigado: "/cart/obrigado",
 };
 
@@ -41,20 +42,7 @@ export const CartTitleHeader: React.FC<CartTitleHeaderProps> = ({ title, backSte
         aria-label="Voltar"
         style={{ width: 40, height: 40 }}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-5 h-5"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M10 19l-7-7m0 0l7-7m-7 7h18"
-          />
-        </svg>
+        <ChevronLeft />
       </button>
       {title}
     </h2>

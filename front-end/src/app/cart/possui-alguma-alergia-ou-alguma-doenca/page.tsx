@@ -24,7 +24,7 @@ export default function FleasOrTicksPage() {
     // Removido activeOption, agora cada grupo tem seu próprio estado
 
     return (
-      <section className="bg-white p-10 rounded-xl shadow-lg w-3/4">
+      <section className="bg-white w-[90%] p-10 rounded-xl shadow-lg w-3/4">
         <CartTitleHeader
           title="Seu pet possui alguma alergia ou alguma doença?"
           backStep="possui-alguma-alergia-ou-alguma-doenca"
@@ -36,13 +36,13 @@ export default function FleasOrTicksPage() {
           </div>
         )}
         <form onSubmit={handleSubmit}>
-          <div className="grid grid-cols-2 md:grid-cols-2 gap-6 mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <span className="font-semibold mb-2 text-sm text-gray-700">
-              <CartAlergicSick label="Possui alguma alergia?" />
+              <CartAlergicSick label="Possui ou já possuiu alguma alergia?" />
             </span>
           </div>
           <div className="flex w-full justify-end mt-6">
-            <CartButton nextHref="/cart/servicos-disponiveis" />
+            <CartButton nextHref="/cart/seu-pet-tem-pulga-ou-carrapato" />
           </div>
         </form>
       </section>

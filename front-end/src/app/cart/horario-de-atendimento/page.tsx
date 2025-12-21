@@ -46,7 +46,7 @@ export default function OpeningHoursPage() {
             </span>
           </div>
           <div className="flex w-full justify-end mt-6">
-            <CartButton nextHref="/cart/seu-pet-tem-pulga-ou-carrapato" />
+            <CartButton nextHref="/cart/qual-e-o-temperamento-do-seu-pet" />
           </div>
         </form>
       </section>
