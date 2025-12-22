@@ -59,7 +59,7 @@ export default function CartWelcome() {
         </div>
       )}
 
-      <form onSubmit={handleSubmit}>
+      <form suppressHydrationWarning onSubmit={handleSubmit}>
         <h2 className="font-bold text-black text-2xl mb-4 text-left w-full">
           Diga-me sobre vocês
         </h2>

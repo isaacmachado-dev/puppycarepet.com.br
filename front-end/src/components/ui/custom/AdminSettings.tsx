@@ -14,3 +14,26 @@ export function AdminBlockTitle({ children }: { children: React.ReactNode }) {
     );
 }
 
+export function AdminSectionTitle({ children }: { children: React.ReactNode }) {
+    return (
+        <h3 className="flex justify-left text-5xl mb-5 text-[1.5rem] dark:text-white">
+            {children}
+        </h3>
+    );
+}
+
+export function AdminSectionDescription({ children }: { children: React.ReactNode }) {
+    return (
+        <p className="flex justify-left text-3xl mb-5 text-[1.2rem] dark:text-white">
+            {children}
+        </p>
+    );
+}
+
+export function AdminHistoricList({ children }: { children?: React.ReactNode }) {
+    return (
+        <p className="flex justify-left text-3xl mb-5 text-[1.2rem] dark:text-white">
+            {children}
+        </p>
+    );     
+};

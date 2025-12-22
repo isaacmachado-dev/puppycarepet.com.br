@@ -23,7 +23,41 @@ export default function LoginPage() {
       const data = await res.json();
       if (res.ok && data.token) {
         localStorage.setItem("admin_token", data.token);
-        router.replace("/admin");
+
+        // Recupera o ID do usuário a partir do JWT
+        const payload = JSON.parse(atob(data.token.split(".")[1] || "")) as {
+          id?: number;
+        };
+
+        if (payload?.id) {
+          localStorage.setItem("user_id", String(payload.id));
+        }
+
+        // Busca o usuário para descobrir seus perfis (TIPOS)
+        try {
+          const userRes = await fetch(`/api/usuarios/${payload?.id ?? ""}`);
+          const userData = await userRes.json();
+          const roles: string[] = Array.isArray(userData?.TIPOS)
+            ? userData.TIPOS
+            : [];
+
+          localStorage.setItem("user_roles", JSON.stringify(roles));
+
+          if (roles.includes("administrador")) {
+            router.replace("/admin");
+            return;
+          }
+
+          if (roles.includes("cliente")) {
+            router.replace("/admin");
+            return;
+          }
+
+          router.replace("/admin");
+        } catch (err) {
+          console.error("Erro ao buscar usuário/roles", err);
+          router.replace("/admin");
+        }
       } else {
         setError(data.message || data.error || "Usuário ou senha inválidos");
       }

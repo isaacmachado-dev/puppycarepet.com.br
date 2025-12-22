@@ -18,6 +18,7 @@ export const CartSizeSelect: React.FC<CartSizeSelectProps> = ({
   <div className="flex flex-col col-span-1">
     <label>{label}</label>
     <select
+      suppressHydrationWarning
       className="p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-[#E72989] transition w-full cursor-pointer"
       {...props}
     >

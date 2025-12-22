@@ -20,15 +20,17 @@ import ClientesPage from "./clientes/page";
 import AnalisePage from "./analise/page";
 import UsuariosPage from "./usuarios/page";
 import OpcoesPage from "./opcoes/page";
+import HistoricoPage from "./historico/page";
 
 import { useRouter } from "next/navigation";
 import AdminHomeLoading from "@/app/admin/components/loading/AdminHomeLoading";
 import { getUsuarios } from "../api/api";
-import { UsuarioApi } from "./usuarios/types/usuario";
+// import { UsuarioApi } from "./usuarios/types/usuario";
 
 export default function AdminPage() {
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
   const [paginaAtual, setPaginaAtual] = useState<
     | "agendamentos"
@@ -36,6 +38,7 @@ export default function AdminPage() {
     | "analise"
     | "usuarios"
     | "opcoes"
+    | "historico"
     | "alterarSenha"
     | null
   >("agendamentos");
@@ -49,16 +52,39 @@ export default function AdminPage() {
         : null;
 
     if (!token) {
-      router.replace("/admin/usuarios/login");
-    } else {
-      setIsAuthenticated(true);
-      try {
-        const payload = JSON.parse(atob(token.split(".")[1]));
-        setNomeUsuario(payload.nome || "Usuário");
-      } catch {
-        setNomeUsuario("Usuário");
-      }
+      router.replace("/login");
+      return;
     }
+
+    // Armazena nome do payload para saudação
+    try {
+      const payload = JSON.parse(atob(token.split(".")[1]));
+      setNomeUsuario(payload.nome || "Usuário");
+    } catch {
+      setNomeUsuario("Usuário");
+    }
+
+    // Verifica roles armazenadas no login
+    const rolesRaw =
+      typeof window !== "undefined" ? localStorage.getItem("user_roles") : null;
+    const roles: string[] = rolesRaw ? JSON.parse(rolesRaw) : [];
+
+    const isAdminRole = roles.includes("administrador");
+    const isClienteRole = roles.includes("cliente");
+    setIsAdmin(isAdminRole);
+
+    if (isAdminRole) {
+      setIsAuthenticated(true);
+      return;
+    }
+
+    if (isClienteRole) {
+      setPaginaAtual("historico");
+      setIsAuthenticated(true);
+      return;
+    }
+
+    router.replace("/login");
   }, [router]);
 
   useEffect(() => {
@@ -77,15 +103,15 @@ export default function AdminPage() {
 
   return (
     <div>
-
       <div className="text-white ">
         <AdminHomeLoading loaded={true} funcionario={nomeUsuario || "Mônica"} />
       </div>
 
       <div className="relative flex min-h-screen text-black font-bold">
         <aside
-          className={`relative z-10 bg-[#1A112E] shadow-lg py-4 px-4 invisible md:visible transition-all duration-300 ${isOpen ? "w-[250px]" : "w-[125px]"
-            }`}
+          className={`relative z-10 bg-[#1A112E] shadow-lg py-4 px-4 invisible md:visible transition-all duration-300 ${
+            isOpen ? "w-[250px]" : "w-[125px]"
+          }`}
         >
           <div className="sticky top-5 flex flex-col gap-2">
             <header className="relative flex items-center gap-2 min-h-[50px]">
@@ -99,8 +125,9 @@ export default function AdminPage() {
                   alt="Petshop Puppy Care"
                   width={50}
                   height={50}
-                  className={`transition-all duration-300 ${isOpen ? "opacity-100" : "opacity-0 w-0"
-                    }`}
+                  className={`transition-all duration-300 ${
+                    isOpen ? "opacity-100" : "opacity-0 w-0"
+                  }`}
                 />
               </button>
               {/* Botao amarelo Admin */}
@@ -109,17 +136,17 @@ export default function AdminPage() {
                   "bg-[#FECE14] text-black px-3 py-1 rounded-md transition-all duration-300"
                 }
               >
-                Admin
+                {isAdmin ? (isOpen ? "Admin" : "A") : (isOpen ? "Cliente" : "C")}
               </span>
 
               {/* Texto Puppy Care */}
               <p
-                className={`text-white transition-all duration-300 overflow-hidden ${isOpen ? "opacity-100 max-w-[200px]" : "opacity-0 max-w-0"
-                  }`}
+                className={`text-white transition-all duration-300 overflow-hidden ${
+                  isOpen ? "opacity-100 max-w-[200px]" : "opacity-0 max-w-0"
+                }`}
               >
-                Puppy Care
+                {nomeUsuario || "Usuário"}
               </p>
-
 
               <button
                 className="absolute -right-4 top-1/2 -translate-y-1/2 translate-x-3 bg-[#333] hover:bg-white focus:outline-none rounded-md border-2 border-[#AAAAAA] cursor-pointer"
@@ -139,82 +166,107 @@ export default function AdminPage() {
               </button>
             </header>
             <div className="p-2 bg-[#E3E3E3] rounded-md flex flex-col gap-2 transition-all duration-300">
-              <div className="text-black hover:text-white transition-all duration-300">
-                <AdminMenuItem
-                  icon={<CalendarDays color="currentColor" />}
-                  label="Agendamentos"
-                  href=""
-                  isOpen={isOpen}
-                  className={`${!isOpen
-                    ? "flex justify-center items-center"
-                    : "justify-start"
-                    }`}
-                  active={paginaAtual === "agendamentos"}
-                  onClick={() => setPaginaAtual("agendamentos")}
-                />
-              </div>
-              <div className="text-black hover:text-white transition-all duration-300">
-                <AdminMenuItem
-                  icon={<Users color="currentColor" />}
-                  label="Clientes"
-                  href=""
-                  isOpen={isOpen}
-                  className={`${!isOpen
-                    ? "flex justify-center items-center"
-                    : "justify-start"
-                    }`}
-                  active={paginaAtual === "clientes"}
-                  onClick={() => setPaginaAtual("clientes")}
-                />
-              </div>
-              <div className="text-black hover:text-white transition-all duration-300">
-                <AdminMenuItem
-                  icon={<ChartNoAxesColumn color="currentColor" />}
-                  className={`${!isOpen
-                    ? "flex justify-center items-center"
-                    : "justify-start"
-                    }`}
-                  label="Análise"
-                  href=""
-                  isOpen={isOpen}
-                  active={paginaAtual === "analise"}
-                  onClick={() => setPaginaAtual("analise")}
-                />
-              </div>
+              {isAdmin && (
+                <>
+                  <div className="text-black hover:text-white transition-all duration-300">
+                    <AdminMenuItem
+                      icon={<CalendarDays color="currentColor" />}
+                      label="Agendamentos"
+                      href=""
+                      isOpen={isOpen}
+                      className={`${
+                        !isOpen
+                          ? "flex justify-center items-center"
+                          : "justify-start"
+                      }`}
+                      active={paginaAtual === "agendamentos"}
+                      onClick={() => setPaginaAtual("agendamentos")}
+                    />
+                  </div>
+                  <div className="text-black hover:text-white transition-all duration-300">
+                    <AdminMenuItem
+                      icon={<Users color="currentColor" />}
+                      label="Clientes"
+                      href=""
+                      isOpen={isOpen}
+                      className={`${
+                        !isOpen
+                          ? "flex justify-center items-center"
+                          : "justify-start"
+                      }`}
+                      active={paginaAtual === "clientes"}
+                      onClick={() => setPaginaAtual("clientes")}
+                    />
+                  </div>
+                  <div className="text-black hover:text-white transition-all duration-300">
+                    <AdminMenuItem
+                      icon={<ChartNoAxesColumn color="currentColor" />}
+                      className={`${
+                        !isOpen
+                          ? "flex justify-center items-center"
+                          : "justify-start"
+                      }`}
+                      label="Análise"
+                      href=""
+                      isOpen={isOpen}
+                      active={paginaAtual === "analise"}
+                      onClick={() => setPaginaAtual("analise")}
+                    />
+                  </div>
+                  <div className="text-black hover:text-white transition-all duration-300">
+                    <AdminMenuItem
+                      icon={<Notebook color="currentColor" />}
+                      className={`${
+                        !isOpen
+                          ? "flex justify-center items-center"
+                          : "justify-start"
+                      }`}
+                      label="Usuários"
+                      href=""
+                      isOpen={isOpen}
+                      active={paginaAtual === "usuarios"}
+                      onClick={() => setPaginaAtual("usuarios")}
+                    />
+                  </div>
+                  <div className="text-black hover:text-white transition-all duration-300">
+                    <AdminMenuItem
+                      icon={<Settings color="currentColor" />}
+                      className={`${
+                        !isOpen
+                          ? "flex justify-center items-center"
+                          : "justify-start"
+                      }`}
+                      label="Opções"
+                      href=""
+                      isOpen={isOpen}
+                      active={paginaAtual === "opcoes"}
+                      onClick={() => setPaginaAtual("opcoes")}
+                    />
+                  </div>
+                </>
+              )}
               <div className="text-black hover:text-white transition-all duration-300">
                 <AdminMenuItem
                   icon={<Notebook color="currentColor" />}
-                  className={`${!isOpen
-                    ? "flex justify-center items-center"
-                    : "justify-start"
-                    }`}
-                  label="Usuários"
+                  className={`${
+                    !isOpen
+                      ? "flex justify-center items-center"
+                      : "justify-start"
+                  }`}
+                  label="Histórico"
                   href=""
                   isOpen={isOpen}
-                  active={paginaAtual === "usuarios"}
-                  onClick={() => setPaginaAtual("usuarios")}
-                />
-              </div>
-              <div className="text-black hover:text-white transition-all duration-300">
-                <AdminMenuItem
-                  icon={<Settings color="currentColor" />}
-                  className={`${!isOpen
-                    ? "flex justify-center items-center"
-                    : "justify-start"
-                    }`}
-                  label="Opções"
-                  href=""
-                  isOpen={isOpen}
-                  active={paginaAtual === "opcoes"}
-                  onClick={() => setPaginaAtual("opcoes")}
+                  active={paginaAtual === "historico"}
+                  onClick={() => setPaginaAtual("historico")}
                 />
               </div>
             </div>
             <div className="text-black hover:text-white transition-all duration-300">
               <AdminMenuItem
                 icon={<X color="currentColor" />}
-                className={`${!isOpen ? "flex justify-center items-center" : "justify-start"
-                  }`}
+                className={`${
+                  !isOpen ? "flex justify-center items-center" : "justify-start"
+                }`}
                 label="Sair"
                 href="/login"
                 isOpen={isOpen}
@@ -222,6 +274,8 @@ export default function AdminPage() {
                 onClick={() => {
                   if (typeof window !== "undefined") {
                     localStorage.removeItem("admin_token");
+                      localStorage.removeItem("user_roles");
+                      localStorage.removeItem("user_id");
                   }
                 }}
               />
@@ -236,6 +290,7 @@ export default function AdminPage() {
             {paginaAtual === "analise" && <AnalisePage />}
             {paginaAtual === "usuarios" && <UsuariosPage />}
             {paginaAtual === "opcoes" && <OpcoesPage />}
+            {paginaAtual === "historico" && <HistoricoPage />}
           </section>
         </main>
       </div>

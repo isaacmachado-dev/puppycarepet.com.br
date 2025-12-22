@@ -66,6 +66,14 @@ async function seedUsuarios() {
         FOTO: '/usuarios/robin.jpg',
         TIPOS: ['colaborador', 'administrador'],
       },
+      {
+        NOME: 'Cliente Exemplo',
+        DESCRICAO: 'Usuário cliente de exemplo',
+        SENHA_HASH: senhaCliente,
+        EMAIL: 'cliente@hotmail.com',
+        FOTO: '/usuarios/cliente-exemplo.jpg',
+        TIPOS: ['cliente'],
+      },
     ],
     skipDuplicates: true,
   });
