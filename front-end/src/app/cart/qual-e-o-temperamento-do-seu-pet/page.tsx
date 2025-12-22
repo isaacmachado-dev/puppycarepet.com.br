@@ -56,7 +56,7 @@ export default function YourPetTemperamentPage() {
           <div>
             <div className="flex justify-between items-center mt-4">
               <span className="flex-1 flex justify-end">
-                <CartButton nextHref="/cart/possui-alguma-alergia-ou-alguma-doenca" />
+                <CartButton nextHref="/cart/obrigado" />
               </span>
             </div>
           </div>
