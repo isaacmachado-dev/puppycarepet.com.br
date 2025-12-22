@@ -28,9 +28,10 @@ export default function AvailableServicesPage() {
     const [selected, setSelected] = useState<string[]>(["Tosa"]);
 
     return (
-      <section className="bg-white p-10 rounded-xl shadow-lg w-3/4">
-        <CartTitleHeader title="Qual é o temperamento do seu pet?" />
-        <CartSubTitleHeader subtitle="Prezando o bem estar do seu pet e dos seus profissionais não atendemos cães agressivos." />
+      <section className="bg-white w-[90%] p-10 rounded-xl shadow-lg">
+        <CartTitleHeader title="Serviços disponíveis" />
+        <CartSubTitleHeader subtitle="Escolha um ou mais dos serviços disponíveis para
+atendermos seu pet!" />
         {error && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 w-full max-w-lg">
             {error}
@@ -38,10 +39,10 @@ export default function AvailableServicesPage() {
         )}
         <form onSubmit={handleSubmit}>
           {/* Bloco único: Horários */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div className="gap-6 mb-6">
             <div className="flex flex-col col-span-1">
               <div className="flex gap-4 h-full items-end">
-                <span className="w-full">
+                <span className="w-full ">
                   <CartAvailableServices
                     label="Selecione uma opção"
                     services="Banho,Tosa,Hidratação,Unhas"
@@ -59,7 +60,7 @@ export default function AvailableServicesPage() {
             </div>
           </div>
           <div className="flex w-full justify-end mt-6">
-            <CartButton nextHref="/cart/obrigado" />
+            <CartButton nextHref="/cart/possui-alguma-alergia-ou-alguma-doenca" />
           </div>
         </form>
       </section>

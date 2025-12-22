@@ -37,7 +37,7 @@ export default function Home() {
                   priority
                 />
                 {/* Banho & Tosa Mobile */}
-                <p className="text-sm mx-auto font-bold sm:block">Banho & Tosa</p>
+                <p className="text-sm mx-auto text-center font-bold sm:block">Banho & Tosa</p>
               </div>
 
               <div className="text-5xl sm:text-7xl font-bold order-3 sm:order-2 text-center sm:text-left">

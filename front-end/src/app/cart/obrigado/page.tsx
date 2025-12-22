@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { CartButton } from "../components/CartButton";
+import { CartConfirmButton } from "../components/CartConfirmButton";
 import { CartTitleHeader } from "../components/CartTitleHeader";
 import { CartSubTitleHeader } from "../components/CartSubTitleHeader";
 
@@ -31,7 +31,7 @@ export default function ThankYouPage() {
         )}
         <form onSubmit={handleSubmit} className="w-full">
           <div className="flex w-full justify-end mt-6">
-            <CartButton nextHref="/" />
+            <CartConfirmButton nextHref="/" />
           </div>
         </form>
       </section>

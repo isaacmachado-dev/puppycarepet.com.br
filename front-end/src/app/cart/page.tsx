@@ -145,7 +145,7 @@ export default function CartWelcome() {
           </div>
 
           <div className="flex justify-end">
-            <CartButton nextHref="/cart/horario-de-atendimento" />
+            <CartButton nextHref="/cart/servicos-disponiveis" />
           </div>
         </div>
       </form>

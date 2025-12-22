@@ -51,7 +51,7 @@ export default function FleasOrTicksPage() {
             </span>
           </div>
           <div className="flex w-full justify-end mt-6">
-            <CartButton nextHref="/cart/qual-e-o-temperamento-do-seu-pet" />
+            <CartButton nextHref="/cart/horario-de-atendimento" />
           </div>
         </form>
       </section>

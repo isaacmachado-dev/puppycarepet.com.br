@@ -28,26 +28,23 @@ export const CartAvailableServices: React.FC<CartAvailableServicesProps> = ({
   };
 
   return (
-    <div className="flex flex-col col-span-1">
-      <span className="flex gap-4 h-full items-end mt-2">
-        {serviceOptions.map((service) => (
-          <Button
-            key={service}
-            variant={selected.includes(service) ? "default" : "outline"}
-            onClick={() => handleSelect(service)}
-            aria-pressed={selected.includes(service)}
-            className={`h-[48px] min-w-[100px] text-base px-8 py-4 font-bold flex items-center justify-center transition
-            ${
-              selected.includes(service)
-                ? "bg-[#1A112E] text-white hover:bg-[#0A002E]"
-                : "bg-white text-[#1A112E] border-2 border-[#1A112E] hover:bg-[#f3f3f3]"
+    <div className="flex flex-wrap gap-4 w-full mt-2">
+      {serviceOptions.map((service) => (
+        <Button
+          key={service}
+          variant={selected.includes(service) ? "default" : "outline"}
+          onClick={() => handleSelect(service)}
+          aria-pressed={selected.includes(service)}
+          className={`h-[48px] w-full text-base px-8 py-4 font-bold flex items-center justify-center cursor-pointer transition
+        ${selected.includes(service)
+              ? "bg-[#1A112E] text-white hover:bg-[#0A002E]"
+              : "bg-white text-[#1A112E] border-2 border-[#1A112E] hover:bg-[#f3f3f3]"
             }
-          `}
-          >
-            {service}
-          </Button>
-        ))}
-      </span> 
+      `}
+        >
+          {service}
+        </Button>
+      ))}
     </div>
   );
 };
