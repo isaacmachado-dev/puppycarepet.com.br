@@ -15,6 +15,7 @@ export const CartSpeciesSelect: React.FC<CartSpeciesSelectProps> = ({ label, val
         {species.map((specie) => (
           <Button
             key={specie.label}
+            suppressHydrationWarning
             variant={value === specie.label ? "default" : "outline"}
             onClick={() => setValue(specie.label)}
             aria-pressed={value === specie.label}
