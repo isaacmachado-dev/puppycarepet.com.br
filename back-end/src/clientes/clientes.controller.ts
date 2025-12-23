@@ -28,6 +28,15 @@ export class ClientesController {
     return this.clientesService.findAll();
   }
 
+  @Get('by-usuario/:usuarioId')
+  @ApiOperation({ summary: 'Buscar cliente vinculado a um usuário' })
+  @ApiParam({ name: 'usuarioId', description: 'ID do usuário (USUARIOS.ID_USUARIO)' })
+  @ApiResponse({ status: 200, description: 'Cliente encontrado.' })
+  @ApiResponse({ status: 404, description: 'Cliente não encontrado para o usuário.' })
+  findByUsuario(@Param('usuarioId', ParseIntPipe) usuarioId: number) {
+    return this.clientesService.findByUsuarioId(usuarioId);
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Buscar um cliente por ID' })
   @ApiParam({ name: 'id', description: 'ID do cliente' })

@@ -33,7 +33,7 @@ export default function LoginPage() {
           localStorage.setItem("user_id", String(payload.id));
         }
 
-        // Busca o usuário para descobrir seus perfis (TIPOS)
+        // Busca o usuário para descobrir seus perfis (TIPOS) e cliente vinculado
         try {
           const userRes = await fetch(`/api/usuarios/${payload?.id ?? ""}`);
           const userData = await userRes.json();
@@ -42,6 +42,22 @@ export default function LoginPage() {
             : [];
 
           localStorage.setItem("user_roles", JSON.stringify(roles));
+
+          // Tenta descobrir o cliente vinculado a este usuário
+          if (payload?.id) {
+            try {
+              const clienteRes = await fetch(`/api/clientes/by-usuario/${payload.id}`);
+              if (clienteRes.ok) {
+                const clienteData = await clienteRes.json();
+                if (clienteData?.ID_CLIENTE) {
+                  localStorage.setItem("cliente_id", String(clienteData.ID_CLIENTE));
+                }
+              }
+            } catch (e) {
+              // ignora silenciosamente se não houver cliente vinculado
+              console.warn("Cliente vinculado não encontrado para usuário", e);
+            }
+          }
 
           if (roles.includes("administrador")) {
             router.replace("/admin");
@@ -96,7 +112,7 @@ export default function LoginPage() {
                 name="username"
                 type="email"
                 placeholder="E-mail"
-                className="text-black bg-white rounded-md p-2 pl-4 placeholder-black hover:placeholder-black hover:text-black hover:bg-gray-200/50 transition-colors duration-300 focus:outline-2 focus:outline-black hover:outline-2 hover:outline-gray-200"
+                className="p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-[#E72989] transition w-full"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -106,7 +122,7 @@ export default function LoginPage() {
                   name="password"
                   type={showPassword ? "text" : "password"}
                   placeholder="Senha"
-                  className=" text-black bg-white  rounded-md p-2 pl-4 placeholder-black group-hover:text-black group-hover:placeholder-black group-hover:bg-gray-200/50 transition-colors duration-300 focus:outline-2 focus:outline-black group-hover:outline-2 hover:outline-gray-200 w-full pr-4 "
+                  className="p-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-[#E72989] transition w-full"
                   value={senha}
                   onChange={(e) => setSenha(e.target.value)}
                   required
@@ -137,10 +153,7 @@ export default function LoginPage() {
               <div className="flex justify-between items-center mt-4">
                 <span>
                   <p className="text-sm text-black">
-                    <a
-                      href="/login/esqueci-a-senha"
-                      className="relative group"
-                    >
+                    <a href="/login/esqueci-a-senha" className="relative group">
                       <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-black transition-all duration-300 group-hover:w-full"></span>
                       Esqueceu a senha?
                     </a>

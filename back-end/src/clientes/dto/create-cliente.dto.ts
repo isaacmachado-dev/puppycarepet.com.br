@@ -1,4 +1,4 @@
-import { IsString } from 'class-validator';
+import { IsInt, IsOptional, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateClienteDto {
@@ -13,4 +13,9 @@ export class CreateClienteDto {
   @ApiProperty({ description: 'ENDERECO completo do cliente' })
   @IsString()
   ENDERECO: string;
+
+  @ApiProperty({ description: 'ID do usuário vinculado (opcional)', required: false })
+  @IsOptional()
+  @IsInt()
+  ID_USUARIO?: number;
 }

@@ -61,6 +61,9 @@ model CLIENTES {
   TELEFONE     String         @db.VarChar(20)
   ENDERECO     String         @db.VarChar(255)
   FOTO_USUARIO Boolean        @default(false)
+  // Mapeamento opcional para o usuário autenticado
+  ID_USUARIO   Int?
+  USUARIO      USUARIOS?      @relation(fields: [ID_USUARIO], references: [ID_USUARIO])
   PETS         PETS[] // um cliente pode ter vários pets (back-relation para PETS.CLIENTE)
   PACOTES      PACOTES[] // um cliente pode ter vários pacotes (back-relation para PACOTES.CLIENTE)
   ATENDIMENTOS ATENDIMENTOS[] // um cliente pode ter vários atendimentos (back-relation para ATENDIMENTOS.CLIENTE)
@@ -72,6 +75,7 @@ model CLIENTES {
   VERSION      Int            @default(1)
 
   @@index([UPDATED_AT])
+  @@index([ID_USUARIO])
 }
 
 model PETS {
@@ -131,9 +135,11 @@ model USUARIOS {
   NOME         String    @db.VarChar(100)
   DESCRICAO    String?
   EMAIL        String    @unique @db.VarChar(150)
+  TELEFONE     String?   @db.VarChar(20)
   FOTO         String? @db.VarChar(255)
   SENHA_HASH   String    @db.VarChar(255)
   TIPOS        String[]  @default([])
+  CLIENTES     CLIENTES[]
   // --- Campos de rastreamento com prioridade para uso offline ---
   PUBLIC_ID    String    @unique @default(uuid())
   CREATED_AT   DateTime  @default(now())

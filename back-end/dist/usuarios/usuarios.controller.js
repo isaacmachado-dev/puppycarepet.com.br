@@ -26,6 +26,9 @@ let UsuariosController = class UsuariosController {
     constructor(usuariosService) {
         this.usuariosService = usuariosService;
     }
+    async create(body) {
+        return this.usuariosService.create(body);
+    }
     async login(body) {
         return this.usuariosService.login(body.email, body.senha);
     }
@@ -46,6 +49,15 @@ let UsuariosController = class UsuariosController {
     }
 };
 exports.UsuariosController = UsuariosController;
+__decorate([
+    (0, common_1.Post)(),
+    (0, swagger_1.ApiOperation)({ summary: 'Criar usuário' }),
+    (0, swagger_1.ApiResponse)({ status: 201, description: 'Usuário criado com sucesso.' }),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [create_usuario_dto_1.CreateUsuarioDto]),
+    __metadata("design:returntype", Promise)
+], UsuariosController.prototype, "create", null);
 __decorate([
     (0, common_1.Post)('login'),
     (0, swagger_1.ApiOperation)({ summary: 'Autenticar usuário e retornar JWT por EMAIL' }),
