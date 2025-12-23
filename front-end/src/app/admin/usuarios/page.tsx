@@ -9,6 +9,18 @@ import AdminTypeEmployee from "@/app/admin/usuarios/components/AdminTypeEmployee
 import UsuariosCard from "@/app/admin/usuarios/components/UsuarioCard"
 import { Usuario, UsuarioApi, UsuarioRole } from "./types/usuario"
 
+// Corrige nomes que chegaram com encoding latin1 (ex.: "JoÃ£o" -> "João")
+const decodeMaybeLatin1 = (value: string) => {
+  if (!value) return value
+  try {
+    const bytes = new Uint8Array([...value].map((c) => c.charCodeAt(0)))
+    const decoded = new TextDecoder("utf-8").decode(bytes)
+    return decoded
+  } catch {
+    return value
+  }
+}
+
 
 export default function UsuariosPage() {
 
@@ -34,26 +46,31 @@ export default function UsuariosPage() {
         const data = (await res.json()) as UsuarioApi[]
         console.log("USUARIOS RAW DATA:", data)
 
-        const normalizados: Usuario[] = (Array.isArray(data) ? data : []).map((_u) => ({
-          id:
-            _u.ID_USUARIO ??
-            Number(_u.id ?? _u.ID ?? 0), // fallback se usar os outros campos
-          name: _u.NOME ?? _u.nome ?? _u.name ?? "Sem nome",
-          email: _u.EMAIL ?? _u.email ?? "",
-          image: _u.FOTO ?? _u.avatar ?? _u.image ?? "",
-          type: (Array.isArray(_u.TIPOS)
-            ? _u.TIPOS
-            : Array.isArray(_u.type)
-              ? _u.type
-              : _u.TIPOS
-                ? [_u.TIPOS]
-                : _u.type
-                  ? Array.isArray(_u.type)
-                    ? _u.type
-                    : [_u.type]
-                  : []) as UsuarioRole[],
-          roles: [],
-        }))
+        const normalizados: Usuario[] = (Array.isArray(data) ? data : []).map((_u) => {
+          const rawName = _u.NOME ?? _u.nome ?? _u.name ?? "Sem nome"
+          const name = decodeMaybeLatin1(rawName)
+
+          return {
+            id:
+              _u.ID_USUARIO ??
+              Number(_u.id ?? _u.ID ?? 0), // fallback se usar os outros campos
+            name,
+            email: _u.EMAIL ?? _u.email ?? "",
+            image: _u.FOTO ?? _u.avatar ?? _u.image ?? "",
+            type: (Array.isArray(_u.TIPOS)
+              ? _u.TIPOS
+              : Array.isArray(_u.type)
+                ? _u.type
+                : _u.TIPOS
+                  ? [_u.TIPOS]
+                  : _u.type
+                    ? Array.isArray(_u.type)
+                      ? _u.type
+                      : [_u.type]
+                    : []) as UsuarioRole[],
+            roles: [],
+          }
+        })
 
         console.log("USUARIOS NORMALIZADOS:", normalizados)
 

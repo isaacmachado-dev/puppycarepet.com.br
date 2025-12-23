@@ -39,6 +39,7 @@ export default function AdminPage() {
     | "usuarios"
     | "opcoes"
     | "historico"
+    | "atendimento"
     | "alterarSenha"
     | null
   >("agendamentos");
@@ -258,6 +259,21 @@ export default function AdminPage() {
                   isOpen={isOpen}
                   active={paginaAtual === "historico"}
                   onClick={() => setPaginaAtual("historico")}
+                />
+              </div>
+              <div className="text-black hover:text-white transition-all duration-300">
+                <AdminMenuItem
+                  icon={<Notebook color="currentColor" />}
+                  className={`${
+                    !isOpen
+                      ? "flex justify-center items-center"
+                      : "justify-start"
+                  }`}
+                  label="Atendimento"
+                  href="/cart"
+                  isOpen={isOpen}
+                  active={paginaAtual === "atendimento"}
+                  onClick={() => setPaginaAtual("atendimento")}
                 />
               </div>
             </div>

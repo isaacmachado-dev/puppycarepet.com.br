@@ -1,4 +1,4 @@
-export default function AdminHistoricListDTO() {
+export default function HistoricoPageDTO() {
     return {
         title: "Histórico de Pedidos",
         description: "Esta é a página de histórico de pedidos do cliente.",

@@ -24,6 +24,25 @@ export class ClientesService {
     });
   }
 
+  async findByUsuarioId(usuarioId: number) {
+    const cliente = await this.prisma.cLIENTES.findFirst({
+      // Tipagem pode não refletir o novo campo até que o Prisma Client seja gerado
+      // Usa casting para evitar erro de compilação enquanto a geração não é possível no ambiente
+      where: ({ ID_USUARIO: usuarioId } as any),
+      include: {
+        PETS: true,
+        PACOTES: true,
+        ATENDIMENTOS: true,
+      },
+    });
+
+    if (!cliente) {
+      throw new NotFoundException(`Cliente vinculado ao usuário ${usuarioId} não encontrado`);
+    }
+
+    return cliente;
+  }
+
   async findOne(id: number) {
     const cliente = await this.prisma.cLIENTES.findUnique({
       where: { ID_CLIENTE: id },

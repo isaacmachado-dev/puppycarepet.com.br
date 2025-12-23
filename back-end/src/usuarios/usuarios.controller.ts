@@ -11,7 +11,7 @@ import {
 import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { UsuariosService } from './usuarios.service';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
-import { LoginDto } from './dto/create-usuario.dto';
+import { CreateUsuarioDto, LoginDto } from './dto/create-usuario.dto';
 
 class UpdateFotoDto {
   foto: string | null;
@@ -21,6 +21,13 @@ class UpdateFotoDto {
 @Controller('usuarios')
 export class UsuariosController {
   constructor(private readonly usuariosService: UsuariosService) { }
+
+  @Post()
+  @ApiOperation({ summary: 'Criar usuário' })
+  @ApiResponse({ status: 201, description: 'Usuário criado com sucesso.' })
+  async create(@Body() body: CreateUsuarioDto) {
+    return this.usuariosService.create(body);
+  }
 
   @Post('login')
   @ApiOperation({ summary: 'Autenticar usuário e retornar JWT por EMAIL' })

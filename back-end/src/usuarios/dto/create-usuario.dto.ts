@@ -31,10 +31,20 @@ export class CreateUsuarioDto {
   @IsString()
   EMAIL: string;
 
+  @ApiPropertyOptional({ description: 'Telefone do usuário', example: '11988887777' })
+  @IsOptional()
+  @IsString()
+  TELEFONE?: string;
+
   @ApiPropertyOptional({ description: 'Descrição/cargo do usuário' })
   @IsOptional()
   @IsString()
   DESCRICAO?: string;
+
+  @ApiPropertyOptional({ description: 'URL (absoluta) da foto do usuário' })
+  @IsOptional()
+  @IsString()
+  FOTO?: string;
 
   @ApiProperty({
     description: 'Senha (texto puro, será hasheada)',

@@ -30,7 +30,9 @@ __decorate([
 class CreateUsuarioDto {
     NOME;
     EMAIL;
+    TELEFONE;
     DESCRICAO;
+    FOTO;
     SENHA;
     TIPOS;
 }
@@ -49,11 +51,23 @@ __decorate([
     __metadata("design:type", String)
 ], CreateUsuarioDto.prototype, "EMAIL", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Telefone do usuário', example: '11988887777' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateUsuarioDto.prototype, "TELEFONE", void 0);
+__decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Descrição/cargo do usuário' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateUsuarioDto.prototype, "DESCRICAO", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'URL (absoluta) da foto do usuário' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateUsuarioDto.prototype, "FOTO", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'Senha (texto puro, será hasheada)',

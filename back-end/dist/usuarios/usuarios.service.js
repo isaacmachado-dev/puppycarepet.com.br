@@ -47,10 +47,37 @@ const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
 const bcrypt = __importStar(require("bcryptjs"));
 const jwt = __importStar(require("jsonwebtoken"));
+function decodeMaybeLatin1(value) {
+    if (!value)
+        return value;
+    try {
+        const buf = Buffer.from(value, 'binary');
+        return buf.toString('utf8');
+    }
+    catch {
+        return value;
+    }
+}
 let UsuariosService = class UsuariosService {
     prisma;
     constructor(prisma) {
         this.prisma = prisma;
+    }
+    async create(dto) {
+        const senhaHash = await bcrypt.hash(dto.SENHA, 10);
+        const nome = decodeMaybeLatin1(dto.NOME) ?? dto.NOME;
+        const descricao = decodeMaybeLatin1(dto.DESCRICAO ?? undefined) ?? dto.DESCRICAO;
+        return this.prisma.uSUARIOS.create({
+            data: {
+                NOME: nome,
+                EMAIL: dto.EMAIL,
+                TELEFONE: dto.TELEFONE,
+                DESCRICAO: descricao,
+                FOTO: dto.FOTO,
+                SENHA_HASH: senhaHash,
+                TIPOS: dto.TIPOS ?? [],
+            },
+        });
     }
     async login(email, senha) {
         const usuario = await this.prisma.uSUARIOS.findUnique({
@@ -78,12 +105,14 @@ let UsuariosService = class UsuariosService {
     }
     async update(id, dto) {
         await this.findOne(id);
+        const nome = decodeMaybeLatin1(dto.NOME ?? undefined) ?? dto.NOME;
+        const descricao = decodeMaybeLatin1(dto.DESCRICAO ?? undefined) ?? dto.DESCRICAO;
         return this.prisma.uSUARIOS.update({
             where: { ID_USUARIO: id },
             data: {
-                NOME: dto.NOME,
+                NOME: nome,
                 EMAIL: dto.EMAIL,
-                DESCRICAO: dto.DESCRICAO,
+                DESCRICAO: descricao,
                 TIPOS: dto.TIPOS,
             },
         });

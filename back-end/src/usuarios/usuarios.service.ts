@@ -3,10 +3,42 @@ import { PrismaService } from '../prisma/prisma.service';
 import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
+import { CreateUsuarioDto } from './dto/create-usuario.dto';
+
+// Corrige strings possivelmente em latin1 (ex.: "JoÃ£o" -> "João")
+function decodeMaybeLatin1(value?: string | null): string | null | undefined {
+  if (!value) return value;
+  try {
+    const buf = Buffer.from(value, 'binary');
+    return buf.toString('utf8');
+  } catch {
+    return value;
+  }
+}
 
 @Injectable()
 export class UsuariosService {
   constructor(private prisma: PrismaService) {}
+
+  // CRIAR USUÁRIO
+  async create(dto: CreateUsuarioDto) {
+    const senhaHash = await bcrypt.hash(dto.SENHA, 10);
+
+    const nome = decodeMaybeLatin1(dto.NOME) ?? dto.NOME;
+    const descricao = decodeMaybeLatin1(dto.DESCRICAO ?? undefined) ?? dto.DESCRICAO;
+
+    return this.prisma.uSUARIOS.create({
+      data: {
+        NOME: nome,
+        EMAIL: dto.EMAIL,
+        TELEFONE: dto.TELEFONE,
+        DESCRICAO: descricao,
+        FOTO: dto.FOTO,
+        SENHA_HASH: senhaHash,
+        TIPOS: dto.TIPOS ?? [],
+      },
+    });
+  }
 
   // LOGIN DE USUÁRIO (FUNCIONAL)
   async login(email: string, senha: string) {
@@ -46,18 +78,21 @@ export class UsuariosService {
 
   // ATUALIZAR DADOS DO USUÁRIO
   async update(id: number, dto: UpdateUsuarioDto) {
-  await this.findOne(id);
+    await this.findOne(id);
 
-  return this.prisma.uSUARIOS.update({
-    where: { ID_USUARIO: id },
-    data: {
-      NOME: dto.NOME,
-      EMAIL: dto.EMAIL,
-      DESCRICAO: dto.DESCRICAO,
-      TIPOS: dto.TIPOS, // <- aqui passa a escrever no array o tipo
-    },
-  });
-}
+    const nome = decodeMaybeLatin1(dto.NOME ?? undefined) ?? dto.NOME;
+    const descricao = decodeMaybeLatin1(dto.DESCRICAO ?? undefined) ?? dto.DESCRICAO;
+
+    return this.prisma.uSUARIOS.update({
+      where: { ID_USUARIO: id },
+      data: {
+        NOME: nome,
+        EMAIL: dto.EMAIL,
+        DESCRICAO: descricao,
+        TIPOS: dto.TIPOS, // <- aqui passa a escrever no array o tipo
+      },
+    });
+  }
 
 
   // ATUALIZAR FOTO DO USUÁRIO
