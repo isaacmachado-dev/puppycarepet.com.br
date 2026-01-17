@@ -4,15 +4,34 @@ import { NextRequest, NextResponse } from 'next/server';
 const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:4000';
 
 export async function GET() {
-  const res = await fetch(`${BACKEND_URL}/usuarios`, { cache: 'no-store' });
+  console.log('🔍 BACKEND_URL:', BACKEND_URL);
+
+  const res = await fetch(`${BACKEND_URL}/usuarios`, {
+    cache: 'no-store',
+    headers: {
+      'Accept': 'application/json; charset=utf-8',  // ← ADICIONADO
+      'Accept-Charset': 'utf-8'                    // ← ADICIONADO
+    }
+  });
+
   if (!res.ok) {
     return NextResponse.json(
       { error: 'Erro ao buscar usuários' },
       { status: res.status },
     );
   }
-  const data = await res.json();
-  return NextResponse.json(data);
+
+  const rawText = await res.text();
+  console.log('📄 RAW Response (primeiros 300 chars):', rawText.slice(0, 300));
+
+  const data = JSON.parse(rawText);
+  console.log('✅ Parsed primeiro nome:', data[0]?.NOME);
+
+  return NextResponse.json(data, {
+    headers: {
+      'Content-Type': 'application/json; charset=utf-8'  // ← GARANTE UTF8
+    }
+  });
 }
 
 export async function POST(request: NextRequest) {

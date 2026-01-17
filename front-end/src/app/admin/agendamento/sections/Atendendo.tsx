@@ -69,11 +69,11 @@ export function Atendendo() {
 
             {showConfirm && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center">
-                    <div className="w-full max-w-sm rounded-lg p-4 shadow-lg">
-                        <h2 className="mb-2 text-base font-semibold">
+                    <div className="w-full max-w-sm rounded-lg p-4 shadow-lg bg-[#171717]">
+                        <h2 className="mb-2 text-base font-bold text-white">
                             Enviar foto do pet?
                         </h2>
-                        <p className="mb-4 text-sm text-gray-600">
+                        <p className="mb-4 text-sm text-white">
                             Deseja mesmo enviar esta imagem para o servidor?
                         </p>
 
@@ -84,13 +84,15 @@ export function Atendendo() {
                             >
                                 Cancelar
                             </button>
+
                             <Button
                                 type="button"
                                 onClick={handleConfirm}
-                                className="cursor-pointer"
+                                className="cursor-pointer bg-[#21F421] text-black hover:bg-[#35CC35]"
                             >
                                 Sim, enviar
                             </Button>
+
                         </div>
                     </div>
                 </div>

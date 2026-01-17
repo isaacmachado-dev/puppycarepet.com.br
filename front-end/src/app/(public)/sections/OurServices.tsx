@@ -9,7 +9,7 @@ export default function OurServices() {
 
                 <div className="bg-white rounded-lg mt-5 p-5">
 
-                    <H2 className="text-black mb-5">
+                    <H2 className="text-black sm:-mb-20 md:mb-5">
                         Conheça os nossos serviços
                     </H2>
 
@@ -63,7 +63,7 @@ export default function OurServices() {
 
                                 <div className="flex flex-col items-center sm:items-start sm:text-left h-full justify-center">
                                     <p className="text-white break-words hyphens-auto">
-                                        Acessório
+                                        Loja
                                     </p>
 
                                     {/* IZinho */}
@@ -73,7 +73,7 @@ export default function OurServices() {
                                             target="_blank"
                                             className="text-sm text-[#FECE14] invisible group-hover:visible relative flex items-center gap-1"
                                         >
-                                            Catálogo
+                                            Nosso catálogo
                                             <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-[#FECE14] transition-all duration-300 group-hover:w-full"></span>
 
                                             <Info color={"#FECE14"} size={20} className="visible" />

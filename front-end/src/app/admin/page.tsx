@@ -47,21 +47,31 @@ export default function AdminPage() {
   const [nomeUsuario, setNomeUsuario] = useState<string>("");
 
   useEffect(() => {
-    const token =
-      typeof window !== "undefined"
-        ? localStorage.getItem("admin_token")
-        : null;
+    const token = typeof window !== "undefined" ? localStorage.getItem("admin_token") : null;
 
     if (!token) {
       router.replace("/login");
       return;
     }
 
-    // Armazena nome do payload para saudação
+    // FIX UTF8 JWT DECODE
     try {
-      const payload = JSON.parse(atob(token.split(".")[1]));
+      const payloadRaw = token.split(".")[1];
+      // Adiciona padding se necessário
+      const payloadPadded = payloadRaw + "=".repeat((4 - payloadRaw.length % 4) % 4);
+      const payloadDecoded = atob(payloadPadded);
+
+      // TextDecoder UTF8 PROPER
+      const bytes = new Uint8Array(payloadDecoded.length);
+      for (let i = 0; i < payloadDecoded.length; i++) {
+        bytes[i] = payloadDecoded.charCodeAt(i);
+      }
+      const payload = JSON.parse(new TextDecoder().decode(bytes));
+
+      console.log('✅ JWT UTF8 nome:', payload.nome);
       setNomeUsuario(payload.nome || "Usuário");
-    } catch {
+    } catch (e) {
+      console.error('JWT decode error:', e);
       setNomeUsuario("Usuário");
     }
 
@@ -114,7 +124,7 @@ export default function AdminPage() {
             }`}
         >
           <div className="sticky top-5 flex flex-col gap-2">
-            <header className="relative flex items-center gap-2 min-h-[50px]">
+            <header className="relative flex flex-col items-center gap-2 min-h-[50px]">
               {/* Logozinha */}
               <button
                 className="rounded-md focus:outline-none"
@@ -123,9 +133,9 @@ export default function AdminPage() {
                 <Image
                   src="/logos/brand/logo-redondo-maior-rosa.png"
                   alt="Petshop Puppy Care"
-                  width={50}
+                  width={300}
                   height={50}
-                  className={`transition-all duration-300 ${isOpen ? "opacity-100" : "opacity-0 w-0"
+                  className={`transition-all duration-300 ${isOpen ? "opacity-100" : ""
                     }`}
                 />
               </button>
@@ -135,16 +145,9 @@ export default function AdminPage() {
                   "bg-[#FECE14] text-black px-3 py-1 rounded-md transition-all duration-300"
                 }
               >
-                {isAdmin ? (isOpen ? "Admin" : "A") : (isOpen ? "Cliente" : "C")}
+                {isAdmin ? (isOpen ? "Admin" : "Admin") : (isOpen ? "Cliente" : "Cliente")}
               </span>
 
-              {/* Texto Puppy Care */}
-              <p
-                className={`text-white transition-all duration-300 overflow-hidden ${isOpen ? "opacity-100 max-w-[200px]" : "opacity-0 max-w-0"
-                  }`}
-              >
-                {nomeUsuario || "Usuário"}
-              </p>
 
               <button
                 className="absolute -right-4 top-1/2 -translate-y-1/2 translate-x-3 bg-[#333] hover:bg-white focus:outline-none rounded-md border-2 border-[#AAAAAA] cursor-pointer"
@@ -267,23 +270,39 @@ export default function AdminPage() {
                 />
               </div> */}
             </div>
-            <div className="text-black hover:text-white transition-all duration-300">
-              <AdminMenuItem
-                icon={<X color="currentColor" />}
-                className={`${!isOpen ? "flex justify-center items-center" : "justify-start"
-                  }`}
-                label="Sair"
-                href="/login"
-                isOpen={isOpen}
-                danger
-                onClick={() => {
-                  if (typeof window !== "undefined") {
-                    localStorage.removeItem("admin_token");
-                    localStorage.removeItem("user_roles");
-                    localStorage.removeItem("user_id");
-                  }
-                }}
-              />
+
+
+            {/* Nome usuário */}
+
+            <div className="relative text-black hover:text-white transition-all duration-300  rounded-md">
+
+              <div className="relative top-2 py-2 text-black text-center bg-[#d1d6d2] z-50 rounded-md ">
+                <p
+                  className={`text-black 
+                    transition-all duration-300 overflow-hidden
+                    `}
+                >
+                  {nomeUsuario || "Usuário"}
+                </p>
+              </div>
+
+              <div className="z-10 rounded-none">
+                <AdminMenuItem
+                  icon={<X color="currentColor" />}
+                  className={`${!isOpen ? "w-full" : "w-full"}`} // pode simplificar
+                  label="" //Sair
+                  href="/login"
+                  isOpen={isOpen}
+                  danger
+                  onClick={() => {
+                    if (typeof window !== "undefined") {
+                      localStorage.removeItem("admin_token");
+                      localStorage.removeItem("user_roles");
+                      localStorage.removeItem("user_id");
+                    }
+                  }}
+                />
+              </div>
             </div>
           </div>
         </aside>

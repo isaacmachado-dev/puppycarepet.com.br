@@ -3,7 +3,9 @@ node_modules
 /generated/prisma
 
 # Build outputs
-/dist/
+dist/
+/dist
+./dist
 /coverage/
 /tsconfig.build.tsbuildinfo
 
