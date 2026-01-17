@@ -14,9 +14,10 @@ export default function ModeSwitchDarkLight() {
 
     // const isDarked = theme === 'dark';
     const isLight = theme === 'light';
+    const label = isLight ? 'Modo claro' : 'Modo escuro';
 
     return (
-        <div>
+        <div className="flex flex-row items-center gap-3">
             {/* From Uiverse.io by CacaceRoberto */}
             <label className="switch cursor-pointer">
                 <input
@@ -75,6 +76,8 @@ export default function ModeSwitchDarkLight() {
                     </div>
                 </span>
             </label>
+
+            <span>{label}</span>
 
         </div>
     );
