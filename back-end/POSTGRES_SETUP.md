@@ -48,12 +48,47 @@ npm run db:setup
 ```powershell
 # Conectar ao PostgreSQL (será solicitada a senha)
 psql -U postgres
+```
 
-# Dentro do PostgreSQL, execute:
-CREATE DATABASE puppycare;
+```sql
+-- 1. Conectado ao PostgreSQL, execute:
+CREATE DATABASE puppycare
+  WITH ENCODING 'UTF8'
+  LC_COLLATE 'pt_BR.UTF-8'
+  LC_CTYPE 'pt_BR.UTF-8'
+  TEMPLATE template0
+;
+
+-- 2. Criar usuário da APP:
 CREATE USER puppycare WITH PASSWORD 'puppycare_pass';
-GRANT ALL PRIVILEGES ON DATABASE puppycare TO puppycare;
-\q
+
+-- 3. Evitar problemas de encoding e decoding caracteres pra UTF-8:
+ALTER DATABASE puppycare SET client_encoding TO 'UTF8';
+ALTER ROLE puppycare SET client_encoding TO 'UTF8';
+
+-- 4. Conectar ao banco:
+\c puppycare;
+
+-- 5. Tornar o usuário dono do banco:
+ALTER DATABASE puppycare OWNER TO puppycare;
+
+-- 6. Permissões no schema public:
+GRANT USAGE, CREATE ON SCHEMA public TO puppycare;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO puppycare;
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO puppycare;
+
+-- 7. Novas tabelas:
+
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON TABLES TO puppycare;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL ON SEQUENCES TO puppycare;
+
+```
+
+## Evitar problemas de Encoding e Decoding UTF-8
+
+```sql
+ALTER DATABASE puppycare SET client_encoding TO 'UTF8';
+ALTER ROLE puppycare SET client_encoding TO 'UTF8';
 ```
 
 #### Configurar a Conexão:

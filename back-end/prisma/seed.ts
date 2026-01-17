@@ -35,7 +35,7 @@ async function seedUsuarios() {
         TIPOS: ['condutor', 'colaborador', 'condutor'],
       },
       {
-        NOME: 'Mortyyyyy',
+        NOME: 'Mortyyyyyy',
         DESCRICAO: 'Usuário administrador',
         SENHA_HASH: senhaAdmin,
         EMAIL: 'morty.smith@puppycarepet.com.br',
@@ -43,7 +43,7 @@ async function seedUsuarios() {
         TIPOS: ['administrador'],
       },
       {
-        NOME: 'Po',
+        NOME: 'Poo',
         DESCRICAO: 'Usuário administrador',
         SENHA_HASH: senhaAdmin,
         EMAIL: 'po@et.com.br',

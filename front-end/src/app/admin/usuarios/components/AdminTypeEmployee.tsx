@@ -55,7 +55,7 @@ export default function AdminTypeEmployee({
                     <Button
                         variant="outline"
                         className={cn(
-                            "leading-5 p-2 pl-10 bg-white  dark:bg-[#171717] group-hover:placeholder-black rounded-sm p-2 w-70 h-10 justify-start !text-left cursor-pointer group !ring-0 shadow-none border-2 border-none outline-2 hover:outline-2  leading-5",
+                            "leading-5 p-2 pl-10 bg-white dark:bg-[#171717] group-hover:placeholder-black rounded-sm p-2 w-70 h-10 justify-start !text-left cursor-pointer group !ring-0 shadow-none border-2 border-none outline-2 hover:outline-2  leading-5",
                             dropdownActive && "border-black",
                             className  // ← Aplica a className passada por prop
                         )}
@@ -77,7 +77,7 @@ export default function AdminTypeEmployee({
                                 )}
                             </div>
                         ) : (
-                            <span className="group rounded-sm text-black/50 dark:text-white/50 text-sm font-bold leading-5 group-hover:text-white">
+                            <span className="group rounded-sm text-black/50 dark:text-white/50 text-sm font-bold leading-5">
                                 Escolha
                             </span>
                         )}

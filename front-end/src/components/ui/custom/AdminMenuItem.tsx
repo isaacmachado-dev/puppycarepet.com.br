@@ -20,17 +20,19 @@ export default function AdminMenuItem({
     onClick?: () => void;
 }) {
 
-    const baseClasses = `
-        flex items-center gap-3 rounded-md px-4 py-2
+    const baseClasses = `flex 
+        flex items-center justify-center gap-2
+        px-4 py-2
         transition-all duration-300
-       ${danger
-            ? "bg-[#E45C5C] hover:bg-[#F63434] text-black hover:text-white"
+        ${danger
+            ? "flex bg-[#E45C5C] hover:bg-[#F63434] text-black items-center justify-center rounded-b-md hover:text-white py-2 pt-3 mx-auto"
             : active
                 ? "bg-[#333] text-white"
                 : "bg-[#d1d6d2] hover:bg-[#444]"
         }
-    ${className || ""}
-    `;
+        ${!danger ? "rounded-md" : "rounded-b-md"}
+        ${className || ""}
+        `;
 
     return href ? (
         <Link href={href} className={baseClasses}>

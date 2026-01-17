@@ -32,8 +32,12 @@ let UsuariosController = class UsuariosController {
     async login(body) {
         return this.usuariosService.login(body.email, body.senha);
     }
-    findAll() {
-        return this.usuariosService.findAll();
+    async findAll(res) {
+        const usuarios = await this.usuariosService.findAll();
+        res.set({
+            'Content-Type': 'application/json; charset=utf-8'
+        });
+        return usuarios;
     }
     findOne(id) {
         return this.usuariosService.findOne(id);
@@ -75,9 +79,10 @@ __decorate([
         status: 200,
         description: 'Lista de usuários retornada com sucesso.',
     }),
+    __param(0, (0, common_1.Res)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
 ], UsuariosController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),

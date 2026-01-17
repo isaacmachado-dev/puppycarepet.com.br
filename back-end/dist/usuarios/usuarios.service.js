@@ -88,11 +88,22 @@ let UsuariosService = class UsuariosService {
         const senhaValida = await bcrypt.compare(senha, usuario.SENHA_HASH);
         if (!senhaValida)
             throw new common_1.NotFoundException('Senha inválida');
-        const token = jwt.sign({ id: usuario.ID_USUARIO, nome: usuario.NOME, email: usuario.EMAIL }, process.env.JWT_SECRET || 'secret', { expiresIn: '1d' });
+        console.log('🔍 RAW DB:', usuario.NOME);
+        console.log('🔍 RAW bytes:', Array.from(new TextEncoder().encode(usuario.NOME)));
+        console.log('🔍 Buffer latin1→utf8:', Buffer.from(usuario.NOME, 'latin1').toString('utf8'));
+        console.log('🔍 Buffer utf8→utf8:', Buffer.from(usuario.NOME, 'utf8').toString('utf8'));
+        const token = jwt.sign({
+            id: usuario.ID_USUARIO,
+            nome: usuario.NOME,
+            email: usuario.EMAIL
+        }, process.env.JWT_SECRET || 'secret', { expiresIn: '1d' });
         return { token };
     }
     async findAll() {
-        return this.prisma.uSUARIOS.findMany();
+        const usuarios = await this.prisma.uSUARIOS.findMany();
+        console.log('RAW DB:', usuarios[0].NOME);
+        console.log('RAW typeof:', typeof usuarios[0].NOME);
+        return usuarios;
     }
     async findOne(id) {
         const usuario = await this.prisma.uSUARIOS.findUnique({
@@ -105,14 +116,12 @@ let UsuariosService = class UsuariosService {
     }
     async update(id, dto) {
         await this.findOne(id);
-        const nome = decodeMaybeLatin1(dto.NOME ?? undefined) ?? dto.NOME;
-        const descricao = decodeMaybeLatin1(dto.DESCRICAO ?? undefined) ?? dto.DESCRICAO;
         return this.prisma.uSUARIOS.update({
             where: { ID_USUARIO: id },
             data: {
-                NOME: nome,
+                NOME: dto.NOME,
                 EMAIL: dto.EMAIL,
-                DESCRICAO: descricao,
+                DESCRICAO: dto.DESCRICAO,
                 TIPOS: dto.TIPOS,
             },
         });

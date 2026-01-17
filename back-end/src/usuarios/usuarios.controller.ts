@@ -7,6 +7,7 @@ import {
   Patch,
   Delete,
   ParseIntPipe,
+  Res,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { UsuariosService } from './usuarios.service';
@@ -43,8 +44,14 @@ export class UsuariosController {
     status: 200,
     description: 'Lista de usuários retornada com sucesso.',
   })
-  findAll() {
-    return this.usuariosService.findAll();
+  async findAll(@Res() res) {
+    const usuarios = await this.usuariosService.findAll();
+
+    // ARRAY DIRETO, sem wrap 'data'
+    res.set({
+      'Content-Type': 'application/json; charset=utf-8'
+    });
+    return usuarios;  // ← SÓ O ARRAY
   }
 
   @Get(':id')
