@@ -15,7 +15,7 @@ async function seedUsuarios() {
         DESCRICAO: 'Usuário administrador',
         SENHA_HASH: senhaAdmin,
         EMAIL: 'monica@puppycarepet.com.br',
-        FOTO: '/usuarios/monica.jpg',
+        FOTO: '/web-app-manifest-512x512.png',
         TIPOS: ['administrador'],
       },
       {
@@ -35,7 +35,7 @@ async function seedUsuarios() {
         TIPOS: ['condutor', 'colaborador', 'condutor'],
       },
       {
-        NOME: 'Morty Smith',
+        NOME: 'Mortyyyyy',
         DESCRICAO: 'Usuário administrador',
         SENHA_HASH: senhaAdmin,
         EMAIL: 'morty.smith@puppycarepet.com.br',
@@ -65,15 +65,7 @@ async function seedUsuarios() {
         EMAIL: 'robin@puppycarepet.com.br',
         FOTO: '/usuarios/robin.jpg',
         TIPOS: ['colaborador', 'administrador'],
-      },
-      {
-        NOME: 'Cliente Exemplo',
-        DESCRICAO: 'Usuário cliente de exemplo',
-        SENHA_HASH: senhaCliente,
-        EMAIL: 'cliente@hotmail.com',
-        FOTO: '/usuarios/cliente-exemplo.jpg',
-        TIPOS: ['cliente'],
-      },
+      }
     ],
     skipDuplicates: true,
   });

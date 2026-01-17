@@ -38,7 +38,7 @@ export default function AdminPage() {
     | "analise"
     | "usuarios"
     | "opcoes"
-    | "historico"
+    // | "historico"
     | "atendimento"
     | "alterarSenha"
     | null
@@ -79,11 +79,11 @@ export default function AdminPage() {
       return;
     }
 
-    if (isClienteRole) {
-      setPaginaAtual("historico");
-      setIsAuthenticated(true);
-      return;
-    }
+    // if (isClienteRole) {
+    //   setPaginaAtual("historico");
+    //   setIsAuthenticated(true);
+    //   return;
+    // }
 
     router.replace("/login");
   }, [router]);
@@ -110,9 +110,8 @@ export default function AdminPage() {
 
       <div className="relative flex min-h-screen text-black font-bold">
         <aside
-          className={`relative z-10 bg-[#1A112E] shadow-lg py-4 px-4 invisible md:visible transition-all duration-300 ${
-            isOpen ? "w-[250px]" : "w-[125px]"
-          }`}
+          className={`relative z-10 bg-[#1A112E] shadow-lg py-4 px-4 invisible md:visible transition-all duration-300 ${isOpen ? "w-[250px]" : "w-[125px]"
+            }`}
         >
           <div className="sticky top-5 flex flex-col gap-2">
             <header className="relative flex items-center gap-2 min-h-[50px]">
@@ -126,9 +125,8 @@ export default function AdminPage() {
                   alt="Petshop Puppy Care"
                   width={50}
                   height={50}
-                  className={`transition-all duration-300 ${
-                    isOpen ? "opacity-100" : "opacity-0 w-0"
-                  }`}
+                  className={`transition-all duration-300 ${isOpen ? "opacity-100" : "opacity-0 w-0"
+                    }`}
                 />
               </button>
               {/* Botao amarelo Admin */}
@@ -142,9 +140,8 @@ export default function AdminPage() {
 
               {/* Texto Puppy Care */}
               <p
-                className={`text-white transition-all duration-300 overflow-hidden ${
-                  isOpen ? "opacity-100 max-w-[200px]" : "opacity-0 max-w-0"
-                }`}
+                className={`text-white transition-all duration-300 overflow-hidden ${isOpen ? "opacity-100 max-w-[200px]" : "opacity-0 max-w-0"
+                  }`}
               >
                 {nomeUsuario || "Usuário"}
               </p>
@@ -175,11 +172,10 @@ export default function AdminPage() {
                       label="Agendamentos"
                       href=""
                       isOpen={isOpen}
-                      className={`${
-                        !isOpen
-                          ? "flex justify-center items-center"
-                          : "justify-start"
-                      }`}
+                      className={`${!isOpen
+                        ? "flex justify-center items-center"
+                        : "justify-start"
+                        }`}
                       active={paginaAtual === "agendamentos"}
                       onClick={() => setPaginaAtual("agendamentos")}
                     />
@@ -190,11 +186,10 @@ export default function AdminPage() {
                       label="Clientes"
                       href=""
                       isOpen={isOpen}
-                      className={`${
-                        !isOpen
-                          ? "flex justify-center items-center"
-                          : "justify-start"
-                      }`}
+                      className={`${!isOpen
+                        ? "flex justify-center items-center"
+                        : "justify-start"
+                        }`}
                       active={paginaAtual === "clientes"}
                       onClick={() => setPaginaAtual("clientes")}
                     />
@@ -202,11 +197,10 @@ export default function AdminPage() {
                   <div className="text-black hover:text-white transition-all duration-300">
                     <AdminMenuItem
                       icon={<ChartNoAxesColumn color="currentColor" />}
-                      className={`${
-                        !isOpen
-                          ? "flex justify-center items-center"
-                          : "justify-start"
-                      }`}
+                      className={`${!isOpen
+                        ? "flex justify-center items-center"
+                        : "justify-start"
+                        }`}
                       label="Análise"
                       href=""
                       isOpen={isOpen}
@@ -217,11 +211,10 @@ export default function AdminPage() {
                   <div className="text-black hover:text-white transition-all duration-300">
                     <AdminMenuItem
                       icon={<Notebook color="currentColor" />}
-                      className={`${
-                        !isOpen
-                          ? "flex justify-center items-center"
-                          : "justify-start"
-                      }`}
+                      className={`${!isOpen
+                        ? "flex justify-center items-center"
+                        : "justify-start"
+                        }`}
                       label="Usuários"
                       href=""
                       isOpen={isOpen}
@@ -232,11 +225,10 @@ export default function AdminPage() {
                   <div className="text-black hover:text-white transition-all duration-300">
                     <AdminMenuItem
                       icon={<Settings color="currentColor" />}
-                      className={`${
-                        !isOpen
-                          ? "flex justify-center items-center"
-                          : "justify-start"
-                      }`}
+                      className={`${!isOpen
+                        ? "flex justify-center items-center"
+                        : "justify-start"
+                        }`}
                       label="Opções"
                       href=""
                       isOpen={isOpen}
@@ -246,43 +238,40 @@ export default function AdminPage() {
                   </div>
                 </>
               )}
-              <div className="text-black hover:text-white transition-all duration-300">
+              {/* <div className="text-black hover:text-white transition-all duration-300">
                 <AdminMenuItem
                   icon={<Notebook color="currentColor" />}
-                  className={`${
-                    !isOpen
-                      ? "flex justify-center items-center"
-                      : "justify-start"
-                  }`}
+                  className={`${!isOpen
+                    ? "flex justify-center items-center"
+                    : "justify-start"
+                    }`}
                   label="Histórico"
                   href=""
                   isOpen={isOpen}
                   active={paginaAtual === "historico"}
                   onClick={() => setPaginaAtual("historico")}
                 />
-              </div>
-              <div className="text-black hover:text-white transition-all duration-300">
+              </div> */}
+              {/* <div className="text-black hover:text-white transition-all duration-300">
                 <AdminMenuItem
                   icon={<Notebook color="currentColor" />}
-                  className={`${
-                    !isOpen
-                      ? "flex justify-center items-center"
-                      : "justify-start"
-                  }`}
+                  className={`${!isOpen
+                    ? "flex justify-center items-center"
+                    : "justify-start"
+                    }`}
                   label="Atendimento"
                   href="/cart"
                   isOpen={isOpen}
                   active={paginaAtual === "atendimento"}
                   onClick={() => setPaginaAtual("atendimento")}
                 />
-              </div>
+              </div> */}
             </div>
             <div className="text-black hover:text-white transition-all duration-300">
               <AdminMenuItem
                 icon={<X color="currentColor" />}
-                className={`${
-                  !isOpen ? "flex justify-center items-center" : "justify-start"
-                }`}
+                className={`${!isOpen ? "flex justify-center items-center" : "justify-start"
+                  }`}
                 label="Sair"
                 href="/login"
                 isOpen={isOpen}
@@ -290,8 +279,8 @@ export default function AdminPage() {
                 onClick={() => {
                   if (typeof window !== "undefined") {
                     localStorage.removeItem("admin_token");
-                      localStorage.removeItem("user_roles");
-                      localStorage.removeItem("user_id");
+                    localStorage.removeItem("user_roles");
+                    localStorage.removeItem("user_id");
                   }
                 }}
               />
@@ -306,7 +295,7 @@ export default function AdminPage() {
             {paginaAtual === "analise" && <AnalisePage />}
             {paginaAtual === "usuarios" && <UsuariosPage />}
             {paginaAtual === "opcoes" && <OpcoesPage />}
-            {paginaAtual === "historico" && <HistoricoPage />}
+            {/* {paginaAtual === "historico" && <HistoricoPage />} */}
           </section>
         </main>
       </div>
