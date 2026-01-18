@@ -40,18 +40,9 @@ export class UsuariosController {
 
   @Get()
   @ApiOperation({ summary: 'Listar todos os usuários' })
-  @ApiResponse({
-    status: 200,
-    description: 'Lista de usuários retornada com sucesso.',
-  })
-  async findAll(@Res() res) {
-    const usuarios = await this.usuariosService.findAll();
-
-    // ARRAY DIRETO, sem wrap 'data'
-    res.set({
-      'Content-Type': 'application/json; charset=utf-8'
-    });
-    return usuarios;  // ← SÓ O ARRAY
+  @ApiResponse({ status: 200, description: 'Lista de usuários retornada com sucesso.' })
+  async findAll() {  // ✅ SEM @Res()
+    return this.usuariosService.findAll();  // Nest manda JSON automático
   }
 
   @Get(':id')

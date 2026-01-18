@@ -274,17 +274,20 @@ export default function AdminPage() {
 
             {/* Nome usuário */}
 
-            <div className="relative text-black hover:text-white transition-all duration-300  rounded-md">
+            <div className="bg-[#e3e3e3] rounded-md">
+              <div className="relative p-2 text-black hover:text-white transition-all duration-300  rounded-md">
 
-              <div className="relative top-2 py-2 text-black text-center bg-[#d1d6d2] z-50 rounded-md ">
-                <p
-                  className={`text-black 
-                    transition-all duration-300 overflow-hidden
-                    `}
-                >
-                  {nomeUsuario || "Usuário"}
-                </p>
+                <div className="relative py-1 text-center bg-[#333333] z-50 rounded-md">
+                  <p
+                    className={`text-white 
+                        transition-all duration-300 overflow-hidden
+                        `}
+                  >
+                    {nomeUsuario || "Usuário"}
+                  </p>
+                </div>
               </div>
+
 
               <div className="z-10 rounded-none">
                 <AdminMenuItem

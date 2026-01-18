@@ -32,12 +32,8 @@ let UsuariosController = class UsuariosController {
     async login(body) {
         return this.usuariosService.login(body.email, body.senha);
     }
-    async findAll(res) {
-        const usuarios = await this.usuariosService.findAll();
-        res.set({
-            'Content-Type': 'application/json; charset=utf-8'
-        });
-        return usuarios;
+    async findAll() {
+        return this.usuariosService.findAll();
     }
     findOne(id) {
         return this.usuariosService.findOne(id);
@@ -75,13 +71,9 @@ __decorate([
 __decorate([
     (0, common_1.Get)(),
     (0, swagger_1.ApiOperation)({ summary: 'Listar todos os usuários' }),
-    (0, swagger_1.ApiResponse)({
-        status: 200,
-        description: 'Lista de usuários retornada com sucesso.',
-    }),
-    __param(0, (0, common_1.Res)()),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Lista de usuários retornada com sucesso.' }),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], UsuariosController.prototype, "findAll", null);
 __decorate([

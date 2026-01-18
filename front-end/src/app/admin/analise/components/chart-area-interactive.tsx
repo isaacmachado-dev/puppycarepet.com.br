@@ -168,11 +168,11 @@ export function ChartAreaInteractive() {
             className="hidden w-[160px] rounded-lg sm:ml-auto sm:flex cursor-pointer"
             aria-label="Selecione um valor"
           >
-            <SelectValue placeholder="Últimos 3 meses" />
+            <SelectValue placeholder="Últimos 90 dias" />
           </SelectTrigger>
           <SelectContent className="rounded-xl">
             <SelectItem value="90d" className="rounded-lg">
-              Últimos 3 meses
+              Últimos 90 dias
             </SelectItem>
             <SelectItem value="30d" className="rounded-lg">
               Últimos 30 dias
