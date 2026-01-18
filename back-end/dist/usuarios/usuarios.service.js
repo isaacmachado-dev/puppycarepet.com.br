@@ -88,10 +88,6 @@ let UsuariosService = class UsuariosService {
         const senhaValida = await bcrypt.compare(senha, usuario.SENHA_HASH);
         if (!senhaValida)
             throw new common_1.NotFoundException('Senha inválida');
-        console.log('🔍 RAW DB:', usuario.NOME);
-        console.log('🔍 RAW bytes:', Array.from(new TextEncoder().encode(usuario.NOME)));
-        console.log('🔍 Buffer latin1→utf8:', Buffer.from(usuario.NOME, 'latin1').toString('utf8'));
-        console.log('🔍 Buffer utf8→utf8:', Buffer.from(usuario.NOME, 'utf8').toString('utf8'));
         const token = jwt.sign({
             id: usuario.ID_USUARIO,
             nome: usuario.NOME,

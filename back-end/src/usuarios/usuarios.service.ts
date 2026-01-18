@@ -51,10 +51,10 @@ export class UsuariosService {
     if (!senhaValida) throw new NotFoundException('Senha inválida');
 
     // ← AQUI (SUBSTITUI a linha do jwt.sign atual)
-    console.log('🔍 RAW DB:', usuario.NOME);
-    console.log('🔍 RAW bytes:', Array.from(new TextEncoder().encode(usuario.NOME)));
-    console.log('🔍 Buffer latin1→utf8:', Buffer.from(usuario.NOME, 'latin1').toString('utf8'));
-    console.log('🔍 Buffer utf8→utf8:', Buffer.from(usuario.NOME, 'utf8').toString('utf8'));
+    // console.log('🔍 RAW DB:', usuario.NOME);
+    // console.log('🔍 RAW bytes:', Array.from(new TextEncoder().encode(usuario.NOME)));
+    // console.log('🔍 Buffer latin1→utf8:', Buffer.from(usuario.NOME, 'latin1').toString('utf8'));
+    // console.log('🔍 Buffer utf8→utf8:', Buffer.from(usuario.NOME, 'utf8').toString('utf8'));
 
     const token = jwt.sign(
       {
