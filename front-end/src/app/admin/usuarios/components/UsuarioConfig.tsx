@@ -98,7 +98,27 @@ export default function DropdownMenuDialog({
                         >
                             Editar
                         </DropdownMenuItem>
-                        <DropdownMenuItem disabled>Excluir</DropdownMenuItem>
+                        <DropdownMenuItem
+                            onSelect={() => {
+                                if (confirm(`Excluir ${usuario.name}?`)) {
+                                    fetch(`/api/usuarios/${usuario.id}`, {
+                                        method: "DELETE",
+                                    })
+                                        .then(res => {
+                                            if (res.ok && onUpdated) onUpdated();  // recarrega lista
+                                        })
+                                        .catch(console.error);
+                                }
+                            }}
+                            className="text-red-600 cursor-pointer  
+                                data-[state=highlighted]:bg-red-100 
+                                data-[state=highlighted]:text-red-800 
+                                focus:bg-red-100 
+                                focus:text-red-800 cursor-pointer
+                            "
+                        >
+                            Excluir
+                        </DropdownMenuItem>
                     </DropdownMenuGroup>
                 </DropdownMenuContent>
             </DropdownMenu>
