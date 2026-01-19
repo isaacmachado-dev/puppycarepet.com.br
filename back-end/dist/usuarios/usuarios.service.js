@@ -97,8 +97,6 @@ let UsuariosService = class UsuariosService {
     }
     async findAll() {
         const usuarios = await this.prisma.uSUARIOS.findMany();
-        console.log('RAW DB:', usuarios[0].NOME);
-        console.log('RAW typeof:', typeof usuarios[0].NOME);
         return usuarios;
     }
     async findOne(id) {

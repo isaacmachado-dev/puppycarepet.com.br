@@ -73,8 +73,8 @@ export class UsuariosService {
     const usuarios = await this.prisma.uSUARIOS.findMany();
 
     // LOG CRU pra debug
-    console.log('RAW DB:', usuarios[0].NOME);
-    console.log('RAW typeof:', typeof usuarios[0].NOME);
+    // console.log('RAW DB:', usuarios[0].NOME);
+    // console.log('RAW typeof:', typeof usuarios[0].NOME);
 
     return usuarios;
   }
