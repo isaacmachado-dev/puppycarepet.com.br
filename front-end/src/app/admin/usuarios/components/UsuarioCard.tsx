@@ -12,7 +12,6 @@ interface UsuariosCardProps {
 
 export default function UsuariosCard({ usuarios, onUpdated }: UsuariosCardProps) {
 
-
   fetch("/api/usuarios")
     .then(async (res) => {
       if (!res.ok) {
@@ -73,7 +72,7 @@ export default function UsuariosCard({ usuarios, onUpdated }: UsuariosCardProps)
 
             <div className="w-[150px] h-[150px] rounded-full overflow-hidden mx-auto">
               <Image
-                src={usuario.image}
+                src={usuario.image ? `${usuario.image}` : '/default-user.png'}
                 width={200}
                 height={200}
                 alt={usuario.name}
@@ -85,6 +84,7 @@ export default function UsuariosCard({ usuarios, onUpdated }: UsuariosCardProps)
               <h3 className="mx-auto dark:text-white">{usuario.name}</h3>
             </div>
           </div>
+
         </div>
       ))}
     </div>

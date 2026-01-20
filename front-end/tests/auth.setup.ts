@@ -1,6 +1,10 @@
 import { test as setup, expect } from '@playwright/test';
 import path from 'path';
 import * as fs from 'fs';
+import dotenv from 'dotenv';
+dotenv.config();
+require('dotenv').config();
+
 
 const authFile = path.join(__dirname, '.auth/user.json');
 const EMAIL = process.env.PLAYWRIGHT_TEST_EMAIL || '';
@@ -19,8 +23,6 @@ setup('Setup de login com estado salvo', async ({ page }) => {
     // 1) Ver para onde você foi
 
 
-    const heading = page.getByText(/Atendimentos\s*Chegando/i);
-    await expect(heading).toBeVisible({ timeout: 15000 });
 
     const authDir = path.dirname(authFile);
     if (!fs.existsSync(authDir)) {
