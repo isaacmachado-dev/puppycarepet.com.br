@@ -32,7 +32,7 @@ async function seedUsuarios() {
         SENHA_HASH: senhaAdmin,
         EMAIL: 'rock.lee@puppycarepet.com.br',
         FOTO: '/usuarios/rock-lee.jpg',
-        TIPOS: ['condutor', 'colaborador', 'condutor'],
+        TIPOS: ['condutor'],
       },
       {
         NOME: 'Mortyyyyyy',

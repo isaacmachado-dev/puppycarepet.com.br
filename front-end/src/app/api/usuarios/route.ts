@@ -22,10 +22,7 @@ export async function GET() {
   }
 
   const rawText = await res.text();
-  console.log('📄 RAW Response (primeiros 300 chars):', rawText.slice(0, 300));
-
   const data = JSON.parse(rawText);
-  console.log('✅ Parsed primeiro nome:', data[0]?.NOME);
 
   return NextResponse.json(data, {
     headers: {

@@ -4,6 +4,9 @@ import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
+import * as path from 'path';
+import { randomUUID } from 'crypto';
+import * as fs from 'fs/promises';
 
 // Corrige strings possivelmente em latin1 (ex.: "JoÃ£o" -> "João")
 function decodeMaybeLatin1(value?: string | null): string | null | undefined {
@@ -24,6 +27,12 @@ export class UsuariosService {
   async create(dto: CreateUsuarioDto) {
     const senhaHash = await bcrypt.hash(dto.SENHA, 10);
 
+    // ✅ SALVA FOTO se enviada
+    let fotoFilename: string | null = null;
+    if (dto.FOTO) {
+      fotoFilename = await this.savePhoto(dto.FOTO);
+    }
+
     const nome = decodeMaybeLatin1(dto.NOME) ?? dto.NOME;
     const descricao = decodeMaybeLatin1(dto.DESCRICAO ?? undefined) ?? dto.DESCRICAO;
 
@@ -33,12 +42,13 @@ export class UsuariosService {
         EMAIL: dto.EMAIL,
         TELEFONE: dto.TELEFONE,
         DESCRICAO: descricao,
-        FOTO: dto.FOTO,
+        FOTO: fotoFilename, // ← Nome do arquivo salvo
         SENHA_HASH: senhaHash,
         TIPOS: dto.TIPOS ?? [],
       },
     });
   }
+
 
   // LOGIN DE USUÁRIO (FUNCIONAL)
   async login(email: string, senha: string) {
@@ -72,11 +82,11 @@ export class UsuariosService {
   async findAll() {
     const usuarios = await this.prisma.uSUARIOS.findMany();
 
-    // LOG CRU pra debug
-    // console.log('RAW DB:', usuarios[0].NOME);
-    // console.log('RAW typeof:', typeof usuarios[0].NOME);
-
-    return usuarios;
+    // ✅ Adiciona URL completa pra todos
+    return usuarios.map(u => ({
+      ...u,
+      FOTO_URL: u.FOTO ? `/uploads/usuarios/${u.FOTO}` : null
+    }));
   }
 
   // BUSCAR UM USUÁRIO POR ID
@@ -127,4 +137,31 @@ export class UsuariosService {
       where: { ID_USUARIO: id },
     });
   }
+
+  private async savePhoto(base64Foto: string): Promise<string | null> {
+    try {
+      if (!base64Foto || !base64Foto.startsWith('data:image/')) return null;
+
+      // ✅ SALVA NA SUA PASTA ATUAL: front-end/public/usuarios/
+      const uploadDir = path.join(process.cwd(), '..', 'front-end', 'public', 'usuarios');
+      
+      await fs.mkdir(uploadDir, { recursive: true });
+
+      const extension = base64Foto.split(';')[0].split('/')[1];
+      const base64Data = base64Foto.split(',')[1];
+      const filename = `usuario-${randomUUID()}.${extension}`;
+
+      const buffer = Buffer.from(base64Data, 'base64');
+      const filepath = path.join(uploadDir, filename);
+      await fs.writeFile(filepath, buffer);
+
+      console.log(`✅ Foto salva: ${filepath}`);
+      return filename;
+    } catch (error) {
+      console.error('Erro ao salvar foto:', error);
+      return null;
+    }
+  }
+
 }
+
