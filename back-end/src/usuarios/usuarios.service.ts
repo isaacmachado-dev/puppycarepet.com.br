@@ -4,53 +4,48 @@ import * as bcrypt from 'bcryptjs';
 import * as jwt from 'jsonwebtoken';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
-import * as path from 'path';
-import { randomUUID } from 'crypto';
-import * as fs from 'fs/promises';
 
-// Corrige strings possivelmente em latin1 (ex.: "JoÃ£o" -> "João")
-function decodeMaybeLatin1(value?: string | null): string | null | undefined {
-  if (!value) return value;
-  try {
-    const buf = Buffer.from(value, 'binary');
-    return buf.toString('utf8');
-  } catch {
-    return value;
-  }
-}
+
 
 @Injectable()
 export class UsuariosService {
   constructor(private prisma: PrismaService) { }
 
-  // CRIAR USUÁRIO
+  // ✅ NOVO: Verifica email único
+  async findByEmail(email: string) {
+    return this.prisma.uSUARIOS.findUnique({
+      where: { EMAIL: email }
+    });
+  }
+
   async create(dto: CreateUsuarioDto) {
     const senhaHash = await bcrypt.hash(dto.SENHA, 10);
 
-    // ✅ SALVA FOTO se enviada
-    let fotoFilename: string | null = null;
-    if (dto.FOTO) {
-      fotoFilename = await this.savePhoto(dto.FOTO);
-    }
 
-    const nome = decodeMaybeLatin1(dto.NOME) ?? dto.NOME;
-    const descricao = decodeMaybeLatin1(dto.DESCRICAO ?? undefined) ?? dto.DESCRICAO;
+    // ✅ CORRIGIDO: Normaliza TIPOS
+    let tipos: string[] | string = [];
+    if (dto.TIPOS) {
+      if (Array.isArray(dto.TIPOS)) {
+        tipos = dto.TIPOS.flat(); // [["condutor"]] → ["condutor"]
+      } else {
+        tipos = dto.TIPOS;
+      }
+    }
 
     return this.prisma.uSUARIOS.create({
       data: {
-        NOME: nome,
+        NOME: dto.NOME,
         EMAIL: dto.EMAIL,
-        TELEFONE: dto.TELEFONE,
-        DESCRICAO: descricao,
-        FOTO: fotoFilename, // ← Nome do arquivo salvo
+        TELEFONE: dto.TELEFONE || '',
+        DESCRICAO: dto.DESCRICAO,
+        FOTO: dto.FOTO,
         SENHA_HASH: senhaHash,
-        TIPOS: dto.TIPOS ?? [],
+        TIPOS: tipos,  // ✅ Array plano ou string
       },
     });
   }
 
 
-  // LOGIN DE USUÁRIO (FUNCIONAL)
   async login(email: string, senha: string) {
     const usuario = await this.prisma.uSUARIOS.findUnique({
       where: { EMAIL: email },
@@ -60,16 +55,10 @@ export class UsuariosService {
     const senhaValida = await bcrypt.compare(senha, usuario.SENHA_HASH);
     if (!senhaValida) throw new NotFoundException('Senha inválida');
 
-    // ← AQUI (SUBSTITUI a linha do jwt.sign atual)
-    // console.log('🔍 RAW DB:', usuario.NOME);
-    // console.log('🔍 RAW bytes:', Array.from(new TextEncoder().encode(usuario.NOME)));
-    // console.log('🔍 Buffer latin1→utf8:', Buffer.from(usuario.NOME, 'latin1').toString('utf8'));
-    // console.log('🔍 Buffer utf8→utf8:', Buffer.from(usuario.NOME, 'utf8').toString('utf8'));
-
     const token = jwt.sign(
       {
         id: usuario.ID_USUARIO,
-        nome: usuario.NOME,  // ← DIRETO, sem Buffer!
+        nome: usuario.NOME,
         email: usuario.EMAIL
       },
       process.env.JWT_SECRET || 'secret',
@@ -78,50 +67,39 @@ export class UsuariosService {
     return { token };
   }
 
-  // LISTAR TODOS OS USUÁRIOS
   async findAll() {
-    const usuarios = await this.prisma.uSUARIOS.findMany();
-
-    // ✅ Adiciona URL completa pra todos
+    const usuarios = await this.prisma.uSUARIOS.findMany({
+      orderBy: [
+        { ID_USUARIO: 'asc' }  // ✅ ORDEM ESTÁVEL por ID
+      ]
+    });
     return usuarios.map(u => ({
       ...u,
-      FOTO_URL: u.FOTO ? `/uploads/usuarios/${u.FOTO}` : null
+      FOTO_URL: u.FOTO ? `http://localhost:4000/${u.FOTO}` : null
     }));
   }
 
-  // BUSCAR UM USUÁRIO POR ID
   async findOne(id: number) {
     const usuario = await this.prisma.uSUARIOS.findUnique({
       where: { ID_USUARIO: id },
     });
-
-    if (!usuario) {
-      throw new NotFoundException(`Usuário com ID ${id} não encontrado`);
-    }
-
+    if (!usuario) throw new NotFoundException(`Usuário ${id} não encontrado`);
     return usuario;
   }
 
-  // ATUALIZAR DADOS DO USUÁRIO
   async update(id: number, dto: UpdateUsuarioDto) {
     await this.findOne(id);
-
-    // const nome = decodeMaybeLatin1(dto.NOME ?? undefined) ?? dto.NOME;
-    //  const descricao = decodeMaybeLatin1(dto.DESCRICAO ?? undefined) ?? dto.DESCRICAO;
-
     return this.prisma.uSUARIOS.update({
       where: { ID_USUARIO: id },
       data: {
         NOME: dto.NOME,
         EMAIL: dto.EMAIL,
         DESCRICAO: dto.DESCRICAO,
-        TIPOS: dto.TIPOS, // <- aqui passa a escrever no array o tipo
+        TIPOS: dto.TIPOS,
       },
     });
   }
 
-
-  // ATUALIZAR FOTO DO USUÁRIO
   async updateFoto(id: number, foto: string | null) {
     await this.findOne(id);
     return this.prisma.uSUARIOS.update({
@@ -130,38 +108,10 @@ export class UsuariosService {
     });
   }
 
-  // DELETAR USUÁRIO POR ID
   async remove(id: number) {
     await this.findOne(id);
     return this.prisma.uSUARIOS.delete({
       where: { ID_USUARIO: id },
     });
   }
-
-  private async savePhoto(base64Foto: string): Promise<string | null> {
-    try {
-      if (!base64Foto || !base64Foto.startsWith('data:image/')) return null;
-
-      // ✅ SALVA NA SUA PASTA ATUAL: front-end/public/usuarios/
-      const uploadDir = path.join(process.cwd(), '..', 'front-end', 'public', 'usuarios');
-      
-      await fs.mkdir(uploadDir, { recursive: true });
-
-      const extension = base64Foto.split(';')[0].split('/')[1];
-      const base64Data = base64Foto.split(',')[1];
-      const filename = `usuario-${randomUUID()}.${extension}`;
-
-      const buffer = Buffer.from(base64Data, 'base64');
-      const filepath = path.join(uploadDir, filename);
-      await fs.writeFile(filepath, buffer);
-
-      console.log(`✅ Foto salva: ${filepath}`);
-      return filename;
-    } catch (error) {
-      console.error('Erro ao salvar foto:', error);
-      return null;
-    }
-  }
-
 }
-

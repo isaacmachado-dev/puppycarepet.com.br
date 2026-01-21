@@ -1,10 +1,9 @@
-// Serviço base para lógica do cart no backend
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Decimal } from '@prisma/client/runtime/library';
 import * as fs from 'fs';
 import * as path from 'path';
-import { File } from 'multer';
+// ✅ REMOVA: import { File } from 'multer';
 
 @Injectable()
 export class CartService {
@@ -20,14 +19,13 @@ export class CartService {
     });
   }
 
-  async createAtendimentoWithOptionalFile(body: any, file?: File) {
-    // Aceita tanto um payload JSON direto quanto um campo 'data' contendo JSON em multipart
+  async createAtendimentoWithOptionalFile(body: any, file?: any) {  // ✅ any ao invés de File
     let payload: any = body;
     if (typeof body?.data === 'string') {
       try {
         payload = JSON.parse(body.data);
       } catch (e) {
-        // mantém body original se não for JSON válido
+        // mantém body original
       }
     }
 

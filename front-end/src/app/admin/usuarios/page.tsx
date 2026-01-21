@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { User, CarFront, ShieldUser, UserRoundPlus } from "lucide-react"
 
 import { AdminBlock, AdminBlockTitle } from "@/components/ui/custom/AdminSettings"
@@ -21,15 +21,15 @@ import { Button } from "@/components/ui/button"
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
 import { Input } from "./components/lib/input"
 
-// Corrige nomes que chegaram com encoding latin1 (ex.: "JoÃ£o" -> "João")
-const decodeMaybeLatin1 = (value: string) => {
-  if (!value) return value
+// ✅ SÓ corrige SE tiver mojibake (�) - NÃO quebra nomes corretos!
+const fixNameOnlyIfBroken = (value: string): string => {
+  if (!value || !value.includes('�')) return value;  // ← CRUCIAL: não mexe no correto!
+
   try {
-    const bytes = new Uint8Array([...value].map((c) => c.charCodeAt(0)))
-    const decoded = new TextDecoder("utf-8").decode(bytes)
-    return decoded
+    const bytes = new Uint8Array([...value].map(c => c.charCodeAt(0)));
+    return new TextDecoder('utf-8').decode(bytes);
   } catch {
-    return value
+    return value;
   }
 }
 
@@ -41,6 +41,9 @@ export default function UsuariosPage() {
   const [loading, setLoading] = React.useState(true)
   const [reload, setReload] = useState(false)
 
+  // ✅ Salva posição do scroll
+  const scrollPositionRef = useRef(0)
+
   // ✅ ESTADOS DO DIALOG
   const [showNewDialog, setShowNewDialog] = useState(false)
   const [newName, setNewName] = useState("")
@@ -49,7 +52,12 @@ export default function UsuariosPage() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [photoPreview, setPhotoPreview] = useState<string>("")
 
+  const [editedId, setEditedId] = useState<number | null>(null);
+
   const fetchFuncionarios = () => {
+    // ✅ SALVA SCROLL ANTES do reload
+    scrollPositionRef.current = window.scrollY || document.documentElement.scrollTop || 0
+
     setLoading(true)
 
     fetch("/api/usuarios")
@@ -64,7 +72,7 @@ export default function UsuariosPage() {
 
         const normalizados: Usuario[] = (Array.isArray(data) ? data : []).map((_u) => {
           const rawName = _u.NOME ?? _u.nome ?? _u.name ?? "Sem nome"
-          const name = decodeMaybeLatin1(rawName)
+          const name = fixNameOnlyIfBroken(rawName)  // ✅ USA A NOVA FUNÇÃO!
 
           return {
             id: _u.ID_USUARIO ?? Number(_u.id ?? _u.ID ?? 0),
@@ -94,79 +102,112 @@ export default function UsuariosPage() {
         console.error("Erro ao buscar funcionários (front):", err)
         setLoading(false)
       })
+
+    // ✅ Scroll para usuário editado
+    if (editedId) {
+      setTimeout(() => {
+        const el = document.querySelector(`[data-user-id="${editedId}"]`);
+        el?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setEditedId(null);
+      }, 500);
+    }
   }
+
+  // ✅ RESTAURA SCROLL após dados carregarem
+  useEffect(() => {
+    if (!loading && scrollPositionRef.current > 0) {
+      requestAnimationFrame(() => {
+        window.scrollTo({ top: scrollPositionRef.current, behavior: 'auto' })
+      })
+    }
+  }, [funcionarios, loading])
 
   useEffect(() => {
     fetchFuncionarios()
   }, [reload])
 
-  // ✅ HANDLER DE ARQUIVO - converte para base64
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const compressImage = (file: File, maxWidth: number = 400, maxHeight: number = 400, quality: number = 0.8): Promise<string> => {
+    return new Promise((resolve) => {
+      const canvas = document.createElement('canvas')
+      const ctx = canvas.getContext('2d')!
+      const img = new Image()
+
+      img.onload = () => {
+        const ratio = Math.min(maxWidth / img.width, maxHeight / img.height)
+        canvas.width = img.width * ratio
+        canvas.height = img.height * ratio
+
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+        const compressed = canvas.toDataURL('image/jpeg', quality)
+        resolve(compressed)
+      }
+
+      img.src = URL.createObjectURL(file)
+    })
+  }
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (file && file.type.startsWith('image/')) {
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        setPhotoPreview(reader.result as string)
+      try {
+        const compressedBase64 = await compressImage(file, 300, 300, 0.7)
+        console.log('📸 Imagem comprimida:', compressedBase64.length / 1024, 'KB')
+
+        setPhotoPreview(compressedBase64)
         setSelectedFile(file)
+      } catch (error) {
+        console.error('Erro ao comprimir imagem:', error)
       }
-      reader.readAsDataURL(file)
     } else {
       setSelectedFile(null)
       setPhotoPreview("")
     }
   }
 
-  // ✅ CRIAR USUÁRIO com foto em base64
   const handleCreateUser = async () => {
     if (!newName.trim() || !newEmail.trim() || newType.length === 0) {
       alert("Nome, email e tipo são obrigatórios!")
       return
     }
 
-    const payload = {
-      NOME: newName.trim(),
-      EMAIL: newEmail.trim(),
-      SENHA: '123456',
-      TIPOS: newType,
-      TELEFONE: '',
-      DESCRICAO: '',
-      FOTO: photoPreview, // ✅ base64 da imagem
-    }
+    const formData = new FormData();
+    formData.append('NOME', newName.trim());
+    formData.append('EMAIL', newEmail.trim());
+    formData.append('SENHA', '123456');
+    formData.append('TIPOS', JSON.stringify(newType));
 
-    console.log('📤 Enviando:', {
-      nome: payload.NOME,
-      email: payload.EMAIL,
-      tipos: payload.TIPOS,
-      temFoto: !!payload.FOTO
-    })
+    if (selectedFile) {
+      formData.append('FOTO', selectedFile);
+      console.log('📤 Enviando foto:', selectedFile.name, selectedFile.size);
+    }
 
     try {
-      const res = await fetch('/api/usuarios', {
+      const res = await fetch('http://localhost:4000/usuarios', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      })
+        body: formData,
+      });
+
+      const data = await res.json();
 
       if (res.ok) {
-        console.log('✅ Usuário criado!')
-        setShowNewDialog(false)
-        setReload(r => !r)
+        console.log('✅ Criado com foto:', data);
+        setShowNewDialog(false);
+        setReload(r => !r);
 
         // Limpa form
-        setNewName("")
-        setNewEmail("")
-        setNewType([])
-        setSelectedFile(null)
-        setPhotoPreview("")
+        setNewName("");
+        setNewEmail("");
+        setNewType([]);
+        setSelectedFile(null);
+        setPhotoPreview("");
       } else {
-        const err = await res.json()
-        alert(`Erro: ${err.error || 'Falha ao criar'}`)
+        alert(data.message || data.error || 'Erro ao criar');
       }
     } catch (error) {
-      console.error('Erro:', error)
-      alert('Erro de conexão')
+      console.error('Erro:', error);
+      alert('Erro de conexão');
     }
-  }
+  };
 
   const numColaboradores = funcionarios.filter((f) =>
     (f.type ?? []).includes("colaborador" as UsuarioRole),
@@ -295,7 +336,7 @@ export default function UsuariosPage() {
               />
             </Field>
 
-            {/* ✅ CAMPO DE FOTO - FUNCIONANDO! */}
+            {/* ✅ CAMPO DE FOTO */}
             <Field>
               <FieldLabel htmlFor="newPhoto">Foto (opcional)</FieldLabel>
               <Input
@@ -323,8 +364,10 @@ export default function UsuariosPage() {
               <Button
                 variant="outline"
                 onClick={() => {
-                  setNewName(""); setNewEmail("");
-                  setNewType([]); setSelectedFile(null);
+                  setNewName("");
+                  setNewEmail("");
+                  setNewType([]);
+                  setSelectedFile(null);
                   setPhotoPreview("");
                 }}
               >

@@ -47,42 +47,36 @@ const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
 const bcrypt = __importStar(require("bcryptjs"));
 const jwt = __importStar(require("jsonwebtoken"));
-const path = __importStar(require("path"));
-const crypto_1 = require("crypto");
-const fs = __importStar(require("fs/promises"));
-function decodeMaybeLatin1(value) {
-    if (!value)
-        return value;
-    try {
-        const buf = Buffer.from(value, 'binary');
-        return buf.toString('utf8');
-    }
-    catch {
-        return value;
-    }
-}
 let UsuariosService = class UsuariosService {
     prisma;
     constructor(prisma) {
         this.prisma = prisma;
     }
+    async findByEmail(email) {
+        return this.prisma.uSUARIOS.findUnique({
+            where: { EMAIL: email }
+        });
+    }
     async create(dto) {
         const senhaHash = await bcrypt.hash(dto.SENHA, 10);
-        let fotoFilename = null;
-        if (dto.FOTO) {
-            fotoFilename = await this.savePhoto(dto.FOTO);
+        let tipos = [];
+        if (dto.TIPOS) {
+            if (Array.isArray(dto.TIPOS)) {
+                tipos = dto.TIPOS.flat();
+            }
+            else {
+                tipos = dto.TIPOS;
+            }
         }
-        const nome = decodeMaybeLatin1(dto.NOME) ?? dto.NOME;
-        const descricao = decodeMaybeLatin1(dto.DESCRICAO ?? undefined) ?? dto.DESCRICAO;
         return this.prisma.uSUARIOS.create({
             data: {
-                NOME: nome,
+                NOME: dto.NOME,
                 EMAIL: dto.EMAIL,
-                TELEFONE: dto.TELEFONE,
-                DESCRICAO: descricao,
-                FOTO: fotoFilename,
+                TELEFONE: dto.TELEFONE || '',
+                DESCRICAO: dto.DESCRICAO,
+                FOTO: dto.FOTO,
                 SENHA_HASH: senhaHash,
-                TIPOS: dto.TIPOS ?? [],
+                TIPOS: tipos,
             },
         });
     }
@@ -103,19 +97,22 @@ let UsuariosService = class UsuariosService {
         return { token };
     }
     async findAll() {
-        const usuarios = await this.prisma.uSUARIOS.findMany();
+        const usuarios = await this.prisma.uSUARIOS.findMany({
+            orderBy: [
+                { ID_USUARIO: 'asc' }
+            ]
+        });
         return usuarios.map(u => ({
             ...u,
-            FOTO_URL: u.FOTO ? `/uploads/usuarios/${u.FOTO}` : null
+            FOTO_URL: u.FOTO ? `http://localhost:4000/${u.FOTO}` : null
         }));
     }
     async findOne(id) {
         const usuario = await this.prisma.uSUARIOS.findUnique({
             where: { ID_USUARIO: id },
         });
-        if (!usuario) {
-            throw new common_1.NotFoundException(`Usuário com ID ${id} não encontrado`);
-        }
+        if (!usuario)
+            throw new common_1.NotFoundException(`Usuário ${id} não encontrado`);
         return usuario;
     }
     async update(id, dto) {
@@ -142,26 +139,6 @@ let UsuariosService = class UsuariosService {
         return this.prisma.uSUARIOS.delete({
             where: { ID_USUARIO: id },
         });
-    }
-    async savePhoto(base64Foto) {
-        try {
-            if (!base64Foto || !base64Foto.startsWith('data:image/'))
-                return null;
-            const uploadDir = path.join(process.cwd(), '..', 'front-end', 'public', 'usuarios');
-            await fs.mkdir(uploadDir, { recursive: true });
-            const extension = base64Foto.split(';')[0].split('/')[1];
-            const base64Data = base64Foto.split(',')[1];
-            const filename = `usuario-${(0, crypto_1.randomUUID)()}.${extension}`;
-            const buffer = Buffer.from(base64Data, 'base64');
-            const filepath = path.join(uploadDir, filename);
-            await fs.writeFile(filepath, buffer);
-            console.log(`✅ Foto salva: ${filepath}`);
-            return filename;
-        }
-        catch (error) {
-            console.error('Erro ao salvar foto:', error);
-            return null;
-        }
     }
 };
 exports.UsuariosService = UsuariosService;

@@ -44,7 +44,7 @@ export class CreateUsuarioDto {
   @ApiPropertyOptional({ description: 'URL (absoluta) da foto do usuário' })
   @IsOptional()
   @IsString()
-  FOTO?: string;
+  FOTO?: string | null;
 
   @ApiProperty({
     description: 'Senha (texto puro, será hasheada)',
