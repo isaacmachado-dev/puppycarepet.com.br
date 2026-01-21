@@ -1,4 +1,4 @@
-import { PawPrint, Sparkles } from "lucide-react";
+import { PawPrint } from "lucide-react";
 
 export default function DogsPawOnHero() {
 

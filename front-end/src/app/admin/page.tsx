@@ -20,7 +20,6 @@ import ClientesPage from "./clientes/page";
 import AnalisePage from "./analise/page";
 import UsuariosPage from "./usuarios/page";
 import OpcoesPage from "./opcoes/page";
-import HistoricoPage from "./historico/page";
 
 import { useRouter } from "next/navigation";
 import AdminHomeLoading from "@/app/admin/components/loading/AdminHomeLoading";
@@ -81,7 +80,7 @@ export default function AdminPage() {
     const roles: string[] = rolesRaw ? JSON.parse(rolesRaw) : [];
 
     const isAdminRole = roles.includes("administrador");
-    const isClienteRole = roles.includes("cliente");
+    // const isClienteRole = roles.includes("cliente");
     setIsAdmin(isAdminRole);
 
     if (isAdminRole) {
