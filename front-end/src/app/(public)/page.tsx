@@ -7,7 +7,6 @@ import { SetupSection } from "./sections/components/ConfigSection";
 // import { AdminButton } from "../components/ui/custom/AdminButton";
 import FooterClient from "./components/FooterClient";
 import Link from "next/link";
-import { PawPrint } from "lucide-react";
 import DogsPawOnHero from "./components/DogsPawOnHero";
 import HeaderSticky from "./components/HeaderSticky";
 

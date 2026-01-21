@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState, useRef, useCallback } from "react"
 import { User, CarFront, ShieldUser, UserRoundPlus } from "lucide-react"
 
 import { AdminBlock, AdminBlockTitle } from "@/components/ui/custom/AdminSettings"
@@ -23,7 +23,7 @@ import { Input } from "./components/lib/input"
 
 // ✅ SÓ corrige SE tiver mojibake (�) - NÃO quebra nomes corretos!
 const fixNameOnlyIfBroken = (value: string): string => {
-  if (!value || !value.includes('�')) return value;  // ← CRUCIAL: não mexe no correto!
+  if (!value || !value.includes('�')) return value;
 
   try {
     const bytes = new Uint8Array([...value].map(c => c.charCodeAt(0)));
@@ -54,10 +54,9 @@ export default function UsuariosPage() {
 
   const [editedId, setEditedId] = useState<number | null>(null);
 
-  const fetchFuncionarios = () => {
-    // ✅ SALVA SCROLL ANTES do reload
+  // ✅ Memoizado com useCallback - resolve exhaustive-deps
+  const fetchFuncionarios = useCallback(() => {
     scrollPositionRef.current = window.scrollY || document.documentElement.scrollTop || 0
-
     setLoading(true)
 
     fetch("/api/usuarios")
@@ -72,7 +71,7 @@ export default function UsuariosPage() {
 
         const normalizados: Usuario[] = (Array.isArray(data) ? data : []).map((_u) => {
           const rawName = _u.NOME ?? _u.nome ?? _u.name ?? "Sem nome"
-          const name = fixNameOnlyIfBroken(rawName)  // ✅ USA A NOVA FUNÇÃO!
+          const name = fixNameOnlyIfBroken(rawName)
 
           return {
             id: _u.ID_USUARIO ?? Number(_u.id ?? _u.ID ?? 0),
@@ -111,7 +110,7 @@ export default function UsuariosPage() {
         setEditedId(null);
       }, 500);
     }
-  }
+  }, [editedId])  // ✅ editedId é a única dep real
 
   // ✅ RESTAURA SCROLL após dados carregarem
   useEffect(() => {
@@ -122,9 +121,10 @@ export default function UsuariosPage() {
     }
   }, [funcionarios, loading])
 
+  // ✅ Effect sem warning
   useEffect(() => {
     fetchFuncionarios()
-  }, [reload])
+  }, [fetchFuncionarios, reload])
 
   const compressImage = (file: File, maxWidth: number = 400, maxHeight: number = 400, quality: number = 0.8): Promise<string> => {
     return new Promise((resolve) => {
@@ -182,9 +182,10 @@ export default function UsuariosPage() {
     }
 
     try {
-      const res = await fetch('http://localhost:4000/usuarios', {
+      const res = await fetch('/api/usuarios', {
         method: 'POST',
         body: formData,
+        cache: 'no-store',
       });
 
       const data = await res.json();
