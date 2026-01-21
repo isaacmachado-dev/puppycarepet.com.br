@@ -30,6 +30,7 @@ async function bootstrap() {
       whitelist: true,
       forbidNonWhitelisted: true,
       transform: true,
+      skipMissingProperties: true,  // ✅ ESSENCIAL! Ignora campos undefined/vazios no PATCH
     }),
   );
 
