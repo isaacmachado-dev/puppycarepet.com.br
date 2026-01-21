@@ -106,13 +106,27 @@ export class UsuariosController {
 
   @Patch(':id')
   @ApiOperation({ summary: 'Atualizar usuário' })
+  @ApiConsumes('multipart/form-data')  // ✅ FormData
   @ApiParam({ name: 'id', description: 'ID_USUARIO' })
   async update(
     @Param('id', ParseIntPipe) id: number,
-    @Body() body: UpdateUsuarioDto,  // ✅ JSON simples!
+    @Body('NOME') nome: string,
+    @Body('EMAIL') email: string,
+    @Body('TIPOS') tiposRaw: string,
   ) {
-    console.log('PATCH body:', body);  // Debug
-    return this.usuariosService.update(id, body);
+    console.log('PATCH fields:', { nome, email, tiposRaw });
+
+    // Parse TIPOS igual POST
+    let tipos: string[] = [];
+    if (tiposRaw) {
+      try {
+        tipos = JSON.parse(tiposRaw);
+      } catch {
+        tipos = [tiposRaw];
+      }
+    }
+
+    return this.usuariosService.update(id, { NOME: nome, EMAIL: email, TIPOS: tipos });
   }
 
   @Delete(':id')

@@ -53,7 +53,6 @@ const fs = __importStar(require("fs-extra"));
 const uuid_1 = require("uuid");
 const swagger_1 = require("@nestjs/swagger");
 const usuarios_service_1 = require("./usuarios.service");
-const update_usuario_dto_1 = require("./dto/update-usuario.dto");
 const create_usuario_dto_1 = require("./dto/create-usuario.dto");
 let UsuariosController = class UsuariosController {
     usuariosService;
@@ -112,9 +111,18 @@ let UsuariosController = class UsuariosController {
     findOne(id) {
         return this.usuariosService.findOne(id);
     }
-    async update(id, body) {
-        console.log('PATCH body:', body);
-        return this.usuariosService.update(id, body);
+    async update(id, nome, email, tiposRaw) {
+        console.log('PATCH fields:', { nome, email, tiposRaw });
+        let tipos = [];
+        if (tiposRaw) {
+            try {
+                tipos = JSON.parse(tiposRaw);
+            }
+            catch {
+                tipos = [tiposRaw];
+            }
+        }
+        return this.usuariosService.update(id, { NOME: nome, EMAIL: email, TIPOS: tipos });
     }
     remove(id) {
         return this.usuariosService.remove(id);
@@ -162,11 +170,14 @@ __decorate([
 __decorate([
     (0, common_1.Patch)(':id'),
     (0, swagger_1.ApiOperation)({ summary: 'Atualizar usuário' }),
+    (0, swagger_1.ApiConsumes)('multipart/form-data'),
     (0, swagger_1.ApiParam)({ name: 'id', description: 'ID_USUARIO' }),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
-    __param(1, (0, common_1.Body)()),
+    __param(1, (0, common_1.Body)('NOME')),
+    __param(2, (0, common_1.Body)('EMAIL')),
+    __param(3, (0, common_1.Body)('TIPOS')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, update_usuario_dto_1.UpdateUsuarioDto]),
+    __metadata("design:paramtypes", [Number, String, String, String]),
     __metadata("design:returntype", Promise)
 ], UsuariosController.prototype, "update", null);
 __decorate([
