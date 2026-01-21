@@ -25,22 +25,22 @@ import { LoginDto } from './dto/create-usuario.dto';
 @ApiTags('usuarios')
 @Controller('usuarios')
 export class UsuariosController {
-  constructor(private readonly usuariosService: UsuariosService) {}
+  constructor(private readonly usuariosService: UsuariosService) { }
 
   @Post()
   @ApiOperation({ summary: 'Criar usuário' })
   @ApiConsumes('multipart/form-data')
   @UseInterceptors(FileInterceptor('FOTO'))
   async create(
-  @Body('NOME') nome: string,
-  @Body('EMAIL') email: string,
-  @Body('SENHA') senha: string,
-  @Body('TIPOS') tiposRaw: string,
-  @UploadedFile() file: any,
-) {
-  try {
+    @Body('NOME') nome: string,
+    @Body('EMAIL') email: string,
+    @Body('SENHA') senha: string,
+    @Body('TIPOS') tiposRaw: string,
+    @UploadedFile() file: any,
+  ) {
+    try {
       // ✅ CORRIGIDO: Trata array ou string única
-    let tipos: string[] = [];
+      let tipos: string[] = [];
       if (tiposRaw) {
         try {
           tipos = JSON.parse(tiposRaw);
@@ -60,10 +60,10 @@ export class UsuariosController {
         console.log('📸 Upload:', file.originalname, file.size);
         const fileName = `${uuidv4()}.${file.originalname?.split('.').pop() || 'jpg'}`;
         const uploadPath = path.join(process.cwd(), 'uploads', fileName);
-        
+
         await fs.ensureDir(path.dirname(uploadPath));
         await fs.writeFile(uploadPath, file.buffer);
-        
+
         fotoUrl = `http://localhost:4000/uploads/${fileName}`;
         console.log('✅ Foto salva:', fotoUrl);
       }
@@ -107,7 +107,11 @@ export class UsuariosController {
   @Patch(':id')
   @ApiOperation({ summary: 'Atualizar usuário' })
   @ApiParam({ name: 'id', description: 'ID_USUARIO' })
-  update(@Param('id', ParseIntPipe) id: number, @Body() body: UpdateUsuarioDto) {
+  async update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: UpdateUsuarioDto,  // ✅ JSON simples!
+  ) {
+    console.log('PATCH body:', body);  // Debug
     return this.usuariosService.update(id, body);
   }
 

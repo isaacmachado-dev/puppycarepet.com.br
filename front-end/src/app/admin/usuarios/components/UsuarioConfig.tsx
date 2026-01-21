@@ -49,16 +49,14 @@ export default function DropdownMenuDialog({
 
     const handleSave = async () => {
         try {
+            const formData = new FormData();
+            formData.append('NOME', name);      // Backend @Body('NOME')
+            formData.append('EMAIL', email);    // Backend @Body('EMAIL')
+            formData.append('TIPOS', JSON.stringify(type));  // Backend @Body('TIPOS')
+
             const res = await fetch(`/api/usuarios/${usuario.id}`, {
                 method: "PATCH",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    name,
-                    email,
-                    type,
-                }),
+                body: formData,  // ✅ Sem Content-Type (auto)
             });
 
             if (!res.ok) {

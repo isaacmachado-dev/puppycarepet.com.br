@@ -112,7 +112,8 @@ let UsuariosController = class UsuariosController {
     findOne(id) {
         return this.usuariosService.findOne(id);
     }
-    update(id, body) {
+    async update(id, body) {
+        console.log('PATCH body:', body);
         return this.usuariosService.update(id, body);
     }
     remove(id) {
@@ -166,7 +167,7 @@ __decorate([
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, update_usuario_dto_1.UpdateUsuarioDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], UsuariosController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
