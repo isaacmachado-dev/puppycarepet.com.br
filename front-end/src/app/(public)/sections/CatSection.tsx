@@ -30,7 +30,7 @@ export default function CatSection() {
                     </H2>
 
                     <p className="max-w-[400px] text-4xl sm:mt-5 font-semibold">
-                        Gatos também gostam de “limpeza”, alivie-os por estarem beeem limpinhos e cheirosos conosco!
+                        Gatos também gostam de “limpeza”, alivie-os por estarem beeem limpinhos e cheirosos com a gente!
                     </p>
                 </div>
 

@@ -66,7 +66,7 @@ __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'URL (absoluta) da foto do usuário' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
+    __metadata("design:type", Object)
 ], CreateUsuarioDto.prototype, "FOTO", void 0);
 __decorate([
     (0, swagger_1.ApiProperty)({

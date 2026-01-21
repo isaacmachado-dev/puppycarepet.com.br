@@ -1,8 +1,7 @@
-// Controller base para endpoints do cart
 import { Controller, Post, Body, Get, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CartService } from './cart.service';
-import type { Multer } from 'multer';
+// ✅ REMOVA: import type { Multer } from 'multer';
 
 @Controller('cart')
 export class CartController {
@@ -11,10 +10,9 @@ export class CartController {
   @Post('atendimento')
   @UseInterceptors(FileInterceptor('file'))
   async createAtendimento(
-    @UploadedFile() file: Multer.File,
+    @UploadedFile() file: any,  
     @Body() body: any,
   ) {
-    // Suporta multipart/form-data com arquivo (campo 'file') e JSON puro
     return this.cartService.createAtendimentoWithOptionalFile(body, file);
   }
 
