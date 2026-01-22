@@ -117,7 +117,7 @@ export default function AdminPage() {
         <AdminHomeLoading loaded={true} funcionario={nomeUsuario || "Mônica"} />
       </div>
 
-      <div className="relative flex min-h-screen text-black font-bold">
+      <div className="md:relative md:flex min-h-screen text-black font-bold">
         <aside
           className={`relative z-10 bg-[#1A112E] shadow-lg py-4 px-4 invisible md:visible transition-all duration-300 ${isOpen ? "w-[250px]" : "w-[125px]"
             }`}
