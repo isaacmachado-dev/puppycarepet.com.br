@@ -119,7 +119,7 @@ export default function AdminPage() {
 
       <div className="md:relative md:flex min-h-screen text-black font-bold">
         <aside
-          className={`relative z-10 bg-[#1A112E] shadow-lg py-4 px-4 invisible md:visible transition-all duration-300 ${isOpen ? "w-[250px]" : "w-[125px]"
+          className={`hidden md:block z-10 bg-[#1A112E] shadow-lg py-4 px-4 invisible md:visible transition-all duration-300 ${isOpen ? "w-[250px]" : "w-[125px]"
             }`}
         >
           <div className="sticky top-5 flex flex-col gap-2">

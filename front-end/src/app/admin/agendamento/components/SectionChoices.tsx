@@ -4,7 +4,6 @@ import { Proximos } from "../sections/Proximos";
 import { Revisar } from "../sections/Revisar";
 import Disponibilidade from "../sections/Disponiblidade";
 
-
 const BUTTONS = [
     { id: "Atendendo", label: "Atendendo" },
     { id: "Proximos", label: "Próximos" },
@@ -14,19 +13,20 @@ const BUTTONS = [
 
 export default function SectionChoices() {
     const [active, setActive] = useState(BUTTONS[0].id);
+    const activeIndex = BUTTONS.findIndex(btn => btn.id === active);
 
     return (
         <>
-            <div className="flex flex-row gap-20 justify-center mt-[40px] z-[10] ">
-                {BUTTONS.map(btn => (
-                    <div key={btn.id} className="py-3 rounded-full">
+            {/* 👇 DESKTOP: Todos os 4 botões 👇 */}
+            <div className="hidden md:flex flex-row gap-6 justify-center mt-[40px] relative z-[10]">
+                {BUTTONS.map((btn, index) => (
+                    <div key={btn.id} className="flex py-3 flex-shrink-0">
                         <button
-                            className={`cursor-pointer py-3 transition-all duration-300
-                        ${active === btn.id ? "bg-[#FFFFFF] dark:bg-[#171717] text-black dark:text-white px-15  rounded-t-full text-black font-extrabold " : "bg-transparent text-black dark:text-white"}
-                        `}
-
+                            className={`cursor-pointer py-3 px-8 transition-all duration-300 rounded-t-full font-bold ${active === btn.id
+                                ? "bg-[#FFFFFF] dark:bg-[#171717] text-black dark:text-white font-extrabold"
+                                : "bg-transparent text-gray-500"
+                                }`}
                             onClick={() => setActive(btn.id)}
-                            // Opcional: bloqueia novamente clique no botão já ativo
                             disabled={active === btn.id}
                             style={active === btn.id ? { opacity: 1, cursor: "default" } : {}}
                         >
@@ -34,8 +34,49 @@ export default function SectionChoices() {
                         </button>
                     </div>
                 ))}
+            </div>
 
+            {/* 👇 MOBILE:  */}
+            <div className="flex md:hidden flex-row gap-6 justify-center mt-[40px] relative z-[10]">
+                {/* ... <= ESQUERDA  */}
+                {activeIndex > 0 && (
+                    <div className="flex py-3 flex-shrink-0">
+                        <button
+                            className="cursor-pointer py-3 px-2 bg-transparent text-gray-500 rounded-t-full text-xs w-[40px] truncate transition-all"
+                            onClick={() => setActive(BUTTONS[activeIndex - 1].id)}
+                            title={BUTTONS[activeIndex - 1].label}
+                        >
+                            {BUTTONS[activeIndex - 1].label}
+                        </button>
+                    </div>
+                )}
 
+                {/* Botões centrais */}
+                <div className="flex">
+                    {/* ATIVO sempre */}
+                    <div className="flex py-3 flex-shrink-0">
+                        <button
+                            className="cursor-pointer py-3 px-8 transition-all duration-300 bg-[#FFFFFF] dark:bg-[#171717] text-black dark:text-white rounded-t-full font-extrabold"
+                            disabled
+                            style={{ opacity: 1, cursor: "default" }}
+                        >
+                            {active}
+                        </button>
+                    </div>
+
+                    {/*  => ... PRÓXIMO (só se tem) */}
+                    {activeIndex < BUTTONS.length - 1 && (
+                        <div className="flex py-3 flex-shrink-0">
+                            <button
+                                className="cursor-pointer py-3 px-2 bg-transparent text-gray-500 rounded-t-full text-xs w-[40px] truncate transition-all"
+                                onClick={() => setActive(BUTTONS[activeIndex + 1].id)}
+                                title={BUTTONS[activeIndex + 1].label}
+                            >
+                                {BUTTONS[activeIndex + 1].label}
+                            </button>
+                        </div>
+                    )}
+                </div>
             </div>
 
             <div className="transition-all">
@@ -48,9 +89,6 @@ export default function SectionChoices() {
                     </div>
                 </div>
             </div>
-
         </>
-
-
     );
 }
