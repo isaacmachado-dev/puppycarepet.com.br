@@ -74,7 +74,7 @@ export default function Home() {
 
                   <Link
                     href="/cart"
-                    className="rounded-md bg-[#1A89A2] px-10 py-4 hover:bg-[#186E81] text-white font-semibold tracking-[2] transform transition-transform duration-200 hover:scale-120 will-change-auto mt-5 text-center sm:-mx-auto sm:text-xl"
+                    className="rounded-md bg-[#1A89A2] px-10 py-4 hover:bg-[#186E81] text-white font-bold tracking-[2] transform transition-transform duration-200 hover:scale-120 will-change-auto mt-5 text-center sm:-mx-auto sm:text-xl"
                   >
                     Agende agora
                   </Link>
