@@ -46,11 +46,11 @@ export function Atendendo() {
                     />
 
                     <label htmlFor="pet-photo" className="cursor-pointer">
-                        <div className="w-[300px] h-[300px] relative">
+                        <div className="w-[200px] h-[200px] md:w-[300px] md:h-[300px] relative">
                             <Image
                                 src={
                                     previewUrl ||
-                                    "https://placehold.co/300x300.png?text=Imagem"
+                                    "https://placehold.co/1024x768.png?text=Imagem"
                                 }
                                 alt="Dog"
                                 className="object-cover rounded-md border"
