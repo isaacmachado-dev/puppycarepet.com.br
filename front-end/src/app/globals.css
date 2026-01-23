@@ -145,27 +145,17 @@
 }
 
 @keyframes fadeSlideIn {
-  from {
+  0% {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(10px);
   }
 
-  to {
+  100% {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-/* utilitária simples para usar no JSX */
 .fade-slide-in {
-  animation: fadeSlideIn 0.25s ease-out;
-}
-
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  animation: fadeSlideIn 0.3s ease-out forwards;
 }
