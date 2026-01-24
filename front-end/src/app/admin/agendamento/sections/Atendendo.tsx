@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Dog } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ConfirmModal } from "./components/ConfirmModal";
 
 export function Atendendo() {
     const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -37,7 +38,7 @@ export function Atendendo() {
 
     return (
         <div className="space-y-6 p-6 max-w-md mx-auto">
-            <div className="border-2 border-black dark:border-white rounded-xl p-6 bg-gradient-to-br from-white to-gray-50 dark:from-slate-900 dark:to-slate-800 shadow-xl">
+            <div className="border-2 border-black dark:border-white rounded-xl p-2 bg-gradient-to-br from-white to-gray-50 dark:from-slate-900 dark:to-slate-800 shadow-xl">
                 <div className="flex flex-col items-center gap-4 text-center">
                     <input
                         id="pet-photo"
@@ -47,8 +48,8 @@ export function Atendendo() {
                         className="hidden"
                     />
 
-                    <label htmlFor="pet-photo" className="cursor-pointer w-full max-w-xs">
-                        <div className="w-[80%] h-[80%] rounded-2xl border-4 border-dashed border-gray-300 dark:border-gray-600 hover:border-[#E72989] dark:hover:border-pink-400 transition-all duration-300 shadow-lg hover:shadow-2xl hover:scale-[1.02] mx-auto">
+                    <label htmlFor="pet-photo" className="cursor-pointer w-full">
+                        <div className="w-[100%] h-[100%] rounded-2xl border-4 border-dashed border-gray-300 dark:border-gray-600 hover:border-[#E72989] dark:hover:border-pink-400 transition-all duration-300 shadow-lg hover:shadow-2xl hover:scale-[1.02] mx-auto">
                             {previewUrl ? (
                                 <img
                                     src={previewUrl}
@@ -57,8 +58,8 @@ export function Atendendo() {
                                 />
                             ) : (
                                 <div className="w-full h-full flex flex-col items-center justify-center gap-3 p-6 bg-gradient-to-br from-pink-50 to-purple-50 dark:from-slate-800 dark:to-slate-700 rounded-xl group">
-                                    <Dog className="w-20 h-20 text-pink-400 group-hover:text-pink-500" />
-                                    <div className="text-2xl font-bold text-pink-400 group-hover:text-pink-500">
+                                    <Dog className="w-20 h-10 md:h-20 text-pink-400 group-hover:text-pink-500" />
+                                    <div className="text-base font-bold text-pink-400 group-hover:text-pink-500">
                                         Adicionar foto
                                     </div>
                                     <p className="text-sm text-gray-500 dark:text-gray-400 px-4">
@@ -70,7 +71,7 @@ export function Atendendo() {
                     </label>
 
                     <div className="flex items-center gap-3 pt-2">
-                        <div className="w-12 h-12 bg-gradient-to-r from-pink-400 to-purple-500 rounded-2xl flex items-center justify-center shadow-lg">
+                        <div className="w-12 h-12 bg-pink-400 rounded-2xl flex items-center justify-center shadow-lg">
                             <Dog className="w-7 h-7 text-white" />
                         </div>
                         <span className="text-2xl font-black text-pink-400">
@@ -81,11 +82,11 @@ export function Atendendo() {
                 </div>
             </div>
 
-            {showConfirm && (
+            {/* {showConfirm && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/70 backdrop-blur-sm">
-                    <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-8 shadow-2xl border border-white/10 max-w-sm w-full max-h-[85vh]">
+                    <div className="bg-pink-400 rounded-3xl p-8 shadow-2xl border border-white/10 max-w-sm w-full max-h-[85vh]">
                         <div className="text-center mb-6">
-                            <Dog className="w-16 h-16 mx-auto text-pink-400 mb-4 shadow-xl" />
+                            <Dog className="w-16 h-16 mx-auto text-white" />
                             <h2 className="text-2xl font-bold text-white mb-2">Enviar foto da Malu?</h2>
                             <p className="text-gray-300 text-lg leading-relaxed">
                                 Confirme para salvar a foto da Malu no sistema de atendimentos.
@@ -101,14 +102,22 @@ export function Atendendo() {
                             </button>
                             <button
                                 onClick={handleConfirm}
-                                className="flex-1 px-8 py-4 rounded-2xl bg-gradient-to-r from-emerald-400 to-emerald-500 hover:from-emerald-500 hover:to-emerald-600 backdrop-blur-sm border border-gray-400/30 text-lg font-semibold text-white transition-all shadow-xl hover:shadow-2xl hover:scale-[1.02] cursor-pointer"
+                                className="flex-1 px-8 py-4 rounded-2xl bg-gradient-to-r from-emerald-400 to-emerald-500 hover:from-emerald-500 hover:to-emerald-600 backdrop-blur-sm border border-gray-400/30 text-lg font-semibold text-black transition-all shadow-xl hover:shadow-2xl hover:scale-[1.02] cursor-pointer"
                             >
-                                Sim!
+                                Sim
                             </button>
                         </div>
                     </div>
                 </div>
-            )}
+            )} */}
+
+            <ConfirmModal open={showConfirm} onClose={handleCancel}>
+
+                <div className="flex gap-6 pt-6">
+                    <button onClick={handleCancel} className="flex-1 px-8 py-4 rounded-2xl bg-gray-600/50 hover:bg-gray-500/50 backdrop-blur-sm border border-gray-400/30 text-lg font-semibold text-white transition-all shadow-xl hover:shadow-2xl hover:scale-[1.02] cursor-pointer">Cancelar</button>
+                    <button onClick={handleConfirm} className="flex-1 px-8 py-4 rounded-2xl bg-gradient-to-r from-emerald-400 to-emerald-500 hover:from-emerald-500 hover:to-emerald-600 backdrop-blur-sm border border-gray-400/30 text-lg font-semibold text-black transition-all shadow-xl hover:shadow-2xl hover:scale-[1.02] cursor-pointer">Sim</button>
+                </div>
+            </ConfirmModal>
         </div>
     );
 }
