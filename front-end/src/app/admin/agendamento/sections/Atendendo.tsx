@@ -38,6 +38,8 @@ export function Atendendo() {
 
     return (
         <div className="space-y-6 p-6 max-w-md mx-auto">
+            
+
             <div className="border-2 border-black dark:border-white rounded-xl p-2 bg-gradient-to-br from-white to-gray-50 dark:from-slate-900 dark:to-slate-800 shadow-xl">
                 <div className="flex flex-col items-center gap-4 text-center">
                     <input
@@ -63,7 +65,7 @@ export function Atendendo() {
                                         Adicionar foto
                                     </div>
                                     <p className="text-sm text-gray-500 dark:text-gray-400 px-4">
-                                        Clique para escolher a foto da Malu 🐕
+                                        Clique para escolher a foto da Malu
                                     </p>
                                 </div>
                             )}
@@ -81,35 +83,6 @@ export function Atendendo() {
 
                 </div>
             </div>
-
-            {/* {showConfirm && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/70 backdrop-blur-sm">
-                    <div className="bg-pink-400 rounded-3xl p-8 shadow-2xl border border-white/10 max-w-sm w-full max-h-[85vh]">
-                        <div className="text-center mb-6">
-                            <Dog className="w-16 h-16 mx-auto text-white" />
-                            <h2 className="text-2xl font-bold text-white mb-2">Enviar foto da Malu?</h2>
-                            <p className="text-gray-300 text-lg leading-relaxed">
-                                Confirme para salvar a foto da Malu no sistema de atendimentos.
-                            </p>
-                        </div>
-
-                        <div className="flex gap-4 justify-center">
-                            <button
-                                onClick={handleCancel}
-                                className="flex-1 px-8 py-4 rounded-2xl bg-gray-600/50 hover:bg-gray-500/50 backdrop-blur-sm border border-gray-400/30 text-lg font-semibold text-white transition-all shadow-xl hover:shadow-2xl hover:scale-[1.02] cursor-pointer"
-                            >
-                                Cancelar
-                            </button>
-                            <button
-                                onClick={handleConfirm}
-                                className="flex-1 px-8 py-4 rounded-2xl bg-gradient-to-r from-emerald-400 to-emerald-500 hover:from-emerald-500 hover:to-emerald-600 backdrop-blur-sm border border-gray-400/30 text-lg font-semibold text-black transition-all shadow-xl hover:shadow-2xl hover:scale-[1.02] cursor-pointer"
-                            >
-                                Sim
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )} */}
 
             <ConfirmModal open={showConfirm} onClose={handleCancel}>
 
