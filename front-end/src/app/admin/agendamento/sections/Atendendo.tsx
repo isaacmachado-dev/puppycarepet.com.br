@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Dog } from "lucide-react";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
 export function Atendendo() {
@@ -13,30 +12,33 @@ export function Atendendo() {
     function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
         const selected = event.target.files?.[0];
         if (!selected) return;
+        if (previewUrl) URL.revokeObjectURL(previewUrl);
 
         const url = URL.createObjectURL(selected);
         setPreviewUrl(url);
         setFile(selected);
-        setShowConfirm(true); // abre o modal
+        setShowConfirm(true);
     }
 
     async function handleConfirm() {
         if (!file) return;
-        // TODO: enviar pro backend aqui (FormData + fetch)
-        setShowConfirm(false);
+        const formData = new FormData();
+        formData.append("petPhoto", file);
+        // await fetch("/api/atendendo/photo", { method: "POST", body: formData });
+        handleCancel();
     }
 
     function handleCancel() {
+        if (previewUrl) URL.revokeObjectURL(previewUrl);
         setPreviewUrl(null);
         setFile(null);
         setShowConfirm(false);
     }
 
-
     return (
-        <div className="space-y-4">
-            <div className="p-2 border-2 border-black dark:border-white rounded-md w-max mx-auto">
-                <div className="flex flex-col items-center justify-center gap-2">
+        <div className="space-y-6 p-6 max-w-md mx-auto">
+            <div className="border-2 border-black dark:border-white rounded-xl p-6 bg-gradient-to-br from-white to-gray-50 dark:from-slate-900 dark:to-slate-800 shadow-xl">
+                <div className="flex flex-col items-center gap-4 text-center">
                     <input
                         id="pet-photo"
                         type="file"
@@ -45,62 +47,68 @@ export function Atendendo() {
                         className="hidden"
                     />
 
-                    <label htmlFor="pet-photo" className="cursor-pointer">
-                        <div className="w-[200px] h-[200px] md:w-[300px] md:h-[300px] relative">
-                            <Image
-                                src={
-                                    previewUrl ||
-                                    "https://placehold.co/1024x768.png?text=Imagem"
-                                }
-                                alt="Dog"
-                                className="object-cover rounded-md border"
-                                fill
-                            />
+                    <label htmlFor="pet-photo" className="cursor-pointer w-full max-w-xs">
+                        <div className="w-[80%] h-[80%] rounded-2xl border-4 border-dashed border-gray-300 dark:border-gray-600 hover:border-[#E72989] dark:hover:border-pink-400 transition-all duration-300 shadow-lg hover:shadow-2xl hover:scale-[1.02] mx-auto">
+                            {previewUrl ? (
+                                <img
+                                    src={previewUrl}
+                                    alt="Preview da Malu"
+                                    className="w-full h-full object-cover rounded-xl shadow-2xl"
+                                />
+                            ) : (
+                                <div className="w-full h-full flex flex-col items-center justify-center gap-3 p-6 bg-gradient-to-br from-pink-50 to-purple-50 dark:from-slate-800 dark:to-slate-700 rounded-xl group">
+                                    <Dog className="w-20 h-20 text-pink-400 group-hover:text-pink-500" />
+                                    <div className="text-2xl font-bold text-pink-400 group-hover:text-pink-500">
+                                        Adicionar foto
+                                    </div>
+                                    <p className="text-sm text-gray-500 dark:text-gray-400 px-4">
+                                        Clique para escolher a foto da Malu 🐕
+                                    </p>
+                                </div>
+                            )}
                         </div>
                     </label>
 
-                    <div className="flex flex-row gap-2 items-center dark:text-white">
-
-                        <Dog className="w-8 h-8" />
-                        <span className="font-bold text-lg ">Malu</span>
+                    <div className="flex items-center gap-3 pt-2">
+                        <div className="w-12 h-12 bg-gradient-to-r from-pink-400 to-purple-500 rounded-2xl flex items-center justify-center shadow-lg">
+                            <Dog className="w-7 h-7 text-white" />
+                        </div>
+                        <span className="text-2xl font-black text-pink-400">
+                            Malu
+                        </span>
                     </div>
+
                 </div>
             </div>
 
             {showConfirm && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center">
-                    <div className="w-full max-w-sm rounded-lg p-4 shadow-lg bg-[#171717]">
-                        <h2 className="mb-2 text-base font-bold text-white">
-                            Enviar foto do pet?
-                        </h2>
-                        <p className="mb-4 text-sm text-white">
-                            Deseja mesmo enviar esta imagem para o servidor?
-                        </p>
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/70 backdrop-blur-sm">
+                    <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-8 shadow-2xl border border-white/10 max-w-sm w-full max-h-[85vh]">
+                        <div className="text-center mb-6">
+                            <Dog className="w-16 h-16 mx-auto text-pink-400 mb-4 shadow-xl" />
+                            <h2 className="text-2xl font-bold text-white mb-2">Enviar foto da Malu?</h2>
+                            <p className="text-gray-300 text-lg leading-relaxed">
+                                Confirme para salvar a foto da Malu no sistema de atendimentos.
+                            </p>
+                        </div>
 
-                        <div className="flex justify-end gap-2 text-sm">
+                        <div className="flex gap-4 justify-center">
                             <button
                                 onClick={handleCancel}
-                                className="rounded-md bg-gray-200 px-3 py-1 hover:bg-gray-300 cursor-pointer"
+                                className="flex-1 px-8 py-4 rounded-2xl bg-gray-600/50 hover:bg-gray-500/50 backdrop-blur-sm border border-gray-400/30 text-lg font-semibold text-white transition-all shadow-xl hover:shadow-2xl hover:scale-[1.02] cursor-pointer"
                             >
                                 Cancelar
                             </button>
-
-                            <Button
-                                type="button"
+                            <button
                                 onClick={handleConfirm}
-                                className="cursor-pointer bg-[#21F421] text-black hover:bg-[#35CC35]"
+                                className="flex-1 px-8 py-4 rounded-2xl bg-gradient-to-r from-emerald-400 to-emerald-500 hover:from-emerald-500 hover:to-emerald-600 backdrop-blur-sm border border-gray-400/30 text-lg font-semibold text-white transition-all shadow-xl hover:shadow-2xl hover:scale-[1.02] cursor-pointer"
                             >
-                                Sim, enviar
-                            </Button>
-
+                                Sim!
+                            </button>
                         </div>
                     </div>
                 </div>
             )}
         </div>
     );
-
-
-
 }
-
