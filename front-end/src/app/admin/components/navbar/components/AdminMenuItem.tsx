@@ -21,7 +21,7 @@ export default function AdminMenuItem({
 }) {
 
     const baseClasses = `flex 
-        flex items-center justify-center gap-2
+        flex items-center gap-2
         px-4 py-2
         transition-all duration-300
         ${danger

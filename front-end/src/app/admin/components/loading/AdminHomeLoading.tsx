@@ -59,7 +59,7 @@ export default function AdminHomeLoading({ loaded, funcionario }: { loaded: bool
                         w-screen h-dvh z-[9999] 
                         flex flex-col p-2 sm:p-4 md:p-8 
                         gap-2 sm:gap-4 md:gap-8
-                        overflow-hidden">
+                        overflow-hidden text-white ">
 
             {/* Typewriter TOP */}
             <div className="flex-1 min-h-[25vh] flex items-start justify-center pt-[30vh] md:pt-12">
