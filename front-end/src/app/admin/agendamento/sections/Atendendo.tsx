@@ -40,7 +40,7 @@ export function Atendendo() {
         <div className="space-y-6 p-6 max-w-md mx-auto">
 
 
-            <div className="border-2 border-black dark:border-white rounded-xl p-2 bg-gradient-to-br from-white to-gray-50 dark:from-slate-900 dark:to-slate-800 shadow-xl">
+            <div className="border-2 border-black dark:border-white rounded-xl p-2 bg-gradient-to-br from-white to-gray-50  shadow-xl">
                 <div className="flex flex-col items-center gap-4 text-center">
                     <input
                         id="pet-photo"
@@ -51,7 +51,7 @@ export function Atendendo() {
                     />
 
                     <label htmlFor="pet-photo" className="cursor-pointer w-full">
-                        <div className="w-[100%] h-[100%] rounded-2xl border-4 border-dashed border-gray-300 dark:border-gray-600 hover:border-[#E72989] dark:hover:border-pink-400 transition-all duration-300 shadow-lg hover:shadow-2xl hover:scale-[1.02] mx-auto">
+                        <div className="w-[100%] h-[100%] rounded-2xl border-4 border-dashed border-gray-300  hover:border-[#E72989] transition-all duration-300 shadow-lg hover:shadow-2xl hover:scale-[1.02] mx-auto">
                             {previewUrl ? (
                                 <img
                                     src={previewUrl}
@@ -59,7 +59,7 @@ export function Atendendo() {
                                     className="w-full h-full object-cover rounded-xl shadow-2xl"
                                 />
                             ) : (
-                                <div className="w-full h-full flex flex-col items-center justify-center gap-3 p-6 bg-gradient-to-br from-pink-50 to-purple-50 dark:from-slate-800 dark:to-slate-700 rounded-xl group">
+                                <div className="w-full h-full flex flex-col items-center justify-center gap-3 p-6 bg-gradient-to-br from-pink-50 to-purple-50 rounded-xl group">
                                     <Dog className="w-20 h-10 md:h-20 text-pink-400 group-hover:text-pink-500" />
                                     <div className="text-base font-bold text-pink-400 group-hover:text-pink-500">
                                         Adicionar foto
