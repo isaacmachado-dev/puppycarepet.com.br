@@ -10,6 +10,7 @@ export function Atendendo() {
     const [file, setFile] = useState<File | null>(null);
     const [showConfirm, setShowConfirm] = useState(false);
 
+
     function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
         const selected = event.target.files?.[0];
         if (!selected) return;
@@ -38,7 +39,7 @@ export function Atendendo() {
 
     return (
         <div className="space-y-6 p-6 max-w-md mx-auto">
-            
+
 
             <div className="border-2 border-black dark:border-white rounded-xl p-2 bg-gradient-to-br from-white to-gray-50 dark:from-slate-900 dark:to-slate-800 shadow-xl">
                 <div className="flex flex-col items-center gap-4 text-center">
@@ -65,7 +66,7 @@ export function Atendendo() {
                                         Adicionar foto
                                     </div>
                                     <p className="text-sm text-gray-500 dark:text-gray-400 px-4">
-                                        Clique para escolher a foto da Malu
+                                        Clique para escolher.
                                     </p>
                                 </div>
                             )}
@@ -84,7 +85,7 @@ export function Atendendo() {
                 </div>
             </div>
 
-            <ConfirmModal open={showConfirm} onClose={handleCancel}>
+            <ConfirmModal open={showConfirm} onClose={handleCancel} >
 
                 <div className="flex gap-6 pt-6">
                     <button onClick={handleCancel} className="flex-1 px-8 py-4 rounded-2xl bg-gray-600/50 hover:bg-gray-500/50 backdrop-blur-sm border border-gray-400/30 text-lg font-semibold text-white transition-all shadow-xl hover:shadow-2xl hover:scale-[1.02] cursor-pointer">Cancelar</button>

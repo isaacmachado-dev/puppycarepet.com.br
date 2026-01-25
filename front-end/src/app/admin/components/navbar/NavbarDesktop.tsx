@@ -21,7 +21,7 @@ export default function NavbarDesktop({ isOpen, setIsOpen, isAdmin, nomeUsuario,
 
     return (
         <aside
-            className={`hidden md:block h-[200vh] z-10 bg-[#1A112E] shadow-lg px-4 invisible md:visible transition-all duration-300 ${isOpen ? "w-[250px]" : "w-[125px]"
+            className={`hidden md:block h-[200vh] z-10 bg-[#1A112E] shadow-lg px-4 invisible md:visible transition-all duration-300 ${isOpen ? "!w-[250px]" : "w-[125px]"
                 }`}
         >
             <div className="relative flex flex-col gap-2 h-[100vh] sticky top-0">
