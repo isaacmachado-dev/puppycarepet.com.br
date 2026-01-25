@@ -96,7 +96,7 @@ export default function AdminPage() {
   }
 
   return (
-    <div className=" min-h-screen bg-gray-50">
+    <div className=" min-h-screen">
       {/* 1. Header sempre visível */}
       <div className="sticky top-0 z-30">
         <AdminHomeLoading loaded={true} funcionario={nomeUsuario || "Mônica"} />
