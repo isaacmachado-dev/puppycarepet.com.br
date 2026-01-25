@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import type { Usuario } from "./usuarios/types/usuario.ts"; // exemplo
 import {
-  X,
   Menu,
 } from "lucide-react";
 import AgendamentoPage from "./agendamento/page";
@@ -13,7 +12,6 @@ import OpcoesPage from "./opcoes/page";
 import { useRouter } from "next/navigation";
 import AdminHomeLoading from "@/app/admin/components/loading/AdminHomeLoading";
 import { getUsuarios } from "../api/api";
-import Navbar from "./components/navbar/NavbarDesktop";
 import NavbarMobile from "./components/navbar/NavbarMobile";
 import NavbarDesktop from "./components/navbar/NavbarDesktop";
 // import { UsuarioApi } from "./usuarios/types/usuario";
@@ -23,7 +21,6 @@ export default function AdminPage() {
   const router = useRouter();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isDesktopOpen, setIsDesktopOpen] = useState(true); // ✅ ADICIONE
   type PageType = "agendamentos" | "clientes" | "analise" | "usuarios" | "opcoes" | null;

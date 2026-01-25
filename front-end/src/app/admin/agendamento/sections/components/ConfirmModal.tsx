@@ -1,6 +1,6 @@
 "use client";
 import { createPortal } from "react-dom";
-import { Dispatch, ReactNode, SetStateAction, useState } from "react";
+import { ReactNode } from "react";
 import { Dog } from "lucide-react";
 import { useLockScroll } from "@/hooks/useLockScroll";
 
