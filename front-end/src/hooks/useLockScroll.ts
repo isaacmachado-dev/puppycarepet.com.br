@@ -1,5 +1,9 @@
-// hooks/useLockScroll.ts
 import { useEffect, useCallback } from 'react';
+
+// ✅ Interface para body custom prop
+interface BodyWithScrollY extends HTMLBodyElement {
+    scrollYBackup?: number;
+}
 
 export function useLockScroll(open: boolean) {
     const lock = useCallback(() => {
@@ -10,11 +14,13 @@ export function useLockScroll(open: boolean) {
             top: `-${scrollY}px`,
             width: '100%'
         });
-        (document.body as any).scrollYBackup = scrollY; // Salva posição
+        // ✅ Type-safe custom prop
+        (document.body as BodyWithScrollY).scrollYBackup = scrollY;
     }, []);
 
     const unlock = useCallback(() => {
-        const scrollY = (document.body as any).scrollYBackup || 0;
+        const body = document.body as BodyWithScrollY;
+        const scrollY = body.scrollYBackup || 0;
         Object.assign(document.body.style, {
             overflow: '',
             position: '',
@@ -22,6 +28,8 @@ export function useLockScroll(open: boolean) {
             width: ''
         });
         window.scrollTo(0, scrollY);
+        // Limpa prop custom
+        delete body.scrollYBackup;
     }, []);
 
     useEffect(() => {
@@ -31,9 +39,8 @@ export function useLockScroll(open: boolean) {
             unlock();
         }
 
-        // Cleanup SÓ se desmontar (não em open=false)
         return () => {
-            if (open) unlock(); // Só se ainda estiver aberto
+            if (open) unlock();
         };
     }, [open, lock, unlock]);
 }

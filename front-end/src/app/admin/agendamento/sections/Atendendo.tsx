@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Dog } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { ConfirmModal } from "./components/ConfirmModal";
 
 export function Atendendo() {
