@@ -36,7 +36,7 @@ export default function NavbarMobile({
             </div>
 
             {/* Badge Admin */}
-            <span className="bg-[#FECE14] text-black px-6 py-2 rounded-full text-sm font-bold self-center shadow-lg">
+            <span className="bg-[#FECE14] text-black px-6 py-2 rounded-md text-sm font-bold self-center shadow-lg">
                 {isAdmin ? "Admin" : "Cliente"}
             </span>
 
