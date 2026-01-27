@@ -5,13 +5,11 @@ import dotenv from 'dotenv';
 dotenv.config();
 require('dotenv').config();
 
-
 const authFile = path.join(__dirname, './.auth/user.json');
 setup.use({ storageState: authFile });
 
 
-
-setup('Setup de login com estado salvo', async ({ page }) => {
+setup('1 - Setup de login com estado salvo', async ({ page }) => {
     const EMAIL = process.env.PLAYWRIGHT_TEST_EMAIL || '';
     const PASSWORD = process.env.PLAYWRIGHT_TEST_PASSWORD || ''
 
@@ -37,8 +35,8 @@ setup('Setup de login com estado salvo', async ({ page }) => {
     await page.context().storageState({ path: authFile });
 
 
-    console.log('Logado com sucesso!');
-    console.log('Salvando estado de autenticação em:', authFile);
+    console.log('1.1 - Logado com sucesso!');
+    console.log('1.2 - Salvando estado de autenticação em:', authFile);
 
 
 

@@ -7,7 +7,7 @@ const STORAGE_STATE_PATH = path.join(__dirname, './.auth/user.json');
 test.use({ storageState: STORAGE_STATE_PATH }); // Puxar do save
 
 
-test('Testando página select dos meses do gráfico de visitantes mensais...', async ({ page }) => {
+test('3 - Testando página de Análise...', async ({ page }) => {
     await page.goto('http://localhost:3000/admin');
     await page.locator('div').filter({ hasText: 'Análise' }).nth(5).click();
 
@@ -43,7 +43,7 @@ test('Testando página select dos meses do gráfico de visitantes mensais...', a
 
     await page.locator('button').filter({ hasText: 'Novembro' }).click();
     await page.getByRole('option', { name: 'Dezembro' }).click();
-    console.log('Teste do Gráfico de visitantes mensais passou com sucesso!');
+    console.log('3.1 - Teste do Gráfico de visitantes mensais passou com sucesso!');
 
     // GRáfico de vendas:
     await page.locator('button').filter({ hasText: 'Últimos 90 dias' }).click();
@@ -54,6 +54,6 @@ test('Testando página select dos meses do gráfico de visitantes mensais...', a
 
     await page.locator('button').filter({ hasText: 'Últimos 30 dias' }).click();
     await page.getByRole('option', { name: 'Últimos 7 dias' }).click();
-    console.log('Teste do Gráfico de vendas passou com sucesso!');
+    console.log('3.2 - Teste do Gráfico de vendas passou com sucesso!');
 
 });
