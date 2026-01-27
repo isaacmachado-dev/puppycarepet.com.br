@@ -144,7 +144,7 @@ export default function AdminPage() {
         />
 
         {/* Main CONTENT */}
-        <main className="h-[200vh] !bg-[#E3E3E3] flex-1 p-6">
+        <main className="h-[200vh] bg-[#E3E3E3] dark:bg-[#242424] flex-1 p-6">
           <section>
             {paginaAtual === "agendamentos" && <AgendamentoPage />}
             {paginaAtual === "clientes" && <ClientesPage />}
