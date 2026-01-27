@@ -154,6 +154,7 @@ export default function AdminPage() {
             {/* {paginaAtual === "historico" && <HistoricoPage />} */}
           </section>
         </main>
+
       </div>
     </div>
   );
