@@ -6,7 +6,7 @@
       "localStorage": [
         {
           "name": "admin_token",
-          "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibm9tZSI6Ik3DtG5pY2EgUGVyZWlyYWEiLCJlbWFpbCI6Im1vbmljYUBwdXBweWNhcmVwZXQuY29tLmJyIiwiaWF0IjoxNzY5NDg1ODUxLCJleHAiOjE3Njk1NzIyNTF9.eOUDZQY7tu935FTCEUg9UrO9a_gW8HqwXyYXtWO-ZI0"
+          "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibm9tZSI6Ik3DtG5pY2EgUGVyZWlyYWEiLCJlbWFpbCI6Im1vbmljYUBwdXBweWNhcmVwZXQuY29tLmJyIiwiaWF0IjoxNzY5NTA3MzUwLCJleHAiOjE3Njk1OTM3NTB9.UpeiPdPwbSldOQGBo_I5-wt0EtHl656Em7lMcHCvd8w"
         },
         {
           "name": "user_roles",
