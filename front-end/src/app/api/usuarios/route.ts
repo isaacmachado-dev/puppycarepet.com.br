@@ -22,7 +22,10 @@ export async function GET() {
   }
 
   const rawText = await res.text();
+  console.log('📄 RAW Response (primeiros 300 chars):', rawText.slice(0, 300));
+
   const data = JSON.parse(rawText);
+  console.log('✅ Parsed primeiro nome:', data[0]?.NOME);
 
   return NextResponse.json(data, {
     headers: {
@@ -32,21 +35,41 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
-  const body = await request.json();
+  let body;
+  const ct = request.headers.get('content-type') || '';
+
+  if (ct.includes('multipart/form-data')) {
+    // ✅ FormData (foto do admin)
+    const formData = await request.formData();
+    body = Object.fromEntries(formData);
+    console.log('🟢 FormData POST:', body);
+  } else {
+    // ✅ JSON puro
+    body = await request.json();
+    console.log('🔵 JSON POST:', body);
+  }
+
+  // Normaliza campos backend (NOME maiúsculo)
+  const payload = {
+    NOME: body.name || body.NOME,
+    EMAIL: body.email || body.EMAIL,
+    SENHA: body.senha || body.SENHA,
+    TIPOS: body.tipos || body.TIPOS,
+    TELEFONE: body.telefone || body.TELEFONE,
+    FOTO: body.foto || body.FOTO  // base64 ou filename
+  };
 
   const res = await fetch(`${BACKEND_URL}/usuarios`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
+    body: JSON.stringify(payload),
   });
 
   const data = await res.json().catch(() => ({}));
 
   if (!res.ok) {
-    return NextResponse.json(
-      data.error || data || { error: 'Erro ao criar usuário' },
-      { status: res.status },
-    );
+    console.error('Backend erro:', res.status, data);
+    return NextResponse.json({ error: data }, { status: res.status });
   }
 
   return NextResponse.json(data);

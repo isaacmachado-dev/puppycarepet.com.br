@@ -13,7 +13,7 @@ dotenv.config({ path: path.resolve(__dirname, '.env') });
  * See https://playwright.dev/docs/test-configuration.
  */
 
-const STORAGE_STATE_PATH = 'tests/.auth/user.json';
+const STORAGE_STATE_PATH = './tests/.auth/user.json';
 export default defineConfig({
   testDir: './tests',
   /* Run tests in files in parallel */
@@ -39,23 +39,33 @@ export default defineConfig({
   projects: [
 
     {
-      name: 'Setup-login',
-      testMatch: /.*\.setup\.ts/,
+      name: '1.admin-login.setup.ts',
+      testMatch: '**/*.setup.ts',
 
       use: {
         ...devices['Desktop Chrome'],
-        storageState: './auth/user.json'
       },
     },
 
     {
-      name: 'chromium',
+      name: '2.admin-agendamentos.test.ts',
       use: {
         ...devices['Desktop Chrome'],
         storageState: STORAGE_STATE_PATH
       },
-      dependencies: ['Setup-login'],
-    }
+      dependencies: ['1.admin-login.setup.ts'],
+    },
+
+    {
+      name: '3.admin-analise.test.ts',
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: STORAGE_STATE_PATH
+      },
+      dependencies: ['1.admin-login.setup.ts'],
+      testMatch: '**/admin-analise.spec.ts',
+    },
+
 
     /* Test against mobile viewports. */
     // {
