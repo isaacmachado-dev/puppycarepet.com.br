@@ -63,7 +63,17 @@ export default defineConfig({
         storageState: STORAGE_STATE_PATH
       },
       dependencies: ['1.admin-login.setup.ts'],
-      testMatch: '**/admin-analise.spec.ts',
+      testMatch: '**/admin-analise.test.ts',
+    },
+
+    {
+      name: '4.admin-usuarios.test.ts',
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: STORAGE_STATE_PATH
+      },
+      dependencies: ['1.admin-login.setup.ts'],
+      testMatch: '**/admin-usuarios.test.ts',
     },
 
 
