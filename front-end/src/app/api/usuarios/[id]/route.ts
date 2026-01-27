@@ -24,6 +24,12 @@ export async function GET(
   return NextResponse.json(data)
 }
 
+type UpdateUsuarioPayload = {
+  NOME: string
+  EMAIL: string
+  TIPOS: string[]
+}
+
 export async function PATCH(
   request: NextRequest,
   context: { params: Promise<{ id: string }> }
