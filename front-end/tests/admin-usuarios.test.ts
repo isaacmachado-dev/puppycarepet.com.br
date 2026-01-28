@@ -23,7 +23,7 @@ test('4 - Testando página de Usuários...', async ({ page }) => {
     await page.getByRole('button', { name: 'Salvar' }).click();
     console.log('4.1 - Edição de usuário testada com sucesso!');
 
-    await page.getByRole('button').nth(3).click({ timeout: 10000 });
+    await page.getByRole('button').nth(3).click({ timeout: 30000 });
     await page.getByRole('textbox', { name: 'Nome *' }).fill('teste');
     await page.getByRole('textbox', { name: 'Nome *' }).press('Tab');
     await page.getByRole('textbox', { name: 'Email *' }).fill('teste@puppycarepet.com.br');

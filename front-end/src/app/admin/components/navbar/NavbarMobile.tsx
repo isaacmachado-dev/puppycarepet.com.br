@@ -44,7 +44,7 @@ export default function NavbarMobile({
             <div className="flex-1 space-y-3 overflow-y-auto">
                 {isAdmin && (
                     <>
-                        <div className="flex flex-col space-y-3">
+                        <div className="flex flex-col space-y-3 dark:text-black">
                             <AdminMenuItem
                                 icon={<CalendarDays className="w-5 h-5" />}
                                 label="Agendamentos"

@@ -244,20 +244,20 @@ export default function UsuariosPage() {
       <AdminBlock>
         <AdminBlockTitle>Quantidade de Funcionários</AdminBlockTitle>
         <div className="flex justify-center">
-          <div className="flex flex-row gap-10">
-            <div className="bg-white dark:bg-[#171717] dark:text-white p-10 rounded-md flex flex-col items-center text-center w-40">
+          <div className="grid grid-cols-3 gap-2 w-full">
+            <div className="bg-white dark:bg-[#171717] dark:text-white p-8 rounded-md flex flex-col items-center text-center">
               <User width={40} height={40} />
-              <h1>Colaboradores</h1>
+              <h1 className="text-sm">Colaborador</h1>
               <p>{numColaboradores}</p>
             </div>
-            <div className="bg-white dark:bg-[#171717] dark:text-white p-10 rounded-md flex flex-col items-center text-center w-40">
+            <div className="bg-white dark:bg-[#171717] dark:text-white p-8 rounded-md flex flex-col items-center text-center">
               <CarFront width={40} height={40} />
-              <h1>Condutores</h1>
+              <h1 className="text-sm">Condutor</h1>
               <p>{condutores}</p>
             </div>
-            <div className="bg-white dark:bg-[#171717] dark:text-white p-10 rounded-md flex flex-col items-center text-center w-40">
+            <div className="bg-white dark:bg-[#171717] dark:text-white p-8 rounded-md flex flex-col items-center text-center">
               <ShieldUser width={40} height={40} />
-              <h1>Administradores</h1>
+              <h1 className="text-sm">Administrador</h1>
               <p>{administradores}</p>
             </div>
           </div>
@@ -268,29 +268,33 @@ export default function UsuariosPage() {
 
       <AdminBlock>
         <AdminBlockTitle>Funcionários</AdminBlockTitle>
-        <div className="flex flex-row gap-8 flex-wrap items-center justify-center">
-          <div>
-            <h2 className="dark:text-white">Nome</h2>
-            <input
-              type="text"
-              placeholder="Digite o nome..."
-              className="bg-white dark:bg-[#171717] rounded-md p-2 pl-4 text-sm font-bold leading-5 w-80 h-10 dark:text-white hover:text-gray-200/50 hover:text-gray-800 hover:bg-gray-200/50 transition-colors duration-300 focus:outline-2 focus:outline-black leading-5 dark:hover:bg-input/50 focus:outline-transparent"
-              value={searchName}
-              onChange={(e) => setSearchName(e.target.value)}
-            />
-          </div>
-          <div>
-            <h2 className="dark:text-white">Tipo de usuário</h2>
-            <AdminTypeEmployee value={selectedTypes} onChange={setSelectedTypes} />
-          </div>
+        <div className="flex flex-col md:flex-row gap-4 md:gap-8 flex-wrap items-center justify-center">
+          <div className="flex flex-col md:flex-row gap-4">
 
-          {/* Adicionar usuário */}
-          <div>
-            <button onClick={() => setShowNewDialog(true)} className="flex justify-center items-center">
-              <div className="bg-[#171717] flex justify-center items-center p-5 mt-6 rounded-md w-20 h-10 mx-auto cursor-pointer">
-                <UserRoundPlus color="white" />
-              </div>
-            </button>
+            <div className="w-full">
+              <h2 className="dark:text-white">Nome</h2>
+              <input
+                type="text"
+                placeholder="Digite o nome..."
+                className="bg-white dark:bg-[#171717] rounded-md pl-2 ext-sm font-bold w-full h-10 dark:text-white hover:text-gray-200/50 hover:text-gray-800 hover:bg-gray-200/50 transition-colors duration-300 focus:outline-2 focus:outline-black dark:hover:bg-input/50 focus:outline-transparent"
+                value={searchName}
+                onChange={(e) => setSearchName(e.target.value)}
+              />
+            </div>
+            <div className="">
+              <h2 className="dark:text-white">Tipo de usuário</h2>
+              <AdminTypeEmployee value={selectedTypes} onChange={setSelectedTypes} />
+            </div>
+
+            {/* Adicionar usuário */}
+            <div>
+              <button onClick={() => setShowNewDialog(true)} className="flex justify-center items-center bg-[#171717] w-full rounded-md md:h-[20%] md:mt-6">
+                <div className="bg-[#171717] flex justify-center items-center p-5 rounded-md md:mt-6 rounded-md w-20 items-center justify-center h-10 cursor-pointer p-full mx-full">
+                  <UserRoundPlus color="white" />
+                </div>
+              </button>
+            </div>
+
           </div>
         </div>
         <div>

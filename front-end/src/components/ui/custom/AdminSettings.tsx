@@ -8,7 +8,7 @@ export function AdminBlock({ children, className = " " }: { children: React.Reac
 
 export function AdminBlockTitle({ children }: { children: React.ReactNode }) {
     return (
-        <h2 className="flex justify-left text-7xl mb-5 text-[1.85rem] dark:text-white">
+        <h2 className="flex justify-left text-7xl mb-5 text-[1.85rem] dark:text-white justify-center items-center mx-auto">
             {children}
         </h2>
     );
@@ -35,5 +35,5 @@ export function AdminHistoricList({ children }: { children?: React.ReactNode }) 
         <p className="flex justify-left text-3xl mb-5 text-[1.2rem] dark:text-white">
             {children}
         </p>
-    );     
+    );
 };
