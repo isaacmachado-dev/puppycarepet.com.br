@@ -8,7 +8,7 @@ export function AdminBlock({ children, className = " " }: { children: React.Reac
 
 export function AdminBlockTitle({ children }: { children: React.ReactNode }) {
     return (
-        <h2 className="flex justify-left text-7xl mb-5 text-[1.85rem] dark:text-white justify-center items-center mx-auto">
+        <h2 className="flex justify-left text-7xl mb-5 text-[1.85rem] dark:text-white mx-auto">
             {children}
         </h2>
     );
