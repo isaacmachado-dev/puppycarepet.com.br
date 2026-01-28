@@ -34,7 +34,7 @@ const ITEMS: AgendaItem[] = [
 
 function AgendaRow({ item }: { item: AgendaItem }) {
     return (
-        <div className="flex flex-row p-2 border-2 border-black dark:border-white dark:text-white rounded-md mt-10">
+        <div className="flex flex-row p-2 border-2 md:w-full border-black dark:border-white dark:text-white rounded-md mt-10">
 
             <div>
                 {/* horário */}
@@ -107,7 +107,7 @@ export function Proximos() {
                 {ITEMS.map(item => (
                     <div
                         key={`${item.time}-${item.pet}-${item.owner}`}
-                        className="flex flex-row gap-5 w-[50vw] md:mx-auto max-w-[90vw]"
+                        className="flex flex-row gap-5 w-[50vw] md:w-[100%]"
                     >
                         <AgendaRow item={item} />
                     </div>
