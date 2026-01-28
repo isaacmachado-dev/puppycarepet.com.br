@@ -141,10 +141,18 @@ function AgendaRow({ item }: { item: AgendaItem }) {
 export function Revisar() {
 
     return (
-        <div className="space-y-4">
-            {ITEMS.map(item => (
-                <AgendaRow key={`${item.time}-${item.pet}-${item.owner}`} item={item} />
-            ))}
+        <div className="space-y-4 w-full overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent pb-4">
+            <div>
+                {ITEMS.map(item => (
+                    <div
+                        key={`${item.time}-${item.pet}-${item.owner}`}
+                        className="flex flex-row gap-5 w-[50vw] md:mx-auto max-w-[90vw]">
+                        <AgendaRow key={`${item.time}-${item.pet}-${item.owner}`} item={item} />
+                    </div>
+                ))}
+
+            </div>
+
         </div>
     );
 }

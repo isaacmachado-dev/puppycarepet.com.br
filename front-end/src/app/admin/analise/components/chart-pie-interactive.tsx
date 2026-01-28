@@ -199,7 +199,7 @@ export function ChartPieInteractive() {
           </PieChart>
         </ChartContainer>
       </CardContent>
-      
+
       <Select value={activeMonth} onValueChange={setActiveMonth} >
         <SelectTrigger
           className="mx-auto h-7 w-[130px] rounded-lg pl-2.5"

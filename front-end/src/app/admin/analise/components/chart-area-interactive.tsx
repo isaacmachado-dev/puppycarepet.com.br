@@ -156,7 +156,7 @@ export function ChartAreaInteractive() {
 
   return (
     <Card className="pt-0">
-      <CardHeader className="flex items-center gap-2 space-y-0 border-b py-5 sm:flex-row">
+      <CardHeader className="flex flex-col items-center gap-2 space-y-0 border-b py-5 sm:flex-row">
         <div className="grid flex-1 gap-1">
           <CardTitle>Gráfico de vendas</CardTitle>
           <CardDescription>
@@ -165,7 +165,7 @@ export function ChartAreaInteractive() {
         </div>
         <Select value={timeRange} onValueChange={setTimeRange}>
           <SelectTrigger
-            className="hidden w-[160px] rounded-lg sm:ml-auto sm:flex cursor-pointer"
+            className="w-full mt-2 w-[160px] rounded-lg sm:ml-auto sm:flex cursor-pointer "
             aria-label="Selecione um valor"
           >
             <SelectValue placeholder="Últimos 90 dias" />

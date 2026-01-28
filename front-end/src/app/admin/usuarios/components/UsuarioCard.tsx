@@ -12,7 +12,7 @@ interface UsuariosCardProps {
 export default function UsuariosCard({ usuarios, onUpdated }: UsuariosCardProps) {
 
   return (
-    <div className="grid grid-cols-4 gap-4 mt-10">
+    <div className="grid md:grid-cols-4 gap-4 mt-10">
       {usuarios.map((usuario) => (
         <div
           key={usuario.id}

@@ -132,7 +132,7 @@ export default function AdminPage() {
       )}
 
       {/* 4. Layout PRINCIPAL - flex row */}
-      <div className="flex h-[calc(100vh-80px)] md:relative md:flex min-h-screen text-black font-bold"> {/* ajusta header height */}
+      <div className="flex md:flex min-h-screen text-black font-bold"> {/* ajusta header height */}
         {/* Navbar DESKTOP */}
         <NavbarDesktop
           isOpen={isDesktopOpen}
@@ -144,7 +144,7 @@ export default function AdminPage() {
         />
 
         {/* Main CONTENT */}
-        <main className="h-[200vh] bg-[#E3E3E3] dark:bg-[#242424] flex-1 p-6">
+        <main className="h-screen overflow-y-auto  bg-[#E3E3E3] dark:bg-[#242424] p-6 flex-1">
           <section>
             {paginaAtual === "agendamentos" && <AgendamentoPage />}
             {paginaAtual === "clientes" && <ClientesPage />}

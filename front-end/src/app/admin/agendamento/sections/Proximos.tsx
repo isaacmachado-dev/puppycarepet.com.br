@@ -92,7 +92,7 @@ function AgendaRow({ item }: { item: AgendaItem }) {
 
             {/* settings */}
 
-            <button className="bg-primary p-2 rounded-md text-white font-bold hover:bg-primary/80 transition-colors cursor-pointer flex items-center justify-center">
+            <button className="bg-primary p-2 rounded-md text-white font-bold hover:bg-primary/80 transition-colors cursor-pointer flex items-center justify-center ml-2 dark:text-black">
                 <Settings2 size={20} />
             </button>
 
@@ -101,12 +101,19 @@ function AgendaRow({ item }: { item: AgendaItem }) {
 }
 
 export function Proximos() {
-
     return (
-        <div className="space-y-4">
-            {ITEMS.map(item => (
-                <AgendaRow key={`${item.time}-${item.pet}-${item.owner}`} item={item} />
-            ))}
+        <div className="w-full overflow-x-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-transparent pb-4">
+            <div className="flex flex-col">
+                {ITEMS.map(item => (
+                    <div
+                        key={`${item.time}-${item.pet}-${item.owner}`}
+                        className="flex flex-row gap-5 w-[50vw] md:mx-auto max-w-[90vw]"
+                    >
+                        <AgendaRow item={item} />
+                    </div>
+                ))}
+            </div>
+
         </div>
     );
 }

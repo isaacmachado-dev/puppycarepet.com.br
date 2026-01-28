@@ -11,7 +11,7 @@ export default function AnalisePage() {
         <AdminBlockTitle>Resumo Geral</AdminBlockTitle>
 
         <div className="bg-white dark:bg-[#171717] rounded-xl p-5">
-          <div className="flex flex-row gap-5 justify-center">
+          <div className="flex flex-col md:flex-row gap-5 justify-center">
 
             <div className="basis-1/2 max-w-xl">
               <ChartPieInteractive />
