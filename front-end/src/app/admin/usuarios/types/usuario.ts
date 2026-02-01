@@ -15,7 +15,7 @@ export interface Usuario {
   roles?: UsuarioRole[]; // se quiser manter separado ou remover se não usar
 }
 
-export type UsuarioApi = {
+export type UsuarioAPI = {
   ID_USUARIO?: number;
   id?: string;
   ID?: string;
