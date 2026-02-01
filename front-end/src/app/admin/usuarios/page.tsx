@@ -5,9 +5,9 @@ import { useEffect, useState, useRef, useCallback } from "react"
 import { User, CarFront, ShieldUser, UserRoundPlus } from "lucide-react"
 
 import { AdminBlock, AdminBlockTitle } from "@/components/ui/custom/AdminSettings"
-import AdminTypeEmployee from "@/app/admin/usuarios/components/AdminTypeEmployee"
+import AdminTypeEmployee from "@/app/admin/usuarios/components/UsuarioType"
 import UsuariosCard from "@/app/admin/usuarios/components/UsuarioCard"
-import { Usuario, UsuarioApi, UsuarioRole } from "./types/usuario"
+import { Usuario, UsuarioAPI, UsuarioRole } from "./types/usuario"
 import {
   Dialog,
   DialogClose,
@@ -66,7 +66,7 @@ export default function UsuariosPage() {
           throw new Error(error?.error || "Erro ao buscar usuários")
         }
 
-        const data = (await res.json()) as UsuarioApi[]
+        const data = (await res.json()) as UsuarioAPI[]
         console.log("USUARIOS RAW DATA:", data)
 
         const normalizados: Usuario[] = (Array.isArray(data) ? data : []).map((_u) => {

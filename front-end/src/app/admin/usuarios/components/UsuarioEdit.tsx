@@ -21,7 +21,7 @@ import {
 } from "@/app/admin/usuarios/components/lib/dropdown-menu";
 import { EllipsisVertical } from "lucide-react";
 import { Button } from "../../../../components/ui/button";
-import AdminTypeEmployee from "./AdminTypeEmployee";
+import AdminTypeEmployee from "./UsuarioType";
 import { Usuario } from "../types/usuario";
 
 interface DropdownMenuDialogProps {

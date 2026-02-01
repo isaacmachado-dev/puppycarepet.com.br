@@ -42,7 +42,25 @@ npm run db:setup
 - Senha: puppycare_pass
 - Database: puppycare
 
+
+
+
 ### 2. Com PostgreSQL Local
+
+#### Configurar a Conexão:
+
+Edite o arquivo `.env`:
+```
+DATABASE_URL="postgresql://puppycare:puppycare_pass@localhost:5432/puppycare"
+```
+
+**Ajuste conforme sua instalação:**
+- `puppycare` → seu usuário PostgreSQL
+- `puppycare_pass` → sua senha
+- `localhost` → endereço do servidor
+- `5432` → porta do PostgreSQL
+- `puppycare` → nome do banco de dados
+
 
 #### Criar o Banco de Dados:
 ```powershell
@@ -91,19 +109,6 @@ ALTER DATABASE puppycare SET client_encoding TO 'UTF8';
 ALTER ROLE puppycare SET client_encoding TO 'UTF8';
 ```
 
-#### Configurar a Conexão:
-
-Edite o arquivo `.env`:
-```
-DATABASE_URL="postgresql://puppycare:puppycare_pass@localhost:5432/puppycare"
-```
-
-**Ajuste conforme sua instalação:**
-- `puppycare` → seu usuário PostgreSQL
-- `puppycare_pass` → sua senha
-- `localhost` → endereço do servidor
-- `5432` → porta do PostgreSQL
-- `puppycare` → nome do banco de dados
 
 ### 3. Aplicar as Migrações
 
