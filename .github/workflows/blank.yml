@@ -15,7 +15,6 @@ jobs:
           username: main
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
-            cd /home/main/puppycare/back-end
             git pull isaac main
             docker-compose down 
             docker-compose up -d
