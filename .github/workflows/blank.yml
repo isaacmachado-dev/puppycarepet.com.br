@@ -17,8 +17,8 @@ jobs:
           username: main
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
-            echo "$GIT_SSH_KEY" > /home/main/.ssh/id_ed25519
-            chmod 600 /home/main/.ssh/id_ed25519
+            # echo "$GIT_SSH_KEY" > /home/main/.ssh/id_ed25519
+            # chmod 600 /home/main/.ssh/id_ed25519
             pm2 stop all
             git remote set-url origin https://$GIT_TOKEN@github.com/isaacmachado-dev/www.puppycarepet.com.br_private.git
             git pull private main
