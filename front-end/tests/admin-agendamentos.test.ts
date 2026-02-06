@@ -6,7 +6,7 @@ const STORAGE_STATE_PATH = path.join(__dirname, './.auth/user.json');
 test.use({ storageState: STORAGE_STATE_PATH }); // Puxar do save
 
 test('2 - Testando página de Agendamentos...', async ({ page }) => {
-  await page.goto('http://147.79.82.92/admin');
+  await page.goto('http://localhost:3000/admin');
   // Click the get started link.
 
   await page.getByRole('button', { name: 'Próximos' }).click();
