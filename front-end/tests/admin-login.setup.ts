@@ -13,7 +13,7 @@ setup('1 - Setup de login com estado salvo', async ({ page }) => {
     const EMAIL = process.env.PLAYWRIGHT_TEST_EMAIL || '';
     const PASSWORD = process.env.PLAYWRIGHT_TEST_PASSWORD || ''
 
-    await page.goto('http://147.79.82.92/');
+    await page.goto('http://localhost:3000/');
     await page.locator('Link:has-text("Agende agora"), a[href="/cart"]:has-text("Agende agora").mt-5').click();
     await page.getByRole('link', { name: 'Acesse sua conta' }).click();
     await page.getByRole('textbox', { name: 'E-mail' }).click();
@@ -30,7 +30,7 @@ setup('1 - Setup de login com estado salvo', async ({ page }) => {
     }
 
     await page.waitForLoadState('networkidle');
-    await page.goto('http://147.79.82.92/admin')
+    await page.goto('http://localhost:3000/admin')
 
     await page.context().storageState({ path: authFile });
 
