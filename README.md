@@ -6,7 +6,11 @@
 
 <div align="center">
   <img src="https://img.shields.io/badge/In%20Development-%23C63E3E" alt="Status">
+  
+  [![Deploy - Hostinger](https://github.com/isaacmachado-dev/www.puppycarepet.com.br_private/actions/workflows/blank.yml/badge.svg)](https://github.com/isaacmachado-dev/www.puppycarepet.com.br_private/actions/workflows/blank.yml)
 </div>
+
+
 
   
 ## Download options:
