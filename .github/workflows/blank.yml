@@ -1,4 +1,4 @@
-name: Deploy PuppyCare on Push Main
+name: Deploy PuppyCare SSH
 on:
   push:
     branches: [ main ]
@@ -8,15 +8,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Deploy Back-end Hostinger VPS
-        uses: hostinger/deploy-on-vps@v2
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3                 # ← OUTRA ACTION!
         with:
-          host: "srv1113770.hstgr.cloud"
+          host: 1113770                
           username: main
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
-            cd /home/main
-            git pull isaac main
-            docker-compose down
-            docker-compose up
-
+            cd /home/main/puppycare/back-end
+            git pull origin main
+            docker-compose down 
+            docker-compose up -d
