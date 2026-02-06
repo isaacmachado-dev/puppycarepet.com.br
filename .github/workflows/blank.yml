@@ -1,4 +1,4 @@
-name: Deploy - Hostinger
+name: Deploy - Hostingerr
 on:
   push:
     branches: [ main ]
