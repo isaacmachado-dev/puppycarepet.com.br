@@ -1,0 +1,17 @@
+name: Deploy PuppyCare on Push Main
+on:
+  push:
+    branches: [ main ]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Deploy Back-end Hostinger VPS
+        uses: hostinger/deploy-on-vps@v2
+        with:
+          api-key: "VsJW6gWXGLfGXoQv2dF6xqcDbozB9REV6lboXDrd8337c97d"
+          virtual-machine: "1113770"  # ← Número da URL VPS (não hostname completo!)
+          project-name: "www.puppycarepet.com.br/deploy-vps"
+          docker-compose-path: "back-end/docker-compose.yml"  # ← CORRIGIDO!
