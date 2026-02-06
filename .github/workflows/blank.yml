@@ -15,6 +15,6 @@ jobs:
           username: main
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
-            git pull isaac main
+            git pull private main
             docker-compose down 
             docker-compose up -d
