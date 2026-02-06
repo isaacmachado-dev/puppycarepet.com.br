@@ -11,7 +11,13 @@ jobs:
       - name: Deploy Back-end Hostinger VPS
         uses: hostinger/deploy-on-vps@v2
         with:
-          api-key: "VsJW6gWXGLfGXoQv2dF6xqcDbozB9REV6lboXDrd8337c97d"
-          virtual-machine: "1113770"  # ← Número da URL VPS (não hostname completo!)
-          project-name: "puppycarepet-deploy-vps"
-          docker-compose-path: "back-end/docker-compose.yml"  # ← CORRIGIDO!
+          host: "srv1113770.hstgr.cloud"
+          username: main
+          key: "VsJW6gWXGLfGXoQv2dF6xqcDbozB9REV6lboXDrd8337c97d"
+          script: |
+            cd /home/main
+            git pull origin main
+            docker-compose down
+            docker-compose up -d --build
+            docker system prune -f
+
