@@ -7,7 +7,7 @@ const STORAGE_STATE_PATH = path.join(__dirname, './.auth/user.json');
 test.use({ storageState: STORAGE_STATE_PATH }); // Puxar do save
 
 test('4 - Testando página de Usuários...', async ({ page }) => {
-    await page.goto('http://localhost:3000/admin');
+    await page.goto('http://147.79.82.92/admin');
     await page.locator('div').filter({ hasText: 'Usuários' }).nth(5).click();
     await expect(page.getByText('Carregando...')).toBeHidden({ timeout: 10000 });
 
