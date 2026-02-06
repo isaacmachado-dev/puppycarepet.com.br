@@ -29,7 +29,7 @@ setup('1 - Setup de login com estado salvo', async ({ page }) => {
         fs.mkdirSync(authDir, { recursive: true });
     }
 
-    await page.waitForLoadState('networkidle');
+    await page.waitForLoadState('domcontentloaded');
     await page.goto('http://localhost:3000/admin')
 
     await page.context().storageState({ path: authFile });
