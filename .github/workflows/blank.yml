@@ -24,6 +24,7 @@ jobs:
             cd front-end
             npm install
             npm run build
+            sudo npx playwright install-deps
             npx playwright install
             npx playwright test
             pm2 start all
