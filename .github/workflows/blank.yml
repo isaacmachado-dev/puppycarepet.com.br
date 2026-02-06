@@ -1,4 +1,4 @@
-name: Deploy PuppyCare SSH
+name: Deploy PuppyCare Hostinger SSH
 on:
   push:
     branches: [ main ]
