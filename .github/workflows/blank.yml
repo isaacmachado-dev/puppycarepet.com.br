@@ -13,5 +13,5 @@ jobs:
         with:
           api-key: "VsJW6gWXGLfGXoQv2dF6xqcDbozB9REV6lboXDrd8337c97d"
           virtual-machine: "1113770"  # ← Número da URL VPS (não hostname completo!)
-          project-name: "www.puppycarepet.com.br/deploy-vps"
+          project-name: "puppycarepet-deploy-vps"
           docker-compose-path: "back-end/docker-compose.yml"  # ← CORRIGIDO!
