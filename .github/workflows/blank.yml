@@ -11,7 +11,7 @@ jobs:
       - name: Deploy SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: srv1113770.hstgr.cloud                
+          host: 147.79.82.92                
           username: main
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
