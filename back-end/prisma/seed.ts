@@ -29,7 +29,7 @@ async function seedUsuarios() {
       SENHA_HASH: senhaAdmin,
       EMAIL: 'rock.lee@puppycarepet.com.br',
       FOTO: '/usuarios/rock-lee.jpg',
-      TIPOS: ['condutor'],
+      TIPOS: ['condutor', 'colaborador'],
     },
     {
       NOME: 'Mortyyyyyy',
@@ -182,7 +182,7 @@ async function main() {
   await seedUsuarios();
 
   // Dependent
-  const maria = clientesByName['Maria Silva'] || 
+  const maria = clientesByName['Maria Silva'] ||
     (await prisma.cLIENTES.findFirst({ orderBy: { ID_CLIENTE: 'asc' } }))!;
   const banho = servicosByName['Carlos'] ||  // ← 'Carlos' do seedServicos
     (await prisma.sERVICOS.findFirst({ orderBy: { ID_SERVICO: 'asc' } }))!;
