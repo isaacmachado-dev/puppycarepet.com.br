@@ -18,9 +18,11 @@ jobs:
             pm2 stop all
             git pull private main
             cd back-end
+            npm install
             npm run build
             cd ..
             cd front-end
+            npm install
             npm run build
             npx playwright install
             npx playwright test
