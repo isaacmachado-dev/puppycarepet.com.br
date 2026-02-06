@@ -1,0 +1,24 @@
+- main:
+  - img "Puppy Care"
+  - img "Letra da logo Puppy Care"
+  - link "Agende agora":
+    - /url: /cart
+  - img "Petshop Puppy Care"
+  - heading "Cuidando do seu pet como se fosse nosso" [level=1]
+  - img "Letra da logo Puppy Care"
+  - link "Agende agora":
+    - /url: /cart
+  - paragraph: Banho & Tosa
+  - img "Cachorro"
+  - heading "Atendemos Cachorros" [level=2]
+  - paragraph: Uma vez confiando em nós, damos cheirinho e charme ao seu pet, seja ele quem for, da idade que for!
+  - img "Gato"
+  - heading "Atendemos Gatos" [level=2]
+  - paragraph: Gatos também gostam de “limpeza”, alivie-os por estarem beeem limpinhos e cheirosos com a gente!
+  - heading "Conheça os nossos serviços" [level=2]
+  - text: z
+  - paragraph: Atendemos o seu animalzinho junto a uma veterinária qualificada, garantindo um trabalho com responsabilidade de quem entende.
+  - paragraph: Leva e Traz
+  - paragraph: Banho e Tosa
+  - paragraph: Cães e Gatos
+  - paragraph: Loja
