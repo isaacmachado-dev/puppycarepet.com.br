@@ -22,6 +22,7 @@ jobs:
             cd ..
             cd front-end
             npm run build
+            npx playwright install
             npx playwright test
             pm2 start all
             
