@@ -8,7 +8,7 @@ test.use({ storageState: STORAGE_STATE_PATH }); // Puxar do save
 
 
 test('3 - Testando página de Análise...', async ({ page }) => {
-    await page.goto('http://localhost:3000/admin');
+    await page.goto('http://147.79.82.92/admin');
     await page.locator('div').filter({ hasText: 'Análise' }).nth(5).click();
 
     await page.locator('button').filter({ hasText: 'Janeiro' }).click();
