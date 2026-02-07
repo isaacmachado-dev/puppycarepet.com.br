@@ -1,4 +1,4 @@
-name: Deploy - Hostingerr
+name: Deploy - Hostinger
 env:
   GIT_TOKEN: ${{ secrets.GIT_PERSONAL_TOKEN }}
 on:
