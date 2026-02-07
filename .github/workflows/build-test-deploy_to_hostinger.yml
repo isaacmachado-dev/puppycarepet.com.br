@@ -3,17 +3,17 @@ env:
   GIT_TOKEN: ${{ secrets.GIT_PERSONAL_TOKEN }}
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Deploy - Hostinger
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: 147.79.82.92                
+          host: 147.79.82.92
           username: main
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
@@ -29,6 +29,5 @@ jobs:
             cd front-end
             npm install
             npm run build
-            npx playwright test
             pm2 start all
-            
+            npx playwright test --reporter=line
