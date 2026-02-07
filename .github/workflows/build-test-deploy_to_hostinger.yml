@@ -1,6 +1,6 @@
 name: Deploy - Hostingerr
 env:
-  GIT_TOKEN: ${{ secrets.VPS_GIT_TOKEN }}
+  GIT_TOKEN: ${{ secrets.GIT_PERSONAL_TOKEN }}
 on:
   push:
     branches: [ main ]
